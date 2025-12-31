@@ -1,0 +1,14 @@
+Supplementary Table S1: Comparison of Selection Methods (N=100)
+============================================================
+                   prob           information          
+                   mean       std        mean       std
+method                                                 
+1.8_Resonator  0.002212  0.000566    6.152110  0.290097
+Argmax         0.204236  0.101303    1.728238  0.553583
+
+Cliche Rate (1.8 Resonator picking Argmax): 0.00%
+
+Interpretation:
+1.8 Resonator significantly increases Mean Surprisal (Information Gain)
+while maintaining a low Cliché Rate, demonstrating a functional departure
+from statistical commonality toward meaningful information extraction.

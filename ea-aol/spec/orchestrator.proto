@@ -1,0 +1,241 @@
+/**
+ * EA-AOL gRPC Protocol Definition
+ * Version: 0.1.0
+ * License: BSD-2-Clause
+ */
+
+syntax = "proto3";
+
+package ea_aol.v1;
+
+option go_package = "github.com/ea-aol/runtime/proto/v1;ea_aol_v1";
+option java_package = "org.ea_aol.runtime.v1";
+option java_multiple_files = true;
+
+// ============================================================================
+// Orchestrator Service
+// ============================================================================
+
+service Orchestrator {
+  // Submit inference request
+  rpc SubmitInference(InferenceRequest) returns (SubmitReply);
+  
+  // Get request status
+  rpc GetStatus(StatusRequest) returns (StatusReply);
+  
+  // Stream real-time telemetry
+  rpc StreamTelemetry(StreamRequest) returns (stream Telemetry);
+  
+  // Cancel inference request
+  rpc CancelInference(CancelRequest) returns (CancelReply);
+  
+  // Wait for request completion
+  rpc WaitForCompletion(WaitRequest) returns (WaitReply);
+  
+  // Force IR recompilation
+  rpc RecompileIR(RecompileRequest) returns (RecompileReply);
+  
+  // Get compiled IR
+  rpc GetIR(GetIRRequest) returns (GetIRReply);
+  
+  // Get runtime statistics
+  rpc GetStats(GetStatsRequest) returns (GetStatsReply);
+  
+  // Set runtime mode
+  rpc SetMode(SetModeRequest) returns (SetModeReply);
+}
+
+// ============================================================================
+// Request/Reply Messages
+// ============================================================================
+
+message InferenceRequest {
+  string request_id = 1;           // Unique request identifier
+  string yaml_payload = 2;         // EA-AOL YAML declaration
+  int64 timeout_ms = 3;            // Request timeout (milliseconds)
+  map<string, string> metadata = 4; // Optional metadata
+}
+
+message SubmitReply {
+  bool accepted = 1;               // True if request accepted
+  string message = 2;              // Status message
+  int64 estimated_duration_ms = 3; // Estimated completion time
+}
+
+message StatusRequest {
+  string request_id = 1;
+}
+
+message StatusReply {
+  enum State {
+    PENDING = 0;
+    COMPILING = 1;
+    RUNNING = 2;
+    SUCCEEDED = 3;
+    FAILED = 4;
+    CANCELLED = 5;
+    TIMEOUT = 6;
+  }
+  
+  State state = 1;
+  string last_event = 2;
+  double epi_j_per_token = 3;
+  double power_w = 4;
+  double latency_ms = 5;
+  double quality_score = 6;
+  uint64 tokens_generated = 7;
+  int32 error_code = 8;
+  string error_message = 9;
+}
+
+message StreamRequest {
+  string request_id = 1;
+  int32 sample_interval_ms = 2;    // Sampling interval (default: 100ms)
+}
+
+message Telemetry {
+  int64 timestamp_us = 1;          // Timestamp (microseconds since epoch)
+  double epi_j_per_token = 2;
+  double power_w = 3;
+  map<string, double> temp_map = 4; // Temperature sensors
+  double gpu_freq_mhz = 5;
+  double gpu_util_pct = 6;
+  double mem_util_pct = 7;
+  map<string, double> custom_metrics = 8; // Extensible metrics
+}
+
+message CancelRequest {
+  string request_id = 1;
+}
+
+message CancelReply {
+  bool cancelled = 1;
+  string message = 2;
+}
+
+message WaitRequest {
+  string request_id = 1;
+  int64 timeout_ms = 2;            // 0 = infinite
+}
+
+message WaitReply {
+  bool completed = 1;
+  StatusReply.State final_state = 2;
+}
+
+message RecompileRequest {
+  string request_id = 1;
+  string reason = 2;               // Optional reason for recompilation
+}
+
+message RecompileReply {
+  bool recompiled = 1;
+  string message = 2;
+}
+
+message GetIRRequest {
+  string request_id = 1;
+}
+
+message GetIRReply {
+  string ir_json = 1;              // IR as JSON string
+  int64 compiled_at = 2;           // Compilation timestamp
+  int32 recompile_count = 3;       // Number of recompilations
+}
+
+message GetStatsRequest {
+  // Empty for global stats, or specify request_id for per-request stats
+  string request_id = 1;
+}
+
+message GetStatsReply {
+  string stats_json = 1;           // Statistics as JSON
+}
+
+message SetModeRequest {
+  enum Mode {
+    SAFE = 0;                      // Conservative, prioritize SLO compliance
+    BALANCED = 1;                  // Balance energy and performance
+    AGGRESSIVE = 2;                // Maximize energy savings
+  }
+  
+  Mode mode = 1;
+}
+
+message SetModeReply {
+  bool success = 1;
+  string message = 2;
+}
+
+// ============================================================================
+// Configuration Service (Optional)
+// ============================================================================
+
+service Configuration {
+  // Get current configuration
+  rpc GetConfig(GetConfigRequest) returns (GetConfigReply);
+  
+  // Update configuration
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigReply);
+  
+  // List available hardware targets
+  rpc ListHardware(ListHardwareRequest) returns (ListHardwareReply);
+}
+
+message GetConfigRequest {}
+
+message GetConfigReply {
+  string config_yaml = 1;
+}
+
+message UpdateConfigRequest {
+  string config_yaml = 1;
+  bool restart_required = 2;       // Restart runtime if true
+}
+
+message UpdateConfigReply {
+  bool success = 1;
+  string message = 2;
+}
+
+message ListHardwareRequest {}
+
+message ListHardwareReply {
+  repeated HardwareTarget targets = 1;
+}
+
+message HardwareTarget {
+  string id = 1;                   // e.g., "nv_gpu_single"
+  string name = 2;                 // e.g., "NVIDIA A100-80GB"
+  bool available = 3;
+  map<string, string> capabilities = 4;
+}
+
+// ============================================================================
+// Health Service
+// ============================================================================
+
+service Health {
+  // Health check
+  rpc Check(HealthCheckRequest) returns (HealthCheckReply);
+  
+  // Watch health status
+  rpc Watch(HealthCheckRequest) returns (stream HealthCheckReply);
+}
+
+message HealthCheckRequest {
+  string service = 1;              // Empty for overall health
+}
+
+message HealthCheckReply {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;
+  }
+  
+  ServingStatus status = 1;
+  string message = 2;
+  int64 uptime_seconds = 3;
+}

@@ -1,0 +1,8 @@
+PyYAML>=6.0
+torch>=2.0.0
+pynvml>=11.5.0
+grpcio>=1.50.0
+grpcio-tools>=1.50.0
+protobuf>=4.21.0
+matplotlib>=3.5.0
+numpy>=1.21.0

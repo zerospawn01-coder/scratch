@@ -1,0 +1,162 @@
+{
+  "ir_version": "0.1.0",
+  "meta": {
+    "model_id": "llama-2-13b-chat",
+    "created_at": "2025-12-10T20:16:00.968707Z",
+    "compiler_version": "0.1.0",
+    "source_hash": "sha256:4e377523bd7e2f07"
+  },
+  "constraints": {
+    "power_cap_w": 150.0,
+    "latency_slo_ms": 25.0,
+    "quality_floor": 0.93
+  },
+  "cost_models": {
+    "flop_per_token": 1300000000.0,
+    "mem_bw_per_token": 1400.0,
+    "energy_model": "default",
+    "baseline_epi": 0.18
+  },
+  "execution_plan": {
+    "transforms": [
+      {
+        "id": "sparse_layer_prune",
+        "priority": 1,
+        "params": {
+          "sparsity_target": 0.5,
+          "target_layers": [
+            "attn_.*",
+            "mlp_.*"
+          ],
+          "method": "magnitude"
+        }
+      },
+      {
+        "id": "moe_routing_power_aware",
+        "priority": 2,
+        "params": {
+          "budget_w": 120.0,
+          "k_max": 4,
+          "routing_strategy": "energy_aware"
+        }
+      },
+      {
+        "id": "kv_cache_compression",
+        "priority": 3,
+        "params": {
+          "compression_ratio": 0.5,
+          "algorithm": "quantize_int8"
+        }
+      },
+      {
+        "id": "dvfs_plan",
+        "priority": 99,
+        "params": {
+          "granularity": "token",
+          "base_freq_mhz": 1200,
+          "boost_freq_mhz": 1500,
+          "schedule": [
+            {
+              "token_range": [
+                0,
+                10
+              ],
+              "freq_mhz": 1500
+            },
+            {
+              "token_range": [
+                11,
+                100
+              ],
+              "freq_mhz": 1200
+            }
+          ]
+        }
+      }
+    ],
+    "resources": {
+      "gpu_allocation": [
+        "gpu0"
+      ],
+      "memory_allocation": {
+        "vram_gb": 40,
+        "host_pinned_gb": 8
+      },
+      "placement": [
+        {
+          "host": "gpu0",
+          "partitions": [
+            {
+              "layers": "all",
+              "memory": "gpu_vram"
+            }
+          ]
+        }
+      ]
+    },
+    "control_plan": [
+      {
+        "time_window_ms": 10,
+        "actions": [
+          {
+            "type": "set_gpu_freq",
+            "target": "gpu0",
+            "params": {
+              "freq_mhz": 1200
+            }
+          },
+          {
+            "type": "set_psu_mode",
+            "target": "psu0",
+            "params": {
+              "mode": "burst_absorb"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "feedback_loop": {
+    "enabled": true,
+    "metrics": [
+      {
+        "name": "EPI_J_PER_TOKEN",
+        "threshold_high": 0.15,
+        "threshold_low": 0.08,
+        "action_high": "recompile",
+        "action_low": "increase_performance"
+      },
+      {
+        "name": "POWER_W",
+        "threshold_high": 150.0,
+        "action_high": "emergency_throttle"
+      },
+      {
+        "name": "TEMP_GPU_DIE_C",
+        "threshold_high": 85.0,
+        "action_high": "throttle"
+      }
+    ],
+    "recompile_limit": 3,
+    "evaluation_interval_ms": 5000
+  },
+  "optimization_hints": {
+    "prefer": [
+      "min_energy",
+      "max_quality",
+      "thermal_stability"
+    ],
+    "hard_constraints": [
+      "power_cap",
+      "latency_slo_ms",
+      "quality_floor"
+    ],
+    "soft_constraints": [
+      {
+        "name": "temp_limit",
+        "value": "80C",
+        "weight": 0.8
+      }
+    ]
+  }
+}

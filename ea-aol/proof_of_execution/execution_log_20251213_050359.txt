@@ -1,0 +1,13 @@
+EA-AOL Execution Log
+======================================================================
+
+   0s |   45C |   30% | Normal - 30% CPU load
+   3s |   50C |   40% | Normal - 40% CPU load
+   6s |   60C |   50% | Normal - 50% CPU load
+   9s |   70C |   60% | Warm - 60% CPU load
+  12s |   80C |   70% | Hot - 70% CPU load
+  15s |   85C |   80% | CRITICAL - 80% CPU load
+  18s |   90C |   20% | EA-AOL INTERVENTION: Reduce to 20%!
+  21s |   75C |   20% | Cooling down - maintain 20%
+  24s |   65C |   30% | Recovered - increase to 30%
+  27s |   55C |   40% | Normal - 40% CPU load

@@ -1,0 +1,28 @@
+# EA-AOL Example: Mixtral MoE Energy Control
+
+inference:
+  model_id: "mixtral-8x7b-v0.1"
+  power_cap: 180.0             # System Power Budget (Watts)
+  latency_slo_ms: 50.0         # P99 Latency Target
+  quality_floor: 0.90          # Acceptable quality drop (vs baseline)
+
+profile:
+  # Base hardware costs (Mock values for Day 1)
+  cost_model:
+    flops_per_token: 1.4e10    # Estimated 14 GFLOPs
+    mem_bw_per_token: 800MB    # Estimated 800 MB
+    alpha_j_per_flop: 1.0e-12  # Energy coeff for Compute (1 pJ/FLOP)
+    beta_j_per_byte:  5.0e-9   # Energy coeff for Memory (5 nJ/Byte)
+
+policy:
+  # Strategy definition
+  strategies:
+    - name: "moe_degrade"
+      trigger: "power > power_cap"
+      action: "reduce_top_k"
+      step: 1                  # Reduce k by 1 per step
+      min_k: 1                 # Don't go below k=1
+
+runtime:
+  target: "nv_gpu_single"
+  telemetry_interval_ms: 500

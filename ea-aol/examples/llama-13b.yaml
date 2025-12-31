@@ -1,0 +1,49 @@
+# EA-AOL Example: LLaMA-13B Inference
+
+inference:
+  model_id: "llama-2-13b-chat"
+  power_cap: 150W
+  latency_slo_ms: 25
+  quality_floor: 0.93
+  
+  orchestrator:
+    layers:
+      - "sparse"
+      - "moe"
+      - "cache_compress"
+    dvfs_granularity: "token"
+    cooling: "liquid_dynamic"
+    monitoring:
+      - "EPI"
+      - "J_PER_TOKEN"
+      - "TEMP_MAP"
+      - "POWER_WAVEFORM"
+
+profile:
+  model_cost:
+    flop_per_token: 1.3e9
+    mem_bw_per_token: 1400MB
+    param_count: 13e9
+  baseline_quality: 1.0
+  baseline_epi: 0.18
+
+policy:
+  prefer:
+    - "min_energy"
+    - "max_quality"
+    - "thermal_stability"
+  hard_constraints:
+    - "power_cap"
+    - "latency_slo_ms"
+    - "quality_floor"
+  soft_constraints:
+    - name: "temp_limit"
+      value: 80C
+      weight: 0.8
+
+runtime:
+  target_hardware: "nv_gpu_single"
+  gpu_model: "A100-80GB"
+  telemetry_endpoint: "unix:/var/run/ea_aol.sock"
+  log_level: "INFO"
+  recompile_limit: 3

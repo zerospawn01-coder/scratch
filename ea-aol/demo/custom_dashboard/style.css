@@ -1,0 +1,97 @@
+/* style.css - Sun's personalized EA‑AOL dashboard */
+
+/* Global dark neon theme */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('sun_dashboard_background_1765906024646.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #00ffff;
+    overflow: hidden;
+}
+
+.dashboard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 800px;
+}
+
+.title {
+    font-size: 48px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.status-box {
+    margin: 20px auto;
+    padding: 20px 40px;
+    border: 2px solid #00ffff;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px #00ffff;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ff4444; /* start red */
+    transition: color 1.5s ease-in-out, border-color 1.5s ease-in-out;
+}
+
+.status-box.optimized {
+    color: #44ff44; /* green */
+    border-color: #44ff44;
+}
+
+/* Simple circular gauge */
+.gauge {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 40px auto;
+}
+
+.gauge .circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff4444 0deg,
+        #ff4444 var(--perc),
+        #444444 var(--perc),
+        #444444 360deg
+    );
+    box-shadow: inset 0 0 20px #000, 0 0 20px #ff4444;
+    transition: background 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+}
+
+.gauge .circle.optimized {
+    background: conic-gradient(
+        #44ff44 0deg,
+        #44ff44 var(--perc),
+        #444444 var(--perc),
+        #444444 360deg
+    );
+    box-shadow: inset 0 0 20px #000, 0 0 20px #44ff44;
+}
+
+.gauge .label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #ffffff;
+    text-shadow: 0 0 8px #ffffff;
+}
+
+/* Fade‑in animation for the whole dashboard */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.dashboard {
+    animation: fadeIn 2s ease-out;
+}

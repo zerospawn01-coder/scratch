@@ -1,0 +1,83 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test-aesthetic-resonator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          cd aesthetic-resonator
+          pip install numpy
+      
+      - name: Run tests
+        run: |
+          cd aesthetic-resonator
+          python test_leap_score.py
+
+  test-post-alignment-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          cd post_alignment_lab
+          pip install numpy pandas matplotlib
+      
+      - name: Run tests
+        run: |
+          cd post_alignment_lab
+          python test_post_alignment_phase2.py
+
+  test-neuro-symbolic-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          cd neuro_symbolic_checker
+          pip install SPARQLWrapper
+      
+      - name: Run tests
+        run: |
+          cd neuro_symbolic_checker
+          python test_lexeme_resolver.py
+
+  test-intuition-layer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Run tests (no dependencies needed - mocked)
+        run: |
+          cd intuition-layer
+          python test_intuition_router.py
