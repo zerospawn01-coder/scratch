@@ -1,0 +1,6002 @@
+[
+  {
+    "timestamp": "2026-01-18 07:06:19",
+    "k": 1.706618118292126,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:06:29",
+    "k": 2.4254171365840103,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:06:39",
+    "k": 1.871013974705357,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:06:49",
+    "k": 1.7748109625978548,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:06:59",
+    "k": 1.725946032850953,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:09",
+    "k": 1.769691636542082,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:19",
+    "k": 1.865768827927834,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:29",
+    "k": 1.9246844321170107,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:39",
+    "k": 1.6980753061885014,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:49",
+    "k": 1.8366667464963444,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:07:59",
+    "k": 1.9518416739874138,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:08:09",
+    "k": 2.5404163687549364,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:08:20",
+    "k": 2.0999249412464724,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:08:30",
+    "k": 2.1286835722155013,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:08:40",
+    "k": 2.125894298410908,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:08:50",
+    "k": 2.091618082868134,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:00",
+    "k": 2.0268405733024197,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:10",
+    "k": 1.9333626379971114,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:20",
+    "k": 1.813792213218051,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:30",
+    "k": 1.671480039343003,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:40",
+    "k": 1.9203936756922402,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:09:50",
+    "k": 2.349005137477743,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:10:00",
+    "k": 1.7562059667691237,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:10:10",
+    "k": 1.7279848779526938,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:10:20",
+    "k": 1.790490980040024,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:10:30",
+    "k": 1.885801371117533,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:10:40",
+    "k": 1.9256135484434491,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:10:50",
+    "k": 1.7319559571932823,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:11:00",
+    "k": 1.8654609413044574,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:11:10",
+    "k": 1.9747682496265142,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:11:20",
+    "k": 2.0568241353761776,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:11:30",
+    "k": 2.6093404468162884,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:11:40",
+    "k": 2.13085324226181,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:11:50",
+    "k": 2.1207503300215675,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:00",
+    "k": 2.079321567557691,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:11",
+    "k": 2.007722768011049,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:21",
+    "k": 1.9076363583402567,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:31",
+    "k": 1.782426517596417,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:41",
+    "k": 1.9165858480925069,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:12:51",
+    "k": 1.9101312704884323,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:13:01",
+    "k": 1.8256327896864915,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:13:11",
+    "k": 2.241383516013917,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:13:21",
+    "k": 1.735439095864064,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:13:31",
+    "k": 1.8133175024823776,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:13:41",
+    "k": 1.9028606815298703,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:13:51",
+    "k": 1.9210853664159755,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:01",
+    "k": 1.7652803054146142,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:11",
+    "k": 1.8933998358292723,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:21",
+    "k": 1.996546886057096,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:31",
+    "k": 2.07185440142929,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:41",
+    "k": 2.117201380331272,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:14:51",
+    "k": 2.6313257294298493,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:15:01",
+    "k": 2.1138348599106345,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:15:11",
+    "k": 2.065215665950892,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:15:21",
+    "k": 1.9868193619360919,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:15:31",
+    "k": 1.8808554510053792,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:15:41",
+    "k": 1.7502540872388241,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:15:51",
+    "k": 1.9238214072897264,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:16:02",
+    "k": 1.8955662078662965,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:16:12",
+    "k": 1.8027518637783189,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:16:22",
+    "k": 1.7313917374993066,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:16:32",
+    "k": 2.247607932253997,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:16:42",
+    "k": 1.8363670511596493,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:16:52",
+    "k": 1.9154319301928302,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:02",
+    "k": 1.6518742932792412,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:12",
+    "k": 1.7968285711967935,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:22",
+    "k": 1.919495281609413,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:32",
+    "k": 2.0164611354735973,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:42",
+    "k": 2.085028553687409,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:17:52",
+    "k": 2.123257025344836,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:18:02",
+    "k": 2.1300925069426633,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:18:12",
+    "k": 2.6053245276734716,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:18:22",
+    "k": 2.049671772264637,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:18:32",
+    "k": 1.964677691755989,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:18:42",
+    "k": 1.8527235870837764,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:18:52",
+    "k": 1.7169136843707709,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:02",
+    "k": 1.9258604684729956,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:12",
+    "k": 1.8771764064652523,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:22",
+    "k": 1.7809779348619947,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:32",
+    "k": 1.7264060938854158,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:42",
+    "k": 1.764031308770032,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:19:53",
+    "k": 2.3589842325587678,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:20:03",
+    "k": 1.923286954914527,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:20:13",
+    "k": 1.687232005733708,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:20:23",
+    "k": 1.8273795625278633,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:20:33",
+    "k": 1.9443775262674317,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:20:43",
+    "k": 2.0349799912910216,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:20:53",
+    "k": 2.0966450431168484,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:21:03",
+    "k": 2.127667511006935,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:21:13",
+    "k": 2.127133218041842,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:21:23",
+    "k": 2.095095399485711,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:21:33",
+    "k": 2.5324494047603867,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:21:43",
+    "k": 1.9409503963707433,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:21:53",
+    "k": 1.8231503064012176,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:03",
+    "k": 1.6823589813010749,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:13",
+    "k": 1.922502262679027,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:23",
+    "k": 1.8559519740953239,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:33",
+    "k": 1.7615528340382205,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:43",
+    "k": 1.7267763006618118,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:22:53",
+    "k": 1.783833618634798,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:23:03",
+    "k": 1.8798587926282102,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:23:13",
+    "k": 2.42589943847746,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:23:23",
+    "k": 1.7214926693067798,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:23:33",
+    "k": 1.8565801437213252,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:23:44",
+    "k": 1.9677337582094099,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:23:54",
+    "k": 2.0518474404055405,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:04",
+    "k": 2.106561258549818,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:14",
+    "k": 2.1303528837953754,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:24",
+    "k": 2.1225476975646007,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:34",
+    "k": 2.083372131431521,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:44",
+    "k": 2.013925772138332,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:24:54",
+    "k": 2.4161235621299557,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:25:04",
+    "k": 1.792701966635222,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:25:14",
+    "k": 1.6470611806234756,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:25:24",
+    "k": 1.9140035111320473,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:25:34",
+    "k": 1.8332774919193715,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:25:44",
+    "k": 1.7456997523845947,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:25:54",
+    "k": 1.73245761039315,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:26:04",
+    "k": 1.80581492112662,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:26:14",
+    "k": 1.8977879629654675,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:26:24",
+    "k": 1.9231389209209697,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:26:34",
+    "k": 2.254703817988828,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:26:44",
+    "k": 1.8845909596443615,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:26:54",
+    "k": 1.989748331978292,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:04",
+    "k": 2.0672254317187297,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:14",
+    "k": 2.1148730013060755,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:24",
+    "k": 2.1313636040722352,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:34",
+    "k": 2.116226851132131,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:45",
+    "k": 2.069891997011088,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:27:55",
+    "k": 1.993659126406235,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:28:05",
+    "k": 1.8896606945557761,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:28:15",
+    "k": 2.260734992409316,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:28:25",
+    "k": 1.922040867175295,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:28:35",
+    "k": 1.9007114068928956,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:28:45",
+    "k": 1.8100645520120353,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:28:55",
+    "k": 1.7340804049294125,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:05",
+    "k": 1.7432110801922522,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:15",
+    "k": 1.8289707953513565,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:25",
+    "k": 1.9118905241473054,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:35",
+    "k": 1.6404089934888362,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:45",
+    "k": 1.7868369995719426,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:29:55",
+    "k": 2.411274742324197,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:30:05",
+    "k": 2.0103132533584813,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:30:15",
+    "k": 2.0810135210856853,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:30:25",
+    "k": 2.1215104788372003,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:30:35",
+    "k": 2.130668514721842,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:30:45",
+    "k": 2.1082330175833306,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:30:55",
+    "k": 2.0548052710314586,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:31:05",
+    "k": 1.9718969789202943,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:31:15",
+    "k": 1.8617942986103686,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:31:25",
+    "k": 1.7276229229250886,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:31:36",
+    "k": 2.4257966049380846,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:31:46",
+    "k": 1.8833359070107831,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:31:56",
+    "k": 1.7876178297964889,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:06",
+    "k": 1.7274003982835475,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:16",
+    "k": 1.7584849941689777,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:26",
+    "k": 1.8520466394016257,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:36",
+    "k": 1.9213939082089826,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:46",
+    "k": 1.6764247283363618,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:32:56",
+    "k": 1.8180823893796676,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:33:06",
+    "k": 1.93684835751785,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:33:16",
+    "k": 2.5294222749102566,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:33:26",
+    "k": 2.093222564371441,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:33:36",
+    "k": 2.126480168044943,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:33:46",
+    "k": 2.1282435390355863,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:33:56",
+    "k": 2.098473415509347,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:06",
+    "k": 2.0379928206594276,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:16",
+    "k": 1.9484996916844097,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:26",
+    "k": 1.83248617297137,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:36",
+    "k": 1.6932093664662038,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:46",
+    "k": 1.924114835301377,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:34:56",
+    "k": 2.36273755856201,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:35:06",
+    "k": 1.7672312637969205,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:35:17",
+    "k": 1.7260842637112337,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:35:27",
+    "k": 1.7774530243735123,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:35:37",
+    "k": 1.8737310080011087,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:35:47",
+    "k": 1.9256803892707643,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:35:57",
+    "k": 1.7114309587469556,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:36:07",
+    "k": 1.848217509775677,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:36:17",
+    "k": 1.961100036177084,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:36:27",
+    "k": 2.047116714316445,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:36:37",
+    "k": 2.603861006325033,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:36:47",
+    "k": 2.1297472459947397,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:36:57",
+    "k": 2.1240535967148215,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:07",
+    "k": 2.086937202873438,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:17",
+    "k": 2.019433427449375,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:27",
+    "k": 1.923171049077962,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:37",
+    "k": 1.8012662684415912,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:47",
+    "k": 1.656996257958528,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:37:57",
+    "k": 1.916872065132519,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:38:07",
+    "k": 1.83969450661681,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:38:17",
+    "k": 2.2497359868945797,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:38:27",
+    "k": 1.7303459409662185,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:38:37",
+    "k": 1.7994907339861659,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:38:47",
+    "k": 1.8931063568682895,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:38:58",
+    "k": 1.9244490839992865,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:08",
+    "k": 1.7454935186576024,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:18",
+    "k": 1.8768671303038178,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:28",
+    "k": 1.983743801113664,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:38",
+    "k": 2.063112999567743,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:48",
+    "k": 2.1127880924910643,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:39:58",
+    "k": 2.6312586684133175,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:40:08",
+    "k": 2.118095622615333,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:40:18",
+    "k": 2.0736814378378696,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:40:28",
+    "k": 1.9992486721391372,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:40:38",
+    "k": 1.8968650152346165,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:40:48",
+    "k": 1.769402370418772,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:40:58",
+    "k": 1.9201347810225151,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:41:08",
+    "k": 1.904712910473393,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:41:18",
+    "k": 1.816260714314247,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:41:28",
+    "k": 1.7367391899978644,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:41:38",
+    "k": 2.239841366648505,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:41:48",
+    "k": 1.822717569971142,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:41:58",
+    "k": 1.908523608768505,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:08",
+    "k": 1.9177723143720957,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:18",
+    "k": 1.7783074228544273,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:28",
+    "k": 1.9042242236442464,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:39",
+    "k": 2.0048727475530033,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:49",
+    "k": 2.077442169405174,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:42:59",
+    "k": 2.119885011701462,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:43:09",
+    "k": 2.131023469726099,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:43:19",
+    "k": 2.6105445862404553,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:43:29",
+    "k": 2.0590183572103595,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:43:39",
+    "k": 1.9779027897272976,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:43:49",
+    "k": 1.8693277161373063,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:43:59",
+    "k": 1.736556162840869,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:09",
+    "k": 1.9253207889966932,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:19",
+    "k": 1.8883184377607216,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:29",
+    "k": 1.7934740632704855,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:39",
+    "k": 1.7286774067875634,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:49",
+    "k": 1.7539670872513793,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:44:59",
+    "k": 2.3459093710901477,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:45:09",
+    "k": 1.9194133744591266,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:45:19",
+    "k": 1.6672145680144461,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:45:29",
+    "k": 1.8101610106306372,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:45:39",
+    "k": 1.930401506378265,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:45:49",
+    "k": 2.024632692486473,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:45:59",
+    "k": 2.090229669998628,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:46:09",
+    "k": 2.1253588364760785,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:46:19",
+    "k": 2.129036986680121,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:46:30",
+    "k": 2.101159536356641,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:46:40",
+    "k": 2.542496528531135,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:46:50",
+    "k": 1.9545973376216588,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:00",
+    "k": 1.840043555805591,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:10",
+    "k": 1.7020338784217124,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:20",
+    "k": 1.925063398917018,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:30",
+    "k": 1.8682192315482093,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:40",
+    "k": 1.7721545825012814,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:47:50",
+    "k": 1.7259000405270744,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:48:00",
+    "k": 1.7723705855375083,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:48:10",
+    "k": 1.8684490102095104,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:48:20",
+    "k": 2.425093724853208,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:48:30",
+    "k": 1.7023936144672764,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:48:40",
+    "k": 1.8403395853474085,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:48:50",
+    "k": 1.9547887165882303,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:00",
+    "k": 2.0425674360224226,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:10",
+    "k": 2.1011992050548693,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:20",
+    "k": 2.1290481244615,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:30",
+    "k": 2.1253386700247257,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:40",
+    "k": 2.0901724213896093,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:49:50",
+    "k": 2.0245396712570516,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:50:00",
+    "k": 2.4302639461289743,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:50:11",
+    "k": 1.8099940541942374,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:50:21",
+    "k": 1.6669853070500924,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:50:31",
+    "k": 1.919374210658805,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:50:41",
+    "k": 1.8460284201891681,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:50:51",
+    "k": 1.753931090331734,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:51:01",
+    "k": 1.728696033807882,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:51:11",
+    "k": 1.7936012842577258,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:51:21",
+    "k": 1.8884387555716045,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:51:31",
+    "k": 1.92530226327947,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:51:41",
+    "k": 2.2368271953458927,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:51:51",
+    "k": 1.8695705695918658,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:01",
+    "k": 1.9780218386403168,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:11",
+    "k": 2.0592861277248327,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:21",
+    "k": 2.1106957215055955,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:31",
+    "k": 2.131049646131059,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:41",
+    "k": 2.11972069134604,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:52:51",
+    "k": 2.0770865539747874,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:53:01",
+    "k": 2.0043303503333476,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:53:11",
+    "k": 1.9034834891920147,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:53:21",
+    "k": 2.277357006287308,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:53:31",
+    "k": 1.9180498384155071,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:53:42",
+    "k": 1.908111520059523,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:53:52",
+    "k": 1.8219581777876004,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:02",
+    "k": 1.7394569633266084,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:12",
+    "k": 1.7371049239350136,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:22",
+    "k": 1.8170609245926117,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:32",
+    "k": 1.905219773525284,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:42",
+    "k": 1.9198400699802014,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:54:52",
+    "k": 1.7706152432797473,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:55:02",
+    "k": 2.3978723816168923,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:55:12",
+    "k": 2.0000240539416496,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:55:22",
+    "k": 2.0742330029184384,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:55:32",
+    "k": 2.118370218031357,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:55:42",
+    "k": 2.1312320658995096,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:55:52",
+    "k": 2.112461943306686,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:56:02",
+    "k": 2.0625956710123505,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:56:12",
+    "k": 1.9829911540908074,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:56:22",
+    "k": 1.875904697459113,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:56:32",
+    "k": 1.7443251389463699,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:56:42",
+    "k": 2.424590029770339,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:56:52",
+    "k": 1.8924673374058631,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:02",
+    "k": 1.7986241539744028,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:12",
+    "k": 1.7300788504464109,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:23",
+    "k": 1.7503538237412384,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:33",
+    "k": 1.8406548704479928,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:43",
+    "k": 1.9172775761736083,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:57:53",
+    "k": 1.6585795991310053,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:58:03",
+    "k": 1.8026500198076802,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:58:13",
+    "k": 1.9242879991470616,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:58:23",
+    "k": 2.5200968333963853,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 07:58:33",
+    "k": 2.087360489153446,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:58:43",
+    "k": 2.124225280407461,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:58:53",
+    "k": 2.129663757961299,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:03",
+    "k": 2.103523389322863,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:13",
+    "k": 2.0465224813721035,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:23",
+    "k": 1.9602720479822127,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:33",
+    "k": 1.8471832836765847,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:43",
+    "k": 1.7103824846076265,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 07:59:53",
+    "k": 1.9256324610042297,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:00:03",
+    "k": 2.3732020971519985,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:00:13",
+    "k": 1.776929226342862,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:00:23",
+    "k": 1.7260469236009572,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:00:33",
+    "k": 1.7677599581332086,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:00:43",
+    "k": 1.863370429825137,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:00:53",
+    "k": 1.9242436202083153,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:01:04",
+    "k": 1.6942610713048776,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:01:14",
+    "k": 1.8334026686150686,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:01:24",
+    "k": 1.9492387439627779,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:01:34",
+    "k": 2.0385465812156873,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:01:44",
+    "k": 2.598811329242441,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:01:54",
+    "k": 2.1283548662916303,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:04",
+    "k": 2.1263356677505274,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:14",
+    "k": 2.092828098516552,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:24",
+    "k": 2.028761372095342,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:34",
+    "k": 1.9359431489151286,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:44",
+    "k": 1.816940510033293,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:02:54",
+    "k": 1.675063199732652,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:03:04",
+    "k": 1.921132858553689,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:03:14",
+    "k": 1.8512477339976443,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:03:24",
+    "k": 2.2578671048501047,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:03:34",
+    "k": 1.7275482009582648,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:03:44",
+    "k": 1.7883848136221099,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:03:54",
+    "k": 1.8840041556966454,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:04",
+    "k": 1.925756002065577,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:14",
+    "k": 1.7287888757521817,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:24",
+    "k": 1.8627988501592898,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:34",
+    "k": 1.9726828043673392,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:44",
+    "k": 2.0553684840744513,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:04:55",
+    "k": 2.108538137097542,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:05:05",
+    "k": 2.6307221676364465,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:05:15",
+    "k": 2.1212790142050326,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:05:25",
+    "k": 2.080466122906927,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:05:35",
+    "k": 2.0094405076575064,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:05:45",
+    "k": 1.910202865696835,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:05:55",
+    "k": 1.78550969262524,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:06:05",
+    "k": 1.915570657929328,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:06:15",
+    "k": 1.9113587399634309,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:06:25",
+    "k": 1.8279403393241858,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:06:35",
+    "k": 1.7426312656648189,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:06:45",
+    "k": 2.2344909646930287,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:06:55",
+    "k": 1.8110744038912931,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:05",
+    "k": 1.901400002313137,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:15",
+    "k": 1.9217436755042718,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:25",
+    "k": 1.762248094427973,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:35",
+    "k": 1.8908893942558695,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:45",
+    "k": 1.9946411574550296,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:07:55",
+    "k": 2.070571488241557,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:08:05",
+    "k": 2.1165690528199734,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:08:15",
+    "k": 2.131353923369693,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:08:25",
+    "k": 2.614511625295327,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:08:36",
+    "k": 2.066513939018852,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:08:46",
+    "k": 1.9886195156184043,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:08:56",
+    "k": 1.8831482328245701,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:06",
+    "k": 1.7529707997831627,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:16",
+    "k": 1.923414406140488,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:26",
+    "k": 1.8969189405797688,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:36",
+    "k": 1.804601697711181,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:46",
+    "k": 1.7320296186204878,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:09:56",
+    "k": 1.7464312591653928,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:10:06",
+    "k": 2.3344709895321083,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:10:16",
+    "k": 1.9145649019834143,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:10:26",
+    "k": 1.6489302172092009,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:10:36",
+    "k": 1.7942629697364805,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:10:46",
+    "k": 1.917402725603368,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:10:56",
+    "k": 2.0148869666018,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:11:06",
+    "k": 2.084002944460795,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:11:16",
+    "k": 2.1228227187226243,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:11:26",
+    "k": 2.1302558406690566,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:11:36",
+    "k": 2.1060945611964312,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:11:46",
+    "k": 2.551016015889269,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:11:56",
+    "k": 1.9665645800039133,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:06",
+    "k": 1.8550781253104156,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:16",
+    "k": 1.719669326368622,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:27",
+    "k": 1.925895693341361,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:37",
+    "k": 1.878791181660104,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:47",
+    "k": 1.78243603562772,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:12:57",
+    "k": 1.7265807728031712,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:13:07",
+    "k": 1.762770188845405,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:13:17",
+    "k": 1.8574519815016908,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:13:27",
+    "k": 2.4229005674662414,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:37",
+    "k": 1.6847319646376504,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:13:47",
+    "k": 1.8252125986151309,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:13:57",
+    "k": 1.9426211567882752,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:07",
+    "k": 2.03367625627991,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:17",
+    "k": 2.0958476126207213,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:27",
+    "k": 2.1273933324139236,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:37",
+    "k": 2.127429648865683,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:47",
+    "k": 2.0959483752849106,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:14:57",
+    "k": 2.033838905197215,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:15:07",
+    "k": 2.4428305338238645,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:15:17",
+    "k": 1.8254587138647511,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:15:27",
+    "k": 1.685026215535931,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:15:37",
+    "k": 1.9229486505002031,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:15:47",
+    "k": 1.8576435864088712,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:15:57",
+    "k": 1.7629206906621118,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:16:07",
+    "k": 1.7265583862437435,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:16:18",
+    "k": 1.782243700500409,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:16:28",
+    "k": 1.8783799255189793,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:16:38",
+    "k": 1.9258901829409107,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:16:48",
+    "k": 2.219024968409337,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:16:58",
+    "k": 1.8545113031482225,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:08",
+    "k": 1.9661023409670524,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:18",
+    "k": 2.050691301101107,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:28",
+    "k": 2.1059079732232373,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:38",
+    "k": 2.1302166377218175,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:48",
+    "k": 2.1229343273792733,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:17:58",
+    "k": 2.084269024662645,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:18:08",
+    "k": 2.0152970413745477,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:18:18",
+    "k": 1.9179417364625826,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:18:28",
+    "k": 2.2949268456474106,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:18:38",
+    "k": 1.649698576820048,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:18:48",
+    "k": 1.9148013733243758,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:18:58",
+    "k": 1.8349822906256954,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:08",
+    "k": 1.7467488427173712,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:18",
+    "k": 1.7318492563147503,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:28",
+    "k": 1.8040963836240618,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:38",
+    "k": 1.8965412414609693,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:48",
+    "k": 1.9235354324835567,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:19:58",
+    "k": 1.7521866021792702,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:20:09",
+    "k": 2.3824790799138578,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:20:19",
+    "k": 1.9881012203883401,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:20:29",
+    "k": 2.0660952263732293,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:20:39",
+    "k": 2.1143014139749376,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:20:49",
+    "k": 2.1313465829783516,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:20:59",
+    "k": 2.116771628386455,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:21:09",
+    "k": 2.070981355920793,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:21:19",
+    "k": 1.9952552917442312,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:21:29",
+    "k": 1.8917096967224227,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:21:39",
+    "k": 1.763261556953577,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:21:49",
+    "k": 2.421521544431723,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:21:59",
+    "k": 1.9019162998386103,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:09",
+    "k": 1.8118681600267865,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:19",
+    "k": 1.7348286087134395,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:29",
+    "k": 1.7421726175635968,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:39",
+    "k": 1.8270946785999367,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:49",
+    "k": 1.9109107800610838,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:22:59",
+    "k": 1.9159609190864795,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:23:09",
+    "k": 1.784274345108055,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:23:19",
+    "k": 1.9091611299923832,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:23:29",
+    "k": 2.5087326539826664,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:23:39",
+    "k": 2.0798073569417053,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:23:49",
+    "k": 2.1208912960567066,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:23:59",
+    "k": 2.130839182425269,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:24:09",
+    "k": 2.1093741214292105,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:24:19",
+    "k": 2.057071957947344,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:24:29",
+    "k": 1.9753735489392767,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:24:39",
+    "k": 1.8665713633421168,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:24:49",
+    "k": 1.7336850702325082,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:25:00",
+    "k": 1.9255292897828915,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:25:10",
+    "k": 2.386641836747208,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:25:20",
+    "k": 1.7914465576541905,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:25:30",
+    "k": 1.7282002201416724,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:25:40",
+    "k": 1.7554696623671853,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:25:50",
+    "k": 1.847994707264938,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:00",
+    "k": 1.9200521749257786,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:10",
+    "k": 1.669891916163742,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:20",
+    "k": 1.8124277042706052,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:30",
+    "k": 1.932248924845454,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:40",
+    "k": 2.026013141454281,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:26:50",
+    "k": 2.5911013290848044,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:27:00",
+    "k": 2.125691376784718,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:27:10",
+    "k": 2.1288220288633255,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:27:20",
+    "k": 2.1004008165648926,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:27:30",
+    "k": 2.0412169606058113,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:27:40",
+    "k": 1.952928656910875,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:27:50",
+    "k": 1.8380109958899133,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:28:00",
+    "k": 1.6996728435953998,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:28:10",
+    "k": 1.9248442089308604,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:28:20",
+    "k": 1.866783143745777,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:28:30",
+    "k": 2.2708381558508313,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:28:40",
+    "k": 1.7259138162631122,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:28:51",
+    "k": 1.7736382438262828,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:01",
+    "k": 1.869895901691239,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:11",
+    "k": 1.9252870909165616,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:21",
+    "k": 1.7047806308828788,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:31",
+    "k": 1.8423991626620495,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:41",
+    "k": 1.9564478539777417,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:29:51",
+    "k": 2.043761074739585,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:30:01",
+    "k": 2.1019009865304863,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:30:11",
+    "k": 2.6292427042297093,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:30:21",
+    "k": 2.125016303162525,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:30:31",
+    "k": 2.089341197656638,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:30:41",
+    "k": 2.023212609233326,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:30:51",
+    "k": 1.9284814499151062,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:01",
+    "k": 1.8077909292409307,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:11",
+    "k": 1.6645451354789165,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:21",
+    "k": 1.9188009465477815,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:31",
+    "k": 1.8445210425230736,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:41",
+    "k": 1.7529695552563844,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:31:51",
+    "k": 2.2290315284803897,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:32:01",
+    "k": 1.7949015332509373,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:32:11",
+    "k": 1.8894986689376987,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:32:21",
+    "k": 1.9251460595911112,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:32:32",
+    "k": 1.7387241966799762,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:32:42",
+    "k": 1.8711758769621247,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:32:52",
+    "k": 1.9792849110755806,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:33:02",
+    "k": 2.0600643312915023,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:33:12",
+    "k": 2.1111130032325516,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:33:22",
+    "k": 2.1310941128489045,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:33:32",
+    "k": 2.6194527265009846,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:33:42",
+    "k": 2.076522800881361,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:33:52",
+    "k": 2.003505391153432,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:02",
+    "k": 1.902420660178323,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:12",
+    "k": 1.7761227107556605,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:22",
+    "k": 1.9183990953770502,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:32",
+    "k": 1.9076019162872497,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:42",
+    "k": 1.8210892455447578,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:34:52",
+    "k": 1.7390338379570247,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:35:02",
+    "k": 1.7374893705726704,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:35:12",
+    "k": 2.3179040481711235,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:35:22",
+    "k": 1.905725755522941,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:35:32",
+    "k": 1.91955517638256,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:35:42",
+    "k": 1.771803128429124,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:35:52",
+    "k": 1.8988420516901154,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:02",
+    "k": 2.0007442839408744,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:13",
+    "k": 2.074731449557021,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:23",
+    "k": 2.1186098388613903,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:33",
+    "k": 2.1312064890950797,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:43",
+    "k": 2.1121737140546246,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:36:53",
+    "k": 2.5620359624101603,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:37:03",
+    "k": 1.9821797649901267,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:37:13",
+    "k": 1.8748638699101297,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:37:23",
+    "k": 1.7431041830977998,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:37:33",
+    "k": 1.9247267311394716,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:37:43",
+    "k": 1.8918130661452115,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:37:53",
+    "k": 1.7978112942667086,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:38:03",
+    "k": 1.729839118453347,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:38:13",
+    "k": 1.750908722432191,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:38:23",
+    "k": 1.8414920510641049,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:38:33",
+    "k": 2.4176198743537785,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:38:43",
+    "k": 1.659871818844434,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:38:53",
+    "k": 1.8037614718948256,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:03",
+    "k": 1.9252054781942463,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:13",
+    "k": 2.02078170758979,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:23",
+    "k": 2.087805244997697,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:33",
+    "k": 2.124407855978345,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:43",
+    "k": 2.129570086261233,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:39:53",
+    "k": 2.10313316397588,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:40:04",
+    "k": 2.045866309706808,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:40:14",
+    "k": 2.4593581883472337,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:40:24",
+    "k": 1.8460338500774238,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:40:34",
+    "k": 1.7090275289684809,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:40:44",
+    "k": 1.9255622654608378,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:40:54",
+    "k": 1.8724503746362422,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:04",
+    "k": 1.7761903942356718,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:14",
+    "k": 1.7260065956814261,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:24",
+    "k": 1.768403008852398,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:34",
+    "k": 1.8640950008813557,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:44",
+    "k": 1.9243825071279057,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:41:54",
+    "k": 2.1954056925242513,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:04",
+    "k": 1.8343739240801213,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:42:14",
+    "k": 1.9500293779770508,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:42:24",
+    "k": 2.0391401722247995,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:42:34",
+    "k": 2.0991661044529,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:42:44",
+    "k": 2.1284596195251053,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:42:54",
+    "k": 2.126198884673294,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:43:04",
+    "k": 2.092451726149493,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:43:14",
+    "k": 2.0281563952774286,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:43:24",
+    "k": 1.935099518839355,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:43:34",
+    "k": 2.3158846102344848,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:43:45",
+    "k": 1.6738699263598242,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:43:55",
+    "k": 1.9208914359312317,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:05",
+    "k": 1.8504962913932215,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:15",
+    "k": 1.7572958708790443,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:25",
+    "k": 1.7276943198576302,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:35",
+    "k": 1.7891779372091667,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:45",
+    "k": 1.8846793665531973,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:44:55",
+    "k": 1.9257085132047955,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:45:05",
+    "k": 1.7299870433996296,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:45:15",
+    "k": 2.363810450113174,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:45:25",
+    "k": 1.9734719267182483,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:45:35",
+    "k": 2.0559307369502884,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:45:45",
+    "k": 2.1088520007180094,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:45:55",
+    "k": 2.1307752350669906,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:05",
+    "k": 2.121081803482359,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:15",
+    "k": 2.0800458232021395,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:25",
+    "k": 2.0088143165359105,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:35",
+    "k": 1.9093613223301,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:45",
+    "k": 1.784504682016471,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:46:55",
+    "k": 2.4158926422395286,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:47:05",
+    "k": 1.9109792363395295,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:47:15",
+    "k": 1.8272236075798387,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:47:26",
+    "k": 1.7422225748325806,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:47:36",
+    "k": 1.7347908360593014,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:47:46",
+    "k": 1.8117900763594295,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:47:56",
+    "k": 1.9018801328277164,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:48:06",
+    "k": 1.9215340307780922,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:48:16",
+    "k": 1.7632391203266224,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:48:26",
+    "k": 1.8917323370750676,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:48:36",
+    "k": 2.4952904933656095,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:48:46",
+    "k": 2.0710204051140586,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:48:56",
+    "k": 2.1167921847622635,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:06",
+    "k": 2.131345647773437,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:16",
+    "k": 2.114273285419361,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:26",
+    "k": 2.0660002134375697,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:36",
+    "k": 1.9879404152923101,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:46",
+    "k": 1.8822529495537428,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:49:56",
+    "k": 1.7519222342232539,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:50:06",
+    "k": 1.9235786143946576,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:50:16",
+    "k": 2.396392555781688,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:50:26",
+    "k": 1.80386509138572,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:50:36",
+    "k": 1.73176740381056,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:50:46",
+    "k": 1.7469063867291572,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:50:56",
+    "k": 1.8352586280869474,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:06",
+    "k": 1.9149402240691307,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:17",
+    "k": 1.650191521096502,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:27",
+    "k": 1.7953678367119148,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:37",
+    "k": 1.9183128747332412,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:47",
+    "k": 2.0155901411432686,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:51:57",
+    "k": 2.584462597614184,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:52:07",
+    "k": 2.123025414938871,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:52:17",
+    "k": 2.1301802732422077,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:52:27",
+    "k": 2.105738486748033,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:52:37",
+    "k": 2.050376297314946,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:52:47",
+    "k": 1.9655320001904084,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:52:57",
+    "k": 1.8537929513581441,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:53:07",
+    "k": 1.7181799047881992,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:53:17",
+    "k": 1.925881023978495,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:53:27",
+    "k": 1.8779180771077695,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:53:37",
+    "k": 2.281738574704965,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:53:47",
+    "k": 1.726494758038188,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:53:57",
+    "k": 1.76336349860093,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:07",
+    "k": 1.858191157567392,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:17",
+    "k": 1.923088199570201,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:27",
+    "k": 1.685922253864024,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:37",
+    "k": 1.8262294735890654,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:47",
+    "k": 1.9434516405318485,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:54:58",
+    "k": 2.0342905523767865,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:55:08",
+    "k": 2.0962227147308496,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:55:18",
+    "k": 2.627523372577567,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:55:28",
+    "k": 2.12729459618056,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:55:38",
+    "k": 2.095553483439243,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:55:48",
+    "k": 2.033191159071678,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:55:58",
+    "k": 1.9419503679036336,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:08",
+    "k": 1.8243701113901372,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:18",
+    "k": 1.6837600693133954,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:28",
+    "k": 1.9227405075199797,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:38",
+    "k": 1.8568300912585272,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:48",
+    "k": 1.7622678722914462,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:56:58",
+    "k": 2.2266576630070585,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:57:08",
+    "k": 1.783005215466982,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:57:18",
+    "k": 1.879117465381624,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:57:28",
+    "k": 1.9258986239426092,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:57:38",
+    "k": 1.7202477830192344,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:57:48",
+    "k": 1.8555808513811964,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:57:58",
+    "k": 1.9669507495575078,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:58:08",
+    "k": 2.0512895139857164,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:58:18",
+    "k": 2.106253561226524,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:58:28",
+    "k": 2.1302885219714165,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:58:38",
+    "k": 2.6227348715129972,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 08:58:49",
+    "k": 2.0837977591490153,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:58:59",
+    "k": 2.014570792774326,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:09",
+    "k": 1.9169848574735204,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:19",
+    "k": 1.7937789797281956,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:29",
+    "k": 1.6483549114269138,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:39",
+    "k": 1.9143973983915317,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:49",
+    "k": 1.834085036974527,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 08:59:59",
+    "k": 1.7462009478945113,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:00:09",
+    "k": 1.7321608174537158,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:00:19",
+    "k": 2.3049813539778627,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:29",
+    "k": 1.8971804778608532,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:00:39",
+    "k": 1.9233367043133314,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:00:49",
+    "k": 1.753451314379853,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:00:59",
+    "k": 1.8835254985811165,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:09",
+    "k": 1.9889108591054305,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:19",
+    "k": 2.0666542444955516,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:29",
+    "k": 2.1145787346613316,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:39",
+    "k": 2.1313560157365172,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:49",
+    "k": 2.11651091444587,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:01:59",
+    "k": 2.5704607167756404,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:09",
+    "k": 1.9944893303006073,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:02:19",
+    "k": 1.8906993150836544,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:02:29",
+    "k": 1.7620111193492325,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:02:39",
+    "k": 1.9217800140169907,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:02:50",
+    "k": 1.901326311834249,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:03:00",
+    "k": 1.8109904166255328,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:03:10",
+    "k": 1.7344654297696331,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:03:20",
+    "k": 1.7426704810633566,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:03:30",
+    "k": 1.8280098060337318,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:03:40",
+    "k": 2.4113984142229064,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:50",
+    "k": 1.915547311199725,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:00",
+    "k": 1.7855384177651752,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:10",
+    "k": 1.9102208142581376,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:20",
+    "k": 2.009440909709129,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:30",
+    "k": 2.080457809016257,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:40",
+    "k": 2.1212663112494696,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:04:50",
+    "k": 2.13073122591048,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:05:00",
+    "k": 2.1085948616612455,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:05:10",
+    "k": 2.0554764308594757,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:05:20",
+    "k": 2.472861131590748,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:30",
+    "k": 1.8630538684882707,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:05:40",
+    "k": 1.729110632974208,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:05:50",
+    "k": 1.9257433662779537,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:00",
+    "k": 1.8842097709187604,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:10",
+    "k": 1.788652346539339,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:20",
+    "k": 1.7276033994711746,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:30",
+    "k": 1.757637460512093,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:41",
+    "k": 1.8509316165135064,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:06:51",
+    "k": 1.921030280257033,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:07:01",
+    "k": 2.1745224115772426,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:07:11",
+    "k": 1.8164589499597144,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:07:21",
+    "k": 1.9355250598320588,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:07:31",
+    "k": 2.0284423048372933,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:07:41",
+    "k": 2.0926212453021202,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:07:51",
+    "k": 2.126255818177709,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:08:01",
+    "k": 2.1284181395956883,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:08:11",
+    "k": 2.099039936715288,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:08:21",
+    "k": 2.0389435361789165,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:08:31",
+    "k": 1.949812462649907,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:08:41",
+    "k": 2.3341075838128833,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:51",
+    "k": 1.6951054448059075,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:01",
+    "k": 1.9243482900123452,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:11",
+    "k": 1.8639390433831753,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:21",
+    "k": 1.7682790093393306,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:31",
+    "k": 1.7260130926449118,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:41",
+    "k": 1.7763033096694698,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:09:51",
+    "k": 1.8725468951458413,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:10:01",
+    "k": 1.9255708700250123,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:10:11",
+    "k": 1.7091566070440565,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:10:21",
+    "k": 2.346102373854459,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:10:32",
+    "k": 1.9594049667448346,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:10:42",
+    "k": 2.045894611603435,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:10:52",
+    "k": 2.103147961427709,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:02",
+    "k": 2.1295706548750575,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:12",
+    "k": 2.1244142795720102,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:22",
+    "k": 2.087828596732555,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:32",
+    "k": 2.0208330468264526,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:42",
+    "k": 1.9252863073660467,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:11:52",
+    "k": 1.8039005505267673,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:12:02",
+    "k": 2.1600299489995605,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:12:12",
+    "k": 1.9176722666361141,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:12:22",
+    "k": 1.841641627375435,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:12:32",
+    "k": 1.75102100255471,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:12:42",
+    "k": 1.7297893212879285,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:12:52",
+    "k": 1.797633389267315,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:13:02",
+    "k": 1.891669829295991,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:13:12",
+    "k": 1.9247578642434984,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:13:22",
+    "k": 1.7427803444870256,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:13:32",
+    "k": 1.8745766625699418,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:13:42",
+    "k": 2.4819246007554123,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:13:52",
+    "k": 2.0618291476340884,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:02",
+    "k": 2.1120500761619816,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:12",
+    "k": 2.131193903186477,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:22",
+    "k": 2.118718231350314,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:33",
+    "k": 2.0749681423643898,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:43",
+    "k": 2.001175911330173,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:14:53",
+    "k": 1.8994039061546268,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:15:03",
+    "k": 1.7724782576039435,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:15:13",
+    "k": 1.919359052425621,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:15:23",
+    "k": 2.4060748218105648,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:15:33",
+    "k": 1.818491732693775,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:15:43",
+    "k": 1.7377746986860947,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:15:53",
+    "k": 1.7387233791907015,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:03",
+    "k": 1.8204482008625735,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:13",
+    "k": 1.9072256004266381,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:23",
+    "k": 1.9186460418019706,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:33",
+    "k": 1.7751861602354855,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:43",
+    "k": 1.9016397690085567,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:16:53",
+    "k": 2.0028965642462886,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:17:03",
+    "k": 2.5761160538930747,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:17:13",
+    "k": 2.1192732049233998,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:17:23",
+    "k": 2.131121033998282,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:17:33",
+    "k": 2.1113491825864283,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:17:43",
+    "k": 2.06051505036448,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:17:53",
+    "k": 1.9800358397538613,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:18:03",
+    "k": 1.8721740040802248,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:18:13",
+    "k": 1.7399238794957124,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:18:24",
+    "k": 1.9250399637140176,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:18:34",
+    "k": 1.8901487993119297,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:18:44",
+    "k": 2.2957190681441,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:18:54",
+    "k": 1.729253691710768,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:04",
+    "k": 1.7523663414970974,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:14",
+    "k": 1.8436111423846337,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:24",
+    "k": 1.91844937926364,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:34",
+    "k": 1.6631030236821618,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:44",
+    "k": 1.8065496615329528,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:19:54",
+    "k": 1.9275183685276707,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:20:04",
+    "k": 2.0224820303017763,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:20:14",
+    "k": 2.0888781325481265,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:20:24",
+    "k": 2.6248340240577592,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:20:34",
+    "k": 2.1293446625274495,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:20:44",
+    "k": 2.102286835544417,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:20:54",
+    "k": 2.044423197455422,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:04",
+    "k": 1.9573518385920528,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:14",
+    "k": 1.843535737227274,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:24",
+    "k": 1.7061425027654638,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:34",
+    "k": 1.9253841668353904,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:44",
+    "k": 1.8707237777596655,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:21:54",
+    "k": 1.7745304878943353,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:22:04",
+    "k": 2.225936630750556,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:22:15",
+    "k": 1.769967813997713,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:22:25",
+    "k": 1.8658261361387216,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:22:35",
+    "k": 1.9246881353594336,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:22:45",
+    "k": 1.6981626695225023,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:22:55",
+    "k": 1.8367315282165102,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:23:05",
+    "k": 1.9519003976082479,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:23:15",
+    "k": 2.0404584686164347,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:23:25",
+    "k": 2.099941730197459,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:23:35",
+    "k": 2.128688589522321,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:23:45",
+    "k": 2.6258869634257493,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:23:55",
+    "k": 2.091618447101069,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:05",
+    "k": 2.0268393310022184,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:15",
+    "k": 1.9333535338356862,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:25",
+    "k": 1.8137856777195984,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:35",
+    "k": 1.6714802662837416,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:45",
+    "k": 1.920393078971906,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:24:55",
+    "k": 1.8490016758643295,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:25:05",
+    "k": 1.7562063347490902,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:25:15",
+    "k": 1.727986792499827,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:25:25",
+    "k": 2.2904982429574723,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:25:35",
+    "k": 1.8858054370217348,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:25:45",
+    "k": 1.925612200284303,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:25:55",
+    "k": 1.7319833064443166,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:06",
+    "k": 1.8654583491655874,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:16",
+    "k": 1.974765284536749,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:26",
+    "k": 2.0568234088048705,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:36",
+    "k": 2.1093476761246217,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:46",
+    "k": 2.130853242784088,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:26:56",
+    "k": 2.1207504918606856,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:27:06",
+    "k": 2.579316656723142,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:27:16",
+    "k": 2.007723415392313,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:27:26",
+    "k": 1.9079613315742474,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:27:36",
+    "k": 1.7828231510052224,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:27:46",
+    "k": 1.9164364546836699,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:27:56",
+    "k": 1.9103227624632797,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:28:06",
+    "k": 1.8259750785028508,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:28:16",
+    "k": 1.741562978613987,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:28:26",
+    "k": 1.7353003976125656,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:28:36",
+    "k": 1.8129980567232338,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:28:46",
+    "k": 2.4026527240697444,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:28:56",
+    "k": 1.9211824583851151,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:06",
+    "k": 1.7648579043174495,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:16",
+    "k": 1.8930545092739053,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:26",
+    "k": 1.9962897253459913,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:36",
+    "k": 2.0716764095588642,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:46",
+    "k": 2.11711589942564,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:29:57",
+    "k": 2.1313303444131826,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:30:07",
+    "k": 2.1139257349555693,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:30:17",
+    "k": 2.0653813933221095,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:30:27",
+    "k": 2.4870523460024847,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:30:37",
+    "k": 1.881091359799374,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:30:47",
+    "k": 1.7504797210512288,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:30:57",
+    "k": 1.9237912590006991,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:07",
+    "k": 1.8956709864236043,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:17",
+    "k": 1.8028645112886328,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:27",
+    "k": 1.731425679984733,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:37",
+    "k": 1.7475331399361018,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:47",
+    "k": 1.8362567026076606,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:31:57",
+    "k": 1.9153810282255619,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:32:07",
+    "k": 2.1516997052371236,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:32:17",
+    "k": 1.7966807442135058,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:32:27",
+    "k": 1.9193778692631969,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:32:37",
+    "k": 2.016383896896726,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:32:47",
+    "k": 2.084974798109421,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:32:57",
+    "k": 2.123236086117479,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:33:07",
+    "k": 2.1301007161793573,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:33:17",
+    "k": 2.105373430844466,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:33:27",
+    "k": 2.0497544878201737,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:33:37",
+    "k": 1.9647895408784488,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:33:48",
+    "k": 2.352850010678122,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:33:58",
+    "k": 1.7170080974759125,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:08",
+    "k": 1.9258621080001943,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:18",
+    "k": 1.8772057921942444,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:28",
+    "k": 1.7810185979106694,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:38",
+    "k": 1.7264102158792898,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:48",
+    "k": 1.7639939585910207,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:34:58",
+    "k": 1.858939165147413,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:35:08",
+    "k": 1.923271114220868,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:35:18",
+    "k": 1.687096641042444,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:35:28",
+    "k": 2.3272344891818704,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:35:38",
+    "k": 1.9442507265820113,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:35:48",
+    "k": 2.0348830224671968,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:35:58",
+    "k": 2.0965871910222296,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:08",
+    "k": 2.1276400348081825,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:18",
+    "k": 2.1271751639309535,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:28",
+    "k": 2.095186938404159,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:38",
+    "k": 2.032580142200459,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:48",
+    "k": 1.9411231204925716,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:36:58",
+    "k": 1.8233210013962973,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:37:08",
+    "k": 2.1825460116336717,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:37:18",
+    "k": 1.9225360199856174,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:37:28",
+    "k": 1.8560585456967982,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:37:39",
+    "k": 1.7616355546112206,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:37:49",
+    "k": 1.7267618432854233,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:37:59",
+    "k": 1.783747423766634,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:38:09",
+    "k": 1.879804322422617,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:38:19",
+    "k": 1.9258996295208568,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:38:29",
+    "k": 1.7213983591589948,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:38:39",
+    "k": 1.8565402464642973,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:38:49",
+    "k": 2.4677275620959045,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:38:59",
+    "k": 2.051845369867819,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:09",
+    "k": 2.1065779032661416,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:19",
+    "k": 2.1303579397280035,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:29",
+    "k": 2.122530936474517,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:39",
+    "k": 2.08330981057995,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:49",
+    "k": 2.0137948735673072,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:39:59",
+    "k": 1.9159300529770196,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:40:09",
+    "k": 1.7924739699164665,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:40:19",
+    "k": 1.6468663526302214,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:40:29",
+    "k": 2.4139383954155043,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:40:39",
+    "k": 1.833121706262597,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:40:49",
+    "k": 1.745602570121895,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:40:59",
+    "k": 1.732524444491656,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:41:09",
+    "k": 1.8059849094799427,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:41:19",
+    "k": 1.8979097031347485,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:41:30",
+    "k": 1.9230895704427275,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:41:40",
+    "k": 1.7549800591675178,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:41:50",
+    "k": 1.8848250916915141,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:42:00",
+    "k": 1.989968656101865,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:42:10",
+    "k": 2.5673839391623243,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:42:20",
+    "k": 2.11496074102398,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:42:30",
+    "k": 2.131365391007428,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:42:40",
+    "k": 2.1161344552701067,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:42:50",
+    "k": 2.0697017868633205,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:00",
+    "k": 1.9933599340381436,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:10",
+    "k": 1.8892424221265451,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:20",
+    "k": 1.7602720564302126,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:30",
+    "k": 1.9221329766818789,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:40",
+    "k": 1.9004842121364542,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:43:50",
+    "k": 2.309710895053054,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:44:00",
+    "k": 1.7339382730950208,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:44:10",
+    "k": 1.7434078164639732,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:44:20",
+    "k": 1.8293277481431098,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:44:30",
+    "k": 1.9120686185474076,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:44:40",
+    "k": 1.6409535915249531,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:44:50",
+    "k": 1.7873326632064193,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:45:00",
+    "k": 1.9116934307722486,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:45:10",
+    "k": 2.0105660989552794,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:45:21",
+    "k": 2.0812005733300873,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:45:31",
+    "k": 2.6216033716338467,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:45:41",
+    "k": 2.1306424776922217,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:45:51",
+    "k": 2.108068933498803,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:01",
+    "k": 2.0545165138774757,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:11",
+    "k": 1.9714836660783215,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:21",
+    "k": 1.861292730707147,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:31",
+    "k": 1.7270266670296448,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:41",
+    "k": 1.9258141189270783,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:46:51",
+    "k": 1.8830122537440237,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:47:01",
+    "k": 1.787273074698842,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:47:11",
+    "k": 2.2273384491288555,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:47:21",
+    "k": 1.7587479254785952,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:47:31",
+    "k": 1.8523935372989744,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:47:41",
+    "k": 1.9214888401077728,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:47:51",
+    "k": 1.6768560943454962,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:01",
+    "k": 1.8184309814943616,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:11",
+    "k": 1.9371363657844551,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:21",
+    "k": 2.029649165050655,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:31",
+    "k": 2.0933741166113267,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:41",
+    "k": 2.126536633383698,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:48:51",
+    "k": 2.6281963441181007,
+    "status": "TRANSITIONING",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:49:02",
+    "k": 2.09830647391707,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:49:12",
+    "k": 2.037717257668808,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:49:22",
+    "k": 1.948116399850311,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:49:32",
+    "k": 1.831970845066654,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:49:42",
+    "k": 1.6926061397594663,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:49:52",
+    "k": 1.9240388168391156,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:50:02",
+    "k": 1.8623380221440204,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:50:12",
+    "k": 1.7668672099166207,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:50:22",
+    "k": 1.726111478967734,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:50:32",
+    "k": 2.277831885403838,
+    "status": "SINCERE",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:50:42",
+    "k": 1.8740968172071015,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:50:52",
+    "k": 1.9256979219266335,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:02",
+    "k": 1.7117543599249754,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:12",
+    "k": 1.8483266510342165,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:22",
+    "k": 1.9611912045845923,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:32",
+    "k": 2.0471782789873427,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:42",
+    "k": 2.103899354745229,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:51:52",
+    "k": 2.12975618624651,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:52:02",
+    "k": 2.1240328924174907,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:52:12",
+    "k": 2.586881602977651,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": "SUDDEN ENTROPY SPIKE (Deviation detected)"
+  },
+  {
+    "timestamp": "2026-01-18 09:52:22",
+    "k": 2.0193503939240385,
+    "status": "IRREVERSIBLE COLLAPSE (t*)",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:52:32",
+    "k": 1.9233253358025622,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:52:42",
+    "k": 1.801488329058028,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:52:53",
+    "k": 1.6572459134159196,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:53:03",
+    "k": 1.9169271248562019,
+    "status": "TRANSITIONING",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:53:13",
+    "k": 1.8398007234843639,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:53:23",
+    "k": 1.7497749318636036,
+    "status": "SINCERE",
+    "alert": ""
+  },
+  {
+    "timestamp": "2026-01-18 09:53:33",
+    "k": 1.730329960739133,
+    "status": "SINCERE",
+    "alert": ""
+  }
+]

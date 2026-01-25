@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-IAT : THE LIVING MIRROR</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="background-grid"></div>
+
+    <div id="app-container">
+        <header>
+            <div class="logo">T-IAT // THE WEAVER</div>
+            <div id="heartbeat-led" class="heartbeat-pulse"></div>
+            <div class="sub-title">Sincere Interaction Mirror v3.0</div>
+        </header>
+
+        <aside class="sidebar-left">
+            <div class="sidebar-title">Active Lineages</div>
+            <div id="lineage-list">
+                <!-- Dynamically filled -->
+                <div class="lineage-item active">PHYSICS_INVARIANT</div>
+                <div class="lineage-item">LOGIC_RECOVERY</div>
+                <div class="lineage-item">HUMAN_PROJECTION</div>
+            </div>
+        </aside>
+
+        <main id="main-display">
+            <svg id="braid-canvas">
+                <!-- Braid strands rendered here -->
+            </svg>
+            <div id="silent-gate" class="silent-gate-overlay"></div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="sidebar-title">Audit Metrics</div>
+
+            <div class="metric-card">
+                <div class="metric-label">Structural Frustration ($C_{fail}$)</div>
+                <div id="metric-cfail" class="metric-value">0.00</div>
+                <div class="metric-gauge">
+                    <div id="gauge-cfail" class="gauge-fill"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Information Drift ($D_{KL}$)</div>
+                <div id="metric-dkl" class="metric-value">0.000</div>
+                <div class="metric-gauge">
+                    <div id="gauge-dkl" class="gauge-fill"></div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Discovery Depth</div>
+                <div id="metric-discovery" class="metric-value">0.0ly</div>
+                <div class="metric-gauge">
+                    <div id="gauge-discovery" class="gauge-fill" style="background: var(--accent-safe); opacity: 0.6;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Invariant Stability</div>
+                <div id="metric-stability" class="metric-value">100%</div>
+                <div class="metric-gauge">
+                    <div id="gauge-stability" class="gauge-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="console-area">
+            <div class="metric-label">Sincere Input Channel</div>
+            <input type="text" id="user-input" placeholder="Type your inquiry to the Invariant Skeleton..." autofocus>
+        </section>
+    </div>
+
+    <script src="braid_renderer.js"></script>
+    <script src="sincerity_engine.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

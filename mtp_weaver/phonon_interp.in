@@ -1,0 +1,14 @@
+&input
+    fildyn='Y2C3N3.dyn', zasr='simple', flfrc='Y2C3N3.fc'
+/
+<!-- slide -->
+&input
+    asr='simple',
+    amass(1)=88.905, amass(2)=12.011, amass(3)=14.007,
+    flfrc='Y2C3N3.fc', flfrq='Y2C3N3.freq', q_in_band_form=.true.
+/
+4
+0.0 0.0 0.0 40
+0.5 0.5 0.5 1
+0.5 0.25 0.75 40
+0.0 0.0 0.0 1

@@ -1,0 +1,18 @@
+nomos_system:
+  # Q3: Discovery Criteria - 新規性の定義
+  discovery_criteria:
+    novelty_metric: "JonesPolynomialChange" # 不変量（位相のクラス）の変化を「新規」とする
+    equivalence_check: "ReidemeisterMoves"   # 同等な変形（等価類）は新規性なしとみなす
+    optimization_metric: "BraidLengthReduction" # 同じ不変量なら、より短い（単純な）表現を評価
+
+  # 特許出願（Nomos）自動チェッカーのパラメータ
+  auto_checker:
+    threshold_sincerity: 0.95
+    prior_art_path: "C:\\Users\\zeros\\.gemini\\antigravity\\scratch\\mtp_weaver\\archive\\prior_art_invariants.json"
+    naming_convention: "T-IAT-NOMOS-{UUID}"
+
+  # 評価対象外（非特許的）な変形
+  non_patentable:
+    - "Cancellation"    # sigma_i * sigma_i^-1
+    - "Commutation"     # |i-j| > 1
+    - "IdentityMoves"   # 何も変化させない空演算

@@ -1,0 +1,6 @@
+&DOS
+    prefix = 'y2c3n3'
+    outdir = './tmp'
+    fildos = 'y2c3n3.dos'
+    DeltaE = 0.01
+/

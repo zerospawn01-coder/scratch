@@ -1,0 +1,28 @@
+constraints:
+  # Q2: Invariant (Hard Rules) - 破ると即ロールバック
+  hard_invariants:
+    - type: "ArtinRelations"
+      desc: "Fundamental braid relations sigma_i * sigma_i^-1 = id"
+      action: "reject_step"
+    - type: "YangBaxterConsistency"
+      desc: "Braiding consistency sigma_i sigma_i+1 sigma_i = sigma_i+1 sigma_i sigma_i+1"
+      action: "reject_step"
+    - type: "EnergyConservation"
+      desc: "Information entropy must not decrease without external work"
+      tolerance: 1e-6
+      action: "damp_and_retry"
+    - type: "StructuralIntegrity"
+      desc: "Topological genus must be preserved across concept mappings"
+      action: "rollback"
+
+  # Q1: Interaction Rules - 交差時の演算定義 (Simplicial Gate)
+  interaction_logic:
+    crossing_operator: "YangBaxterGate" # 単体的なメッセージパッシングへのマッピング
+    braid_depth: 256 # 追跡する複雑性の深さ
+    interaction_resolution: "high"
+
+  # Q4: Controller Policy - 介入の積極性
+  intervention_policy:
+    mode: "active_preemptive" # 能動的・予測的回路遮断
+    check_frequency: "per_step"
+    safety_level: "critial"

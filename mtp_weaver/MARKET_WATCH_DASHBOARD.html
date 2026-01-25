@@ -1,0 +1,125 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>AI Market Sentinel | Multi-Scale Watchtower</title>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <style>
+                body { font-family: 'Courier New', Courier, monospace; background: #0a0a0a; color: #fff; text-align: center; padding: 20px; }
+                .container { border: 2px solid #00ff99; padding: 20px; display: inline-block; background: #111; border-radius: 10px; box-shadow: 0 0 30px #00ff9933; width: 90%; max-width: 1000px; }
+                .mode-label { background: #222; color: #666; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; margin-bottom: 20px; display: inline-block; border: 1px solid #333; }
+                .header-stats { display: flex; justify-content: space-around; margin-bottom: 20px; font-size: 1.1em; border-bottom: 1px solid #333; padding-bottom: 15px; }
+                .k-val { font-size: 4.5em; font-weight: bold; color: #00ff99; margin: 10px 0; text-shadow: 0 0 15px #00ff9966; }
+                .last-update { font-size: 0.7em; color: #555; margin-bottom: 20px; }
+                .summary-box { display: flex; justify-content: space-between; margin: 20px 0; background: #1a1a1a; padding: 15px; border-radius: 5px; font-size: 0.9em; }
+                .controls { margin: 20px 0; }
+                button { background: #222; color: #fff; border: 1px solid #444; padding: 8px 18px; cursor: pointer; border-radius: 5px; margin: 0 5px; font-family: inherit; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+                button:hover { background: #333; border-color: #00ff99; transform: translateY(-2px); }
+                button.active { background: #00ff99; border-color: #00ff99; color: #000; font-weight: bold; box-shadow: 0 4px 15px #00ff9966; }
+                .alert { color: #ff4d4d; background: #200000; padding: 15px; margin-top: 20px; border-radius: 5px; border: 1px solid #ff4d4d; animation: glow 3s infinite ease-in-out; }
+                @keyframes glow { 0% { opacity: 0.7; box-shadow: 0 0 5px #ff4d4d; } 50% { opacity: 1.0; box-shadow: 0 0 25px #ff4d4d; } 100% { opacity: 0.7; box-shadow: 0 0 5px #ff4d4d; } }
+                #marketChart { background: #151515; border-radius: 8px; padding: 15px; margin-bottom: 30px; }
+                .table-container { margin-top: 30px; height: 350px; overflow-y: scroll; border: 1px solid #333; border-radius: 5px; background: #0c0c0c; }
+                table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9em; }
+                th, td { padding: 12px; border-bottom: 1px solid #222; }
+                th { background: #181818; position: sticky; top: 0; color: #888; text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; }
+                tr:hover { background: #1a1a1a; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="mode-label">MODE: STRUCTURAL SIMULATION (T-IAT ENGINE)</div>
+                <h1>MARKET WATCHTOWER</h1>
+                <div class="header-stats">
+                    <div>Status: <span style="color:#00ff99">SINCERE</span></div>
+                    <div>Today Max: 2.6313</div>
+                    <div>Today Min: 1.6404</div>
+                </div>
+                <div class="k-val">1.7498</div>
+                <div class="last-update">LATEST SINCERITY SCAN: 2026-01-18 09:53:23</div>
+                
+                <div class="summary-box">
+                    <div><strong>24H Avg:</strong> 1.9643</div>
+                    <div><strong>Stability Index:</strong> 0.7949</div>
+                </div>
+
+                <div class="controls">
+                    <button id="btn24h" class="active" onclick="setScale('24h')">24 HOURS</button>
+                    <button id="btn7d" onclick="setScale('7d')">7 DAYS</button>
+                    <button id="btn30d" onclick="setScale('30d')">30 DAYS</button>
+                </div>
+
+                <canvas id="marketChart" height="120"></canvas>
+                
+                
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Timestamp</th><th>k-Invariant</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr style='color: #fff'><td>2026-01-18 09:53:23</td><td>1.7498</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:53:13</td><td>1.8398</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:53:03</td><td>1.9169</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:52:53</td><td>1.6572</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:52:42</td><td>1.8015</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:52:32</td><td>1.9233</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:52:22</td><td>2.0194</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #ff4d4d'><td>2026-01-18 09:52:12</td><td>2.5869</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #fff'><td>2026-01-18 09:52:02</td><td>2.1240</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:52</td><td>2.1298</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:42</td><td>2.1039</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:32</td><td>2.0472</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:22</td><td>1.9612</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:12</td><td>1.8483</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:51:02</td><td>1.7118</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:50:52</td><td>1.9257</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:50:42</td><td>1.8741</td><td>SINCERE</td></tr><tr style='color: #ff4d4d'><td>2026-01-18 09:50:32</td><td>2.2778</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:50:22</td><td>1.7261</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:50:12</td><td>1.7669</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:50:02</td><td>1.8623</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:52</td><td>1.9240</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:42</td><td>1.6926</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:32</td><td>1.8320</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:22</td><td>1.9481</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:12</td><td>2.0377</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:49:02</td><td>2.0983</td><td>TRANSITIONING</td></tr><tr style='color: #ff4d4d'><td>2026-01-18 09:48:51</td><td>2.6282</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:48:41</td><td>2.1265</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:48:31</td><td>2.0934</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:48:21</td><td>2.0296</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:48:11</td><td>1.9371</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:48:01</td><td>1.8184</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:47:51</td><td>1.6769</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:47:41</td><td>1.9215</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:47:31</td><td>1.8524</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:47:21</td><td>1.7587</td><td>SINCERE</td></tr><tr style='color: #ff4d4d'><td>2026-01-18 09:47:11</td><td>2.2273</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:47:01</td><td>1.7873</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:51</td><td>1.8830</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:41</td><td>1.9258</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:31</td><td>1.7270</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:21</td><td>1.8613</td><td>SINCERE</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:11</td><td>1.9715</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:46:01</td><td>2.0545</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #fff'><td>2026-01-18 09:45:51</td><td>2.1081</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #fff'><td>2026-01-18 09:45:41</td><td>2.1306</td><td>IRREVERSIBLE COLLAPSE (t*)</td></tr><tr style='color: #ff4d4d'><td>2026-01-18 09:45:31</td><td>2.6216</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:45:21</td><td>2.0812</td><td>TRANSITIONING</td></tr><tr style='color: #fff'><td>2026-01-18 09:45:10</td><td>2.0106</td><td>TRANSITIONING</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script>
+                const scales = {
+                    '24h': { labels: ["09:36:48", "09:36:58", "09:37:08", "09:37:18", "09:37:28", "09:37:39", "09:37:49", "09:37:59", "09:38:09", "09:38:19", "09:38:29", "09:38:39", "09:38:49", "09:38:59", "09:39:09", "09:39:19", "09:39:29", "09:39:39", "09:39:49", "09:39:59", "09:40:09", "09:40:19", "09:40:29", "09:40:39", "09:40:49", "09:40:59", "09:41:09", "09:41:19", "09:41:30", "09:41:40", "09:41:50", "09:42:00", "09:42:10", "09:42:20", "09:42:30", "09:42:40", "09:42:50", "09:43:00", "09:43:10", "09:43:20", "09:43:30", "09:43:40", "09:43:50", "09:44:00", "09:44:10", "09:44:20", "09:44:30", "09:44:40", "09:44:50", "09:45:00", "09:45:10", "09:45:21", "09:45:31", "09:45:41", "09:45:51", "09:46:01", "09:46:11", "09:46:21", "09:46:31", "09:46:41", "09:46:51", "09:47:01", "09:47:11", "09:47:21", "09:47:31", "09:47:41", "09:47:51", "09:48:01", "09:48:11", "09:48:21", "09:48:31", "09:48:41", "09:48:51", "09:49:02", "09:49:12", "09:49:22", "09:49:32", "09:49:42", "09:49:52", "09:50:02", "09:50:12", "09:50:22", "09:50:32", "09:50:42", "09:50:52", "09:51:02", "09:51:12", "09:51:22", "09:51:32", "09:51:42", "09:51:52", "09:52:02", "09:52:12", "09:52:22", "09:52:32", "09:52:42", "09:52:53", "09:53:03", "09:53:13", "09:53:23"], data: [1.9411231204925716, 1.8233210013962973, 2.1825460116336717, 1.9225360199856174, 1.8560585456967982, 1.7616355546112206, 1.7267618432854233, 1.783747423766634, 1.879804322422617, 1.9258996295208568, 1.7213983591589948, 1.8565402464642973, 2.4677275620959045, 2.051845369867819, 2.1065779032661416, 2.1303579397280035, 2.122530936474517, 2.08330981057995, 2.0137948735673072, 1.9159300529770196, 1.7924739699164665, 1.6468663526302214, 2.4139383954155043, 1.833121706262597, 1.745602570121895, 1.732524444491656, 1.8059849094799427, 1.8979097031347485, 1.9230895704427275, 1.7549800591675178, 1.8848250916915141, 1.989968656101865, 2.5673839391623243, 2.11496074102398, 2.131365391007428, 2.1161344552701067, 2.0697017868633205, 1.9933599340381436, 1.8892424221265451, 1.7602720564302126, 1.9221329766818789, 1.9004842121364542, 2.309710895053054, 1.7339382730950208, 1.7434078164639732, 1.8293277481431098, 1.9120686185474076, 1.6409535915249531, 1.7873326632064193, 1.9116934307722486, 2.0105660989552794, 2.0812005733300873, 2.6216033716338467, 2.1306424776922217, 2.108068933498803, 2.0545165138774757, 1.9714836660783215, 1.861292730707147, 1.7270266670296448, 1.9258141189270783, 1.8830122537440237, 1.787273074698842, 2.2273384491288555, 1.7587479254785952, 1.8523935372989744, 1.9214888401077728, 1.6768560943454962, 1.8184309814943616, 1.9371363657844551, 2.029649165050655, 2.0933741166113267, 2.126536633383698, 2.6281963441181007, 2.09830647391707, 2.037717257668808, 1.948116399850311, 1.831970845066654, 1.6926061397594663, 1.9240388168391156, 1.8623380221440204, 1.7668672099166207, 1.726111478967734, 2.277831885403838, 1.8740968172071015, 1.9256979219266335, 1.7117543599249754, 1.8483266510342165, 1.9611912045845923, 2.0471782789873427, 2.103899354745229, 2.12975618624651, 2.1240328924174907, 2.586881602977651, 2.0193503939240385, 1.9233253358025622, 1.801488329058028, 1.6572459134159196, 1.9169271248562019, 1.8398007234843639, 1.7497749318636036] },
+                    '7d': { labels: ["01-18 07:00", "01-18 08:00", "01-18 09:00"], data: [1.963622001253082, 1.964350438535095, 1.9649656745837776] },
+                    '30d': { labels: ["01-18"], data: [1.9643121420298166] }
+                };
+                
+                const ctx = document.getElementById('marketChart').getContext('2d');
+                let currentScale = localStorage.getItem('watchtowerScale') || '24h';
+                
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: scales[currentScale].labels,
+                        datasets: [{
+                            label: 'k-Invariant',
+                            data: scales[currentScale].data,
+                            borderColor: '#00ff99',
+                            backgroundColor: '#00ff9911',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#00ff99',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: currentScale === '24h' ? 3 : 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        animation: { duration: 1000, easing: 'easeOutQuart' },
+                        scales: {
+                            y: { min: 1.0, max: 3.0, grid: { color: '#222' }, ticks: { color: '#555' } },
+                            x: { grid: { display: false }, ticks: { color: '#555', maxRotation: 0, autoSkip: true, maxTicksLimit: 12 } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+
+                function setScale(s) {
+                    currentScale = s;
+                    localStorage.setItem('watchtowerScale', s);
+                    ['24h', '7d', '30d'].forEach(id => {
+                        document.getElementById('btn' + id).classList.toggle('active', id === s);
+                    });
+                    chart.data.labels = scales[s].labels;
+                    chart.data.datasets[0].data = scales[s].data;
+                    chart.data.datasets[0].pointRadius = s === '24h' ? 3 : 1;
+                    chart.update();
+                }
+                
+                setScale(currentScale);
+
+                // Seamless Update: Refresh page every 30s but keep state.
+                // A true "human" UI would use AJAX/Fetch, but for this demo, 
+                // we reload to ensure the new HTML from the python script is seen.
+                setTimeout(() => location.reload(), 30000);
+            </script>
+        </body>
+        </html>
+        
