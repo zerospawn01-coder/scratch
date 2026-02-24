@@ -12,7 +12,7 @@ import SilentCamera from '../ui/hud/SilentCamera';
 import AudioControl from '../ui/hud/AudioControl';
 
 const App = () => {
-    const { nodes, edges, is3D, isSilent, lastCommand } = useStore();
+    const { nodes, edges, is3D, isSilent, lastCommand, isSafeMode } = useStore();
     const { connected } = useSVPSession();
     useLedgerSession(); // Bind SSE Ledger
 
@@ -25,6 +25,7 @@ const App = () => {
                 <div className={`svp-status ${!connected ? 'stalled' : ''}`}>
                     SVP: {statusText}
                     {!connected && <span className="reconnect-pulse"> [RECONNECTING...]</span>}
+                    {isSafeMode && <div className="safe-mode-alert"> [SAFE_MODE_ISOLATED]</div>}
                 </div>
                 <div className="command-log">LAST: {lastCommand} {isSilent ? '(SILENT)' : ''}</div>
             </div>

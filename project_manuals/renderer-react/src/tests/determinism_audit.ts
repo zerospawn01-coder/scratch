@@ -108,3 +108,8 @@ console.log(`| C (Dupe) | ${resultC.coreHash === resultA.coreHash ? 'YES' : 'NO'
 console.log(`| D (Mixed) | NO_MUTATE | ${resultD.rejected} | ${resultD.quarantined} |`);
 
 console.log(`\nOVERALL DETERMINISM PASS: ${pass}`);
+
+console.log(`\n--- FINAL TELEMETRY SUMMARY ---`);
+console.log(`Reorder Rejections (Test B): ${resultB.rejected}`);
+console.log(`Duplicate Rejections (Test C): ${resultC.rejected}`);
+console.log(`Quarantine Detections (Test D): ${resultD.quarantined}`);
