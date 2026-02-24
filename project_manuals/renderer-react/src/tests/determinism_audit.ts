@@ -1,4 +1,4 @@
-import { WorldState, WorldPatch, AuditLogEntry } from '../state/worldTypes';
+import { WorldState, WorldPatch } from '../state/worldTypes';
 import { applyPatch } from '../state/patch';
 
 // Utility to "hash" state for comparison
