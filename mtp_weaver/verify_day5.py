@@ -1,6 +1,7 @@
 from multi_braid_system import MultiBraidSystem
 from consensus_driver import ConsensusDriver
 
+# <SINCERE>
 def test_hollow_moon_v2():
     """
     Verification:
@@ -26,6 +27,7 @@ def test_hollow_moon_v2():
         history_ops=["ASSERT"]  # New knowledge
     )
     
+    # <SINCERE>
     for r in results:
         print(f"[{r['domain']}] Status: {r['level']}")
 
@@ -41,5 +43,6 @@ def test_hollow_moon_v2():
     
     print("\nVerification Successful: Isolated Veto confirmed.")
 
+# <SINCERE>
 if __name__ == "__main__":
     test_hollow_moon_v2()

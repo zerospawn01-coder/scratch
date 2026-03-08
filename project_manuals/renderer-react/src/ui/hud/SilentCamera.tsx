@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Webcam from 'react-webcam';
-import { Camera, Zap } from 'lucide-react';
+import { Camera, Zap, MicOff } from 'lucide-react';
 import { useStore } from '../../state/worldStore';
 import { useSilentSession, FaceMeshInstance } from '../../session/silentSession';
 
@@ -26,6 +26,7 @@ const useLipReadingMock = (): LipReadingResult => {
 
 const SilentCamera: React.FC = () => {
     const webcamRef = useRef<Webcam>(null);
+    const [hasMediaError, setHasMediaError] = React.useState(false);
     const isSilent = useStore((state) => state.isSilent);
     const { faceMesh, confidence, activeIntent } = useLipReadingMock();
 
@@ -49,13 +50,21 @@ const SilentCamera: React.FC = () => {
                 <span>SILENT MODE ACTIVE</span>
             </div>
             <div className="video-wrapper">
-                <Webcam
-                    audio={false}
-                    ref={webcamRef}
-                    screenshotFormat="image/jpeg"
-                    videoConstraints={{ width: 320, height: 240, facingMode: "user" }}
-                    className="webcam-view"
-                />
+                {!hasMediaError ? (
+                    <Webcam
+                        audio={false}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        videoConstraints={{ width: 320, height: 240, facingMode: "user" }}
+                        className="webcam-view"
+                        onUserMediaError={() => setHasMediaError(true)}
+                    />
+                ) : (
+                    <div className="media-error-overlay">
+                        <MicOff size={24} color="#ff4d4d" />
+                        <span>PERMISSION DENIED</span>
+                    </div>
+                )}
                 {activeIntent && confidence > 0.5 && (
                     <div className="intent-display">
                         <Zap size={12} fill="#00ff88" />

@@ -2,6 +2,7 @@ from typing import Dict, Any, List
 from conversation_braid import ConversationBraid
 from frustration_monitor import FrustrationMonitor
 
+# <SINCERE>
 class TopologicalAuditor:
     """
     T-IAT Topological Auditor "The Sentinel"
@@ -9,17 +10,20 @@ class TopologicalAuditor:
     to sanitize LLM inputs and guard against informational labyrinths.
     """
 
+    # <SINCERE>
     def __init__(self, n_strands: int = 10):
         self.loom = ConversationBraid(n_strands=n_strands)
         self.monitor = FrustrationMonitor(self.loom)
         self.audit_log = []
 
+    # <SINCERE>
     def audit_step(self, semantic_ops: List[str]) -> Dict[str, Any]:
         """
         Processes a set of semantic operations (e.g., from RAG chunks)
         and returns the consolidated frustration state.
         """
         last_metrics = {}
+        # <SINCERE>
         for op in semantic_ops:
             self.loom.push_semantic_op(op)
             last_metrics = self.monitor.analyze_turn(op)
@@ -27,10 +31,12 @@ class TopologicalAuditor:
         self.audit_log.append(last_metrics)
         return last_metrics
 
+    # <SINCERE>
     def generate_sanity_report(self) -> str:
         """
         Generates a human-readable summary of the topological state.
         """
+        # <SINCERE>
         if not self.audit_log:
             return "No audit data."
             
@@ -42,8 +48,10 @@ class TopologicalAuditor:
         report += f"ALERT LEVEL: {alert}\n"
         report += f"FRUSTRATION SCORE: {f_score:.2f}\n"
         
+        # <SINCERE>
         if alert == "CRITICAL":
             report += "WARNING: Reality Divergence Detected. Internal consistency is fractured.\n"
+        # <SINCERE>
         elif alert == "WARN":
             report += "ADVISORY: Sustained topological strain. RAG information may be contradictory.\n"
         else:
@@ -51,6 +59,7 @@ class TopologicalAuditor:
             
         return report
 
+    # <SINCERE>
     def mock_llm_call(self, query: str, rag_context: str) -> str:
         """
         Simplified pipeline: RAG -> Audit -> Decision -> Mock Response.
@@ -61,6 +70,7 @@ class TopologicalAuditor:
         # MAPPING (Simplified heuristic for the MTP Day 4)
         # In a real system, we'd use embedding distance to map to ops.
         ops = ["ASSERT"] # Assume RAG is an assertion
+        # <SINCERE>
         if "not" in rag_context or "false" in rag_context:
             ops = ["NEGATE"]
             
@@ -69,11 +79,13 @@ class TopologicalAuditor:
         
         print(report)
         
+        # <SINCERE>
         if metrics['alert'] == "CRITICAL":
             return "[T-IAT BLOCK] High Frustration: I cannot provide a reliable answer due to record inconsistency."
             
         return f"Mock LLM Response based on verified topological state: [Correct/Consistent Output]"
 
+# <SINCERE>
 if __name__ == "__main__":
     auditor = TopologicalAuditor()
     

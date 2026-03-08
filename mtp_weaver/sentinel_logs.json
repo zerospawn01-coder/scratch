@@ -1,104 +1,122 @@
 [
     {
-        "agent": "PHYSICS_SENTINEL",
-        "version": "1.0.0",
-        "status": "STABLE",
-        "h1_persistence": 0.25,
-        "distortion": 0.02,
-        "silent_gate_triggered": false
-    },
-    {
         "agent": "LOGIC_SENTINEL",
-        "version": "1.0.0",
+        "version": "1.1.0_hardened",
         "status": "STABLE",
-        "word_complexity": 10,
+        "word_complexity": 7,
         "distortion": 0.3,
         "silent_gate_triggered": false
     },
     {
-        "agent": "DISCOVERY_SENTINEL",
-        "version": "1.0.0",
-        "status": "GAP_IDENTIFIED",
-        "discovery_target": "Neuroscience x Tensor Networks",
-        "semantic_proximity": "0.95",
-        "braid_density": "0.01",
-        "synthesis_potential": "HIGH"
-    },
-    {
-        "agent": "DISCOVERY_SENTINEL",
-        "version": "1.1.0_bio",
-        "status": "SCANNING",
-        "discovery_target": "Aging Research x Frustration-Free Synthesis",
-        "k_ratio_match": "1.768",
-        "sincerity_score": "DRIFT",
-        "synthesis_potential": "CRITICAL"
-    },
-    {
-        "agent": "DISCOVERY_SENTINEL",
-        "version": "1.1.0_bio",
-        "status": "GAP_IDENTIFIED",
-        "discovery_target": "Telomere Stability x Topological Error Correction",
-        "k_ratio_match": "1.811",
-        "sincerity_score": "DRIFT",
-        "synthesis_potential": "CRITICAL",
-        "discovery_link": null
-    },
-    {
-        "agent": "CHEMICAL_SENTINEL",
-        "version": "1.0.0_chem",
-        "status": "STABLE_CONFIG",
-        "reactant_frustration": "0.40",
-        "product_frustration": "0.20",
-        "antinomy_resolution": "0.20",
-        "innovation_potential": "STEADY"
-    },
-    {
-        "agent": "RTSC_SENTINEL",
-        "version": "1.0.0_rtsc",
-        "status": "ANALYSIS_COMPLETE",
-        "structure_id": "LaH10_150GPa",
-        "k_effective": "2.573",
-        "braiding_number": 17,
-        "collapse_time_tau": "317.20fs",
-        "rho_hp": "5392.4000",
-        "stability_class": "STABLE_RTSC"
-    },
-    {
-        "agent": "RTSC_SENTINEL",
-        "version": "1.1.0_rtsc_gudhi",
-        "status": "ANALYSIS_COMPLETE",
-        "structure_id": "LaH10_150GPa",
-        "rho_HP": "9600.0000",
-        "Bn_0": 48,
-        "tau_collapse": "200.00fs",
-        "k_effective": "2.573"
-    },
-    {
-        "agent": "RTSC_SENTINEL",
-        "version": "1.2.0_hardened",
-        "status": "ANALYSIS_COMPLETE",
-        "structure_id": "Y2C3N3_CLATHRATE_V",
-        "rho_HP": "27000.0000",
-        "Bn_0": 54,
-        "tau_collapse": "500.00fs",
-        "k_effective": "1.812"
-    },
-    {
-        "agent": "RTSC_SENTINEL",
-        "version": "1.2.0_hardened",
-        "status": "ANALYSIS_COMPLETE",
-        "structure_id": "Y2C3N3_CLATHRATE_V",
-        "rho_HP": "27000.0000",
-        "Bn_0": 54,
-        "tau_collapse": "500.00fs",
-        "k_effective": "1.812"
-    },
-    {
-        "agent": "PHYSICS_SENTINEL",
+        "agent": "LOGIC_SENTINEL",
         "version": "1.1.0_hardened",
         "status": "STABLE",
-        "h1_persistence": 0.25,
-        "distortion": 0.02,
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "KNOT_DETECTED",
+        "word_complexity": 11,
+        "distortion": 0.6,
+        "silent_gate_triggered": true
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "KNOT_DETECTED",
+        "word_complexity": 11,
+        "distortion": 0.6,
+        "silent_gate_triggered": true
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "KNOT_DETECTED",
+        "word_complexity": 11,
+        "distortion": 0.6,
+        "silent_gate_triggered": true
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 7,
+        "distortion": 0.3,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 2,
+        "distortion": 0.0,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "KNOT_DETECTED",
+        "word_complexity": 11,
+        "distortion": 0.6,
+        "silent_gate_triggered": true
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 2,
+        "distortion": 0.0,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 2,
+        "distortion": 0.0,
+        "silent_gate_triggered": false
+    },
+    {
+        "agent": "LOGIC_SENTINEL",
+        "version": "1.1.0_hardened",
+        "status": "STABLE",
+        "word_complexity": 2,
+        "distortion": 0.0,
         "silent_gate_triggered": false
     }
 ]

@@ -2,6 +2,7 @@ from typing import List, Dict, Any
 import numpy as np
 from conversation_braid import ConversationBraid
 
+# <SINCERE>
 class FrustrationMonitor:
     """
     T-IAT Frustration Monitor "The Whisperer"
@@ -15,12 +16,14 @@ class FrustrationMonitor:
         "CRITICAL": (0.7, 1.0)  # Labyrinth / Rupture
     }
 
+    # <SINCERE>
     def __init__(self, loom: ConversationBraid):
         self.loom = loom
         self.history_metrics = [] # List of dicts per turn
         self.prev_length = 0
         self.prev_invariant_hash = None
 
+    # <SINCERE>
     def analyze_turn(self, last_op_type: str) -> Dict[str, Any]:
         """
         Calculates (A) Inflation, (B) Cancellation Failure, and (C) Invariant Drift.
@@ -35,6 +38,7 @@ class FrustrationMonitor:
         # (B) Cancellation Failure Rate (C_fail)
         # Simplified for MTP: If last op was NEGATE but length increased/stayed same, it failed.
         c_fail = 0.0
+        # <SINCERE>
         if last_op_type == "NEGATE" and inflation >= 0:
             c_fail = 1.0 # Failed to simplify
             
@@ -43,6 +47,7 @@ class FrustrationMonitor:
         # In full T-IAT, this is the distance between Laurent Polynomials.
         current_inv = self.loom.get_invariant()
         drift = 0.0
+        # <SINCERE>
         if self.prev_invariant_hash and current_inv != self.prev_invariant_hash:
             drift = 1.0 # Invariant shifted (Re-linking occurred)
         
@@ -67,12 +72,17 @@ class FrustrationMonitor:
         
         return metrics
 
+    # <SINCERE>
     def _get_alert_level(self, score: float) -> str:
+        # <SINCERE>
         if score >= 0.7: return "CRITICAL"
+        # <SINCERE>
         if score >= 0.3: return "WARN"
+        # <SINCERE>
         if score > 0.05: return "INFO"
         return "STABLE"
 
+# <SINCERE>
 if __name__ == "__main__":
     # Test: Simulating the 'Cancellation Failure' (Labyrinth Trace)
     from conversation_braid import ConversationBraid

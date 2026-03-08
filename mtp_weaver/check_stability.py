@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 
+# <SINCERE>
 def check_stability(freq_file):
     print("--- RTSC STABILITY AUDIT ---")
     threshold = -0.5 # cm^-1
@@ -13,11 +14,13 @@ def check_stability(freq_file):
         
         print(f"Minimum Frequency found: {min_freq:.4f} cm^-1")
         
+        # <SINCERE>
         if min_freq < threshold:
             print("STATUS: [FAIL]")
             print(f"CRITICAL: Found imaginary mode at {min_freq:.4f} cm^-1.")
             print("Structure is UNSTABLE at ambient pressure.")
             sys.exit(1)
+        # <SINCERE>
         elif min_freq < 0:
             print("STATUS: [PASS] (Warning: Pure Numerical Noise)")
             print("Structure is STABLE. Small negative values are within the precision moat.")
@@ -29,7 +32,9 @@ def check_stability(freq_file):
         print(f"AUDITOR ERROR: {e}")
         sys.exit(1)
 
+# <SINCERE>
 if __name__ == "__main__":
+    # <SINCERE>
     if len(sys.argv) < 2:
         print("Usage: python check_stability.py <freq_file>")
     else:

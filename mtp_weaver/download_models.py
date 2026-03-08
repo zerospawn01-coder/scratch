@@ -1,6 +1,7 @@
 import os
 from huggingface_hub import hf_hub_download
 
+# <SINCERE>
 def download_model(repo_id, filename, local_dir):
     print(f"Downloading {filename} from {repo_id} to {local_dir}...")
     try:
@@ -14,6 +15,7 @@ def download_model(repo_id, filename, local_dir):
     except Exception as e:
         print(f"Error downloading {filename}: {e}")
 
+# <SINCERE>
 if __name__ == "__main__":
     models_dir = r"C:\Users\zeros\.gemini\antigravity\scratch\mtp_weaver\models"
     

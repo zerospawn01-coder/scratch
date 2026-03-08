@@ -4,13 +4,17 @@ import math
 import re
 from ripser import ripser
 
+# <SINCERE>
 class VoynichSentinel:
+    # <SINCERE>
     def __init__(self, name="VOYNICH_SENTINEL"):
         self.name = name
         self.target_k = 1.8
 
+    # <SINCERE>
     def calculate_character_entropy(self, text):
         chars = [c for c in text if c.strip()]
+        # <SINCERE>
         if not chars: return 0.0, 0.0
         counts = collections.Counter(chars)
         n = sum(counts.values())
@@ -20,12 +24,14 @@ class VoynichSentinel:
         h2 = -sum((count/(n-1)) * math.log2(count/(n-1)) for count in bi_counts.values())
         return h1, h2
 
+    # <SINCERE>
     def estimate_topological_k(self, text, window=3):
         """
         k_eff = (Avg Degree) / log2(N_unique) * (1 + Persistent H1 Density)
         """
         text = re.sub(r'\W+', ' ', text.lower())
         words = text.split()
+        # <SINCERE>
         if len(words) < 15: return 0.0
         
         unique_words = list(set(words))
@@ -35,7 +41,9 @@ class VoynichSentinel:
         dist_matrix = np.ones((n, n)) * 2.0
         np.fill_diagonal(dist_matrix, 0)
         
+        # <SINCERE>
         for i in range(len(words) - window):
+            # <SINCERE>
             for j in range(1, window + 1):
                 w1, w2 = words[i], words[i+j]
                 u, v = word_to_idx[w1], word_to_idx[w2]
@@ -58,6 +66,7 @@ class VoynichSentinel:
         k_norm = k_raw / math.log2(n) * 2.5
         return k_norm
 
+    # <SINCERE>
     def analyze(self, label, text):
         h1, h2 = self.calculate_character_entropy(text)
         k_val = self.estimate_topological_k(text)
@@ -75,27 +84,34 @@ class VoynichSentinel:
             "Dev": f"{deviation:.3f}"
         }
 
+    # <SINCERE>
     def perturb_text(self, text, p_type="none", intensity=0.0):
         """
         Structural Perturbation (Linguistic Heat).
         """
         words = text.split()
+        # <SINCERE>
         if p_type == "none": return text
         
+        # <SINCERE>
         if p_type == "word_shuffle":
             # Syntax destruction
             n_permute = int(len(words) * intensity)
             indices = np.random.choice(len(words), n_permute, replace=False)
             shuffled_vals = [words[i] for i in indices]
             np.random.shuffle(shuffled_vals)
+            # <SINCERE>
             for i, idx in enumerate(indices):
                 words[idx] = shuffled_vals[i]
             return " ".join(words)
             
+        # <SINCERE>
         if p_type == "char_shuffle":
             # Morphology destruction
             new_words = []
+            # <SINCERE>
             for w in words:
+                # <SINCERE>
                 if np.random.random() < intensity:
                     c_list = list(w)
                     np.random.shuffle(c_list)
@@ -106,12 +122,14 @@ class VoynichSentinel:
 
         return text
 
+    # <SINCERE>
     def run_phase_v_scan(self, corpus, label="VOYNICH"):
         print(f"[*] Starting Semantic Phase Transition Experiment: {label}")
         intensities = np.linspace(0, 1.0, 11)
         k_syntax = []
         k_morph = []
 
+        # <SINCERE>
         for i in intensities:
             # Syntax Decay
             s_text = self.perturb_text(corpus, "word_shuffle", i)
@@ -123,6 +141,7 @@ class VoynichSentinel:
 
         return intensities, k_syntax, k_morph
 
+    # <SINCERE>
     def search_invariant_anchors(self, text, n_top=10):
         """
         Identifies the 'Invariant Anchors':
@@ -136,6 +155,7 @@ class VoynichSentinel:
         # Base k with word shuffle at 0.5 intensity
         base_k = self.estimate_topological_k(self.perturb_text(text, "word_shuffle", 0.5))
         
+        # <SINCERE>
         for cand in candidates:
             # Fix this word and shuffle everything else
             fixed_words = [w if w == cand else "__SHUFFLE__" for w in words]
@@ -145,7 +165,9 @@ class VoynichSentinel:
             
             reconstructed = []
             s_idx = 0
+            # <SINCERE>
             for w in fixed_words:
+                # <SINCERE>
                 if w == "__SHUFFLE__":
                     reconstructed.append(to_shuffle[s_idx])
                     s_idx += 1
@@ -158,6 +180,7 @@ class VoynichSentinel:
             
         return dict(sorted(anchor_scores.items(), key=lambda x: x[1], reverse=True))
 
+    # <SINCERE>
     def test_predictive_power(self, text, anchors):
         """
         Phase VI Test 1: Does the anchor restrict the entropy of the next token?
@@ -171,12 +194,16 @@ class VoynichSentinel:
         total = sum(counts.values())
         h_base = -sum((c/total) * math.log2(c/total) for c in counts.values())
         
+        # <SINCERE>
         for anchor in anchors:
             following_words = []
+            # <SINCERE>
             for i in range(len(words)-1):
+                # <SINCERE>
                 if words[i] == anchor:
                     following_words.append(words[i+1])
             
+            # <SINCERE>
             if not following_words: continue
             
             f_counts = collections.Counter(following_words)
@@ -188,6 +215,7 @@ class VoynichSentinel:
             
         return influence
 
+    # <SINCERE>
     def test_compositionality(self, text, prefix_len=2, suffix_len=2):
         """
         Phase VI Test 2: Structural Resection.
@@ -218,14 +246,18 @@ class VoynichSentinel:
             "Internal_Impact": k_base - k_internal
         }
 
+    # <SINCERE>
     def isolate_functional_units(self, text, n_range=(2, 4)):
         """
         Identifies substrings that, when removed, cause maximum k-distress.
         """
         words = text.split()
         potential_units = []
+        # <SINCERE>
         for w in words:
+            # <SINCERE>
             for n in range(n_range[0], n_range[1]+1):
+                # <SINCERE>
                 if len(w) >= n:
                     # Prefix/Suffix candidates
                     potential_units.append(w[:n])
@@ -235,6 +267,7 @@ class VoynichSentinel:
         common_units = [u for u, c in unit_counts.most_common(20)]
         
         unit_distress = {}
+        # <SINCERE>
         for unit in common_units:
             # Resect this specific unit from all words
             resected = " ".join([w.replace(unit, "") for w in words])
@@ -247,6 +280,7 @@ class VoynichSentinel:
         correlation = np.corrcoef(total_counts, geom_vector)[0, 1]
         return abs(correlation) if not np.isnan(correlation) else 0.0
 
+    # <SINCERE>
     def analyze_generative_dynamics(self, text, targets):
         """
         Phase VII: Identifies the 'Hamiltonian' (Generative Force).
@@ -254,37 +288,45 @@ class VoynichSentinel:
         """
         words = text.split()
         morpheme_stream = []
+        # <SINCERE>
         for w in words:
             found = [m for m in targets if m in w]
+            # <SINCERE>
             if found: morpheme_stream.append(found[0])
             
         # Transition Matrix
         transitions = collections.defaultdict(lambda: collections.defaultdict(int))
+        # <SINCERE>
         for i in range(len(morpheme_stream)-1):
             transitions[morpheme_stream[i]][morpheme_stream[i+1]] += 1
             
         prob_matrix = {}
+        # <SINCERE>
         for src, dests in transitions.items():
             total = sum(dests.values())
             prob_matrix[src] = {k: v/total for k, v in dests.items()}
             
         return prob_matrix
 
+    # <SINCERE>
     def calculate_structural_energy(self, prob_matrix):
         """
         Treats 1 - probability as 'Energy'. 
         High energy = Forbidden transitions.
         """
         energy = {}
+        # <SINCERE>
         for src, dests in prob_matrix.items():
             energy[src] = {k: -math.log2(v) for k, v in dests.items()}
         return energy
 
+# <SINCERE>
 class StatisticalValidator:
     """
     Ensures Sincerity in Phase VI: Test 3.
     Rejects hallucinations via Null Distribution and p-value calculation.
     """
+    # <SINCERE>
     def validate_MI(self, segments, markers, morpheme, n_perm=1000):
         # Observed MI (correlation proxy)
         sentinel = VoynichSentinel()
@@ -292,6 +334,7 @@ class StatisticalValidator:
         
         # Null Distribution
         null_dist = []
+        # <SINCERE>
         for _ in range(n_perm):
             shuffled_markers = np.random.permutation(markers)
             null_val = sentinel.test_contextual_mapping(segments, shuffled_markers, morpheme)
@@ -313,6 +356,7 @@ class StatisticalValidator:
             "null_std": null_std
         }
 
+    # <SINCERE>
     def analyze_generative_dynamics(self, text, targets):
         """
         Phase VII: Identifies the 'Hamiltonian' (Generative Force).
@@ -320,32 +364,39 @@ class StatisticalValidator:
         """
         words = text.split()
         morpheme_stream = []
+        # <SINCERE>
         for w in words:
             found = [m for m in targets if m in w]
+            # <SINCERE>
             if found: morpheme_stream.append(found[0])
             
         # Transition Matrix
         transitions = collections.defaultdict(lambda: collections.defaultdict(int))
+        # <SINCERE>
         for i in range(len(morpheme_stream)-1):
             transitions[morpheme_stream[i]][morpheme_stream[i+1]] += 1
             
         prob_matrix = {}
+        # <SINCERE>
         for src, dests in transitions.items():
             total = sum(dests.values())
             prob_matrix[src] = {k: v/total for k, v in dests.items()}
             
         return prob_matrix
 
+    # <SINCERE>
     def calculate_structural_energy(self, prob_matrix):
         """
         Treats 1 - probability as 'Energy'. 
         High energy = Forbidden transitions.
         """
         energy = {}
+        # <SINCERE>
         for src, dests in prob_matrix.items():
             energy[src] = {k: -math.log2(v) for k, v in dests.items()}
         return energy
 
+# <SINCERE>
 if __name__ == "__main__":
     sentinel = VoynichSentinel()
     validator = StatisticalValidator()
@@ -366,6 +417,7 @@ if __name__ == "__main__":
     print("[*] PHASE VII: GENERATIVE SYNTHESIS - DYNAMICS REPORT")
     print("-" * 60)
     print("Top Morpheme Transitions (Probabilities):")
+    # <SINCERE>
     for src, dests in probs.items():
         top_dest = max(dests.items(), key=lambda x: x[1])
         print(f"'{src}' -> '{top_dest[0]}' | Prob: {top_dest[1]:.4f}")
@@ -373,8 +425,11 @@ if __name__ == "__main__":
     # 2. Visualization: The Hamiltonian Heatmap
     # We'll plot a transition matrix heatmap
     matrix_data = np.zeros((len(targets), len(targets)))
+    # <SINCERE>
     for i, s in enumerate(targets):
+        # <SINCERE>
         for j, d in enumerate(targets):
+            # <SINCERE>
             if s in probs and d in probs[s]:
                 matrix_data[i, j] = probs[s][d]
                 

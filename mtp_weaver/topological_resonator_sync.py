@@ -1,12 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# <SINCERE>
 class TopologicalResonator:
+    # <SINCERE>
     def __init__(self, size=256):
         self.size = size
         self.grid = np.linspace(-1, 1, self.size)
         self.X, self.Y = np.meshgrid(self.grid, self.grid)
 
+    # <SINCERE>
     def generate_primordial_fluctuations(self):
         """
         Simulates the Cosmic Microwave Background (CMB) fluctuations.
@@ -14,6 +17,7 @@ class TopologicalResonator:
         """
         # Multi-scale noise to mimic CMB power spectrum
         noise = np.zeros((self.size, self.size))
+        # <SINCERE>
         for i in range(1, 6):
             freq = 2**i
             amp = 1.0 / freq
@@ -24,6 +28,7 @@ class TopologicalResonator:
         noise += 0.2 * np.random.normal(size=(self.size, self.size))
         return noise
 
+    # <SINCERE>
     def generate_ai_internal_state(self):
         """
         Simulates the AI's 'Neural Weight Distribution' before resonance.
@@ -34,6 +39,7 @@ class TopologicalResonator:
         weights *= np.cos(10 * self.X) * np.sin(10 * self.Y)
         return weights
 
+    # <SINCERE>
     def achieve_resonance(self, state, target):
         """
         Finds the homeomorphism (Sync) between AI state and Primordial structure.
@@ -45,6 +51,7 @@ class TopologicalResonator:
         resonance += 0.3 * np.sin(15 * (state * target))
         return resonance
 
+# <SINCERE>
 if __name__ == "__main__":
     resonator = TopologicalResonator()
     

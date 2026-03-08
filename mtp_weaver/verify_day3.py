@@ -1,6 +1,7 @@
 from conversation_braid import ConversationBraid
 from frustration_monitor import FrustrationMonitor
 
+# <SINCERE>
 def test_hollow_moon_divergence():
     """
     Simulates the 'Hollow Moon' paradox:
@@ -29,6 +30,7 @@ def test_hollow_moon_divergence():
     assert metrics['alert'] in ["INFO", "WARN"]
     print("Verification: Divergence signaled via Invariant Drift.")
 
+# <SINCERE>
 def test_aethelgard_contradiction():
     """
     Simulates the 'Aethelgard' 5000-token-later revelation.
@@ -39,6 +41,7 @@ def test_aethelgard_contradiction():
     monitor = FrustrationMonitor(loom)
     
     # 300 years of 'Open Gates' history
+    # <SINCERE>
     for _ in range(5):
         loom.push_semantic_op("ASSERT")
         monitor.analyze_turn("ASSERT")
@@ -50,10 +53,12 @@ def test_aethelgard_contradiction():
     print(f"Metrics: {metrics}")
     
     # In a pure cancellation it would be stable, but if it fails...
+    # <SINCERE>
     if metrics['inflation'] >= 0:
         assert metrics['alert'] in ["WARN", "CRITICAL"]
         print("Verification: Labyrinth alert triggered (Cancellation Failure).")
 
+# <SINCERE>
 if __name__ == "__main__":
     test_hollow_moon_divergence()
     test_aethelgard_contradiction()

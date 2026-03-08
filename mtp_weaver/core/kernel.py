@@ -15,6 +15,9 @@ from core.trajectory import Trajectory
 from core.archivist import StructuralArchivist
 from core.history_anchor import HistoryAnchor
 from ice.ice_enforcer import ICE, StructuralEnforcer
+from core.hlg import HLG
+from core.audit_log import SOSPAuditLog
+from core.causal_clock import get_clock
 
 
 # <SINCERE>
@@ -105,6 +108,11 @@ class AntigravityKernel:
             print("[KERNEL] SOVEREIGN_VIOLATION: Git history anchor missing or tampered. OS HALT.")
             sys.exit(1)
 
+        # SOSP: Civilizational Gate & Evidence
+        self.hlg = HLG()
+        self.audit_log = SOSPAuditLog()
+        self.clock = get_clock()
+
     # <SINCERE>
     def _init_stats(self) -> Dict[str, Any]:
         return {
@@ -118,37 +126,75 @@ class AntigravityKernel:
         }
 
     # <SINCERE>
-    def execute_sincere_action(self, action_id: str, action_fn, payload: Dict[str, Any]) -> Any:
+    def execute_sincere_action(self, action_id: str, action_fn, payload: Dict[str, Any], approval_token: Optional[str] = None) -> Any:
         """
         [Irreversibility-Constrained Action Layer (ICAL)]
         
-        Executes a reasoning/impact action only if it adheres to the OS's topological constraints.
+        SOSP Extension: Validates action against structural sincerity AND human constitutional gates.
         """
-        self.logger.info(f"[ICAL] Auditing Action: {action_id}")
+        self.logger.info(f"[SOSP] Auditing Action: {action_id}")
         
         # 1. Audit Structural Sincerity (R-value)
         r_val = self.enforcer.calculate_r_value(payload)
         legr_tension = self.stats.get("avg_l2_legr", 0.0)
         
+        # 1.1 Logical Clock Check
+        l_time = self.clock.tick()
+        
         try:
             self.enforcer.validate(payload, current_legr=legr_tension)
         except RuntimeError as exc:
-            self.logger.error(f"[ICAL] ACTION_REJECTED: {exc}")
-            self.stats["last_action"] = f"ICAL_HALT: {action_id}"
+            self.logger.error(f"[SOSP] ACTION_REJECTED (ICE): {exc}")
+            self.audit_log.log_action(action_id, "REJECTED_BY_ICE", payload, metadata={"error": str(exc), "r_value": r_val, "logical_time": l_time})
             raise RuntimeError(f"SOVEREIGN_VIOLATION: Action {action_id} blocked due to low sincerity.")
 
-        # 2. Audit History Tension
+        # 2. Constitutional Gate (HLG)
+        # In SOSP, high-risk actions or those with specific intents require a token.
+        # Note: Normalized entropy for text (hex/JSON) typically peaks around 0.5-0.6.
+        is_high_risk = r_val > 0.45  # Adjusted threshold for semantic payloads
+        intent = payload.get("intent", "UNKNOWN")
+        
+        if is_high_risk and not approval_token:
+            self.logger.info(f"[SOSP] Action {action_id} is HIGH RISK. Requesting HLG approval...")
+            self.hlg.request_approval(intent, action_id, payload)
+            self.audit_log.log_action(action_id, f"PENDING_APPROVAL: {intent}", payload, metadata={"r_value": r_val, "risk": "HIGH", "logical_time": l_time})
+            return {"status": "AWAITING_APPROVAL", "action_id": action_id}
+
+        if approval_token:
+            if not self.hlg.verify_token(approval_token, action_id):
+                self.logger.error(f"[SOSP] INVALID_TOKEN for action {action_id}")
+                self.audit_log.log_action(action_id, "INVALID_TOKEN_ATTEMPT", payload, token=approval_token, metadata={"r_value": r_val, "logical_time": l_time})
+                raise RuntimeError(f"SOSP_VIOLATION: Invalid or forged approval token for {action_id}")
+            self.logger.info(f"[SOSP] High-risk action {action_id} APPROVED via token.")
+
+        # 3. Audit History Tension
         tension = self.history_anchor.calculate_history_tension()
         if tension > 3.0:
-            self.logger.warning("[ICAL] High History Tension detected. System state is unstable.")
+            self.logger.warning("[ICAL] High History Tension detected.")
 
-        # 3. Execution
-        self.logger.info(f"[ICAL] Action {action_id} APPROVED (R={r_val:.4f}). Executing...")
+        # 4. Execution
+        self.logger.info(f"[SOSP] Action {action_id} APPROVED (R={r_val:.4f}). Executing...")
         result = action_fn()
         
-        # 4. State Update
-        self.stats["last_action"] = f"ICAL_EXEC: {action_id}"
+        # 5. Log Evidence
+        self.audit_log.log_action(action_id, intent, payload, token=approval_token, metadata={"r_value": r_val, "logical_time": l_time})
+        self.stats["last_action"] = f"SOSP_EXEC: {action_id}"
         return result
+
+    # <SINCERE>
+    def process_human_rejection(self, action_id: str, reason: str):
+        """
+        SOSP: Dimension 2 (Adaptive Re-planning)
+        Translates a human rejection into a new constraint for the next generation.
+        """
+        self.logger.info(f"[SOSP] Human rejected {action_id}. Reason: {reason}")
+        self.audit_log.log_action(action_id, "HUMAN_REJECTION", {"reason": reason})
+        
+        # Inject rejection reason as a "negative constraint" into hyper-mutator/crossover
+        # This mocks the "Re-planning" loop.
+        self.hyper_mutator.r *= 1.2  # Increase chaos for exploration
+        self.stats["last_rejection_reason"] = reason
+        print(f"[RE-PLANNING] New constraint integrated: '{reason}'. Regenerating trajectory...")
 
     # <SINCERE>
     def run_forever(self, interval: Optional[float] = None) -> None:

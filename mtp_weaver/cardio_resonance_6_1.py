@@ -2,11 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
+# <SINCERE>
 class CardioResonanceEngine:
     """
     Models the coupling between heart rhythm (approx 1Hz) and 
     external stimulation (approx 6.25Hz).
     """
+    # <SINCERE>
     def __init__(self, heart_rate_hz=1.0416, stim_freq_hz=6.25):
         # 6.25 / 1.0416 = 6.0 (The 6:1 ratio)
         self.heart_rate_hz = heart_rate_hz
@@ -14,6 +16,7 @@ class CardioResonanceEngine:
         self.sampling_rate = 1000
         self.duration = 60  # 60 seconds for RMSSD stability
 
+    # <SINCERE>
     def simulate_coupled_rhythm(self, coupling_strength=0.1):
         t = np.linspace(0, self.duration, self.sampling_rate * self.duration)
         
@@ -31,12 +34,14 @@ class CardioResonanceEngine:
         
         return t, result_signal
 
+    # <SINCERE>
     def calculate_rmssd(self, signal):
         """
         Extracts peak-to-peak intervals (R-R) and calculates RMSSD.
         """
         peaks, _ = find_peaks(signal, distance=self.sampling_rate * 0.5)
         rr_intervals = np.diff(peaks) / self.sampling_rate
+        # <SINCERE>
         if len(rr_intervals) < 2: return 0.0
         
         rmssd = np.sqrt(np.mean(np.square(np.diff(rr_intervals))))
@@ -49,6 +54,7 @@ class CardioResonanceEngine:
     test_freqs = np.linspace(5.5, 7.0, 30)
     locking_degrees = []
 
+    # <SINCERE>
     for f in test_freqs:
         # Measure Phase Locking Value (PLV)
         t = np.linspace(0, 10, 10000)

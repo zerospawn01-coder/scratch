@@ -14,6 +14,28 @@ constraints:
     - type: "StructuralIntegrity"
       desc: "Topological genus must be preserved across concept mappings"
       action: "rollback"
+    - type: "TrivialityHalt"
+      desc: "Manifold collapsed to identity or trivial knot"
+      action: "stop_and_reset"
+    - type: "CrossingComplexity"
+      desc: "Maximum number of crossings exceeded for current strand count"
+      limit: 1024
+      action: "reject_step"
+    - type: "HiddenMagneticOrder"
+      desc: "Pseudogap phase backbone: maintains spin-correlation scaling"
+      scaling_factor: 0.15 #ドーピング濃度依存の特性温度に準拠
+      action: "admit_with_weight"
+    - type: "MagneticPolaron"
+      desc: "Multi-point correlation (5-point) for superconducting stability"
+      action: "prioritize_cluster"
+    - type: "FiberCurvatureLimit"
+      desc: "Mechanical limit of the spiral transistor arrangement on the fiber surface"
+      min_radius_nm: 50
+      action: "warn_and_damp"
+    - type: "TopologicalImpedance"
+      desc: "Signal integrity at Braid crossing points (High integration limit)"
+      threshold: 0.85
+      action: "optimize_layout"
 
   # Q1: Interaction Rules - 交差時の演算定義 (Simplicial Gate)
   interaction_logic:

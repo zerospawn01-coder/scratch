@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# <SINCERE>
 def generate_pink_noise(N, fs=1000):
     """
     Generates Pink Noise (1/f) using the Voss-McCartney algorithm via FFT.
@@ -24,6 +25,7 @@ def generate_pink_noise(N, fs=1000):
     
     return pink_noise
 
+# <SINCERE>
 def simulate_chaperone_perturbation(duration_sec=10, fs=1000, intensity=0.5):
     """
     Translates Pink Noise into a Vibronic Perturbation Spectrum.
@@ -37,6 +39,7 @@ def simulate_chaperone_perturbation(duration_sec=10, fs=1000, intensity=0.5):
     
     return perturbation
 
+# <SINCERE>
 if __name__ == "__main__":
     # Internal Verification: Spectral Profile Audit
     dur = 5

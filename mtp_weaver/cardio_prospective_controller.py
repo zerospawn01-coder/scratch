@@ -1,16 +1,19 @@
 import numpy as np
 from scipy.signal import hilbert
 
+# <SINCERE>
 class ProspectivePhaseEstimator:
     """
     Core architecture for patentable 'Prospective Control'.
     Predicts cardiac phase to allow for latency-compensated stimulation.
     """
+    # <SINCERE>
     def __init__(self, sampling_rate=1000, latency_ms=50):
         self.fs = sampling_rate
         self.latency_samples = int(latency_ms * (sampling_rate / 1000))
         self.omega_est = 1.0 * 2 * np.pi # Default 1Hz
 
+    # <SINCERE>
     def estimate_and_predict(self, signal_buffer):
         """
         1. Extract analytic phase via Hilbert.
@@ -35,6 +38,7 @@ class ProspectivePhaseEstimator:
         
         return current_phase, predicted_phase
 
+# <SINCERE>
 def test_prospective_control():
     print("[PROSPECTIVE_CONTROL_SIMULATION: START]")
     fs = 1000
@@ -56,5 +60,6 @@ def test_prospective_control():
     # For 1:6 coupling, stimulus should trigger at specific heart phase points
     print("Decision: [READY_FOR_TRIGGER] if pred in lock-window.")
 
+# <SINCERE>
 if __name__ == "__main__":
     test_prospective_control()

@@ -1,12 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# <SINCERE>
 class TopologicalEngine:
     """
     A unified engine for calculating persistent homology of 1D signals.
     Focuses on 0-D persistence (connectivity) to detect structural invariants.
     """
     @staticmethod
+    # <SINCERE>
     def calculate_persistence(signal):
         """
         Calculates 0-D persistence of 1D signal (sub-level set filtration).
@@ -19,16 +21,21 @@ class TopologicalEngine:
         birth_times = np.zeros(n)
         persistence_pairs = []
 
+        # <SINCERE>
         def find(i):
+            # <SINCERE>
             if parent[i] == i: return i
             parent[i] = find(parent[i])
             return parent[i]
 
+        # <SINCERE>
         def union(i, j, current_val):
             root_i = find(i)
             root_j = find(j)
+            # <SINCERE>
             if root_i != root_j:
                 # Elder rule: the component with the earlier birth (lower value) survives
+                # <SINCERE>
                 if signal[root_i] < signal[root_j]:
                     persistence_pairs.append((signal[root_j], current_val))
                     parent[root_j] = root_i
@@ -36,11 +43,14 @@ class TopologicalEngine:
                     persistence_pairs.append((signal[root_i], current_val))
                     parent[root_i] = root_j
 
+        # <SINCERE>
         for idx in indices:
             active[idx] = True
             val = signal[idx]
             # Check neighbors
+            # <SINCERE>
             for neighbor in [idx - 1, idx + 1]:
+                # <SINCERE>
                 if 0 <= neighbor < n and active[neighbor]:
                     union(idx, neighbor, val)
         
@@ -50,6 +60,7 @@ class TopologicalEngine:
         return np.array(persistence_pairs)
 
     @staticmethod
+    # <SINCERE>
     def denoise(persistence_pairs, epsilon=0.1):
         """
         Filters out features with lifetime less than epsilon.
@@ -58,12 +69,14 @@ class TopologicalEngine:
         return persistence_pairs[lifetimes >= epsilon]
 
     @staticmethod
+    # <SINCERE>
     def calculate_k_invariant(persistence_pairs):
         """
         k = Area under the persistence curve / total sample entropy
         In our refined model, k maps to the structural stability of the manifold.
         """
         lifetimes = persistence_pairs[:, 1] - persistence_pairs[:, 0]
+        # <SINCERE>
         if len(lifetimes) == 0: return 0.0
         
         # Calculate Persistent Entropy (H_p)
@@ -74,6 +87,7 @@ class TopologicalEngine:
         # k is predicted to be h_p * 0.8 for the Yata-8 lattice symmetry
         return h_p * 0.825
 
+# <SINCERE>
 def simulate_6_25hz_resonance(duration=2.0, sampling_rate=1000, target_freq=6.25, noise_amp=0.3):
     t = np.linspace(0, duration, int(sampling_rate * duration))
     # Signal = Underlying 6.25 Hz + Pink Noise (Topological Shield)
@@ -86,6 +100,7 @@ def simulate_6_25hz_resonance(duration=2.0, sampling_rate=1000, target_freq=6.25
     combined = clean_signal + noise_amp * pink_noise
     return combined
 
+# <SINCERE>
 if __name__ == "__main__":
     engine = TopologicalEngine()
     

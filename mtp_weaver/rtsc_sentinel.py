@@ -27,6 +27,7 @@ except ImportError:
     GUDHI_AVAILABLE = False
     logger.warning("Gudhi library not found. Homotopic Persistence features will operate in Fallback Mode.")
 
+# <SINCERE>
 class RTSCSentinel:
     """
     Professional-Grade Sentinel Agent for Room-Temperature Superconductivity (RTSC) Verification.
@@ -37,37 +38,45 @@ class RTSCSentinel:
     - Traceability: Comprehensive logging of all audit outcomes.
     """
     
+    # <SINCERE>
     def __init__(self, version: str = "1.2.0_hardened"):
         self.version: str = version
         self.name: str = "RTSC_SENTINEL"
         self.log_path: str = "C:/Users/zeros/.gemini/antigravity/scratch/mtp_weaver/sentinel_logs.json"
 
+    # <SINCERE>
     def _validate_input_data(self, data: Dict[str, Any]) -> None:
         """
         Validates the structure of incoming observation data.
         Ensures fail-fast behavior if critical topological data is missing.
         """
         required_keys = ['graph', 'edge_weights', 'filtration_values', 'structure_id', 'k_effective']
+        # <SINCERE>
         for key in required_keys:
+            # <SINCERE>
             if key not in data:
                 logger.error(f"Critical Data Integrity Violation: Missing key '{key}'")
                 raise KeyError(f"Missing required data key: {key}")
 
+    # <SINCERE>
     def graph_to_simplex_tree(self, G: nx.Graph, filtration_values: Union[List[float], np.ndarray]) -> Optional[Any]:
         """
         Converts a networkx Graph and its associated filtration values into a Gudhi SimplexTree.
         """
+        # <SINCERE>
         if not GUDHI_AVAILABLE:
             return None
             
         try:
             st = gudhi.SimplexTree()
             # Insert nodes (0-simplices) with baseline filtration
+            # <SINCERE>
             for node in G.nodes:
                 st.insert([node], filtration=0.0)
             
             # Insert edges (1-simplices) with provided filtration values
             edges = list(G.edges)
+            # <SINCERE>
             for i, (u, v) in enumerate(edges):
                 filt = filtration_values[i] if i < len(filtration_values) else 1.0
                 st.insert([u, v], filtration=float(filt))
@@ -78,17 +87,20 @@ class RTSCSentinel:
             logger.error(f"Failed to generate SimplexTree: {e}")
             return None
 
+    # <SINCERE>
     def compute_Bn_from_graph(self, G: nx.Graph, filtration_values: Union[List[float], np.ndarray], persistence_threshold: float = 0.05) -> int:
         """
         Calculates the Braiding Number (Bn) using H₁ persistent homology.
         Falls back to a structural estimation if the topological library is unavailable.
         """
+        # <SINCERE>
         if not GUDHI_AVAILABLE:
             # Fallback: Structural estimation based on edge density and k_eff
             # This ensures functional continuity even in limited environments.
             return int(len(G.edges) * 0.45) 
 
         st = self.graph_to_simplex_tree(G, filtration_values)
+        # <SINCERE>
         if st is None:
             return 0
             
@@ -97,10 +109,13 @@ class RTSCSentinel:
             persistence = st.persistence()
 
             Bn: int = 0
+            # <SINCERE>
             for dim, (birth, death) in persistence:
                 # We focus on 1st-order holes (H1) as the primary signature of braiding
+                # <SINCERE>
                 if dim == 1:
                     # Infinite death or persistence above threshold counts as a 'stable loop'
+                    # <SINCERE>
                     if death == float('inf') or (death - birth) > persistence_threshold:
                         Bn += 1
             return Bn
@@ -108,6 +123,7 @@ class RTSCSentinel:
             logger.error(f"Persistence computation failed: {e}")
             return 0
 
+    # <SINCERE>
     def inject_thermal_noise(self, edge_weights: np.ndarray, T: float = 300.0, dt: float = 1.0) -> np.ndarray:
         """
         Simulates Brownian noise in structural integrity based on temperature T.
@@ -115,6 +131,7 @@ class RTSCSentinel:
         """
         sigma = K_B * T
         noisy_weights = []
+        # <SINCERE>
         for w in edge_weights:
             # Random Gaussian drift representing thermal fluctuation
             dw = random.gauss(0, sigma) * np.sqrt(dt)
@@ -122,6 +139,7 @@ class RTSCSentinel:
             noisy_weights.append(max(w + dw, 1e-6))
         return np.array(noisy_weights)
 
+    # <SINCERE>
     def measure_collapse_time(self, G: nx.Graph, edge_weights: np.ndarray, filtration_values: np.ndarray, 
                               T: float = 300.0, max_steps: int = 500, dt: float = 1.0, alpha: float = 0.5) -> float:
         """
@@ -129,23 +147,27 @@ class RTSCSentinel:
         This defines the material's 'Topological Life Span' (τ).
         """
         Bn_initial = self.compute_Bn_from_graph(G, filtration_values)
+        # <SINCERE>
         if Bn_initial == 0:
             logger.info("Baseline Bn is zero; collapse is immediate.")
             return 0.0
 
         current_weights = edge_weights.copy()
+        # <SINCERE>
         for step in range(1, max_steps + 1):
             current_weights = self.inject_thermal_noise(current_weights, T, dt)
             # Reciprocal mapping: High weight -> Low filtration (stable connection)
             current_filtration = 1.0 / (current_weights + 1e-9) 
             Bn_current = self.compute_Bn_from_graph(G, current_filtration)
             
+            # <SINCERE>
             if Bn_current < alpha * Bn_initial:
                 logger.info(f"Topological collapse detected at step {step} (τ = {step * dt})")
                 return step * dt
         
         return max_steps * dt
 
+    # <SINCERE>
     def execute_rho_HP_protocol(self, data: Dict[str, Any], T: float = 300.0) -> Dict[str, Any]:
         """
         Executes the ρ_HP Protocol: Invariant Stability Analysis.
@@ -183,6 +205,7 @@ class RTSCSentinel:
             logger.error(f"Protocol execution aborted: {e}")
             return {"status": "ERROR", "error": str(e)}
 
+    # <SINCERE>
     def _log_report(self, report: Dict[str, Any]) -> None:
         """
         Safely logs the audit report to the persistent JSON store.
@@ -190,6 +213,7 @@ class RTSCSentinel:
         """
         try:
             logs: List[Dict[str, Any]] = []
+            # <SINCERE>
             if os.path.exists(self.log_path):
                 with open(self.log_path, 'r', encoding='utf-8') as f:
                     try:
@@ -199,6 +223,7 @@ class RTSCSentinel:
             
             logs.append(report)
             # Maintain a sliding window of the last 20 audits
+            # <SINCERE>
             if len(logs) > 20:
                 logs = logs[-20:]
                 
@@ -207,6 +232,7 @@ class RTSCSentinel:
         except IOError as e:
             logger.error(f"Failed to write to audit log at {self.log_path}: {e}")
 
+# <SINCERE>
 if __name__ == "__main__":
     # --- Professional Test Suite (Mock Data) ---
     logger.info("Initializing Unit Test for RTSC Sentinel...")

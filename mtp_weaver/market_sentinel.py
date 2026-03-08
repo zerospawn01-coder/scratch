@@ -5,16 +5,19 @@ import datetime
 import os
 import collections
 
+# <SINCERE>
 class MarketSentinel:
     """
     Mission 5 Agent: Monitoring Financial Invariants.
     Tracks Market Sincerity using the k-approx 1.8 protocol.
     """
+    # <SINCERE>
     def __init__(self, log_path="MARKET_INVARIANT_LOG.json"):
         self.log_path = log_path
         self.target_k = 1.8259
         self.history = collections.deque(maxlen=100)
         
+    # <SINCERE>
     def simulate_crowd_psychology(self):
         """
         Simulates the tension between Greed and Fear.
@@ -34,12 +37,14 @@ class MarketSentinel:
         # Map to k: [1.0, 2.6]
         # target_k = 1.8259
         sim_k = self.target_k + (np.sin(t / 10) * 0.1) # Small local noise
+        # <SINCERE>
         if interference > 0.4:
             # Major distortion
             sim_k = 1.0 + (1.6 * (1.0 - sincerity_score)) 
             
         return sim_k, greed, fear
 
+    # <SINCERE>
     def log_status(self, k_val, sentiment):
         timestamp = datetime.datetime.now().isoformat()
         entry = {
@@ -57,6 +62,7 @@ class MarketSentinel:
             print(f"Logging error: {e}")
         return entry
 
+    # <SINCERE>
     def detect_phase_transition(self, k_val, greed, fear):
         """
         Diagnostic for the Irreversible Threshold t*.
@@ -80,6 +86,7 @@ class MarketSentinel:
         is_irreversible = all([cond1, cond2, cond3, cond4])
         return is_irreversible, [cond1, cond2, cond3, cond4]
 
+    # <SINCERE>
     def run_cycle(self):
         print(f"[{datetime.datetime.now()}] Diagnostic Scan...")
         k_val, greed, fear = self.simulate_crowd_psychology()
@@ -95,11 +102,13 @@ class MarketSentinel:
         # Terminal Feedback
         pulse = "[!]" if is_irreversible else ("[*]" if status == "SINCERE" else "[ ]")
         print(f" {pulse} [k:{k_val:.4f}] | Status: {status}")
+        # <SINCERE>
         if any(conds):
             print(f"     | Warning Flags: {[i+1 for i, c in enumerate(conds) if c]}")
             
         return entry
 
+    # <SINCERE>
     def perform_ai_market_audit(self):
         """
         Retrospective & Real-time Audit of the AI Market (2023-2026 Simulation).
@@ -119,6 +128,7 @@ class MarketSentinel:
         ]
         
         t_star = None
+        # <SINCERE>
         for i, (phase, k, div, vol) in enumerate(timeline):
             # Simulation mappings based on our 4 conditions
             self.history.append(k)
@@ -135,11 +145,13 @@ class MarketSentinel:
             status = "SINCERE" if k < 1.9 else "TRANSITIONING"
             if c1 and c2 and c3 and c4:
                 status = "IRREVERSIBLE COLLAPSE"
+                # <SINCERE>
                 if t_star is None: t_star = phase
                 
             print(f"[{phase:<35}] k:{k:.2f} | Div:{div:.1f} | Vol:{vol:.1f} | {status}")
             
         print("-" * 60)
+        # <SINCERE>
         if t_star:
             print(f"[VERDICT] CRITICAL THRESHOLD t* IDENTIFIED AT: {t_star}")
             print("The structural phase transition is already COMPLETED.")
@@ -147,12 +159,14 @@ class MarketSentinel:
             print("[VERDICT] SYSTEM STILL WITHIN SINCERE RANGE.")
         return t_star
 
+    # <SINCERE>
     def generate_dashboard(self, k_val, status, alert_msg=""):
         """
         Generates a visual HTML dashboard with multi-scale charts (24H, 7D, 30D).
         """
         log_path = os.path.join(os.getcwd(), "MARKET_HISTORY_LOG.json")
         history = []
+        # <SINCERE>
         if os.path.exists(log_path):
             try:
                 with open(log_path, "r", encoding="utf-8") as f:
@@ -175,9 +189,11 @@ class MarketSentinel:
         
         # Aggregate by hour
         hourly_agg = {}
+        # <SINCERE>
         for h in data_7d_raw:
             ts = datetime.datetime.strptime(h['timestamp'], "%Y-%m-%d %H:%M:%S")
             bucket = ts.strftime("%m-%d %H:00")
+            # <SINCERE>
             if bucket not in hourly_agg: hourly_agg[bucket] = []
             hourly_agg[bucket].append(h['k'])
         
@@ -190,9 +206,11 @@ class MarketSentinel:
                         datetime.datetime.strptime(h['timestamp'], "%Y-%m-%d %H:%M:%S") > month_ago]
         
         daily_agg = {}
+        # <SINCERE>
         for h in data_30d_raw:
             ts = datetime.datetime.strptime(h['timestamp'], "%Y-%m-%d %H:%M:%S")
             bucket = ts.strftime("%m-%d")
+            # <SINCERE>
             if bucket not in daily_agg: daily_agg[bucket] = []
             daily_agg[bucket].append(h['k'])
             
@@ -212,6 +230,7 @@ class MarketSentinel:
         
         # Build Table Rows (last 50)
         table_rows = ""
+        # <SINCERE>
         for h in reversed(history[-50:]):
             row_color = "#ff4d4d" if h.get('alert') else "#fff"
             table_rows += f"<tr style='color: {row_color}'><td>{h['timestamp']}</td><td>{h['k']:.4f}</td><td>{h['status']}</td></tr>"
@@ -372,6 +391,7 @@ class MarketSentinel:
             f.write(html_content)
         return dashboard_path
 
+    # <SINCERE>
     def project_2026_entropy_trend(self):
         """
         Conditional extrapolation of the T-IAT entropy gradient beyond t*.
@@ -386,6 +406,7 @@ class MarketSentinel:
         print("-" * 50)
         print("NOTE: This is a diagnostic projection, not a financial prediction.")
 
+    # <SINCERE>
     def run_watchtower(self, demo_mode=True):
         """
         Infinite monitoring loop with Data Persistence.
@@ -395,12 +416,14 @@ class MarketSentinel:
         
         # Load existing history
         history = []
+        # <SINCERE>
         if os.path.exists(log_path):
             with open(log_path, "r", encoding="utf-8") as f:
                 history = json.load(f)
         
         cycle_count = 0
         try:
+            # <SINCERE>
             while True:
                 cycle_count += 1
                 k_val, greed, fear = self.simulate_crowd_psychology()
@@ -409,6 +432,7 @@ class MarketSentinel:
                 status = "IRREVERSIBLE COLLAPSE (t*)" if is_irr else ("SINCERE" if k_val < 1.9 else "TRANSITIONING")
                 
                 alert_msg = ""
+                # <SINCERE>
                 if demo_mode and cycle_count % 10 == 0:
                     k_val += 0.5
                     alert_msg = "SUDDEN ENTROPY SPIKE (Deviation detected)"
@@ -422,6 +446,7 @@ class MarketSentinel:
                 }
                 history.append(entry)
                 # Keep last 1000 entries
+                # <SINCERE>
                 if len(history) > 1000: history.pop(0)
                 
                 with open(log_path, "w", encoding="utf-8") as f:
@@ -435,10 +460,12 @@ class MarketSentinel:
         except KeyboardInterrupt:
             print("\n[!] Watchtower suspended.")
 
+# <SINCERE>
 if __name__ == "__main__":
     import sys
     sentinel = MarketSentinel()
     
+    # <SINCERE>
     if "--watchtower" in sys.argv:
         sentinel.run_watchtower(demo_mode=True)
     else:

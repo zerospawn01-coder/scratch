@@ -11,6 +11,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("PHYSICS_SENTINEL")
 
+# <SINCERE>
 class PhysicsSentinel:
     """
     Professional-Grade Sentinel Agent for Monitoring Physical Invariants.
@@ -21,6 +22,7 @@ class PhysicsSentinel:
     - Observability: Formal logging of H1 persistence metrics.
     """
     
+    # <SINCERE>
     def __init__(self, version: str = "1.1.0_hardened"):
         self.version: str = version
         self.name: str = "PHYSICS_SENTINEL"
@@ -28,21 +30,26 @@ class PhysicsSentinel:
         self.state: str = "INIT"
         self.log_path: str = "C:/Users/zeros/.gemini/antigravity/scratch/mtp_weaver/sentinel_logs.json"
 
+    # <SINCERE>
     def _validate_observation_data(self, data: Any) -> None:
         """
         Validates the structure of physical observation data.
         Expects a dictionary with required metrics.
         """
+        # <SINCERE>
         if not isinstance(data, dict):
             logger.error("Input Violation: Observation data must be a dictionary.")
             raise TypeError("Observation data must be a dictionary.")
         
         required_metrics = ["h1_persistence", "distortion"]
+        # <SINCERE>
         for metric in required_metrics:
+            # <SINCERE>
             if metric not in data:
                 logger.error(f"Missing Key: '{metric}' is required for physical audit.")
                 raise KeyError(f"Missing required metric: {metric}")
 
+    # <SINCERE>
     def audit_physical_state(self, observation_data: Dict[str, float]) -> Dict[str, Any]:
         """
         Audit a physical observation against the Invariant Skeleton.
@@ -59,6 +66,7 @@ class PhysicsSentinel:
             # Topological Integrity Check:
             # Low persistence (H1 cycles disappearing) or high distortion indicates a structural rupture.
             status: str = "STABLE"
+            # <SINCERE>
             if h1_persistence < 0.1 or distortion_score > 0.5:
                 status = "RUPTURE"
                 logger.warning(f"Structural Rupture detected! Persistence: {h1_persistence}, Distortion: {distortion_score}")
@@ -79,12 +87,14 @@ class PhysicsSentinel:
             logger.error(f"Physical Audit Aborted: {e}")
             return {"status": "ERROR", "error": str(e)}
 
+    # <SINCERE>
     def _log_report(self, report: Dict[str, Any]) -> None:
         """
         Safely logs the audit results to the persistent Sentinel store.
         """
         try:
             logs: List[Dict[str, Any]] = []
+            # <SINCERE>
             if os.path.exists(self.log_path):
                 with open(self.log_path, 'r', encoding='utf-8') as f:
                     try:
@@ -94,6 +104,7 @@ class PhysicsSentinel:
             
             logs.append(report)
             # Limit history to 15 entries
+            # <SINCERE>
             if len(logs) > 15:
                 logs = logs[-15:]
                 
@@ -102,6 +113,7 @@ class PhysicsSentinel:
         except IOError as e:
             logger.error(f"Failed to update Sentinel log: {e}")
 
+# <SINCERE>
 if __name__ == "__main__":
     # --- Professional Unit Test ---
     logger.info("Initializing Physics Sentinel validation...")

@@ -12,6 +12,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("DISCOVERY_SENTINEL")
 
+# <SINCERE>
 class DiscoverySentinel:
     """
     Professional-Grade Sentinel Agent for Discovering New Invariants & Gaps.
@@ -22,12 +23,14 @@ class DiscoverySentinel:
     - Traceability: Formal logging of cross-field synthesis potential.
     """
     
+    # <SINCERE>
     def __init__(self, version: str = "1.2.0_hardened_bio"):
         self.version: str = version
         self.name: str = "DISCOVERY_SENTINEL"
         self.state: str = "EXPLORING"
         self.log_path: str = "C:/Users/zeros/.gemini/antigravity/scratch/mtp_weaver/sentinel_logs.json"
 
+    # <SINCERE>
     def scan_for_gaps(self) -> Dict[str, Any]:
         """
         Scans for Topological Vacuums in Bio-Physical fields.
@@ -56,6 +59,7 @@ class DiscoverySentinel:
             
             # Decision Logic: Low braid density implies a 'Vacuum' (unexplored possibility).
             status: str = "SCANNING"
+            # <SINCERE>
             if braid_density < 0.05:
                 status = "GAP_IDENTIFIED"
                 logger.info(f"Topological Gap Identified in: {target_pair[0]} x {target_pair[1]}")
@@ -78,12 +82,14 @@ class DiscoverySentinel:
             logger.error(f"Gap Discovery Scan failed: {e}")
             return {"status": "ERROR", "error": str(e)}
 
+    # <SINCERE>
     def _log_report(self, report: Dict[str, Any]) -> None:
         """
         Safely logs the discovery outcome to the shared Sentinel repository.
         """
         try:
             logs: List[Dict[str, Any]] = []
+            # <SINCERE>
             if os.path.exists(self.log_path):
                 with open(self.log_path, 'r', encoding='utf-8') as f:
                     try:
@@ -92,6 +98,7 @@ class DiscoverySentinel:
                         logger.warning("Sentinel log corrupted. Recovering.")
             
             logs.append(report)
+            # <SINCERE>
             if len(logs) > 15:
                 logs = logs[-15:]
                 
@@ -100,6 +107,7 @@ class DiscoverySentinel:
         except IOError as e:
             logger.error(f"Failed to update Discovery repository: {e}")
 
+# <SINCERE>
 if __name__ == "__main__":
     # --- Professional Unit Test ---
     logger.info("Initializing Discovery Sentinel validation...")

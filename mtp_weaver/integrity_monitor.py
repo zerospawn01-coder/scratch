@@ -2,12 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from vibronic_perturbation import simulate_chaperone_perturbation
 
+# <SINCERE>
 class IntegrityMonitor:
+    # <SINCERE>
     def __init__(self, size=64):
         self.size = size
         # Create a 'Topological Skeleton' template (Standard folded state)
         self.skeleton = self._create_skeleton_template()
         
+    # <SINCERE>
     def _create_skeleton_template(self):
         """Creates a simplified 2D Gaussian representing the ideal topological fold."""
         x = np.linspace(-1, 1, self.size)
@@ -16,6 +19,7 @@ class IntegrityMonitor:
         skeleton = np.exp(-(X**2 + Y**2) / 0.5)
         return skeleton
 
+    # <SINCERE>
     def simulate_projected_image(self, t, perturbation):
         """
         Simulates the projected Moiré image from the processor.
@@ -35,6 +39,7 @@ class IntegrityMonitor:
         projection = self.skeleton + sincere_residual + transient_noise
         return projection
 
+    # <SINCERE>
     def map_residuals(self, projections):
         """
         Calculates 'Residual Persistence'.
@@ -47,6 +52,7 @@ class IntegrityMonitor:
         # Truth density is where the residual persists despite shaking.
         return persistence_map
 
+# <SINCERE>
 if __name__ == "__main__":
     monitor = IntegrityMonitor()
     projections = []
@@ -55,6 +61,7 @@ if __name__ == "__main__":
     duration = 50
     p_stream = simulate_chaperone_perturbation(duration_sec=duration/10, fs=10, intensity=0.2)
     
+    # <SINCERE>
     for i in range(duration):
         projections.append(monitor.simulate_projected_image(i, p_stream[i]))
         

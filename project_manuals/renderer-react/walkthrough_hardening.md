@@ -24,65 +24,66 @@ The core state logic was stress-tested against four network failure scenarios to
 
 ---
 
-# 🔥 Devpost Submission: Live Agents — The Accountable Incident Copilot
+# 🔥 Devpost Submission: Live Agents — Sovereign Incident Infrastructure
 
 ### Elevator Pitch
 
-Live Agents is an accountable AI co-pilot for incident response that transforms real-time Gemini insights into controlled, auditable recovery actions — even in noisy, high-stakes production environments. It replaces unsafe AI “autopilot” patterns with deterministic mediation, human gating, and mathematically enforced state integrity.
+Live Agents is not just an app; it is the **"Sensory Extension" (感覚器官の拡張)** of Sovereign OS. It transforms chaotic production failures into a deterministic recovery flow — powered by the Gemini Multimodal Live API to provide **Constraint-Based Intent Estimation (制約付き意図推定)** in the most hostile environments.
 
 ---
 
-## The Problem: The Fog of War
+## 🏗 Concept: Extending Civilization Infrastructure
 
-During major outages, SREs operate in chaotic conditions where:
-- Standard voice NLP fails in **deafening data centers**
-- Black-box AI automation is too risky to trust
-- Incident timelines are compressed and error budgets evaporate
-- Voice-only interfaces entirely exclude engineers with vocal impairments (e.g., ALS) from operational roles
+**これは単なるアプリ開発ではなく、Sovereign OSの「感覚器官」の拡張である。**
 
-In critical infrastructure, a hallucinated command or unauthorized execution is catastrophic.
+In critical infrastructure, failure is not an option, but fragmented information is a reality. Live Agents provides:
 
----
-
-## The Solution: Deterministic Mediation
-
-Powered by the **Gemini Multimodal Live API**, Live Agents extracts **continuous, real-time, interruptible intent** through:
-- A noise-resilient Special Voice Protocol (SVP)
-- Silent lip-based command classification (MediaPipe FaceMesh)
-- Visual context shared with the model
-
-Intent is never executed directly. Instead, every action flows through a **Causal Gate** enforced by:
-- Deterministic patch sequencing
-- Tool-verified “ARMED” staging
-- Two-factor human approval
-- Immutable audit logging
-
-The backend runs on **Google Cloud Run**, with state events recorded via **Cloud Logging**, ensuring production-grade traceability.
+1. **Observability (2D/3D Visualization)**: Logical topology (2D) meets spatial cognition (3D).
+2. **Gate Control (IAM & Logic)**: Causal execution gating that prevents unauthorized mutation.
+3. **Auditability (Logging)**: Every decision anchored to an immutable ledger (Google Cloud Logging).
 
 ---
 
-## Architectural Invariants (Technical Execution)
+## 👄 The "Wow" Factor: Silent Mode Interface
 
-**Monotonic Sequencing**
-Custom patch protocol rejects out-of-order, duplicate, and cross-run injections. Replays converge to an identical final WorldState.
+**カメラを見つめ、声を出さずにコマンドを送る (Lip Reading) — The One-Shot "Magic"**
 
-**Causal Gating (Cloud IAM-Aligned)**
-Execution is physically blocked until tool verification and staged approval succeed. No free-text execution.
+We solve the "Fog of War" through a multimodal fail-safe:
 
-**Fail-Closed Isolation**
-Schema mismatches or unauthorized RunIDs trigger audited `SAFE_MODE_ISOLATED` state. The system degrades safely.
-
-**Dual-View Situational Awareness**
-2D causal topology for logical tracing and a 3D spatial twin (React Three Fiber) for blast-radius cognition — dynamically driven via Gemini function calling.
+- **Accessibility**: Enables SREs with vocal impairments (e.g., ALS) to command production.
+- **Data Centers**: Operates reliably under deafening hardware noise.
+- **Disaster Zones**: Enables silent, high-stakes command execution.
 
 ---
 
-## Why It Wins
+## 🧠 The Solution: Constraint-Based Intent Estimation
 
-Live Agents proves that multimodal AI can operate inside critical infrastructure without sacrificing safety. It expands operational accessibility (lip-based Silent Mode), survives adversarial network conditions, enforces human mediation, and produces auditable, deterministic state transitions.
+**完全な読唇ではなく、「制約付き意図推定」で勝つ。**
 
-This is not AI as a chatbot. It is AI as an accountable operational layer.
+Input is often incomplete. Live Agents uses Gemini to bridge the gap:
+
+1. **Input**: Extract lip region from camera frames (MediaPipe).
+2. **Context**: Inject "Top 5 Protocol Candidates" based on system state.
+3. **Inference**: Gemini interprets movement + context to resolve intent.
+**Result: 劇的な精度向上 (Dramatic Accuracy Improvement)**
+
+*“入力が不完全でも、構造で補正する知性 (Intelligence that corrects even when input is incomplete)”*
 
 ---
 
-> *“The agent is incapable of executing outside a deterministic, audited, two-factor-gated action path; all failures degrade to safe-mode with explicit operator visibility.”*
+## 🏗 Architecture: Single Source of Truth
+
+**WorldState Patch Protocol** connects the Backend (Cloud Run) to the Renderers:
+
+- **2D Dynamic Topology (監査の主戦力)**: Real-time React Flow visualization of causal chains and health.
+- **3D Spatial Digital Twin (物理的な資産管理の演出)**: Abstract space (Spheres/Cubes) blast-radius cognition via React Three Fiber, utilizing the Live Agent state directly.
+
+Every mutation is a **signed patch** against the WorldState, ensuring that regardless of network jitter, the system converges to a single reality.
+
+---
+
+## ⚖️ Final Verification
+
+**“The agent is incapable of executing outside a deterministic, audited, two-factor-gated action path; all failures degrade to safe-mode with explicit operator visibility.”**
+
+This is not a chatbot. This is the **Accountable Operational Layer** for the next generation of civilization infrastructure.

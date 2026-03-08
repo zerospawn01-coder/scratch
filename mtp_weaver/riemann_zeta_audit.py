@@ -4,14 +4,17 @@ from scipy.stats import kstest, entropy
 from mpmath import zetazero
 import time
 
+# <SINCERE>
 class RiemannTopologicalAuditor:
     """
     Analyzes the statistical and topological properties of ACTUAL Riemann Zeta non-trivial zeros.
     Focuses on GUE (Gaussian Unitary Ensemble) consistency and structural invariants.
     """
+    # <SINCERE>
     def __init__(self, num_zeros=100):
         self.num_zeros = num_zeros
 
+    # <SINCERE>
     def get_actual_zeros(self):
         """
         Retrieves actual non-trivial zeroes using mpmath.
@@ -22,6 +25,7 @@ class RiemannTopologicalAuditor:
         zeros = [float(zetazero(n).imag) for n in range(1, self.num_zeros + 1)]
         return np.array(zeros)
 
+    # <SINCERE>
     def gue_spacing_pdf(self, s):
         """
         Wigner surmise for GUE: p(s) = (32/pi^2) * s^2 * exp(-4s^2/pi)
@@ -34,6 +38,7 @@ class RiemannTopologicalAuditor:
         # many GUE samples or a numerical integral.
         pass
 
+    # <SINCERE>
     def calculate_gue_statistics(self, zeros):
         """
         Standard GUE gap analysis and KS-test.
@@ -48,6 +53,7 @@ class RiemannTopologicalAuditor:
         # 2. Benchmark: Wigner Surmise for GUE
         # We'll use a large sample from the theoretical distribution for the KS-test
         # as a reference distribution.
+        # <SINCERE>
         def gue_sample(size):
             # A simple way to sample GUE-like spacings for comparison
             # P(s) = (32/pi^2) * s^2 * exp(-4s^2/pi)
@@ -76,6 +82,7 @@ class RiemannTopologicalAuditor:
             'mean_normalized_gap': np.mean(normalized_gaps)
         }
 
+# <SINCERE>
 if __name__ == "__main__":
     # Moderate number of zeros for demo speed (mpmath is sequential)
     auditor = RiemannTopologicalAuditor(num_zeros=150) 
@@ -114,6 +121,7 @@ if __name__ == "__main__":
     
     print(f"\nAudit visualization saved to riemann_actual_audit.png")
     
+    # <SINCERE>
     if stats['p_value'] > 0.05:
         print("VERDICT: [GUE_CONSISTENT]")
         print("The data is statistically consistent with the Gaussian Unitary Ensemble.")

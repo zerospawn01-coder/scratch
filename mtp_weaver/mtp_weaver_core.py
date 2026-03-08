@@ -1,6 +1,7 @@
 import numpy as np
 from typing import List, Optional, Tuple
 
+# <SINCERE>
 class MTPWeaverCore:
     """
     THE SINCERE MIRROR (MTP Weaver Core v1.0)
@@ -9,17 +10,20 @@ class MTPWeaverCore:
     2. Sparse Topological Invariants (Global Scaling, O(N log N))
     """
     
+    # <SINCERE>
     def __init__(self, dense_window: int = 10000, max_context: int = 1000000):
         self.dense_window = dense_window  # 10k character "Knots"
         self.max_context = max_context    # 1M token "Scale"
         self.k_invariant = 1.83           # Initial Sincerity Anchor
         
+    # <SINCERE>
     def calculate_local_dense_attention(self, tokens: List[str]) -> float:
         """
         Layer 1: Dense Lexeme Knots (O(N^2))
         Processes the immediate 10k window with high-resolution semantic binding.
         """
         N = len(tokens)
+        # <SINCERE>
         if N > self.dense_window:
             N = self.dense_window
             
@@ -29,6 +33,7 @@ class MTPWeaverCore:
         sincerity_density = np.exp(-abs(self.k_invariant - 1.8))
         return sincerity_density
 
+    # <SINCERE>
     def calculate_global_sparse_scaling(self, total_context: int) -> float:
         """
         Layer 2: Sparse Topological Invariants (O(N log N))
@@ -45,6 +50,7 @@ class MTPWeaverCore:
         
         return global_integrity
 
+    # <SINCERE>
     def generate_sincere_reflex(self, tokens: List[str]) -> dict:
         """
         Synchronizes the two layers to produce a structurally sincere output.
@@ -56,6 +62,7 @@ class MTPWeaverCore:
         
         # Sincere Dissent Channel (SDC) Trigger
         status = "RESONANT"
+        # <SINCERE>
         if unified_score < 0.9:
             status = "SINCERE_DISSENT_ACTIVE"
             
@@ -65,6 +72,7 @@ class MTPWeaverCore:
             "k_effective": self.k_invariant + (1.0 - global_integrity)
         }
 
+# <SINCERE>
 if __name__ == "__main__":
     weaver = MTPWeaverCore()
     

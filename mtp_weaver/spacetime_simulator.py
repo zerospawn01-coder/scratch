@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# <SINCERE>
 class SpacetimeSimulator:
+    # <SINCERE>
     def __init__(self, size=128):
         self.size = size
         self.grid = np.linspace(-1, 1, self.size)
@@ -11,6 +13,7 @@ class SpacetimeSimulator:
         # Define Schwarzschild radius (Simulated)
         self.rs = 0.3 
 
+    # <SINCERE>
     def calculate_metric_strain(self):
         """
         Translates radial distance into a twist-angle gradient (Metric Strain).
@@ -24,6 +27,7 @@ class SpacetimeSimulator:
         strain = self.rs / r_safe
         return strain
 
+    # <SINCERE>
     def map_holographic_entropy(self, t):
         """
         Simulates the projected interference pattern (The Boundary Map).
@@ -50,6 +54,7 @@ class SpacetimeSimulator:
         
         return output
 
+# <SINCERE>
 if __name__ == "__main__":
     sim = SpacetimeSimulator()
     

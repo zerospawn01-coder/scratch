@@ -1,6 +1,7 @@
 from typing import List, Dict
 from braid_engine import BraidEngine
 
+# <SINCERE>
 class ConversationBraid:
     """
     T-IAT Semantic Mapper: Conversation Braid "The Weaver's Loom"
@@ -15,36 +16,43 @@ class ConversationBraid:
         "SHIFT": 0,     # Context shift (Increment active strand index)
     }
 
+    # <SINCERE>
     def __init__(self, n_strands: int = 10):
         self.engine = BraidEngine(n_strands=n_strands)
         self.history: List[int] = []
         self.active_index = 1 # Start with first strand pair (1, 2)
         self.max_strands = n_strands
 
+    # <SINCERE>
     def push_semantic_op(self, op_type: str):
         """
         Pushes a semantic operation onto the braid.
         """
+        # <SINCERE>
         if op_type == "SHIFT":
             self.active_index = (self.active_index % (self.max_strands - 1)) + 1
             return
         
         gen_type = self.OP_MAP.get(op_type)
+        # <SINCERE>
         if gen_type:
             generator = self.active_index * gen_type
             self.history.append(generator)
             # Apply greedy simplification after each push to maintain o(T)
             self.history = self.engine.simplify_braid(self.history)
 
+    # <SINCERE>
     def get_invariant(self):
         """
         Returns the current topological invariant (Knot Invariant) of the history.
         """
         return self.engine.calculate_jones_polynomial(self.history)
 
+    # <SINCERE>
     def __repr__(self):
         return f"ConversationBraid(History: {self.history}, ActiveIndex: {self.active_index})"
 
+# <SINCERE>
 if __name__ == "__main__":
     # Example: "A is B" (ASSERT), "B is C" (SHIFT, ASSERT), "A is not B" (SHIFT back, NEGATE)
     loom = ConversationBraid(n_strands=4)

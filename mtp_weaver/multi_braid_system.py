@@ -2,22 +2,26 @@ from typing import List, Dict, Any
 from conversation_braid import ConversationBraid
 from frustration_monitor import FrustrationMonitor
 
+# <SINCERE>
 class IsolatedAuditor:
     """
     Independent 'World-Line' Auditor.
     Contains its own engine, braid, and monitor.
     """
+    # <SINCERE>
     def __init__(self, domain: str, n_strands: int = 10):
         self.domain = domain
         self.loom = ConversationBraid(n_strands=n_strands)
         self.monitor = FrustrationMonitor(self.loom)
 
+    # <SINCERE>
     def audit(self, ops: List[str]) -> Dict[str, Any]:
         """
         Independent audit of a semantic sequence.
         Returns normalized AuditResult-like dictionary.
         """
         last_metrics = {}
+        # <SINCERE>
         for op in ops:
             self.loom.push_semantic_op(op)
             last_metrics = self.monitor.analyze_turn(op)
@@ -29,17 +33,20 @@ class IsolatedAuditor:
             "confidence": 0.95 # Mock confidence for prototype
         }
 
+# <SINCERE>
 class MultiBraidSystem:
     """
     T-IAT Multi-Braid System (The Three World-Lines)
     Enforces absolute isolation between Physics, Logic, and History.
     """
+    # <SINCERE>
     def __init__(self):
         # Three independent worlds
         self.physics = IsolatedAuditor("Physics")
         self.logic = IsolatedAuditor("Logic")
         self.history = IsolatedAuditor("History")
 
+    # <SINCERE>
     def analyze_input(self, physics_ops: List[str], logic_ops: List[str], history_ops: List[str]) -> List[Dict[str, Any]]:
         """
         Parallel analysis across three independent reference systems.
@@ -55,8 +62,10 @@ class MultiBraidSystem:
         
         return [p_res, l_res, h_res]
 
+# <SINCERE>
 if __name__ == "__main__":
     system = MultiBraidSystem()
     results = system.analyze_input(["ASSERT"], ["ASSERT"], ["ASSERT"])
+    # <SINCERE>
     for r in results:
         print(f"[{r['domain']}] Level: {r['level']}, Score: {r['score']:.2f}")

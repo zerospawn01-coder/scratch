@@ -12,13 +12,14 @@ The OS is grounded in the **AZ† Symmetry Classification**, treating the Liouvi
 
 - **Exceptions Points (EPs)** function as nodal sanctuaries for integrity.
 - **Topological Heartbeats** are monitored via G2 Noise Spectroscopy.
-- **Irreversibility** is enforced by the **Irreversible Kernel** and the **Sieve Shadow ($R \approx 0.7$)**.
+- **Irreversibility-Constrained Action Layer (ICAL)**: All execution is gated by the Sieve Shadow ($R \approx 0.7$).
+- **History Anchoring**: The system's integrity is physically linked to the Git commit history.
 
 ## 🛠️ Components
 
-- **Core**: `mtp_weaver/core/` (EHI, LEGR, Irreversible Kernel)
-- **Security**: `mtp_weaver/vault/` (VaultGuard, Secret Distribution)
-- **Monitoring**: `mtp_weaver/core/physics_monitor.py` (Symmetry Audit)
+- **Core**: `mtp_weaver/core/` (EHI, LEGR, ICAL, HistoryAnchor)
+- **Monitoring**: `mtp_weaver/core/physics_monitor.py` (Unified Sincerity Dashboard)
+- **Security**: `mtp_weaver/vault/` (VaultGuard, Sovereign Seed)
 - **Darwinian Layer**: `mtp_weaver/core/genetics.py` (Recombinant Evolution)
 
 ## 🧬 Generation II: The Civilization Protocol

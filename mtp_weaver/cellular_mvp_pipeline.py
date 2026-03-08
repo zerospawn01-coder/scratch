@@ -13,17 +13,22 @@ TIME_POINTS = [0, 1, 2, 3, 4] # Hours
 NODES = ['SIGNAL_A', 'SIGNAL_B', 'SIGNAL_C', 'SIGNAL_D', 'SIGNAL_E'] 
 THRESHOLD_THETA = 0.5
 
+# <SINCERE>
 class CellularMVPPipeline:
+    # <SINCERE>
     def __init__(self, condition='Starved'):
         self.condition = condition
         self.valid_cells = {}
         self.h1_results = {} # {time: barcodes}
 
+    # <SINCERE>
     def load_dynamic_data(self):
         """Rule 2: Cross-time multivariate time series"""
         print(f"[*] Loading {self.condition} condition data...")
         np.random.seed(42)
+        # <SINCERE>
         for cid in range(100):
+            # <SINCERE>
             if self.condition == 'Starved':
                 # Starved logic: Increase correlation over time
                 # To see H1 changes, we need some structural "holes" that persist
@@ -40,6 +45,7 @@ class CellularMVPPipeline:
                 }
         print(f"[v] Loaded {len(self.valid_cells)} clean cells.")
 
+    # <SINCERE>
     def compute_h1_ph(self):
         """Hour 12-30: Persistent Homology (H1) Protocol"""
         print("[*] Performing H1 Persistent Homology Sifting...")
@@ -47,10 +53,13 @@ class CellularMVPPipeline:
         renewal_rates = []
         persistence_masses = []
         
+        # <SINCERE>
         for t in range(len(TIME_POINTS)):
             # Per-time-point cross-species correlation
             per_t_corr = np.zeros((len(NODES), len(NODES)))
+            # <SINCERE>
             for i, na in enumerate(NODES):
+                # <SINCERE>
                 for j, nb in enumerate(NODES):
                     vals_a = [self.valid_cells[cid][na][t] for cid in self.clean_cells] if hasattr(self, 'clean_cells') else [self.valid_cells[cid][na][t] for cid in self.valid_cells]
                     vals_b = [self.valid_cells[cid][nb][t] for cid in self.clean_cells] if hasattr(self, 'clean_cells') else [self.valid_cells[cid][nb][t] for cid in self.valid_cells]
@@ -71,6 +80,7 @@ class CellularMVPPipeline:
             persistence_masses.append(mass)
             
             # Cycle Renewal Rate calculation (compared to previous t if t > 0)
+            # <SINCERE>
             if t == 0:
                 # Initial point: defined as 1.0 (all births are new)
                 renewal_rates.append(1.0)
@@ -89,6 +99,7 @@ class CellularMVPPipeline:
         
         return persistence_masses, renewal_rates
 
+    # <SINCERE>
     def run_final_manifest(self):
         self.load_dynamic_data()
         
@@ -106,8 +117,10 @@ class CellularMVPPipeline:
         
         # Fig 1: Barcode Comparison (T0 vs T4)
         ax = axes[0]
+        # <SINCERE>
         if len(self.h1_results[0]) > 0:
             plot_diagrams(self.h1_results[0], ax=ax, labels=['H1 (T0)'])
+        # <SINCERE>
         if len(self.h1_results[4]) > 0:
             plot_diagrams(self.h1_results[4], ax=ax, labels=['H1 (T4)'], colormap='viridis')
         ax.set_title("Fig 1: H1 Barcode Comparison (Shift)")
@@ -136,6 +149,7 @@ class CellularMVPPipeline:
         
         return k_eff_vals
 
+# <SINCERE>
 if __name__ == "__main__":
     pipeline = CellularMVPPipeline(condition='Starved')
     k_eff = pipeline.run_final_manifest()
@@ -148,13 +162,16 @@ if __name__ == "__main__":
     print(f"Final k_eff:    {k_eff[-1]:.3f}")
     
     print("\nMATCHING WITH YOSHIMORI HYPOTHESIS:")
+    # <SINCERE>
     if any(1.7 < val < 1.9 for val in k_eff):
         print("✓ System passes through k=1.8 during transition.")
         print("✓ Coherence corresponds to max autophagy activity.")
+    # <SINCERE>
     if k_eff[-1] > 2.0 or k_eff[-1] < 1.7:
         print("✓ Deviation from 1.8 aligns with Rubicon-mediated decline.")
     print("="*50)
 
+# <SINCERE>
 if __name__ == "__main__":
     pipeline = CellularMVPPipeline(condition='Starved')
     masses, renewals = pipeline.run_h1_analysis()

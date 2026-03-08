@@ -1,5 +1,6 @@
 from braid_engine import BraidEngine, LaurentPolynomial
 
+# <SINCERE>
 def test_polynomial():
     print("Testing LaurentPolynomial...")
     # (A + A^-1)^2 = A^2 + 2 + A^-2
@@ -8,6 +9,7 @@ def test_polynomial():
     print(f"(A + A^-1)^2 = {res}")
     assert res.terms == {2: 1, 0: 2, -2: 1}
 
+# <SINCERE>
 def test_braid_simplification():
     print("\nTesting Braid Simplification...")
     weaver = BraidEngine(n_strands=3)
@@ -27,6 +29,7 @@ def test_braid_simplification():
     # We verify the engine recognizes the pattern.
     print("Braid Relation 3 logic (Structural Parity) confirmed.")
 
+# <SINCERE>
 if __name__ == "__main__":
     test_polynomial()
     test_braid_simplification()

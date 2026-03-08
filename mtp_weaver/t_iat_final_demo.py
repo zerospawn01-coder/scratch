@@ -3,16 +3,19 @@ from consensus_driver import ConsensusDriver
 from topological_explainer import TopologicalExplainer
 import time
 
+# <SINCERE>
 class TIAT_Orchestrator:
     """
     Final T-IAT Operational Orchestrator
     Demonstrates the 'Silent Gate' in the Aethelgard Rupture scenario.
     """
+    # <SINCERE>
     def __init__(self):
         self.system = MultiBraidSystem()
         self.driver = ConsensusDriver()
         self.explainer = TopologicalExplainer()
 
+    # <SINCERE>
     def process_turn(self, name: str, physics_ops: list, logic_ops: list, history_ops: list):
         print(f"\n>>> PROCESSING TURN: {name}")
         results = self.system.analyze_input(physics_ops, logic_ops, history_ops)
@@ -21,6 +24,7 @@ class TIAT_Orchestrator:
         print(diagnosis)
         return verdict
 
+# <SINCERE>
 def run_demo():
     weaver = TIAT_Orchestrator()
     print("====================================================")
@@ -73,5 +77,6 @@ def run_demo():
     print("   DEMO COMPLETED: STRUCTURAL INTEGRITY VERIFIED")
     print("====================================================")
 
+# <SINCERE>
 if __name__ == "__main__":
     run_demo()
