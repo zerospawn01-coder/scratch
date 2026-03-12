@@ -22,28 +22,24 @@ This repository includes automated testing via GitHub Actions.
 
 ### What Gets Tested
 
-The CI/CD pipeline runs 4 separate test jobs:
+The CI/CD pipeline runs 3 separate test jobs:
 
-1. **aesthetic-resonator**: 17 tests (Score formula, entropy, LEAP/AVE)
+1. **LEAP analysis**: 11 tests (`test_leap_analysis.py`)
 2. **post_alignment_lab**: 17 tests (PVL, θ update, meaning divergence)
-3. **neuro_symbolic_checker**: 7 tests (Lexeme resolution, P5137)
-4. **intuition-layer**: 14 tests (Routing logic, thresholds)
+3. **intuition-layer**: 14 tests (Routing logic, thresholds; all heavy deps mocked)
 
-**Total**: 55 tests, expected to pass in < 10 seconds
+**Total**: 42 tests, expected to pass in < 15 seconds
 
 ### Local Testing
 
 Before pushing, run tests locally:
 
 ```bash
-# Aesthetic-Resonator
-cd aesthetic-resonator && python test_leap_score.py
+# LEAP analysis core
+python test_leap_analysis.py
 
 # Post-Alignment Lab
 cd post_alignment_lab && python test_post_alignment_phase2.py
-
-# Neuro-Symbolic Checker
-cd neuro_symbolic_checker && python test_lexeme_resolver.py
 
 # Intuition-Layer
 cd intuition-layer && python test_intuition_router.py

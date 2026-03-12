@@ -1,8 +1,13 @@
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-from collections import deque
 from dataclasses import dataclass
 from typing import List, Tuple
+
+
+def _cosine_similarity(query: np.ndarray, matrix: np.ndarray) -> np.ndarray:
+    """Compute cosine similarity between a query vector and a matrix of vectors."""
+    query_norm = np.linalg.norm(query) + 1e-8
+    matrix_norms = np.linalg.norm(matrix, axis=1) + 1e-8
+    return matrix @ query / (matrix_norms * query_norm)
 
 @dataclass
 class Episode:
@@ -62,10 +67,7 @@ class FixedMemoryBank:
         embeddings = np.stack([m.embedding for m in self.memories])
         
         # コサイン類似度計算
-        similarities = cosine_similarity(
-            query_emb.reshape(1, -1), 
-            embeddings
-        )[0]
+        similarities = _cosine_similarity(query_emb, embeddings)
         
         # Top-k取得
         top_k_indices = np.argsort(similarities)[-k:][::-1]
