@@ -30,6 +30,12 @@ The CI/CD pipeline runs 3 separate test jobs:
 
 **Total**: 42 tests, expected to pass in < 15 seconds
 
+### Rationale for current setup
+
+- **NumPy cosine similarity**: usage is limited to lightweight memory ranking, so a small NumPy implementation keeps dependency weight low while remaining numerically stable.
+- **Removed obsolete jobs**: prior CI referenced paths that no longer exist; the workflow now targets the three actively maintained suites.
+- **Python 3.10**: aligns the runner version across jobs for deterministic behavior and matches the currently supported baseline in this repo.
+
 ### Local Testing
 
 Before pushing, run tests locally:

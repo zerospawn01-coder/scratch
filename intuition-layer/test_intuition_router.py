@@ -15,7 +15,37 @@ from unittest.mock import Mock, patch, MagicMock
 import sys
 sys.modules['torch'] = MagicMock()
 sys.modules['transformers'] = MagicMock()
+import numpy as np
+from memory_bank import _cosine_similarity
 from intuition_router import IntuitionRouter
+
+
+class TestCosineSimilarity(unittest.TestCase):
+    """Test NumPy cosine similarity helper"""
+    
+    def test_same_vector_similarity_is_one(self):
+        query = np.array([1.0, 2.0, 3.0])
+        matrix = np.array([[1.0, 2.0, 3.0]])
+        sim = _cosine_similarity(query, matrix)
+        self.assertAlmostEqual(sim[0], 1.0, places=6)
+    
+    def test_orthogonal_vectors_similarity_zero(self):
+        query = np.array([1.0, 0.0])
+        matrix = np.array([[0.0, 1.0]])
+        sim = _cosine_similarity(query, matrix)
+        self.assertAlmostEqual(sim[0], 0.0, places=6)
+    
+    def test_opposite_vectors_similarity_negative_one(self):
+        query = np.array([1.0, 0.0])
+        matrix = np.array([[-1.0, 0.0]])
+        sim = _cosine_similarity(query, matrix)
+        self.assertAlmostEqual(sim[0], -1.0, places=6)
+    
+    def test_zero_vector_does_not_crash(self):
+        query = np.array([0.0, 0.0])
+        matrix = np.array([[1.0, 0.0], [0.0, 1.0]])
+        sim = _cosine_similarity(query, matrix)
+        self.assertTrue(np.allclose(sim, 0.0))
 
 
 class TestIntuitionScoreCalculation(unittest.TestCase):
