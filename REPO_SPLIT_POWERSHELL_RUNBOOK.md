@@ -74,6 +74,41 @@ Set-Location $env:TARGET_ROOT; git init -b main; git add .; git commit -m "Initi
 # push したいときだけ: git push -u origin main
 ```
 
----
+## 6. プロジェクト別の変数例
+```
+# cognitive-lab を切り出す例
+$env:SUBDIR="cognitive-lab";     $env:NEW_REPO_URL="git@github.com:org/cognitive-lab.git"
+
+# ea-aol を切り出す例
+$env:SUBDIR="ea-aol";            $env:NEW_REPO_URL="git@github.com:org/ea-aol.git"
+
+# mtp-weaver を切り出す例
+$env:SUBDIR="mtp_weaver";        $env:NEW_REPO_URL="git@github.com:org/mtp-weaver.git"
+
+# lab-experiments を切り出す例
+$env:SUBDIR="lab-experiments";   $env:NEW_REPO_URL="git@github.com:org/lab-experiments.git"
+```
+
+## 7. 履歴を残したい場合 (git filter-repo)
+> 事前に `pip install git-filter-repo` などでツールを準備してください。
+```powershell
+Set-Location $env:SOURCE_ROOT
+git filter-repo --path $env:SUBDIR --force
+
+# 生成物を新しい作業ディレクトリにコピー
+Copy-Item $env:SOURCE_ROOT $env:TARGET_ROOT -Recurse
+Set-Location $env:TARGET_ROOT
+git remote add origin $env:NEW_REPO_URL
+# push するなら: git push -u origin main
+```
+
+## 8. scratch をアーカイブする場合
+```powershell
+Set-Location $env:SOURCE_ROOT
+if (-not (Test-Path "archive")) { New-Item -ItemType Directory -Path "archive" | Out-Null }
+Compress-Archive -Path "." -DestinationPath ".\archive\scratch-$(Get-Date -Format 'yyyyMMdd').zip"
+```
+
 - ここまでで **push は実行していません**。リモートに送る前にコードオーナー確認やライセンス確認を行ってください。
-- 元リポの履歴を保持したい場合は `git filter-repo` などを追加で実行してください（この runbook では扱いません）。
+- 履歴を保持したい場合はセクション 7 の `git filter-repo` 手順を使ってください。
+- PowerShell での実行を前提としています。Bash は不要です。
