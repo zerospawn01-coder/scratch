@@ -4,22 +4,25 @@
 
 **[OPERATOR PANEL :: FAST PATH]**
 
-If you have already performed the pre-flight checks and the destination repositories exist, run these commands in order:
+> [!IMPORTANT]
+> **Source of Truth (Validated in this Session):**
+> Current `scratch/` root is a hollow shell (only contains `autonomous-task-gen/` and split tools).
+> For the split payload (`ea-aol`, `post_alignment_lab`, etc.), use the **copilot-worktree** as the source.
 
 ```powershell
-# 1. Setup Environment
-$env:ROOT = "$HOME\work"
-$env:SCRATCH = Join-Path $env:ROOT "scratch"
-$env:COG = Join-Path $env:ROOT "cognitive-lab"
-$env:EAAOL = Join-Path $env:ROOT "ea-aol"
-$env:MTP = Join-Path $env:ROOT "mtp-weaver"
-$env:LABEXP = Join-Path $env:ROOT "lab-experiments"
+# 1. Setup Environment (Example for this environment)
+$env:ROOT = "c:\Users\zeros\.gemini\antigravity\scratch.worktrees\"
+$env:SCRATCH = Join-Path $env:ROOT "copilot-worktree-2026-03-07T22-10-40"
+$env:COG = "c:\Users\zeros\.gemini\antigravity\split-targets\cognitive-lab"
+$env:EAAOL = "c:\Users\zeros\.gemini\antigravity\split-targets\ea-aol"
+$env:MTP = "c:\Users\zeros\.gemini\antigravity\split-targets\mtp-weaver"
+$env:LABEXP = "c:\Users\zeros\.gemini\antigravity\split-targets\lab-experiments"
 
 # 2. Execute Copy-Based Repos (Phase 1)
-pwsh -File .\tools\repo_split_copy.ps1 -Layout recommended
+pwsh -File .\tools\repo_split_copy.ps1 -Layout recommended -Root $env:ROOT -ScratchName "copilot-worktree-2026-03-07T22-10-40"
 
 # 3. Execute History-Preserving Repos (Phase 2)
-pwsh -File .\tools\repo_split_filter_repo.ps1 -Layout recommended -Push
+pwsh -File .\tools\repo_split_filter_repo.ps1 -Layout recommended -Root $env:ROOT -ScratchName "copilot-worktree-2026-03-07T22-10-40" -Push
 
 # 4. Finalize Archive State
 pwsh -File .\tools\repo_split_archive.ps1 -Layout recommended -ExcludedAction archive
@@ -233,14 +236,22 @@ The optimized first-pass repository set is:
 **[CONFIG PANEL :: POWERSHELL_VARS]**
 
 ```powershell
-$env:ROOT = "$HOME\work"
-$env:SCRATCH = Join-Path $env:ROOT "scratch"
+# Standard Template Variables:
+$env:ROOT_TMPL = "$HOME\work"
+$env:SCRATCH_TMPL = Join-Path $env:ROOT_TMPL "scratch"
+
+# Example (Validated in this session using the copilot worktree as the payload):
+$env:ROOT = "c:\Users\zeros\.gemini\antigravity\scratch.worktrees\"
+$env:SCRATCH = Join-Path $env:ROOT "copilot-worktree-2026-03-07T22-10-40"
 
 $env:COG = Join-Path $env:ROOT "cognitive-lab"
 $env:EAAOL = Join-Path $env:ROOT "ea-aol"
 $env:MTP = Join-Path $env:ROOT "mtp-weaver"
 $env:LABEXP = Join-Path $env:ROOT "lab-experiments"
 ```
+
+> [!NOTE]
+> `sovereign-arena-chaos/` is currently **deferred/excluded** in the mapping plan (Disposition: exclude). Revisit after the 5-repo split is complete.
 
 ## 🛡️ Preflight Checks: Integrity Verification
 
