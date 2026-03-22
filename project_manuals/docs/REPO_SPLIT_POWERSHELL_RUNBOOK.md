@@ -795,4 +795,58 @@ pwsh -File .\tools\repo_split_archive.ps1 -Layout recommended -WhatIf
 pwsh -File .\tools\repo_split_archive.ps1 -Layout recommended -ExcludedAction delete -WhatIf
 ```
 
-Default behavior keeps excluded placeholders untouched and only reports them, but the standard execution policy is to rerun with `-ExcludedAction archive` once the split is ready.
+## 📝 Pre-flight Verification Log (Dry-Run Checked)
+
+**[AUDIT PANEL :: VALIDATED_BASELINE]**
+
+The following execution plan was verified using a `-WhatIf` dry-run on **2026-03-22**.
+
+### 1. Copy-Based Migration (Recommended Layout)
+
+#### Copy Migration Command
+
+`pwsh -File .\tools\repo_split_copy.ps1 -Layout recommended -Root "c:\Users\zeros\.gemini\antigravity\scratch.worktrees\" -ScratchName "copilot-worktree-2026-03-07T22-10-40" -WhatIf`
+
+#### Verified Copy Targets
+
+- `cognitive-lab` [confirmed]
+- `lab-experiments` [confirmed]
+- `project-manuals` [confirmed]
+
+#### Copy Payload Summary
+
+- `.github/` -> `.github/`
+- `post_alignment_lab/` -> `post_alignment_lab/`
+- `intuition-layer/` -> `intuition-layer/`
+- `LEAP scripts` -> `leap_analysis/`
+- `jepa_intuition_poc/`, `geodesic_descent/`, `personal_ai/` -> `lab-experiments/`
+
+### 2. History-Preserving Migration (Recommended Layout)
+
+#### History Separation Command
+
+`pwsh -File .\tools\repo_split_filter_repo.ps1 -Layout recommended -Root "c:\Users\zeros\.gemini\antigravity\scratch.worktrees\" -ScratchName "copilot-worktree-2026-03-07T22-10-40" -WhatIf`
+
+#### Verified History Items
+
+- `ea-aol` [confirmed]
+- `mtp-weaver` [confirmed]
+
+#### Migration Notes
+
+- `git filter-repo` logic and target remotes (HTTPS default) were validated.
+- Push was skipped as expected during `-WhatIf`.
+
+### 3. Archive & Report Normalization
+
+#### Archive Normalization Command
+
+`pwsh -File .\tools\repo_split_archive.ps1 -Layout recommended -Root "c:\Users\zeros\.gemini\antigravity\scratch.worktrees\" -ScratchName "copilot-worktree-2026-03-07T22-10-40" -WhatIf`
+
+#### Verified Archive Items
+
+- `Disposition: keep` for tts_narrator, system_sentinel, etc. [validated]
+- `ReportFiles` normalization [validated]
+
+---
+END OF VALIDATED RUNBOOK
