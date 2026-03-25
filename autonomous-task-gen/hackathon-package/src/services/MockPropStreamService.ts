@@ -1,23 +1,17 @@
 /**
- * MockPropStreamService.ts – Phase 19: Streaming Simulator
+ * MockPropStreamService.ts – Phase 32: Predictive Streaming Simulator
  *
  * Provides two stream scenarios:
- *   • "safe"   – a well-behaved stream that stays within any reasonable budget.
- *   • "stress" – deliberately exceeds the node budget to trigger Guard-2.
+ *   • "safe"   – a well-behaved stream.
+ *   • "stress" – deliberately exceeds the node budget.
  *
- * Each scenario yields PropStreamChunks at a configurable interval, mimicking
- * the incremental JSON delivery from a real AI producer.
+ * Each scenario now yields "VibrationSignal" telemetry before each chunk,
+ * allowing the UI to forecast risks in real time.
  */
 
-import type { PropStreamChunk } from "../types/constitution";
-
-// ---------------------------------------------------------------------------
-// Stream definitions
-// ---------------------------------------------------------------------------
+import type { PropStreamChunk, VibrationSignal } from "../types/constitution";
 
 type StreamScenario = "safe" | "stress";
-
-/** A raw data record used to build a chunk. */
 type ChunkPayload = Record<string, unknown>;
 
 const SAFE_CHUNKS: ChunkPayload[] = [
@@ -28,11 +22,6 @@ const SAFE_CHUNKS: ChunkPayload[] = [
   { type: "footer", note: "Stream ended normally." },
 ];
 
-/**
- * Stress chunks intentionally create a deep, sprawling tree so Guard-2
- * detects a node-budget violation (with a contract of maxNodes:10, this
- * stream exceeds the limit by the 4th chunk).
- */
 const STRESS_CHUNKS: ChunkPayload[] = [
   {
     type: "section",
@@ -48,7 +37,6 @@ const STRESS_CHUNKS: ChunkPayload[] = [
       { type: "row", cells: [{ v: 9 }, { v: 10 }] },
     ],
   },
-  // Third chunk pushes well past a 10-node budget
   {
     type: "section",
     children: [
@@ -58,67 +46,87 @@ const STRESS_CHUNKS: ChunkPayload[] = [
   { type: "footer", note: "Intentional budget overflow." },
 ];
 
-// ---------------------------------------------------------------------------
-// MockPropStreamService
-// ---------------------------------------------------------------------------
-
-/** Callback fired for each streamed chunk. */
 export type ChunkCallback = (chunk: PropStreamChunk) => void;
-
-/** Callback fired when all chunks have been delivered. */
 export type DoneCallback = () => void;
+export type VibrationCallback = (signal: VibrationSignal) => void;
 
 export class MockPropStreamService {
   private timer: ReturnType<typeof setTimeout> | null = null;
+  private preChunkTimer: ReturnType<typeof setTimeout> | null = null;
+  private active = false;
   private seq = 0;
 
-  /**
-   * Start streaming the chosen scenario.
-   *
-   * @param scenario   "safe" or "stress"
-   * @param onChunk    called with each PropStreamChunk
-   * @param onDone     called once all chunks have been sent
-   * @param intervalMs delay between chunks in milliseconds (default 600)
-   */
   start(
     scenario: StreamScenario,
     onChunk: ChunkCallback,
     onDone: DoneCallback,
-    intervalMs = 600,
+    onVibration?: VibrationCallback,
+    intervalMs = 800,
   ): void {
     this.stop();
+    this.active = true;
     this.seq = 0;
 
     const payloads = scenario === "safe" ? SAFE_CHUNKS : STRESS_CHUNKS;
     let index = 0;
 
     const sendNext = () => {
+      if (!this.active) {
+        return;
+      }
+
       if (index >= payloads.length) {
         onDone();
         return;
       }
 
-      const data = payloads[index++];
-      const serialised = JSON.stringify(data);
-      const chunk: PropStreamChunk = {
-        data,
-        byteLength: new TextEncoder().encode(serialised).length,
-        seq: this.seq++,
-      };
+      // 1. Simulate "Vibration" before sending the chunk
+      if (onVibration) {
+        const entropyBase = scenario === "stress" ? 1.4 : 0.3;
+        const noise = Math.random() * 0.3;
+        onVibration({
+          sourceId: "ai_producer_telemetry",
+          entropy: entropyBase + noise,
+          gradient: 0.6 + (Math.random() * 0.4),
+          confidence: scenario === "safe" ? 0.95 : 0.65,
+          observedAt: new Date().toISOString(),
+        });
+      }
 
-      onChunk(chunk);
+      // 2. Small delay (200ms) to allow UI to react to vibration before chunk arrives
+      this.preChunkTimer = setTimeout(() => {
+        if (!this.active) {
+          return;
+        }
 
-      this.timer = setTimeout(sendNext, intervalMs);
+        const currentData = payloads[index++];
+        const serialised = JSON.stringify(currentData);
+        const chunk: PropStreamChunk = {
+          data: currentData,
+          byteLength: new TextEncoder().encode(serialised).length,
+          seq: this.seq++,
+        };
+
+        onChunk(chunk);
+        this.timer = setTimeout(sendNext, intervalMs);
+      }, 200);
     };
 
-    this.timer = setTimeout(sendNext, intervalMs);
+    // Initial trigger
+    this.timer = setTimeout(sendNext, 100);
   }
 
-  /** Cancel an in-progress stream. */
   stop(): void {
+    this.active = false;
+
     if (this.timer !== null) {
       clearTimeout(this.timer);
       this.timer = null;
+    }
+
+    if (this.preChunkTimer !== null) {
+      clearTimeout(this.preChunkTimer);
+      this.preChunkTimer = null;
     }
   }
 }
