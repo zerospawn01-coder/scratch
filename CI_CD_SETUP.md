@@ -22,11 +22,11 @@ This repository includes automated testing via GitHub Actions.
 
 ### What Gets Tested
 
-The CI/CD pipeline runs 3 separate test jobs:
+The CI/CD pipeline runs 3 separate test jobs (GitHub Actions job IDs shown):
 
-1. **LEAP analysis**: 11 tests (`test_leap_analysis.py`)
-2. **post_alignment_lab**: 17 tests (PVL, θ update, meaning divergence)
-3. **intuition-layer**: 14 tests (Routing logic, thresholds; all heavy deps mocked)
+1. **`leap-analysis`**: 11 tests (`test_leap_analysis.py`)
+2. **`post-alignment-lab`**: 17 tests (PVL, θ update, meaning divergence)
+3. **`intuition-layer`**: 14 tests (Routing logic, thresholds; all heavy deps mocked)
 
 **Total**: 42 tests, expected to pass in < 15 seconds
 

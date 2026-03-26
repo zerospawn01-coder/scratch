@@ -91,13 +91,17 @@ $env:SUBDIR="lab-experiments";   $env:NEW_REPO_URL="git@github.com:org/lab-exper
 
 ## 7. 履歴を残したい場合 (git filter-repo)
 > 事前に `pip install git-filter-repo` などでツールを準備してください。
+>
+> **重要**: `git filter-repo` は履歴をその場で書き換えます。必ず **元リポのフレッシュクローン（またはバックアップ）** に対して実行してください。作業中の clone で実行すると元リポを破壊する恐れがあります。
 ```powershell
-Set-Location $env:SOURCE_ROOT
-git filter-repo --path $env:SUBDIR --force
+# 1. 元リポをフレッシュクローンして作業用コピーを作成する
+git clone $env:SOURCE_ROOT $env:TARGET_ROOT
 
-# 生成物を新しい作業ディレクトリにコピー
-Copy-Item $env:SOURCE_ROOT $env:TARGET_ROOT -Recurse
+# 2. 指定サブディレクトリだけに履歴を絞り込む（元リポには影響しない）
 Set-Location $env:TARGET_ROOT
+git filter-repo --path $env:SUBDIR --path-rename "${env:SUBDIR}/:" --force
+
+# 3. 新しいリモートを設定する（push はまだしない）
 git remote add origin $env:NEW_REPO_URL
 # push するなら: git push -u origin main
 ```
