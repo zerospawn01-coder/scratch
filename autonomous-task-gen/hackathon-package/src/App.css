@@ -48,25 +48,38 @@ body {
   font-size: 14px;
 }
 
-.audit-harness__contract h2,
-.audit-harness__checkpoint h2 {
-  font-size: 15px;
-  color: #8b949e;
-  font-weight: 600;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.audit-harness__dashboard {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
 }
 
-/* ------------------------------------------------------------------ */
-/* Contract table                                                       */
-/* ------------------------------------------------------------------ */
+.audit-harness__main-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.audit-harness__side-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+}
+
+.audit-harness__contract {
+  background: #161b22;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #30363d;
+}
 
 .contract-table {
-  border-collapse: collapse;
-  font-size: 13px;
   width: 100%;
-  max-width: 380px;
+  font-size: 12px;
 }
 
 .contract-table th,
@@ -95,11 +108,66 @@ body {
 /* Controls                                                             */
 /* ------------------------------------------------------------------ */
 
-.audit-harness__controls {
+.audit-harness__controls-bar {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
+  background: #161b22;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+}
+
+.audit-harness__controls-bar-left {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.audit-harness__controls-bar-right {
+  margin-left: auto;
+}
+
+.audit-harness__select {
+  padding: 6px 10px;
+  background: #0d1117;
+  color: #fff;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.audit-harness__sidebar-section {
+  background: #161b22;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #30363d;
+}
+
+.audit-harness__sidebar-title--danger {
+  color: #f85149 !important;
+}
+
+.audit-harness__checkbox-label {
+  color: #8b949e;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkpoint-card--blocked {
+  background: #161b22;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(218, 54, 51, 0.15);
+}
+
+.checkpoint-card__path {
+  font-size: 11px;
+  color: #8b949e;
+  margin-top: 8px;
 }
 
 .audit-harness__mode-label {
@@ -175,4 +243,134 @@ body {
   overflow-x: auto;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* ------------------------------------------------------------------ */
+/* WAL telemetry dashboard                                              */
+/* ------------------------------------------------------------------ */
+
+.telemetry-dashboard {
+  border: 1px solid #2a2d36;
+  border-radius: 8px;
+  background: #0f131a;
+  padding: 14px;
+}
+
+.telemetry-dashboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.telemetry-dashboard__header h2 {
+  color: #8b949e;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.telemetry-dashboard__count {
+  font-size: 12px;
+  color: #8b949e;
+}
+
+.telemetry-dashboard__filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.telemetry-dashboard__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8b949e;
+  font-size: 12px;
+}
+
+.telemetry-dashboard__filter select {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #2a2d36;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.telemetry-dashboard__empty {
+  font-size: 13px;
+  color: #8b949e;
+}
+
+.telemetry-dashboard__table-wrap {
+  overflow-x: auto;
+}
+
+.telemetry-dashboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.telemetry-dashboard__table th,
+.telemetry-dashboard__table td {
+  padding: 8px;
+  border: 1px solid #2a2d36;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.telemetry-dashboard__table th {
+  background: #161b22;
+  color: #8b949e;
+}
+
+.telemetry-dashboard__table td {
+  color: #e6edf3;
+}
+
+.telemetry-dashboard__table code {
+  color: #ffa657;
+}
+
+.telemetry-dashboard__hash-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.telemetry-dashboard__hash-btn:hover code {
+  text-decoration: underline;
+}
+
+.telemetry-dashboard__expanded-row td {
+  background: #0b0f15;
+}
+
+.telemetry-dashboard__raw-json {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #2a2d36;
+  border-radius: 6px;
+  background: #11161f;
+  color: #c9d1d9;
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.telemetry-dashboard__outcome {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.telemetry-dashboard__outcome--safe_complete {
+  color: #3fb950;
+}
+
+.telemetry-dashboard__outcome--violation {
+  color: #f85149;
 }
