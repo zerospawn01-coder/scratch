@@ -1,0 +1,178 @@
+/* App.css – Phase 19: Global styles */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Audit Harness                                                        */
+/* ------------------------------------------------------------------ */
+
+.audit-harness {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.audit-harness__header {
+  border-bottom: 1px solid #2a2d36;
+  padding-bottom: 16px;
+}
+
+.audit-harness__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #e6edf3;
+}
+
+.audit-harness__subtitle {
+  color: #8b949e;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.audit-harness__contract h2,
+.audit-harness__checkpoint h2 {
+  font-size: 15px;
+  color: #8b949e;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Contract table                                                       */
+/* ------------------------------------------------------------------ */
+
+.contract-table {
+  border-collapse: collapse;
+  font-size: 13px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.contract-table th,
+.contract-table td {
+  padding: 6px 12px;
+  border: 1px solid #2a2d36;
+  text-align: left;
+}
+
+.contract-table th {
+  background: #161b22;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.contract-table td {
+  color: #e6edf3;
+}
+
+.contract-table code {
+  color: #ffa657;
+  font-family: monospace;
+}
+
+/* ------------------------------------------------------------------ */
+/* Controls                                                             */
+/* ------------------------------------------------------------------ */
+
+.audit-harness__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.audit-harness__mode-label {
+  font-size: 14px;
+  color: #8b949e;
+}
+
+.audit-harness__mode-label select {
+  background: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #2a2d36;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+.audit-harness__mode-label select:focus {
+  border-color: #58a6ff;
+}
+
+.btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: #238636;
+  color: #fff;
+}
+
+.btn--primary:hover { opacity: 0.85; }
+
+.btn--danger {
+  background: #da3633;
+  color: #fff;
+}
+
+.btn--danger:hover { opacity: 0.85; }
+
+.audit-harness__done-badge {
+  font-size: 12px;
+  color: #3fb950;
+  background: #0f2e1c;
+  border: 1px solid #238636;
+  border-radius: 12px;
+  padding: 3px 10px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Checkpoint pre                                                       */
+/* ------------------------------------------------------------------ */
+
+.checkpoint-pre {
+  background: #161b22;
+  border: 1px solid #2a2d36;
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 12px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  color: #e6edf3;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
