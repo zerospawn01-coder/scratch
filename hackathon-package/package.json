@@ -1,0 +1,15 @@
+{
+  "name": "hackathon-package",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "vitest run",
+    "test:prop-guard": "vitest run src/tests/PropStreamGuard.test.ts",
+    "test:amendment": "vitest run src/tests/ViolationFeedbackEngine.test.ts",
+    "test:escalation": "vitest run src/tests/HlgEscalationService.test.ts",
+    "test:telemetry": "vitest run src/tests/PropStreamTelemetryEngine.test.ts",
+    "test:load": "vitest run src/tests/high-load-governance.test.ts"
+  }
+}
