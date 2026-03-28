@@ -16,16 +16,23 @@
 
 import type { LedgerEntry, ResearchPhase } from '../types/rgo';
 
+function normalizeForHash(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map(normalizeForHash);
+  }
+  if (value && typeof value === 'object') {
+    return Object.keys(value as Record<string, unknown>)
+      .sort()
+      .reduce<Record<string, unknown>>((acc, key) => {
+        acc[key] = normalizeForHash((value as Record<string, unknown>)[key]);
+        return acc;
+      }, {});
+  }
+  return value;
+}
+
 function stableStringify(value: Record<string, unknown>): string {
-  if (value === null || typeof value !== 'object') {
-    return JSON.stringify(value);
-  }
-  const sortedKeys = Object.keys(value).sort();
-  const sorted: Record<string, unknown> = {};
-  for (const key of sortedKeys) {
-    sorted[key] = value[key];
-  }
-  return JSON.stringify(sorted);
+  return JSON.stringify(normalizeForHash(value));
 }
 
 /**
@@ -54,6 +61,7 @@ export class ResearchLedger {
     phase: ResearchPhase,
     payload: Record<string, unknown>
   ): LedgerEntry {
+    const immutablePayload = normalizeForHash(payload) as Record<string, unknown>;
     const previousHash =
       this.entries.length > 0
         ? this.entries[this.entries.length - 1].entryHash
@@ -66,14 +74,14 @@ export class ResearchLedger {
       ledgerSequence,
       researchId,
       phase,
-      payload,
+      payload: immutablePayload,
     });
 
     const entry: LedgerEntry = {
       ledgerSequence,
       researchId,
       phase,
-      payload,
+      payload: immutablePayload,
       previousHash,
       entryHash: hashString(hashBase),
       committedAt,

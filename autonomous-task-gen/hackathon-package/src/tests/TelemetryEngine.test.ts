@@ -51,6 +51,25 @@ describe("AuthorizationWal", () => {
 
     vi.useRealTimers();
   });
+
+  it("clones mutation payloads before storing them in the WAL", () => {
+    const wal = new AuthorizationWal();
+    const mutation = {
+      mutationId: "mut_1",
+      target: "CONTRACT" as const,
+      action: "PARTITION" as const,
+      rationale: "split contract",
+      vulnerabilityRisk: 0.1,
+      projectedR: 0.8,
+      payload: { nested: { limit: 3 } },
+      status: "PENDING" as const,
+    };
+
+    const atom = wal.appendMutation(mutation, "MUTATION_APPROVED");
+    mutation.payload.nested.limit = 10;
+
+    expect(atom.mutationPayload).toEqual({ nested: { limit: 3 } });
+  });
 });
 
 describe("PropStreamTelemetryEngine", () => {

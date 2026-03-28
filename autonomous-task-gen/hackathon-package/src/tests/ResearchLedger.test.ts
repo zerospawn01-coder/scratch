@@ -98,6 +98,33 @@ describe('ResearchLedger', () => {
     expect(ledger.verifyIntegrity()).toBe(false);
   });
 
+  it('preserves integrity when the caller mutates the original payload after append', () => {
+    const ledger = new ResearchLedger();
+    const payload = { nested: { value: 1 } };
+
+    ledger.append('r1', 'INTENT', payload);
+    payload.nested.value = 999;
+
+    expect(ledger.verifyIntegrity()).toBe(true);
+    expect(ledger.list()[0].payload).toEqual({ nested: { value: 1 } });
+  });
+
+  it('produces the same hash for semantically identical nested payloads', () => {
+    const ledgerA = new ResearchLedger();
+    const ledgerB = new ResearchLedger();
+
+    const entryA = ledgerA.append('r1', 'INTENT', {
+      nested: { b: 2, a: 1 },
+      top: 'same',
+    });
+    const entryB = ledgerB.append('r1', 'INTENT', {
+      top: 'same',
+      nested: { a: 1, b: 2 },
+    });
+
+    expect(entryA.entryHash).toBe(entryB.entryHash);
+  });
+
   it('clear() resets the ledger', () => {
     const ledger = new ResearchLedger();
     ledger.append('r1', 'INTENT', {});

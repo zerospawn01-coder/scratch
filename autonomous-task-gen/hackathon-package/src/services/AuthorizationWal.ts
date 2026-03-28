@@ -8,13 +8,23 @@ interface AppendAuditInput {
   degradePolicy?: DegradePolicy;
 }
 
-function stableStringify(value: Record<string, unknown>): string {
-  const sortedKeys = Object.keys(value).sort();
-  const sorted: Record<string, unknown> = {};
-  for (const key of sortedKeys) {
-    sorted[key] = value[key];
+function normalizeForHash(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    return value.map(normalizeForHash);
   }
-  return JSON.stringify(sorted);
+  if (value && typeof value === "object") {
+    return Object.keys(value as Record<string, unknown>)
+      .sort()
+      .reduce<Record<string, unknown>>((acc, key) => {
+        acc[key] = normalizeForHash((value as Record<string, unknown>)[key]);
+        return acc;
+      }, {});
+  }
+  return value;
+}
+
+function stableStringify(value: Record<string, unknown>): string {
+  return JSON.stringify(normalizeForHash(value));
 }
 
 // Simple deterministic hash for audit chaining without runtime crypto dependencies.
@@ -69,6 +79,7 @@ export class AuthorizationWal {
     const timestamp = new Date().toISOString();
     const previousHash = this.atoms.length > 0 ? this.atoms[this.atoms.length - 1].walCommitHash : "GENESIS";
     const walSequence = this.logicalSequence + 1;
+    const immutablePayload = normalizeForHash(mutation.payload ?? {}) as Record<string, unknown>;
 
     const hashBase = stableStringify({
       previousHash,
@@ -77,7 +88,7 @@ export class AuthorizationWal {
       target: mutation.target,
       action: mutation.action,
       outcome,
-      payload: mutation.payload ?? {},
+      payload: immutablePayload,
     });
 
     const atom: AuditAtom = {
@@ -88,7 +99,7 @@ export class AuthorizationWal {
       violatingPath: mutation.target,
       timestamp,
       walCommitHash: hashString(hashBase),
-      mutationPayload: mutation.payload,
+      mutationPayload: immutablePayload,
     };
 
     this.atoms.push(atom);
