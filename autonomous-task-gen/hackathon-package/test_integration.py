@@ -1,4 +1,4 @@
-"""Operational test suite for Phase O + P integrated governance loop."""
+"""Operational test suite for Phase O + P + Q + R integrated governance loop."""
 import json
 import sys
 import tempfile
@@ -11,6 +11,7 @@ from evaluate import evaluate_candidate  # type: ignore[import-not-found]
 from exploration_governor import ExplorationGovernor, ExplorationPolicy  # type: ignore[import-not-found]
 from gate import gate_decision  # type: ignore[import-not-found]
 from governance_enforcer import GovernanceEnforcer  # type: ignore[import-not-found]
+from override_observer import OverrideEpisode, extract_episodes  # type: ignore[import-not-found]
 
 NULL_HASH = "sha256:" + "0" * 64
 
@@ -230,8 +231,98 @@ with tempfile.TemporaryDirectory() as td:
         "REJECT": sum(1 for r in rows if r["decision"] == "REJECT"),
     }
 
+    # --- Phase R: override_observer assertions ---
+
+    def _es(override_active=False, override_reason=None, override_attempts_used=0,
+            override_budget=5, escape_adopt_count=0, escape_novel_count=0):
+        """Helper: build a minimal exploration_status dict for observer tests."""
+        return {
+            "override_active": override_active,
+            "override_reason": override_reason,
+            "override_attempts_used": override_attempts_used,
+            "override_budget": override_budget,
+            "escape_adopt_count": escape_adopt_count,
+            "escape_novel_count": escape_novel_count,
+        }
+
+    # [25] Episode detection: single STAGNATION_OVERRIDE episode, improving_escape outcome
+    rows_25 = [
+        {"seq": 1, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es()},
+        {"seq": 2, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=True, override_reason="STAGNATION_OVERRIDE",
+                                   override_attempts_used=1, escape_novel_count=1)},
+        {"seq": 3, "decision": "ADOPT", "policy_violations": [],
+         "exploration_status": _es(override_active=False, override_attempts_used=1,
+                                   escape_adopt_count=1, escape_novel_count=1)},
+    ]
+    eps25 = extract_episodes(rows_25)
+    require(len(eps25) == 1, f"[25] expected 1 episode, got {len(eps25)}")
+    e25 = eps25[0]
+    require(e25.episode_id == 1, f"[25] episode_id={e25.episode_id}")
+    require(e25.start_seq == 2, f"[25] start_seq={e25.start_seq}")
+    require(e25.end_seq == 3, f"[25] end_seq={e25.end_seq}")
+    require(e25.trigger_reason == "STAGNATION_OVERRIDE", f"[25] trigger={e25.trigger_reason}")
+    require(e25.outcome == "improving_escape", f"[25] outcome={e25.outcome}")
+    require(e25.escape_adopt_count == 1, f"[25] escape_adopt={e25.escape_adopt_count}")
+    print("[25] episode detection + improving_escape outcome OK")
+
+    # [26] Outcome: budget_exhausted when OVERRIDE_BUDGET_EXCEEDED in policy_violations
+    rows_26 = [
+        {"seq": 10, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=True, override_reason="STAGNATION_OVERRIDE",
+                                   override_attempts_used=2, escape_novel_count=2)},
+        {"seq": 11, "decision": "REJECT",
+         "policy_violations": [{"code": "OVERRIDE_BUDGET_EXCEEDED", "severity": "WARNING",
+                                 "message": "budget exhausted"}],
+         "exploration_status": _es(override_active=False, override_attempts_used=3,
+                                   override_budget=3, escape_novel_count=2)},
+    ]
+    eps26 = extract_episodes(rows_26)
+    require(len(eps26) == 1, f"[26] expected 1 episode, got {len(eps26)}")
+    e26 = eps26[0]
+    require(e26.outcome == "budget_exhausted", f"[26] outcome={e26.outcome}")
+    require(e26.budget_used == 3, f"[26] budget_used={e26.budget_used}")
+    require(e26.escape_novel_count == 2, f"[26] escape_novel={e26.escape_novel_count}")
+    print("[26] budget_exhausted outcome OK")
+
+    # [27] Outcome: passive_deactivate when override ends without ADOPT and no budget violation
+    rows_27 = [
+        {"seq": 20, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=True, override_reason="EXPLORATION_EXHAUSTED",
+                                   override_attempts_used=2)},
+        {"seq": 21, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=False, override_attempts_used=2)},
+    ]
+    eps27 = extract_episodes(rows_27)
+    require(len(eps27) == 1, f"[27] expected 1 episode, got {len(eps27)}")
+    e27 = eps27[0]
+    require(e27.outcome == "passive_deactivate", f"[27] outcome={e27.outcome}")
+    require(e27.trigger_reason == "EXPLORATION_EXHAUSTED", f"[27] trigger={e27.trigger_reason}")
+    print("[27] passive_deactivate outcome OK")
+
+    # [28] Run-truncated: override still active at end of rows
+    rows_28 = [
+        {"seq": 30, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es()},
+        {"seq": 31, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=True, override_reason="STAGNATION_OVERRIDE",
+                                   override_attempts_used=1, escape_novel_count=1)},
+        {"seq": 32, "decision": "REJECT", "policy_violations": [],
+         "exploration_status": _es(override_active=True, override_reason="STAGNATION_OVERRIDE",
+                                   override_attempts_used=2, escape_novel_count=2)},
+    ]
+    eps28 = extract_episodes(rows_28)
+    require(len(eps28) == 1, f"[28] expected 1 episode, got {len(eps28)}")
+    e28 = eps28[0]
+    require(e28.outcome == "run_truncated", f"[28] outcome={e28.outcome}")
+    require(e28.start_seq == 31, f"[28] start_seq={e28.start_seq}")
+    require(e28.end_seq == 32, f"[28] end_seq={e28.end_seq}")
+    require(e28.escape_novel_count == 2, f"[28] escape_novel={e28.escape_novel_count}")
+    print("[28] run_truncated outcome OK")
+
 print()
-print("TEST_RESULT: PASS (Phase O + P + Q)")
+print("TEST_RESULT: PASS (Phase O + P + Q + R)")
 print(f"default_attempts={len(rows)}, last_stop={rows[-1]['stop_check']}")
 print(f"decisions={decisions}")
 print(f"hash_chain_verified=True, lockdown_threshold={GovernanceEnforcer.LOCKDOWN_THRESHOLD}")
