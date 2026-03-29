@@ -58,10 +58,12 @@ The system separates "is it better?" from "is it allowable?".
 - `program.md`: governance and decision policy
 - `evolve.py`: candidate mutation
 - `evaluate.py`: score and invariant evaluation
-- `gate.py`: Adopt/Reject decision
-- `run_loop.py`: loop execution and ledger append
-- `ledger.jsonl`: attempt log
-- `ledger.schema.json`: ledger row schema
+- `governance_enforcer.py`: primary policy gate — `PolicyViolation`, `PolicyDecision`, `GovernanceEnforcer` with lockdown
+- `exploration_governor.py`: exploration meta-gate (Phase P) — `ExplorationPolicy`, `ExplorationStatus`, `ExplorationGovernor`; controls diversity, reject budget, stagnation override
+- `gate.py`: backward-compatible wrapper over `GovernanceEnforcer` (deprecated)
+- `run_loop.py`: loop execution, `DecisionEvent` ledger append, hash-chain management
+- `ledger.jsonl`: append-only `DecisionEvent` log
+- `ledger.schema.json`: `DecisionEvent` JSON schema (seq / prev\_event\_hash / event\_hash chain)
 
 ## Note
 

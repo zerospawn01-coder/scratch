@@ -1,4 +1,17 @@
+"""gate.py — Deprecated backward-compatible wrapper.
+
+Use governance_enforcer.GovernanceEnforcer directly for new code.
+This module exists solely to keep existing callers (e.g. the operational test
+suite) working while the loop migrates to GovernanceEnforcer + DecisionEvent.
+
+The wrapper creates a *fresh* GovernanceEnforcer per call so each invocation
+is fully stateless, replicating the original gate_decision behaviour exactly.
+"""
+from __future__ import annotations
+
 from typing import Dict, Tuple
+
+from governance_enforcer import GovernanceEnforcer  # type: ignore[import-not-found]
 
 
 def gate_decision(
@@ -7,17 +20,13 @@ def gate_decision(
     min_improvement: float,
     duplicate_candidate: bool,
 ) -> Tuple[str, str]:
-    if evaluation.get("eval_status") != "ok":
-        return "REJECT", "rejected_evaluation_error"
-
-    if evaluation.get("invariant_violation_count", 1) > 0:
-        return "REJECT", "rejected_invariant_violation"
-
-    if duplicate_candidate:
-        return "REJECT", "rejected_duplicate_candidate"
-
-    candidate_score = float(evaluation.get("final_score", -1e9))
-    if candidate_score < incumbent_score + min_improvement:
-        return "REJECT", "rejected_due_to_no_improvement_despite_valid_invariants"
-
-    return "ADOPT", "adopted_score_improved_and_invariants_passed"
+    """Stateless wrapper over GovernanceEnforcer. Creates a fresh enforcer per call."""
+    enforcer = GovernanceEnforcer()
+    result = enforcer.enforce(
+        candidate_hash="",
+        evaluation=evaluation,
+        incumbent_score=incumbent_score,
+        min_improvement=min_improvement,
+        duplicate_candidate=duplicate_candidate,
+    )
+    return result.decision, result.decision_reason

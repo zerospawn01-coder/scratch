@@ -96,11 +96,25 @@ Recommended defaults:
 
 - `evolve.py`: candidate mutation
 - `evaluate.py`: score and invariant evaluation
-- `gate.py`: deterministic adoption decision
-- `run_loop.py`: single-run loop orchestration and ledger append
-- `ledger.jsonl`: append-only attempt history
-- `ledger.schema.json`: canonical JSON schema for each ledger row
+- `governance_enforcer.py`: primary policy gate (`PolicyViolation`, `PolicyDecision`, `GovernanceEnforcer`)
+- `exploration_governor.py`: exploration meta-gate — Phase P (`ExplorationPolicy`, `ExplorationStatus`, `ExplorationGovernor`)
+- `gate.py`: backward-compatible wrapper — deprecated, use `GovernanceEnforcer` directly
+- `run_loop.py`: single-run loop orchestration; emits `DecisionEvent` with hash chain
+- `ledger.jsonl`: append-only `DecisionEvent` history
+- `ledger.schema.json`: `DecisionEvent` schema (seq / run\_id / prev\_event\_hash / policy\_violations / event\_hash)
 
 ## Governance Layer Note
 
-This demo kernel is a reduced public surface of a broader governance stack. In non-demo mode, long-horizon health metrics, forbidden-memory constraints, and production promotion authorization may apply.
+This demo kernel is a reduced public surface of a broader governance stack (Antigravity OS). `GovernanceEnforcer` mirrors the `GovernanceGate` / `GovernanceViolation` model of the TypeScript layer; `DecisionEvent` mirrors `LedgerEntry` from `rgo.ts`. > **「何を試すか」すら統治されるようになった**
+
+`GovernanceEnforcer` (Phase O) と `ExplorationGovernor` (Phase P) は直列に合成されます：
+
+```text
+ExplorationGovernor.adjusted_min_improvement()  ← 探索自由度の制御
+        ↓
+GovernanceEnforcer.enforce()                    ← 安全性の絶対保証
+        ↓
+decision + policy_violations + exploration_status → DecisionEvent
+```
+
+`GovernanceEnforcer` が提供する fail-closed 安全保証は `ExplorationGovernor` によって上書きされません。探索の進化能力（liveness）と安全性（safety）は別レイヤーで独立に統治されます。
