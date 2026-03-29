@@ -1,26 +1,56 @@
-# 🌌 Antigravity OS: The Sovereign Multiverse (Archived Root)
+# Antigravity Scratch (Legacy Root)
 
-> **"Intelligence is not generated; it is conserved across topological transformations."**
+This repository root is no longer the active home of the split Antigravity
+projects. It should be treated as a legacy staging area while the remaining
+deferred items are resolved.
 
-## 🏛️ Project Status: REORGANIZED (Phase 22.4)
+The authoritative source for active work is now the `main` branch of each
+destination repository. `scratch` should not be treated as the canonical place
+to resume or merge independent lines of work.
 
-This repository (`scratch`) has been successfully split into five purpose-specific repositories to ensure better governance, isolation, and operational clarity. **This root is now ARCHIVED.**
+## Active Repositories
 
-### ⛓️ New Project Structure
+- `cognitive-lab`
+  - Main research repo
+  - Owns `post_alignment_lab`, `intuition-layer`, and `leap_analysis`
+- `ea-aol`
+  - Independent contract-first runtime/project
+- `mtp-weaver`
+  - Independent kernel, governance, and audit line
+- `lab-experiments`
+  - Incubation repo for `jepa_intuition_poc`, `geodesic_descent`, and `personal_ai`
+- `project-manuals`
+  - Operational knowledge, split handoff material, `phase14`, and reference UI assets
 
-The Antigravity OS ecosystem now operates across the following repositories:
+## What Still Belongs Here
 
-1.  **[cognitive-lab](https://github.com/zerospawn01-coder/cognitive-lab)**: Core intelligence, LEAP analysis, and deterministic reasoning engines.
-2.  **[ea-aol](https://github.com/zerospawn01-coder/ea-aol)**: Energy-Aware AI Orchestration Language - Unified Reference Runtime.
-3.  **[mtp-weaver](https://github.com/zerospawn01-coder/mtp-weaver)**: Multi-Topology Projection Weaver - Collective AI Mesh Nucleus.
-4.  **[lab-experiments](https://github.com/zerospawn01-coder/lab-experiments)**: POCs, research, and exploratory high-chaos simulations.
-5.  **[project-manuals](https://github.com/zerospawn01-coder/project-manuals)**: Global governance, protocols, and operational runbooks.
+Only unresolved leftovers that have not yet been assigned a final destination:
 
----
+- `autonomous-task-gen/`
+- `data/`
+- temporary local-only material that should not be promoted into a destination repo
 
-### 🛠️ Legacy Access
+## What Does Not Belong Here
 
-For historical reference, the original monolithic state is preserved in the `main` branch history prior to commit `split-completion-22-4`.
+Do not add new work here if it can be explained as any of the following:
 
-**TOTAL_SYSTEM_INTEGRITY: COMPLETED (Phase 22.4)**
-**TOPOLOGICAL_PROTECTION: DECENTRALIZED**
+- active research logic
+- independent runtime/project code
+- experiment incubation
+- operational knowledge or reference UI
+
+Add it directly to the owning destination repo instead.
+
+In particular, do not reabsorb:
+
+- `ea-aol` contract/runtime work
+- `mtp-weaver` kernel/governance/audit work
+- `project-manuals` runbooks, operational assets, or reference UI
+
+## Next References
+
+- `project-manuals` repository:
+  - https://github.com/zerospawn01-coder/project-manuals
+- Scratch migration handoff PR:
+  - https://github.com/zerospawn01-coder/project-manuals/pull/2
+
