@@ -49,10 +49,8 @@ In particular, do not reabsorb:
 
 ## Next References
 
-- Scratch migration map:
-  - `project_manuals/github_project_manuals_review/docs/SCRATCH_REPO_MIGRATION_MAP.md`
-- Scratch reorganization checklist:
-  - `project_manuals/github_project_manuals_review/docs/SCRATCH_REORG_CHECKLIST.md`
-- Short action list:
-  - `project_manuals/github_project_manuals_review/docs/SCRATCH_NEXT_ACTIONS.md`
+- `project-manuals` repository:
+  - https://github.com/zerospawn01-coder/project-manuals
+- Scratch migration handoff PR:
+  - https://github.com/zerospawn01-coder/project-manuals/pull/2
 
