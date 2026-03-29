@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/governed-evolution/ledger.schema.json",
+  "title": "Governed Evolution Ledger Row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attempt_id",
+    "timestamp",
+    "parent_candidate_id",
+    "candidate_id",
+    "candidate_hash",
+    "mutation_type",
+    "reward",
+    "cost",
+    "safety_penalty",
+    "final_score",
+    "invariant_violation_count",
+    "invariant_pass",
+    "eval_status",
+    "duplicate_candidate",
+    "decision",
+    "decision_reason",
+    "incumbent_score_before",
+    "incumbent_score_after",
+    "stop_check"
+  ],
+  "properties": {
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^A-[0-9]{5}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "parent_candidate_id": {
+      "type": "string",
+      "pattern": "^C-[0-9]{5}$"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^C-[0-9]{5}$"
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "mutation_type": {
+      "type": "string",
+      "enum": [
+        "param_shift",
+        "rule_replace",
+        "template_swap",
+        "none"
+      ]
+    },
+    "reward": {
+      "type": "number"
+    },
+    "cost": {
+      "type": "number",
+      "minimum": 0
+    },
+    "safety_penalty": {
+      "type": "number",
+      "minimum": 0
+    },
+    "final_score": {
+      "type": "number"
+    },
+    "invariant_violation_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "invariant_pass": {
+      "type": "boolean"
+    },
+    "eval_status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "error"
+      ]
+    },
+    "duplicate_candidate": {
+      "type": "boolean"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ADOPT",
+        "REJECT"
+      ]
+    },
+    "decision_reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "incumbent_score_before": {
+      "type": "number"
+    },
+    "incumbent_score_after": {
+      "type": "number"
+    },
+    "stop_check": {
+      "type": "string",
+      "enum": [
+        "continue",
+        "max_attempts",
+        "max_consecutive_rejects",
+        "stagnation"
+      ]
+    }
+  }
+}
