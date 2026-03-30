@@ -144,3 +144,8 @@ Phase S は調整値を直接適用せず、`recommended_adjustments` を determ
 Phase T は Phase S の report を入力に、deterministic な候補生成とシミュレーション評価を行い、
 次回ラン用の `selected_candidate` を返します。安全のため `apply_now=False` を固定し、
 実運用への反映は人手または次段の承認フローに委ねます。
+
+監査用途では、Phase T plan を append-only JSONL として記録できます：
+
+- `build_plan_from_ledger(ledger_path)`
+- `report_plan_to_jsonl(plan, adaptive_plan_report.jsonl, source_ledger=ledger_path)`

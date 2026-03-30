@@ -17,7 +17,11 @@ from override_analytics import (  # type: ignore[import-not-found]
     ExplorationAnalyticsReport,
     analyze_episodes,
 )
-from adaptive_governance import build_adaptive_plan  # type: ignore[import-not-found]
+from adaptive_governance import (  # type: ignore[import-not-found]
+    build_adaptive_plan,
+    build_plan_from_ledger,
+    report_plan_to_jsonl,
+)
 
 NULL_HASH = "sha256:" + "0" * 64
 
@@ -455,6 +459,31 @@ with tempfile.TemporaryDirectory() as td:
     require(sel.base_min_improvement <= 0.005,
             f"[36] base_min_improvement not adjusted: {sel.base_min_improvement}")
     print("[36] adaptive selection reflects recommendations OK")
+
+    # [37] ledger連携: ledger -> report -> adaptive plan が生成できる
+    ledger_path = Path(td) / "ledger.jsonl"
+    plan_from_ledger = build_plan_from_ledger(ledger_path)
+    require(plan_from_ledger.health_status in {"HEALTHY", "AT_RISK", "EXHAUSTED"},
+            f"[37] unexpected health_status={plan_from_ledger.health_status}")
+    require(plan_from_ledger.apply_now is False, "[37] apply_now must remain False")
+    print("[37] build_plan_from_ledger OK")
+
+    # [38] 監査出力: report_plan_to_jsonl が JSONL レコードを生成する
+    plan_report_path = Path(td) / "adaptive_plan_report.jsonl"
+    report_plan_to_jsonl(plan_from_ledger, plan_report_path, source_ledger=ledger_path, mode="w")
+    lines = [ln for ln in plan_report_path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+    require(len(lines) == 1, f"[38] expected 1 record got {len(lines)}")
+    rec = json.loads(lines[0])
+    require(rec["apply_now"] is False, "[38] apply_now not false in report")
+    require(rec["source_ledger"].endswith("ledger.jsonl"), f"[38] bad source_ledger={rec['source_ledger']}")
+    require("selected_candidate" in rec, "[38] selected_candidate missing")
+    print("[38] report_plan_to_jsonl record output OK")
+
+    # [39] append-only監査: mode='a' でレコードが追記される
+    report_plan_to_jsonl(plan_from_ledger, plan_report_path, source_ledger=ledger_path, mode="a")
+    lines2 = [ln for ln in plan_report_path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+    require(len(lines2) == 2, f"[39] expected 2 records got {len(lines2)}")
+    print("[39] append-only adaptive plan report OK")
 
 print()
 print("TEST_RESULT: PASS (Phase O + P + Q + R + S + T)")

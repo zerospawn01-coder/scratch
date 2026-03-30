@@ -79,6 +79,11 @@ The system separates "is it better?" from "is it allowable?".
 
 Phase S/T are proposal-only by design: they do not auto-apply runtime policy changes.
 
+Phase T also supports append-only audit output for plan records:
+
+- `build_plan_from_ledger(ledger_path)`
+- `report_plan_to_jsonl(plan, adaptive_plan_report_path, source_ledger)`
+
 ## Note
 
 This demo kernel is a reduced public surface of a broader governance system.

@@ -15,11 +15,17 @@ This module is intentionally advisory and side-effect free.
 """
 from __future__ import annotations
 
+import json
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Dict, List
 
 from exploration_governor import ExplorationPolicy  # type: ignore[import-not-found]
-from override_analytics import AnalyticsThresholds, ExplorationAnalyticsReport  # type: ignore[import-not-found]
+from override_analytics import (  # type: ignore[import-not-found]
+    AnalyticsThresholds,
+    ExplorationAnalyticsReport,
+    analyze_ledger,
+)
 
 
 DEFAULT_BASE_MIN_IMPROVEMENT = 0.005
@@ -208,3 +214,45 @@ def build_adaptive_plan(
         evaluated_candidates=evaluated,
         rationale=rationale,
     )
+
+
+def build_plan_from_ledger(
+    ledger_path: Path,
+    thresholds: AnalyticsThresholds = AnalyticsThresholds(),
+    current_policy: ExplorationPolicy = ExplorationPolicy(),
+    base_min_improvement: float = DEFAULT_BASE_MIN_IMPROVEMENT,
+) -> AdaptivePlan:
+    """Convenience wrapper: ledger -> Phase S report -> Phase T plan."""
+    report = analyze_ledger(ledger_path, thresholds=thresholds)
+    return build_adaptive_plan(
+        report=report,
+        current_policy=current_policy,
+        base_min_improvement=base_min_improvement,
+    )
+
+
+def report_plan_to_jsonl(
+    plan: AdaptivePlan,
+    path: Path,
+    source_ledger: Path,
+    mode: str = "a",
+) -> None:
+    """
+    Write one audit record for an AdaptivePlan.
+
+    Uses append mode by default to preserve append-only reporting semantics.
+    """
+    if mode not in {"a", "w"}:
+        raise ValueError("mode must be 'a' or 'w'")
+
+    payload = {
+        "source_ledger": str(source_ledger),
+        "health_status": plan.health_status,
+        "apply_now": plan.apply_now,
+        "selected_candidate": plan.selected_candidate.to_dict(),
+        "evaluated_candidates": [c.to_dict() for c in plan.evaluated_candidates],
+        "rationale": plan.rationale,
+    }
+
+    with path.open(mode, encoding="utf-8") as f:
+        f.write(json.dumps(payload, ensure_ascii=True) + "\n")
