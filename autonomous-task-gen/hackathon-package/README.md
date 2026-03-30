@@ -60,10 +60,22 @@ The system separates "is it better?" from "is it allowable?".
 - `evaluate.py`: score and invariant evaluation
 - `governance_enforcer.py`: primary policy gate — `PolicyViolation`, `PolicyDecision`, `GovernanceEnforcer` with lockdown
 - `exploration_governor.py`: exploration meta-gate (Phase P) — `ExplorationPolicy`, `ExplorationStatus`, `ExplorationGovernor`; controls diversity, reject budget, stagnation override
+- `override_observer.py`: Phase R observability layer — extracts override episodes from DecisionEvent rows
+- `override_analytics.py`: Phase S analytics layer — computes KPI, warning health status, and deterministic feedback proposals
 - `gate.py`: backward-compatible wrapper over `GovernanceEnforcer` (deprecated)
 - `run_loop.py`: loop execution, `DecisionEvent` ledger append, hash-chain management
 - `ledger.jsonl`: append-only `DecisionEvent` log
 - `ledger.schema.json`: `DecisionEvent` JSON schema (seq / prev\_event\_hash / event\_hash chain)
+
+## Governance Evolution Layers
+
+- Phase O: governed search safety (`GovernanceEnforcer`)
+- Phase P: exploration liveness governance (`ExplorationGovernor`)
+- Phase Q: override budget + escape proof metrics
+- Phase R: override episode observability (`OverrideEpisode`)
+- Phase S: episode analytics + health judgment + feedback proposal (`override_analytics.py`)
+
+Phase S is proposal-only by design: it does not auto-apply policy changes.
 
 ## Note
 

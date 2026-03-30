@@ -12,6 +12,10 @@ from exploration_governor import ExplorationGovernor, ExplorationPolicy  # type:
 from gate import gate_decision  # type: ignore[import-not-found]
 from governance_enforcer import GovernanceEnforcer  # type: ignore[import-not-found]
 from override_observer import OverrideEpisode, extract_episodes  # type: ignore[import-not-found]
+from override_analytics import (  # type: ignore[import-not-found]
+    AnalyticsThresholds,
+    analyze_episodes,
+)
 
 NULL_HASH = "sha256:" + "0" * 64
 
@@ -321,8 +325,90 @@ with tempfile.TemporaryDirectory() as td:
     require(e28.escape_novel_count == 2, f"[28] escape_novel={e28.escape_novel_count}")
     print("[28] run_truncated outcome OK")
 
+    # --- Phase S: override_analytics assertions ---
+
+    episodes_s = [
+        OverrideEpisode(
+            episode_id=1,
+            start_seq=2,
+            end_seq=4,
+            trigger_reason="STAGNATION_OVERRIDE",
+            budget_used=3,
+            escape_adopt_count=1,
+            escape_novel_count=2,
+            outcome="improving_escape",
+        ),
+        OverrideEpisode(
+            episode_id=2,
+            start_seq=8,
+            end_seq=10,
+            trigger_reason="STAGNATION_OVERRIDE",
+            budget_used=3,
+            escape_adopt_count=0,
+            escape_novel_count=2,
+            outcome="budget_exhausted",
+        ),
+        OverrideEpisode(
+            episode_id=3,
+            start_seq=12,
+            end_seq=13,
+            trigger_reason="EXPLORATION_EXHAUSTED",
+            budget_used=2,
+            escape_adopt_count=0,
+            escape_novel_count=1,
+            outcome="passive_deactivate",
+        ),
+    ]
+
+    # [29] KPI集計: episode群から主要KPIが正しく計算される
+    report_s = analyze_episodes(episodes_s)
+    require(report_s.episode_count == 3, f"[29] episode_count={report_s.episode_count}")
+    require(report_s.attempt_span == 12, f"[29] attempt_span={report_s.attempt_span}")
+    require(report_s.avg_episode_length == 2.6667, f"[29] avg_episode_length={report_s.avg_episode_length}")
+    require(report_s.override_frequency == 0.25, f"[29] override_frequency={report_s.override_frequency}")
+    print("[29] KPI aggregation OK")
+
+    # [30] outcome比率: improving_escape / budget_exhaust が期待通り
+    require(report_s.improving_escape_rate == 0.3333, f"[30] improving_escape_rate={report_s.improving_escape_rate}")
+    require(report_s.budget_exhaust_rate == 0.3333, f"[30] budget_exhaust_rate={report_s.budget_exhaust_rate}")
+    require(report_s.passive_deactivate_rate == 0.3333, f"[30] passive_deactivate_rate={report_s.passive_deactivate_rate}")
+    require(report_s.run_truncated_rate == 0.0, f"[30] run_truncated_rate={report_s.run_truncated_rate}")
+    print("[30] outcome rates OK")
+
+    # [31] deterministic提案: 同じ入力では同じ recommendation が返る
+    report_s2 = analyze_episodes(episodes_s)
+    require(report_s.to_dict() == report_s2.to_dict(), "[31] report not deterministic")
+    print("[31] deterministic recommendation/report OK")
+
+    # [32] warning判定: 閾値を厳しくすると HEALTHY -> AT_RISK / EXHAUSTED へ遷移
+    at_risk_thresholds = AnalyticsThresholds(
+        min_improving_escape_rate=0.2,
+        max_budget_exhaust_rate=0.3,
+        max_override_frequency=0.2,
+    )
+    report_at_risk = analyze_episodes(episodes_s, thresholds=at_risk_thresholds)
+    require(report_at_risk.health_status == "AT_RISK", f"[32] health_status={report_at_risk.health_status}")
+    require("increase_cooldown" in report_at_risk.recommended_adjustments,
+            "[32] missing increase_cooldown")
+    require("lower_base_min_improvement" in report_at_risk.recommended_adjustments,
+            "[32] missing lower_base_min_improvement")
+
+    exhausted_thresholds = AnalyticsThresholds(
+        min_improving_escape_rate=0.6,
+        max_budget_exhaust_rate=0.3,
+        max_override_frequency=0.2,
+    )
+    episodes_exhausted = [
+        OverrideEpisode(1, 1, 3, "STAGNATION_OVERRIDE", 3, 0, 2, "budget_exhausted"),
+        OverrideEpisode(2, 5, 7, "STAGNATION_OVERRIDE", 3, 0, 2, "budget_exhausted"),
+    ]
+    report_exhausted = analyze_episodes(episodes_exhausted, thresholds=exhausted_thresholds)
+    require(report_exhausted.health_status == "EXHAUSTED",
+            f"[32] exhausted health_status={report_exhausted.health_status}")
+    print("[32] health judgment threshold transitions OK")
+
 print()
-print("TEST_RESULT: PASS (Phase O + P + Q + R)")
+print("TEST_RESULT: PASS (Phase O + P + Q + R + S)")
 print(f"default_attempts={len(rows)}, last_stop={rows[-1]['stop_check']}")
 print(f"decisions={decisions}")
 print(f"hash_chain_verified=True, lockdown_threshold={GovernanceEnforcer.LOCKDOWN_THRESHOLD}")

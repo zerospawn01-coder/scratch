@@ -118,3 +118,24 @@ decision + policy_violations + exploration_status → DecisionEvent
 ```
 
 `GovernanceEnforcer` が提供する fail-closed 安全保証は `ExplorationGovernor` によって上書きされません。探索の進化能力（liveness）と安全性（safety）は別レイヤーで独立に統治されます。
+
+Phase R / S で観測と評価を分離して追加：
+
+```text
+DecisionEvent (raw ledger)
+        -> override_observer.extract_episodes()      # Phase R: episode化
+        -> override_analytics.analyze_episodes()     # Phase S: KPI + health + proposal
+```
+
+Phase S の health 判定は fail-closed ではなく warning 系の運用指標です。
+
+- `HEALTHY`
+- `AT_RISK`
+- `EXHAUSTED`
+
+Phase S は調整値を直接適用せず、`recommended_adjustments` を deterministic に返します。
+
+- `increase_diversity_window`
+- `increase_cooldown`
+- `decrease_override_budget`
+- `lower_base_min_improvement`
