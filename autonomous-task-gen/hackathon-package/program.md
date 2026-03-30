@@ -125,6 +125,7 @@ Phase R / S で観測と評価を分離して追加：
 DecisionEvent (raw ledger)
         -> override_observer.extract_episodes()      # Phase R: episode化
         -> override_analytics.analyze_episodes()     # Phase S: KPI + health + proposal
+        -> adaptive_governance.build_adaptive_plan() # Phase T: next-run tuning candidate selection
 ```
 
 Phase S の health 判定は fail-closed ではなく warning 系の運用指標です。
@@ -139,3 +140,7 @@ Phase S は調整値を直接適用せず、`recommended_adjustments` を determ
 - `increase_cooldown`
 - `decrease_override_budget`
 - `lower_base_min_improvement`
+
+Phase T は Phase S の report を入力に、deterministic な候補生成とシミュレーション評価を行い、
+次回ラン用の `selected_candidate` を返します。安全のため `apply_now=False` を固定し、
+実運用への反映は人手または次段の承認フローに委ねます。

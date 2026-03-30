@@ -62,6 +62,7 @@ The system separates "is it better?" from "is it allowable?".
 - `exploration_governor.py`: exploration meta-gate (Phase P) — `ExplorationPolicy`, `ExplorationStatus`, `ExplorationGovernor`; controls diversity, reject budget, stagnation override
 - `override_observer.py`: Phase R observability layer — extracts override episodes from DecisionEvent rows
 - `override_analytics.py`: Phase S analytics layer — computes KPI, warning health status, and deterministic feedback proposals
+- `adaptive_governance.py`: Phase T proposal layer — evaluates deterministic next-run tuning candidates (proposal-only)
 - `gate.py`: backward-compatible wrapper over `GovernanceEnforcer` (deprecated)
 - `run_loop.py`: loop execution, `DecisionEvent` ledger append, hash-chain management
 - `ledger.jsonl`: append-only `DecisionEvent` log
@@ -74,8 +75,9 @@ The system separates "is it better?" from "is it allowable?".
 - Phase Q: override budget + escape proof metrics
 - Phase R: override episode observability (`OverrideEpisode`)
 - Phase S: episode analytics + health judgment + feedback proposal (`override_analytics.py`)
+- Phase T: self-tuning planning (`adaptive_governance.py`) — candidate simulation/selection for next run, no auto-apply
 
-Phase S is proposal-only by design: it does not auto-apply policy changes.
+Phase S/T are proposal-only by design: they do not auto-apply runtime policy changes.
 
 ## Note
 

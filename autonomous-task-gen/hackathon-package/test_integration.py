@@ -1,4 +1,4 @@
-"""Operational test suite for Phase O + P + Q + R integrated governance loop."""
+"""Operational test suite for Phase O + P + Q + R + S + T integrated governance loop."""
 import json
 import sys
 import tempfile
@@ -14,8 +14,10 @@ from governance_enforcer import GovernanceEnforcer  # type: ignore[import-not-fo
 from override_observer import OverrideEpisode, extract_episodes  # type: ignore[import-not-found]
 from override_analytics import (  # type: ignore[import-not-found]
     AnalyticsThresholds,
+    ExplorationAnalyticsReport,
     analyze_episodes,
 )
+from adaptive_governance import build_adaptive_plan  # type: ignore[import-not-found]
 
 NULL_HASH = "sha256:" + "0" * 64
 
@@ -407,8 +409,55 @@ with tempfile.TemporaryDirectory() as td:
             f"[32] exhausted health_status={report_exhausted.health_status}")
     print("[32] health judgment threshold transitions OK")
 
+    # --- Phase T: adaptive_governance assertions ---
+
+    report_t = ExplorationAnalyticsReport(
+        episode_count=3,
+        attempt_span=12,
+        override_frequency=0.25,
+        avg_episode_length=2.6667,
+        improving_escape_rate=0.20,
+        budget_exhaust_rate=0.70,
+        passive_deactivate_rate=0.10,
+        run_truncated_rate=0.0,
+        health_status="AT_RISK",
+        recommended_adjustments=[
+            "increase_diversity_window",
+            "increase_cooldown",
+            "decrease_override_budget",
+            "lower_base_min_improvement",
+        ],
+    )
+
+    # [33] 候補生成: baseline + single + combined が評価される
+    plan_t = build_adaptive_plan(report_t, current_policy=ExplorationPolicy(), base_min_improvement=0.005)
+    names_t = [c.name for c in plan_t.evaluated_candidates]
+    require("baseline" in names_t, "[33] baseline candidate missing")
+    require("combined::all" in names_t, "[33] combined candidate missing")
+    require(len(names_t) == 6, f"[33] expected 6 candidates got {len(names_t)}")
+    print("[33] adaptive candidate generation OK")
+
+    # [34] deterministic: 同一入力なら同一選定/同一スコア順
+    plan_t2 = build_adaptive_plan(report_t, current_policy=ExplorationPolicy(), base_min_improvement=0.005)
+    require(plan_t.to_dict() == plan_t2.to_dict(), "[34] adaptive plan not deterministic")
+    print("[34] adaptive determinism OK")
+
+    # [35] proposal-only: apply_now は常に False
+    require(plan_t.apply_now is False, "[35] apply_now must be False")
+    print("[35] proposal-only apply_now=False OK")
+
+    # [36] 選定結果: 推奨調整が policy/base_min に反映された候補が選べる
+    sel = plan_t.selected_candidate
+    require(sel.policy.override_budget <= ExplorationPolicy().override_budget,
+            f"[36] override_budget not adjusted: {sel.policy.override_budget}")
+    require(sel.policy.window_size >= ExplorationPolicy().window_size,
+            f"[36] window_size not adjusted: {sel.policy.window_size}")
+    require(sel.base_min_improvement <= 0.005,
+            f"[36] base_min_improvement not adjusted: {sel.base_min_improvement}")
+    print("[36] adaptive selection reflects recommendations OK")
+
 print()
-print("TEST_RESULT: PASS (Phase O + P + Q + R + S)")
+print("TEST_RESULT: PASS (Phase O + P + Q + R + S + T)")
 print(f"default_attempts={len(rows)}, last_stop={rows[-1]['stop_check']}")
 print(f"decisions={decisions}")
 print(f"hash_chain_verified=True, lockdown_threshold={GovernanceEnforcer.LOCKDOWN_THRESHOLD}")
