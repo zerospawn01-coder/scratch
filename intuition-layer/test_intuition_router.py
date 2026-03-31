@@ -47,6 +47,31 @@ class TestCosineSimilarity(unittest.TestCase):
         sim = _cosine_similarity(query, matrix)
         self.assertTrue(np.allclose(sim, 0.0))
 
+    def test_query_shape_1_d(self):
+        """Query shaped (1, d) should give the same result as a 1-D query."""
+        query_1d = np.array([1.0, 2.0, 3.0])
+        query_2d = query_1d.reshape(1, -1)  # (1, 3)
+        matrix = np.array([[1.0, 2.0, 3.0], [0.0, 1.0, 0.0]])
+        sim_1d = _cosine_similarity(query_1d, matrix)
+        sim_2d = _cosine_similarity(query_2d, matrix)
+        self.assertTrue(np.allclose(sim_1d, sim_2d))
+
+    def test_query_shape_d_1(self):
+        """Query shaped (d, 1) should give the same result as a 1-D query."""
+        query_1d = np.array([1.0, 0.0])
+        query_col = query_1d.reshape(-1, 1)  # (2, 1)
+        matrix = np.array([[1.0, 0.0], [-1.0, 0.0]])
+        sim_1d = _cosine_similarity(query_1d, matrix)
+        sim_col = _cosine_similarity(query_col, matrix)
+        self.assertTrue(np.allclose(sim_1d, sim_col))
+
+    def test_matrix_dimension_mismatch_raises(self):
+        """Mismatched query/matrix dimensions should raise ValueError."""
+        query = np.array([1.0, 2.0, 3.0])
+        matrix = np.array([[1.0, 2.0]])  # d=2, not 3
+        with self.assertRaises(ValueError):
+            _cosine_similarity(query, matrix)
+
 
 class TestIntuitionScoreCalculation(unittest.TestCase):
     """Test intuition score components"""

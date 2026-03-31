@@ -4,7 +4,21 @@ from typing import List, Tuple
 
 
 def _cosine_similarity(query: np.ndarray, matrix: np.ndarray) -> np.ndarray:
-    """Compute cosine similarity between a query vector and a matrix of vectors."""
+    """Compute cosine similarity between a query vector and a matrix of vectors.
+
+    ``query`` is flattened to 1-D so embeddings returned as (1, d) or (d, 1)
+    by user-supplied ``embed_fn`` are handled correctly.  ``matrix`` must be
+    2-D with the same feature dimension as ``query``.
+    """
+    query = np.asarray(query, dtype=float).reshape(-1)
+    matrix = np.asarray(matrix, dtype=float)
+    if matrix.ndim != 2:
+        raise ValueError(f"matrix must be 2-D, got shape {matrix.shape}")
+    if matrix.shape[1] != query.shape[0]:
+        raise ValueError(
+            f"Dimension mismatch: query has {query.shape[0]} dims, "
+            f"matrix has {matrix.shape[1]} dims"
+        )
     query_norm = np.linalg.norm(query) + 1e-8
     matrix_norms = np.linalg.norm(matrix, axis=1) + 1e-8
     return matrix @ query / (matrix_norms * query_norm)
