@@ -9,15 +9,23 @@ Active development has been moved to dedicated repositories:
 | Repository | Responsibility |
 |---|---|
 | `cognitive-lab` | Main research — `post_alignment_lab`, `intuition-layer`, `leap_analysis` |
+| `cognitive-substrate` | Topological constitution for AI — constraint verifier, composer, observer |
 | `ea-aol` | Independent contract-first runtime/project |
 | `mtp-weaver` | Kernel, governance, and audit line |
 | `lab-experiments` | Incubation — `jepa_intuition_poc`, `geodesic_descent`, `personal_ai` |
 | `project-manuals` | Operational knowledge, `phase14`, reference UI assets |
 
-Currently, this repository only retains **unassigned remnants**:
+Currently, this repository retains the following **unassigned or unresolved remnants**:
 
-- `autonomous-task-gen/`
-- `data/`
+| Item | Type | Tentative destination |
+|---|---|---|
+| `autonomous-task-gen/` | Directory | TBD |
+| `data/` | Directory | TBD |
+| `hackathon-package/` | TypeScript project (governance tooling) | `mtp-weaver` or `cognitive-substrate` |
+| `project_manuals/` | PowerShell split-scripts, `phase14/`, `docs/` | `project-manuals` |
+| `tools/` | PowerShell repo-split utilities | `project-manuals` |
+| `openai-codex-0.116.0.tgz` | Archived package tarball | Archive or discard |
+| `FINAL_SINCERE_APPROVAL_REPORT.md` | Historical certification document | Archive in `project-manuals` |
 
 ### Temporary Role
 
@@ -37,7 +45,7 @@ general-purpose staging ground, and not a shared tooling repository.
 
 ### End State
 
-Once `autonomous-task-gen/` and `data/` are relocated or formally assigned,
+Once all remnants listed above are relocated, formally assigned, or explicitly archived,
 this repository will be **archived as read-only**.
 
 ## References
