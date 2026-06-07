@@ -1,56 +1,55 @@
-# Antigravity Scratch (Legacy Root)
+# Antigravity Scratch (Legacy Staging Area)
 
-This repository root is no longer the active home of the split Antigravity
-projects. It should be treated as a legacy staging area while the remaining
-deferred items are resolved.
+## Repository Status
 
-The authoritative source for active work is now the `main` branch of each
-destination repository. `scratch` should not be treated as the canonical place
-to resume or merge independent lines of work.
+This repository is a **legacy staging area in wind-down phase**.
 
-## Active Repositories
+Active development has been moved to dedicated repositories:
 
-- `cognitive-lab`
-  - Main research repo
-  - Owns `post_alignment_lab`, `intuition-layer`, and `leap_analysis`
-- `ea-aol`
-  - Independent contract-first runtime/project
-- `mtp-weaver`
-  - Independent kernel, governance, and audit line
-- `lab-experiments`
-  - Incubation repo for `jepa_intuition_poc`, `geodesic_descent`, and `personal_ai`
-- `project-manuals`
-  - Operational knowledge, split handoff material, `phase14`, and reference UI assets
+| Repository | Responsibility |
+|---|---|
+| `cognitive-lab` | Main research — `post_alignment_lab`, `intuition-layer`, `leap_analysis` |
+| `cognitive-substrate` | Topological constitution for AI — constraint verifier, composer, observer |
+| `ea-aol` | Independent contract-first runtime/project |
+| `mtp-weaver` | Kernel, governance, and audit line |
+| `lab-experiments` | Incubation — `jepa_intuition_poc`, `geodesic_descent`, `personal_ai` |
+| `project-manuals` | Operational knowledge, `phase14`, reference UI assets |
 
-## What Still Belongs Here
+Currently, this repository retains the following **unassigned or unresolved remnants**:
 
-Only unresolved leftovers that have not yet been assigned a final destination:
+| Item | Type | Tentative destination |
+|---|---|---|
+| `autonomous-task-gen/` | Directory | TBD |
+| `data/` | Directory | TBD |
+| `hackathon-package/` | TypeScript project (governance tooling) | `mtp-weaver` or `cognitive-substrate` |
+| `project_manuals/` | PowerShell split-scripts, `phase14/`, `docs/` | `project-manuals` |
+| `tools/` | PowerShell repo-split utilities | `project-manuals` |
+| `openai-codex-0.116.0.tgz` | Archived package tarball | Archive or discard |
+| `FINAL_SINCERE_APPROVAL_REPORT.md` | Historical certification document | Archive in `project-manuals` |
 
-- `autonomous-task-gen/`
-- `data/`
-- temporary local-only material that should not be promoted into a destination repo
+### Temporary Role
 
-## What Does Not Belong Here
+Until final destinations are determined for the assets above, this repository
+serves only as a **bounded holding area**. It is not a sandbox, not a
+general-purpose staging ground, and not a shared tooling repository.
 
-Do not add new work here if it can be explained as any of the following:
+### Rules
 
-- active research logic
-- independent runtime/project code
-- experiment incubation
-- operational knowledge or reference UI
+- Do not add new long-term projects here.
+- Do not use this repository as a general sandbox for active development.
+- Any retained content must have a migration destination or archival rationale.
+- Do not reabsorb work that already belongs to a destination repository:
+  - `ea-aol` contract/runtime work
+  - `mtp-weaver` kernel/governance/audit work
+  - `project-manuals` runbooks, operational assets, or reference UI
 
-Add it directly to the owning destination repo instead.
+### End State
 
-In particular, do not reabsorb:
+Once all remnants listed above are relocated, formally assigned, or explicitly archived,
+this repository will be **archived as read-only**.
 
-- `ea-aol` contract/runtime work
-- `mtp-weaver` kernel/governance/audit work
-- `project-manuals` runbooks, operational assets, or reference UI
+## References
 
-## Next References
-
-- `project-manuals` repository:
-  - https://github.com/zerospawn01-coder/project-manuals
-- Scratch migration handoff PR:
-  - https://github.com/zerospawn01-coder/project-manuals/pull/2
+- `project-manuals` repository: https://github.com/zerospawn01-coder/project-manuals
+- Scratch migration handoff PR: https://github.com/zerospawn01-coder/project-manuals/pull/2
 
