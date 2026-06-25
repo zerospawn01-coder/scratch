@@ -39,6 +39,8 @@ func _run() -> void:
 	var contam_inc: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/ContamInc") as Button
 	var warnings_label: Label = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/WarningsLabel") as Label
 	var undo_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow/UndoBtn") as Button
+	var comp_label: Label = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompLabel") as Label
+	var comp_inc: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompInc") as Button
 	
 	var add_white_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddWhiteBtn") as Button
 	var form_panel: PanelContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel") as PanelContainer
@@ -197,6 +199,45 @@ func _run() -> void:
 		print("SEARCH %s => %s" % [term, search_count.text])
 		_assert(search_count.text.ends_with("件ヒット"), "Episode 3 search should complete for %s." % term)
 		_assert(not search_count.text.begins_with("0 "), "Episode 3 should contain %s." % term)
+
+	# 6.6. Scenario EP2 Selector and Clock Label Tests
+	var ep2_index := -1
+	for index in range(doc_selector.item_count):
+		if doc_selector.get_item_text(index) == "シナリオ EP2":
+			ep2_index = index
+			break
+	_assert(ep2_index >= 0, "Doc selector should include Scenario EP2.")
+
+	doc_selector.select(ep2_index)
+	doc_selector.item_selected.emit(ep2_index)
+	await process_frame
+	_assert(doc_title.text == "シナリオ EP2", "Doc selector should switch to Scenario EP2.")
+	_assert(toc_list.get_child_count() > 0, "TOC should update for Episode 2.")
+	_assert(comp_label.text == "検証委員会", "Complicity clock label should become 検証委員会 for Episode 2.")
+
+	var comp_desc_label: Label = app.get("_comp_desc_label") as Label
+	_assert(comp_desc_label != null, "Complicity status description label should exist.")
+	if comp_desc_label != null:
+		_assert(comp_desc_label.visible, "Episode 2 should show the committee progress description.")
+		_assert(comp_desc_label.text.contains("未招集"), "Episode 2 clock stage should start at 未招集.")
+		comp_inc.pressed.emit()
+		await process_frame
+		_assert(comp_desc_label.text.contains("資料提出依頼"), "Episode 2 clock stage should advance with the committee clock.")
+
+	var ep2_terms: Array[String] = [
+		"診断書",
+		"検証委員会",
+		"既往症",
+		"瀬尾アキラ",
+		"真田リョウ",
+	]
+	for term in ep2_terms:
+		search_input.text = term
+		search_input.text_changed.emit(term)
+		await create_timer(0.1).timeout
+		print("SEARCH %s => %s" % [term, search_count.text])
+		_assert(search_count.text.ends_with("件ヒット"), "Episode 2 search should complete for %s." % term)
+		_assert(not search_count.text.begins_with("0 "), "Episode 2 should contain %s." % term)
 
 	# 7. TOC Toggle Tests
 	var initial_toc_visibility := toc_panel.visible

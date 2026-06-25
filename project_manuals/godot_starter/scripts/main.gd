@@ -75,7 +75,7 @@ const CURRENT_HIGHLIGHT_BG := Color(1.0, 0.46, 0.16)
 const HIGHLIGHT_FG := Color(0.06, 0.06, 0.06)
 const MOBILE_WIDTH := 1024.0
 const COMPACT_TOC_WIDTH := 1100.0
-const BRACKETS_TO_IGNORE := "[]【】"
+const SEARCH_CHARS_TO_IGNORE := "[]【】 \t　"
 
 @onready var _doc_title: Label = $Root/Columns/ContentPanel/ContentMargin/ContentRows/DocTitle
 @onready var _document_body: RichTextLabel = $Root/Columns/ContentPanel/ContentMargin/ContentRows/DocumentBody
@@ -429,7 +429,7 @@ func _normalize_line_with_map(line: String) -> Dictionary:
 
 	for index in range(line.length()):
 		var character := line.substr(index, 1)
-		if BRACKETS_TO_IGNORE.contains(character):
+		if SEARCH_CHARS_TO_IGNORE.contains(character):
 			continue
 		normalized += character.to_lower()
 		starts.append(index)
@@ -446,7 +446,7 @@ func _normalize_query(query: String) -> String:
 	var normalized := ""
 	for index in range(query.length()):
 		var character := query.substr(index, 1)
-		if BRACKETS_TO_IGNORE.contains(character):
+		if SEARCH_CHARS_TO_IGNORE.contains(character):
 			continue
 		normalized += character.to_lower()
 	return normalized.strip_edges()
