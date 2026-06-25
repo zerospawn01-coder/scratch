@@ -16,3 +16,6 @@ exports/
 .DS_Store
 Thumbs.db
 *.tmp
+
+# Visual verification captures
+visual_check_*.png
