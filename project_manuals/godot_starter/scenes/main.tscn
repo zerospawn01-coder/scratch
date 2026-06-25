@@ -1,0 +1,467 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0epugikm41tv"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.085, 0.095, 1)
+
+[node name="Root" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Columns" type="HBoxContainer" parent="Root"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Sidebar" type="VBoxContainer" parent="Root/Columns"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AppTitle" type="Label" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "CRISIS ACTOR"
+
+[node name="Edition" type="Label" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "v0.2.1 P0 Test Edition"
+
+[node name="Spacer" type="HSeparator" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+
+[node name="RulebookButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "ルールブック"
+
+[node name="CharactersButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "キャラクター"
+
+[node name="ScenarioButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "シナリオ EP1"
+
+[node name="ScenarioEp3Button" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "シナリオ EP3"
+
+[node name="WalkthroughButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "ウォークスルー"
+
+[node name="PlanButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "実装計画"
+
+[node name="TaskButton" type="Button" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+text = "タスク"
+
+[node name="Footer" type="Label" parent="Root/Columns/Sidebar"]
+layout_mode = 2
+size_flags_vertical = 10
+vertical_alignment = 2
+autowrap_mode = 3
+text = "P0テスト用の資料ビューアです。本文は docs/crisis_actor から読み込まれます。"
+
+[node name="OpsPanel" type="PanelContainer" parent="Root/Columns"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+
+[node name="OpsMargin" type="MarginContainer" parent="Root/Columns/OpsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="OpsRows" type="VBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="OpsTitle" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SESSION OPERATOR"
+
+[node name="PhaseRow" type="HBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PhaseLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+text = "フェーズ: "
+
+[node name="Phase1Btn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "1"
+
+[node name="Phase2Btn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+toggle_mode = true
+text = "2"
+
+[node name="Phase3Btn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+toggle_mode = true
+text = "3"
+
+[node name="Phase4Btn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+toggle_mode = true
+text = "4"
+
+[node name="Phase5Btn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+toggle_mode = true
+text = "5"
+
+[node name="UndoBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/PhaseRow"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Undo"
+
+[node name="Spacer" type="HSeparator" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+
+[node name="ClocksTitle" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "セッションクロック (0〜6)"
+
+[node name="ClocksGrid" type="GridContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_constants/horizontal_separation = 12
+theme_override_constants/vertical_separation = 6
+columns = 4
+
+[node name="CredLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "信憑性"
+
+[node name="CredDec" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " - "
+
+[node name="CredVal" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="CredInc" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " + "
+
+[node name="ContamLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "現実混入"
+
+[node name="ContamDec" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " - "
+
+[node name="ContamVal" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+
+[node name="ContamInc" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " + "
+
+[node name="DebtLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "監査負債"
+
+[node name="DebtDec" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " - "
+
+[node name="DebtVal" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="DebtInc" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " + "
+
+[node name="CompLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "共犯"
+
+[node name="CompDec" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " - "
+
+[node name="CompVal" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="CompInc" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " + "
+
+[node name="WearLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "機材劣化"
+
+[node name="WearDec" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " - "
+
+[node name="WearVal" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="WearInc" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid"]
+layout_mode = 2
+text = " + "
+
+[node name="WarningsLabel" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 3
+
+[node name="Spacer2" type="HSeparator" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+
+[node name="CardsHeaderRow" type="HBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+
+[node name="CardsTitle" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardsHeaderRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "カード操作"
+
+[node name="CardAddFlow" type="HFlowContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+
+[node name="AddWhiteBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow"]
+layout_mode = 2
+text = "+白ログ"
+
+[node name="AddGrayBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow"]
+layout_mode = 2
+text = "+灰矛盾"
+
+[node name="AddBlackBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow"]
+layout_mode = 2
+text = "+黒真実"
+
+[node name="AddRoughBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow"]
+layout_mode = 2
+text = "+粗演出"
+
+[node name="CardFormPanel" type="PanelContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+visible = false
+layout_mode = 2
+
+[node name="FormMargin" type="MarginContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FormRows" type="VBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="FormTitle" type="Label" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "白カード追加"
+
+[node name="InputTitle" type="LineEdit" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+placeholder_text = "題名 / タイトル"
+
+[node name="InputFact" type="LineEdit" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+placeholder_text = "内容 / 事実 / 矛盾点"
+
+[node name="InputCost" type="LineEdit" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+placeholder_text = "隠された代償 / 物証"
+
+[node name="InputConstraint" type="LineEdit" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+placeholder_text = "次回への檻 / 無力化対象"
+
+[node name="InputOwner" type="LineEdit" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+placeholder_text = "担当PC / 責任者"
+
+[node name="FormButtons" type="HBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows"]
+layout_mode = 2
+alignment = 2
+
+[node name="FormCancelBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/FormButtons"]
+layout_mode = 2
+text = "キャンセル"
+
+[node name="FormSubmitBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/FormButtons"]
+layout_mode = 2
+text = "作成"
+
+[node name="CardScroll" type="ScrollContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CardList" type="VBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/CardScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="SaveLoadRow" type="HBoxContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SaveBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/SaveLoadRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "セッション保存"
+
+[node name="LoadBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows/SaveLoadRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "セッション読込"
+
+[node name="ExportBtn" type="Button" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+layout_mode = 2
+text = "Markdownログ出力"
+
+[node name="ContentPanel" type="PanelContainer" parent="Root/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ContentMargin" type="MarginContainer" parent="Root/Columns/ContentPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
+
+[node name="ContentRows" type="VBoxContainer" parent="Root/Columns/ContentPanel/ContentMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SearchContainer" type="HBoxContainer" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DocSelector" type="OptionButton" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+visible = false
+layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
+
+[node name="SearchInput" type="LineEdit" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "キーワードを検索..."
+clear_button_enabled = true
+
+[node name="PrevButton" type="Button" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+layout_mode = 2
+text = "◀"
+
+[node name="NextButton" type="Button" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+layout_mode = 2
+text = "▶"
+
+[node name="SearchCount" type="Label" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+layout_mode = 2
+text = "全文表示"
+
+[node name="TOCToggleButton" type="Button" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows/SearchContainer"]
+layout_mode = 2
+text = "目次を表示"
+
+[node name="DocTitle" type="Label" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Document"
+
+[node name="QuickSearchLabel" type="Label" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "クイック検索"
+
+[node name="QuickSearchRow" type="HFlowContainer" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="DocumentBody" type="RichTextLabel" parent="Root/Columns/ContentPanel/ContentMargin/ContentRows"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = false
+context_menu_enabled = true
+selection_enabled = true
+scroll_active = true
+autowrap_mode = 3
+
+[node name="TOCPanel" type="PanelContainer" parent="Root/Columns"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="TOCMargin" type="MarginContainer" parent="Root/Columns/TOCPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 16
+
+[node name="TOCRows" type="VBoxContainer" parent="Root/Columns/TOCPanel/TOCMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TOCTitle" type="Label" parent="Root/Columns/TOCPanel/TOCMargin/TOCRows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "目次"
+
+[node name="TOCScroll" type="ScrollContainer" parent="Root/Columns/TOCPanel/TOCMargin/TOCRows"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TOCList" type="VBoxContainer" parent="Root/Columns/TOCPanel/TOCMargin/TOCRows/TOCScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6

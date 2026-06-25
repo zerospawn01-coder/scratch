@@ -1,0 +1,18 @@
+# Godot local/editor cache
+.godot/
+
+# Imported resource cache from older Godot versions
+.import/
+
+# Export secrets and local export config
+export.cfg
+export_credentials.cfg
+
+# Build outputs
+builds/
+exports/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.tmp
