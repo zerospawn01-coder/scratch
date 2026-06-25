@@ -76,6 +76,8 @@ const QUICK_SEARCH_TERMS: Array[String] = [
 	"最終報告書",
 	"広報庁",
 	"要約版",
+	"未処理負債",
+	"構造負債",
 ]
 
 const BODY_COLOR := Color(0.92, 0.93, 0.95)
@@ -157,6 +159,7 @@ var _toc_user_visible := true
 var _render_generation := 0
 var _comp_desc_label: Label
 var _guidelines_text: RichTextLabel
+var _unprocessed_debt_val: Label
 
 
 func _ready() -> void:
@@ -621,6 +624,9 @@ func _on_state_changed() -> void:
 	_debt_val.text = str(state.audit_debt)
 	_comp_val.text = str(state.complicity_clock)
 	_wear_val.text = str(state.equipment_wear)
+	
+	if _unprocessed_debt_val:
+		_unprocessed_debt_val.text = str(state.unprocessed_debt)
 
 	if _comp_desc_label:
 		var doc_title: String = DOCUMENTS[_current_doc_index]["title"]
@@ -973,6 +979,28 @@ func _setup_tabletop_p1_features() -> void:
 	var ops_rows := _ops_panel.get_node("OpsMargin/OpsRows") as VBoxContainer
 	if not ops_rows:
 		return
+
+	# Add Unprocessed Debt to the ClocksGrid dynamically
+	var clocks_grid := $Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid as GridContainer
+	if clocks_grid:
+		var lbl := Label.new()
+		lbl.text = "未処理負債"
+		clocks_grid.add_child(lbl)
+		
+		var dec_btn := Button.new()
+		dec_btn.text = " - "
+		dec_btn.pressed.connect(_adjust_clock.bind("unprocessed_debt", -1))
+		clocks_grid.add_child(dec_btn)
+		
+		_unprocessed_debt_val = Label.new()
+		_unprocessed_debt_val.text = str(state.unprocessed_debt)
+		_unprocessed_debt_val.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		clocks_grid.add_child(_unprocessed_debt_val)
+		
+		var inc_btn := Button.new()
+		inc_btn.text = " + "
+		inc_btn.pressed.connect(_adjust_clock.bind("unprocessed_debt", 1))
+		clocks_grid.add_child(inc_btn)
 
 	# Separator
 	var sep := HSeparator.new()

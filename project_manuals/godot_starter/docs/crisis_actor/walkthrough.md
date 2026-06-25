@@ -93,3 +93,25 @@ The Godot-based **CRISIS ACTOR VTT Minimal** tool has been successfully updated 
     - 実機での動作確認中、クロック、進捗ラベル、警告文、表現調整ガイドラインパネルが動的に追加された際、縦方向のスペースが圧縮されてカードリスト用スクロール領域（`CardScroll`）が縦幅0に潰れてしまい、追加したカードが表示されなくなる重大な不具合を発見。
     - `main.tscn` において、`CardScroll` に `custom_minimum_size = Vector2(0, 150)` を追加指定しました。これにより、縦方向の領域が圧迫された状態でもカードリストが最小限の高さ（150px）を常に保証し、カードが正しく画面にスクロール表示されるようになりました。
 
+---
+
+## 8. P0ルールカーネルと「未処理負債」カウンターの実装
+*   **ルールブックの改定**: [crisis_actor_rulebook.md](crisis_actor_rulebook.md)
+    - 冒頭に実在の事件や陰謀論との混同を防ぐための **トーン管理文（安全線）** を追加。
+    - セッション終了条件と **3軸評価（Public / Audit / Human Outcomes）** によるマルチエンディング評価システムを明文化。
+    - 嘘や妥協の代償を表すGM用隠しパラメータ **「未処理負債 (Structural Debt)」** の増減ルールと、圧力帯域（安定 / 圧力 / 破綻前 / 破綻 / 強制クライマックス）ごとの環境変化を定義。
+    - **1D6 異常混入イベント表**、カードの公開範囲、倫理監査役（オーディター）の機械的権限（*Witness Claim*, *Black Seal*, *Objection Round*）、黒塗り合議ルールと5分停滞時の解決手順、次回セッションへのパラメータおよびカード持ち越しルールを追記。
+*   **VTTデータモデルの強化**: [session_state.gd](../../scripts/session_state.gd)
+    - `unprocessed_debt`（未処理負債）パラメータ（0〜10）を実装。
+    - undo/redo 履歴、JSONセーブ／ロード、Markdownエクスポート機能に `unprocessed_debt` のシリアライズを追加。
+    - `get_warnings()` を拡張し、未処理負債の圧力帯域（3以上）に応じて動的警告テキストを自動出力するシステムを実装。
+*   **VTT UIへの統合**: [main.gd](../../scripts/main.gd)
+    - 操作パネル (`OpsPanel`) の `ClocksGrid` 内に、未処理負債用のコントロール（ラベル、増減ボタン、値表示）を起動時に動的生成・追加。
+    - 値の変更に連動してセッション状態と同期し、警告テキストがリアルタイムで更新されるように接続。
+    - クイック検索ワードに `"未処理負債"`, `"構造負債"` を追加。
+*   **スモークテストでの検証保証**: [viewer_smoke_test.gd](../../tests/viewer_smoke_test.gd)
+    - 未処理負債カウンターの増減および undo/redo、警告閾値の到達による警告テキストの切り替え、Markdownエクスポートでの出力をカバーするテストアサーションを追加し、`VIEWER_SMOKE_PASS` を達成しました。
+*   **実機スクリーンショットでの確認**:
+    - [visual_check_04_ep4_clock_max.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_04_ep4_clock_max.png) において、「未処理負債」が 3 の時に `⚠️【未処理負債: 圧力】` の警告文が正常に赤字で描画されている様子を確認できます。
+
+

@@ -42,6 +42,12 @@ func _run() -> void:
 	var comp_label: Label = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompLabel") as Label
 	var comp_inc: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompInc") as Button
 	
+	var clocks_grid: GridContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid") as GridContainer
+	var child_count := clocks_grid.get_child_count()
+	var unproc_val := clocks_grid.get_child(child_count - 2) as Label
+	var unproc_dec := clocks_grid.get_child(child_count - 3) as Button
+	var unproc_inc := clocks_grid.get_child(child_count - 1) as Button
+	
 	var add_white_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddWhiteBtn") as Button
 	var form_panel: PanelContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel") as PanelContainer
 	var input_title: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputTitle") as LineEdit
@@ -96,8 +102,34 @@ func _run() -> void:
 	await process_frame
 	_assert(cred_val.text.to_int() == initial_cred, "Undo should restore credibility to original value.")
 
+	# Unprocessed Debt Increment/Decrement Tests
+	var initial_unproc = unproc_val.text.to_int()
+	_assert(initial_unproc == 0, "Unprocessed debt should start at 0.")
+	unproc_inc.pressed.emit()
+	await process_frame
+	_assert(unproc_val.text.to_int() == 1, "Unprocessed debt should increment via UI button.")
+
+	unproc_dec.pressed.emit()
+	await process_frame
+	_assert(unproc_val.text.to_int() == 0, "Unprocessed debt should decrement via UI button.")
+
 	# 4. Warnings Threshold Test
 	_assert(warnings_label.text == "", "Warnings should be empty initially.")
+
+	# Test Unprocessed Debt warnings trigger (3 -> Pressure warning)
+	unproc_inc.pressed.emit() # 1
+	unproc_inc.pressed.emit() # 2
+	unproc_inc.pressed.emit() # 3
+	await process_frame
+	_assert(warnings_label.text.contains("未処理負債: 圧力"), "Warnings should trigger Pressure alert when unprocessed debt >= 3.")
+
+	# Reset debt for contamination warning test
+	unproc_dec.pressed.emit()
+	unproc_dec.pressed.emit()
+	unproc_dec.pressed.emit()
+	await process_frame
+	_assert(warnings_label.text == "", "Warnings should be empty after resetting debt.")
+
 	for k in range(5):
 		contam_inc.pressed.emit()
 		await process_frame
@@ -171,6 +203,7 @@ func _run() -> void:
 		_assert(md_content.contains("# CRISIS ACTOR - セッション記録"), "Markdown should have the correct title.")
 		_assert(md_content.contains("Test White Card"), "Markdown should contain card title.")
 		_assert(md_content.contains("Test Official Fact Description"), "Markdown should contain card content.")
+		_assert(md_content.contains("未処理負債"), "Markdown should contain unprocessed debt parameter.")
 
 	await create_timer(2.1).timeout
 

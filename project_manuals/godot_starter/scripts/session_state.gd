@@ -45,6 +45,13 @@ var current_phase: int = 1:
 		current_phase = clamp(val, 1, 5)
 		state_changed.emit()
 
+var unprocessed_debt: int = 0:
+	set(val):
+		if not _is_undoing:
+			_save_history()
+		unprocessed_debt = clamp(val, 0, 10)
+		state_changed.emit()
+
 var white_cards: Array[Dictionary] = []
 var gray_cards: Array[Dictionary] = []
 var black_cards: Array[Dictionary] = []
@@ -61,6 +68,7 @@ func _save_history() -> void:
 		"complicity_clock": complicity_clock,
 		"equipment_wear": equipment_wear,
 		"current_phase": current_phase,
+		"unprocessed_debt": unprocessed_debt,
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
@@ -84,6 +92,7 @@ func undo() -> bool:
 	complicity_clock = snapshot["complicity_clock"]
 	equipment_wear = snapshot["equipment_wear"]
 	current_phase = snapshot["current_phase"]
+	unprocessed_debt = snapshot["unprocessed_debt"]
 	white_cards = snapshot["white_cards"]
 	gray_cards = snapshot["gray_cards"]
 	black_cards = snapshot["black_cards"]
@@ -163,6 +172,16 @@ func get_warnings() -> Array[String]:
 		warnings.append("⚠️ 【機材劣化警告】特効機材の限界です！次のアクションで強制発火（現実混入率+1、または粗い演出の灰カード化）が起きます。")
 	if credibility <= 0:
 		warnings.append("🚨 【信憑性崩壊】演出の信憑性が完全に失われました！アルコン・シミュレーションズは社会的抹殺（即時敗北）を迎えます。")
+	
+	if unprocessed_debt >= 3 and unprocessed_debt <= 4:
+		warnings.append("⚠️ 【未処理負債: 圧力】現場が軋み始めています。フェーズ終了時に必ず「ノイズ」が1件発生します。")
+	elif unprocessed_debt >= 5 and unprocessed_debt <= 6:
+		warnings.append("⚠️ 【未処理負債: 破綻前】演出に明らかな異常。異常混入イベント表から1件発生させます！")
+	elif unprocessed_debt >= 7 and unprocessed_debt <= 8:
+		warnings.append("🚨 【未処理負債: 破綻】制御不能寸前。場にある灰カード1枚が強制的に「腐爛+1」されます！")
+	elif unprocessed_debt >= 9:
+		warnings.append("🚨 【未処理負債: 強制クライマックス】防壁崩壊！即座に黒カード露出か現実混入が表面化し、最終解決へ移行します。")
+		
 	return warnings
 
 func export_to_markdown() -> String:
@@ -174,7 +193,8 @@ func export_to_markdown() -> String:
 	md += "- **現実混入率**: %d/6\n" % reality_contamination
 	md += "- **監査負債**: %d/6\n" % audit_debt
 	md += "- **共犯クロック**: %d/6\n" % complicity_clock
-	md += "- **機材劣化**: %d/6\n\n" % equipment_wear
+	md += "- **機材劣化**: %d/6\n" % equipment_wear
+	md += "- **未処理負債**: %d/10\n\n" % unprocessed_debt
 	
 	md += "## ■ 固定された白カード（公式ログ） [%d]\n" % white_cards.size()
 	for i in range(white_cards.size()):
@@ -219,6 +239,7 @@ func to_dict() -> Dictionary:
 		"complicity_clock": complicity_clock,
 		"equipment_wear": equipment_wear,
 		"current_phase": current_phase,
+		"unprocessed_debt": unprocessed_debt,
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
@@ -234,6 +255,7 @@ func from_dict(dict: Dictionary) -> void:
 	if dict.has("complicity_clock"): complicity_clock = int(dict["complicity_clock"])
 	if dict.has("equipment_wear"): equipment_wear = int(dict["equipment_wear"])
 	if dict.has("current_phase"): current_phase = int(dict["current_phase"])
+	if dict.has("unprocessed_debt"): unprocessed_debt = int(dict["unprocessed_debt"])
 	
 	if dict.has("white_cards"):
 		white_cards.clear()

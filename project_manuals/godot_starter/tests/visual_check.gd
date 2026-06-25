@@ -88,6 +88,15 @@ func _run() -> void:
 		for k in range(5):
 			comp_inc.pressed.emit()
 			await process_frame
+		
+		# Increment unprocessed debt to 3 to trigger warning
+		var clocks_grid: GridContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid") as GridContainer
+		var c_count := clocks_grid.get_child_count()
+		var unproc_inc := clocks_grid.get_child(c_count - 1) as Button
+		unproc_inc.pressed.emit()
+		unproc_inc.pressed.emit()
+		unproc_inc.pressed.emit()
+		await process_frame
 		await process_frame
 		
 		await _capture("visual_check_04_ep4_clock_max.png")
