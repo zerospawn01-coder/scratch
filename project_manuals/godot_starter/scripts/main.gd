@@ -29,6 +29,11 @@ const DOCUMENTS: Array[Dictionary] = [
 		"button": "ScenarioEp3Button",
 	},
 	{
+		"title": "シナリオ EP4",
+		"path": "res://docs/crisis_actor/crisis_actor_scenario_ep4.md",
+		"button": "ScenarioEp4Button", # Note: not in sidebar layout but accessible via doc selector
+	},
+	{
 		"title": "ウォークスルー",
 		"path": "res://docs/crisis_actor/walkthrough.md",
 		"button": "WalkthroughButton",
@@ -66,6 +71,11 @@ const QUICK_SEARCH_TERMS: Array[String] = [
 	"既往症",
 	"瀬尾アキラ",
 	"真田リョウ",
+	"公開区分",
+	"開示クロック",
+	"最終報告書",
+	"広報庁",
+	"要約版",
 ]
 
 const BODY_COLOR := Color(0.92, 0.93, 0.95)
@@ -146,6 +156,7 @@ var _phase_buttons: Array[Button] = []
 var _toc_user_visible := true
 var _render_generation := 0
 var _comp_desc_label: Label
+var _guidelines_text: RichTextLabel
 
 
 func _ready() -> void:
@@ -231,8 +242,67 @@ func _show_document(index: int) -> void:
 			comp_label.text = "検証委員会"
 		elif document["title"] == "シナリオ EP3":
 			comp_label.text = "文化財処理"
+		elif document["title"] == "シナリオ EP4":
+			comp_label.text = "公開審査"
 		else:
 			comp_label.text = "共犯"
+
+	# Dynamic guidelines adaptation
+	if _guidelines_text:
+		var doc_title: String = document["title"]
+		if doc_title == "シナリオ EP2":
+			_guidelines_text.text = (
+				"[b][color=#ffd700]表現調整ガイドライン (EP2)[/color][/b]\n" +
+				"[color=#a0a0a0]禁止語 ➔ 推奨代替語[/color]\n" +
+				"・[color=#ff6b6b]災害[/color] ➔ 一過性現象 / 訓練環境影響\n" +
+				"・[color=#ff6b6b]人災[/color] ➔ 歴史的経緯 / 偶発的要因\n" +
+				"・[color=#ff6b6b]避難[/color] ➔ 移動の訓練\n" +
+				"・[color=#ff6b6b]避難不徹底[/color] ➔ 心理的反応\n" +
+				"・[color=#ff6b6b]補償[/color] ➔ お見舞い金 / 生活再建等配慮金\n" +
+				"・[color=#ff6b6b]抹消[/color] ➔ 記載漏れ / 処理未了\n" +
+				"・[color=#ff6b6b]隠蔽[/color] ➔ 表現管理\n" +
+				"・[color=#ff6b6b]責任[/color] ➔ 因果関係の確認未済\n" +
+				"・[color=#ff6b6b]実験[/color] ➔ 技術的デモンストレーション\n" +
+				"・[color=#ff6b6b]呼吸器障害[/color] ➔ 一過性過呼吸\n" +
+				"・[color=#ff6b6b]告発[/color] ➔ 問題提起\n" +
+				"・[color=#ff6b6b]有害ガス[/color] ➔ 演出用無害ガス"
+			)
+		elif doc_title == "シナリオ EP4":
+			_guidelines_text.text = (
+				"[b][color=#ffd700]表現調整ガイドライン (EP4)[/color][/b]\n" +
+				"[color=#a0a0a0]禁止語 ➔ 推奨代替語[/color]\n" +
+				"・[color=#ff6b6b]災害[/color] ➔ 一過性現象 / 訓練環境影響\n" +
+				"・[color=#ff6b6b]人災[/color] ➔ 歴史的経緯\n" +
+				"・[color=#ff6b6b]避難[/color] ➔ 移動の伝承 / 訓練\n" +
+				"・[color=#ff6b6b]避難経路[/color] ➔ 祈りの道筋\n" +
+				"・[color=#ff6b6b]補償[/color] ➔ 生活再建支援 / お見舞い金\n" +
+				"・[color=#ff6b6b]抹消[/color] ➔ 記録不備 / 記載漏れ\n" +
+				"・[color=#ff6b6b]隠蔽[/color] ➔ 表現調整 / 表現管理\n" +
+				"・[color=#ff6b6b]責任[/color] ➔ 関係性 / 因果関係未確認\n" +
+				"・[color=#ff6b6b]実験[/color] ➔ 誘導検証 / デモンストレーション\n" +
+				"・[color=#ff6b6b]失踪者[/color] ➔ 帳外対象者\n" +
+				"・[color=#ff6b6b]死者[/color] ➔ 先人\n" +
+				"・[color=#ff6b6b]虚偽[/color] ➔ 記録齟齬\n" +
+				"・[color=#ff6b6b]告発[/color] ➔ 問題提起\n" +
+				"・[color=#ff6b6b]加害[/color] ➔ 影響\n" +
+				"・[color=#ff6b6b]口封じ[/color] ➔ 地域配慮"
+			)
+		else:
+			# Default (EP3)
+			_guidelines_text.text = (
+				"[b][color=#ffd700]表現調整ガイドライン (EP3)[/color][/b]\n" +
+				"[color=#a0a0a0]禁止語 ➔ 推奨代替語[/color]\n" +
+				"・[color=#ff6b6b]災害[/color] ➔ 地域記憶\n" +
+				"・[color=#ff6b6b]人災[/color] ➔ 歴史的経緯\n" +
+				"・[color=#ff6b6b]避難経路[/color] ➔ 祈りの道筋\n" +
+				"・[color=#ff6b6b]補償[/color] ➔ 生活再建支援\n" +
+				"・[color=#ff6b6b]抹消[/color] ➔ 記録不備\n" +
+				"・[color=#ff6b6b]隠蔽[/color] ➔ 表現調整\n" +
+				"・[color=#ff6b6b]責任[/color] ➔ 関係性\n" +
+				"・[color=#ff6b6b]実験[/color] ➔ 誘導検証\n" +
+				"・[color=#ff6b6b]失踪者[/color] ➔ 帳外対象者\n" +
+				"・[color=#ff6b6b]告発[/color] ➔ 問題提起"
+			)
 
 	_search_input.clear()
 	_current_match_index = -1
@@ -576,6 +646,19 @@ func _on_state_changed() -> void:
 				"個人名削除",
 				"解説文確定",
 				"文化財化完了"
+			]
+			var idx := clampi(state.complicity_clock, 0, 6)
+			_comp_desc_label.text = "進捗: %s" % stages[idx]
+			_comp_desc_label.visible = true
+		elif doc_title == "シナリオ EP4":
+			var stages := [
+				"内部参照のみ",
+				"照会申請",
+				"部分開示審査",
+				"利害関係者通知",
+				"公開範囲削減",
+				"要約版作成",
+				"要約版のみ公開"
 			]
 			var idx := clampi(state.complicity_clock, 0, 6)
 			_comp_desc_label.text = "進捗: %s" % stages[idx]
@@ -932,10 +1015,10 @@ func _setup_tabletop_p1_features() -> void:
 	style_box.content_margin_bottom = 8
 	guidelines_panel.add_theme_stylebox_override("panel", style_box)
 	
-	var guidelines_text := RichTextLabel.new()
-	guidelines_text.bbcode_enabled = true
-	guidelines_text.fit_content = true
-	guidelines_text.text = (
+	_guidelines_text = RichTextLabel.new()
+	_guidelines_text.bbcode_enabled = true
+	_guidelines_text.fit_content = true
+	_guidelines_text.text = (
 		"[b][color=#ffd700]表現調整ガイドライン[/color][/b]\n" +
 		"[color=#a0a0a0]禁止語 ➔ 推奨代替語[/color]\n" +
 		"・[color=#ff6b6b]災害[/color] ➔ 地域記憶\n" +
@@ -950,7 +1033,7 @@ func _setup_tabletop_p1_features() -> void:
 		"・[color=#ff6b6b]告発[/color] ➔ 問題提起"
 	)
 	
-	guidelines_panel.add_child(guidelines_text)
+	guidelines_panel.add_child(_guidelines_text)
 	ops_rows.add_child(guidelines_panel)
 
 	guidelines_btn.toggled.connect(func(button_pressed: bool):
