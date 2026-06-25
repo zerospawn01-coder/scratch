@@ -38,3 +38,34 @@ The Godot-based **CRISIS ACTOR VTT Minimal** tool has been successfully updated 
       - Sets state and creates a test card, then triggers Save to verify `user://session_log.json` is successfully created.
       - Mutates credibility and clears cards, then triggers Load to verify the exact state is restored.
       - Triggers Export to verify `user://session_log.md` is created with correct contents (title, test card title, and description).
+
+---
+
+## 4. Episode 2: "診断書のない負傷者" (公開前検証委員会) Integration
+*   **Scenario File**: [crisis_actor_scenario_ep2.md](crisis_actor_scenario_ep2.md)
+*   **Details**:
+    - **検証プロセスのホラー化**: 傷が存在していても、公的診断書がなければ被害としてカウントされない「記録の形式化」を巡るサスペンス。
+    - **診断書カードと既往症ラベル**: 診断書を「確定記載」にすると信憑性への重大なリスクとなり、これを防ぐために「既往症（持病）」として上書きする行政的隠蔽措置を表現。
+    - **検証委員会クロック**: `0〜6` の進行。停滞や妥協によって自動で草案が作成され、最終的にすべての被害申告（灰カード）が報告書内に吸収・無害化されます。
+
+---
+
+## 5. Episode 4: "公開記録審判" (The Public-Safe Archive) Integration
+*   **Scenario File**: [crisis_actor_scenario_ep4.md](crisis_actor_scenario_ep4.md)
+*   **Details**:
+    - **アーカイブの恐怖**: これまで積み上げた白・灰・黒・監査ログそのものを分類・要約する、キャンペーン全体の到達点。
+    - **公開区分カード**: 情報を「PUBLIC（一般公開）」「LIMITED（限定公開）」「SEALED（封印）」「MISINFO（デマ破棄）」「PUBLIC-SAFE（無害な公開形式）」のいずれかに分類。
+    - **監査ログ開示クロック**: 開示は進むが、進むほど内容が「要約（抽象化）」され解像度が下がる矛盾を再現。
+
+---
+
+## 6. Dynamic VTT Features & Robustness
+*   **Dynamic Clock Labels & Stage Text**:
+    - 読み込まれたシナリオに応じて、VTTの「共犯」クロックのラベルが自動で **「検証委員会」** (EP2) や **「公開審査」** (EP4) 、 **「文化財処理」** (EP3) へ動的にチェンジ。
+    - 各クロックの値（0〜6）に対応するシナリオ固有の進捗段階（例: `未分類` ➔ `資料整理中` ➔ `文化財化完了`）を画面上にリアルタイムで表示するサポートラベルを実装。
+*   **Dynamic guidelines Panel**:
+    - EP2、EP3、EP4 のそれぞれの表現ガイドライン（禁止語テーブル）を、選択中のドキュメントに応じて動的差し替え表示するパネルを実装。
+*   **Sidebar Button Safeguard**:
+    - UI（.tscn）内に該当ボタンノードが存在しなくとも、VTT起動時にクラッシュせずドロップダウンから選択可能な、頑健なドキュメント読み込みロジックへ刷新。
+*   **Tabletop UX Enhancements**:
+    - カード追加時にリスト最下部へ自動スクロールする機能や、メッセージ表示タイマーの世代管理により、セッション中のGM操作負荷とバグを極限まで低減。
