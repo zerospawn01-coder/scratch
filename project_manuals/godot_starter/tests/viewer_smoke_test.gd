@@ -49,9 +49,20 @@ func _run() -> void:
 	var unproc_inc := clocks_grid.get_child(child_count - 1) as Button
 	
 	var add_white_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddWhiteBtn") as Button
+	var add_gray_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddGrayBtn") as Button
+	var add_black_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddBlackBtn") as Button
+	var add_rough_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddRoughBtn") as Button
+	var add_dominant_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddDominantBtn") as Button
+	var add_investigation_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddInvestigationBtn") as Button
+	var add_suspicion_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddSuspicionBtn") as Button
+	var add_protected_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddProtectedBtn") as Button
+	var add_classification_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddClassificationBtn") as Button
 	var form_panel: PanelContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel") as PanelContainer
 	var input_title: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputTitle") as LineEdit
 	var input_fact: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputFact") as LineEdit
+	var input_cost: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputCost") as LineEdit
+	var input_constraint: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputConstraint") as LineEdit
+	var input_owner: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputOwner") as LineEdit
 	var form_submit_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/FormButtons/FormSubmitBtn") as Button
 	var card_list_container: VBoxContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardScroll/CardList") as VBoxContainer
 	var export_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ExportBtn") as Button
@@ -137,16 +148,16 @@ func _run() -> void:
 
 	# 5. Card Creation Test
 	_assert(card_list_container.get_child_count() == 0, "Card list should be empty initially.")
-	add_white_btn.pressed.emit()
-	await process_frame
-	_assert(form_panel.visible, "Card form panel should become visible on button press.")
-	
-	input_title.text = "Test White Card"
-	input_fact.text = "Test Official Fact Description"
-	form_submit_btn.pressed.emit()
-	await process_frame
-	_assert(not form_panel.visible, "Form panel should hide after submission.")
-	_assert(card_list_container.get_child_count() == 1, "Card list container should contain 1 child card.")
+	await _submit_card(add_white_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test White Card", "Test Official Fact Description", "Hidden cost", "Next premise", "PC1")
+	await _submit_card(add_gray_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Gray Card", "Test contradiction", "", "", "PC4")
+	await _submit_card(add_black_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Black Card", "Test sealed truth", "Test evidence", "Test White Card", "PC2")
+	await _submit_card(add_rough_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Rough Card", "Test sloppy action", "Future weak point", "", "PC3")
+	await _submit_card(add_dominant_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Dominant White Card", "Test campaign premise", "Test dominance effect", "Test exposure risk", "GM")
+	await _submit_card(add_investigation_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Investigation Card", "Test unresolved fact", "Test protection reason", "Test next hook", "PC2")
+	await _submit_card(add_suspicion_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Suspicion Card", "Test public rumor", "Test source account", "Test public effect", "GM")
+	await _submit_card(add_protected_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Protected Card", "Test preserved testimony", "Test stopped redaction", "Test next agenda", "PC2")
+	await _submit_card(add_classification_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Classification Card", "Test archive item", "PUBLIC-SAFE", "Test classification reason", "PC1")
+	_assert(card_list_container.get_child_count() == 9, "Card list container should contain all 9 card types.")
 
 	# 6. Save/Load and Exporter Test
 	# Clear existing test files
@@ -159,7 +170,8 @@ func _run() -> void:
 	cred_inc.pressed.emit()
 	await process_frame
 	var saved_cred := cred_val.text.to_int()
-	_assert(card_list_container.get_child_count() == 1, "Should have 1 card before save.")
+	var saved_card_count := card_list_container.get_child_count()
+	_assert(saved_card_count == 9, "Should have all 9 card types before save.")
 
 	# Get save and load buttons
 	var save_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/SaveLoadRow/SaveBtn") as Button
@@ -180,14 +192,14 @@ func _run() -> void:
 	await process_frame
 
 	_assert(cred_val.text.to_int() == 1, "Credibility should be mutated to 1.")
-	_assert(card_list_container.get_child_count() == 0, "Card list should be empty after removing card.")
+	_assert(card_list_container.get_child_count() == saved_card_count - 1, "Card list should lose the removed white card.")
 
 	# Load the session back
 	load_btn.pressed.emit()
 	await process_frame
 
 	_assert(cred_val.text.to_int() == saved_cred, "Credibility should be restored to %d after load." % saved_cred)
-	_assert(card_list_container.get_child_count() == 1, "Card list should have 1 card restored after load.")
+	_assert(card_list_container.get_child_count() == saved_card_count, "Card list should restore all card types after load.")
 
 	# Export Markdown log
 	export_btn.pressed.emit()
@@ -203,6 +215,9 @@ func _run() -> void:
 		_assert(md_content.contains("# CRISIS ACTOR - セッション記録"), "Markdown should have the correct title.")
 		_assert(md_content.contains("Test White Card"), "Markdown should contain card title.")
 		_assert(md_content.contains("Test Official Fact Description"), "Markdown should contain card content.")
+		_assert(md_content.contains("Test Investigation Card"), "Markdown should contain investigation card title.")
+		_assert(md_content.contains("Test Protected Card"), "Markdown should contain protected card title.")
+		_assert(md_content.contains("Test Classification Card"), "Markdown should contain classification card title.")
 		_assert(md_content.contains("未処理負債"), "Markdown should contain unprocessed debt parameter.")
 
 	await create_timer(2.1).timeout
@@ -309,6 +324,34 @@ func _run() -> void:
 func _assert(condition: bool, message: String) -> void:
 	if not condition:
 		_fail(message)
+
+
+func _submit_card(
+	button: Button,
+	form_panel: PanelContainer,
+	input_title: LineEdit,
+	input_fact: LineEdit,
+	input_cost: LineEdit,
+	input_constraint: LineEdit,
+	input_owner: LineEdit,
+	form_submit_btn: Button,
+	title: String,
+	fact: String,
+	cost: String,
+	constraint: String,
+	owner: String
+) -> void:
+	button.pressed.emit()
+	await process_frame
+	_assert(form_panel.visible, "Card form panel should become visible on button press for %s." % title)
+	input_title.text = title
+	input_fact.text = fact
+	input_cost.text = cost
+	input_constraint.text = constraint
+	input_owner.text = owner
+	form_submit_btn.pressed.emit()
+	await process_frame
+	_assert(not form_panel.visible, "Form panel should hide after submitting %s." % title)
 
 
 func _fail(message: String) -> void:

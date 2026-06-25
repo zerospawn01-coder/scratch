@@ -208,6 +208,7 @@ func _ready() -> void:
 	_add_gray_btn.pressed.connect(_open_card_form.bind("gray"))
 	_add_black_btn.pressed.connect(_open_card_form.bind("black"))
 	_add_rough_btn.pressed.connect(_open_card_form.bind("rough"))
+	_add_extended_card_buttons()
 	_form_cancel_btn.pressed.connect(func(): _card_form_panel.visible = false)
 	_form_submit_btn.pressed.connect(_on_form_submit)
 	_save_btn.pressed.connect(_on_save_pressed)
@@ -223,6 +224,46 @@ func _ready() -> void:
 
 func _connect_clock_button(button: Button, property_name: String, delta: int) -> void:
 	button.pressed.connect(_adjust_clock.bind(property_name, delta))
+
+
+func _add_extended_card_buttons() -> void:
+	var add_flow := _add_white_btn.get_parent() as HFlowContainer
+	if not add_flow:
+		return
+
+	var definitions: Array[Dictionary] = [
+		{"name": "AddDominantBtn", "text": "+支配白", "type": "dominant"},
+		{"name": "AddInvestigationBtn", "text": "+調査対象", "type": "investigation"},
+		{"name": "AddSuspicionBtn", "text": "+疑惑", "type": "suspicion"},
+		{"name": "AddProtectedBtn", "text": "+保全中", "type": "protected"},
+		{"name": "AddClassificationBtn", "text": "+公開区分", "type": "classification"},
+	]
+
+	for definition in definitions:
+		if add_flow.has_node(NodePath(str(definition["name"]))):
+			continue
+		var button := Button.new()
+		button.name = str(definition["name"])
+		button.text = str(definition["text"])
+		button.tooltip_text = _extended_card_tooltip(str(definition["type"]))
+		button.pressed.connect(_open_card_form.bind(str(definition["type"])))
+		add_flow.add_child(button)
+
+
+func _extended_card_tooltip(type: String) -> String:
+	match type:
+		"dominant":
+			return "今回の前提として効く支配的白カードを作成"
+		"investigation":
+			return "白カードで完全抹消できない調査対象カードを作成"
+		"suspicion":
+			return "SNSや世論に流れる疑惑カードを作成"
+		"protected":
+			return "Emergency Injunctionで保全中になったカードを作成"
+		"classification":
+			return "EP4用の公開区分カードを作成"
+		_:
+			return "カードを作成"
 
 
 func _adjust_clock(property_name: String, delta: int) -> void:
@@ -736,6 +777,41 @@ func _open_card_form(type: String) -> void:
 			_input_cost.placeholder_text = "将来のリスク・弱点"
 			_input_constraint.visible = false
 			_input_owner.placeholder_text = "責任PC"
+		"dominant":
+			_form_title.text = "支配的白カード追加"
+			_input_title.placeholder_text = "題名 / タイトル"
+			_input_fact.placeholder_text = "前提化された公式説明"
+			_input_cost.placeholder_text = "運用効果（沿うと信憑性+1など）"
+			_input_constraint.placeholder_text = "露出時リスク（対応黒カード露出時など）"
+			_input_owner.placeholder_text = "担当PC / GM"
+		"investigation":
+			_form_title.text = "調査対象カード追加"
+			_input_title.placeholder_text = "題名 / タイトル"
+			_input_fact.placeholder_text = "未確定だが消せない事実"
+			_input_cost.placeholder_text = "保護理由 / 追加調査理由"
+			_input_constraint.placeholder_text = "次回への棘 / 再登場条件"
+			_input_owner.placeholder_text = "担当PC / 記録者"
+		"suspicion":
+			_form_title.text = "疑惑カード追加"
+			_input_title.placeholder_text = "題名 / タイトル"
+			_input_fact.placeholder_text = "疑惑の主張"
+			_input_cost.placeholder_text = "発生源（SNS/NPC/報道など）"
+			_input_constraint.placeholder_text = "世論への影響"
+			_input_owner.placeholder_text = "記録者"
+		"protected":
+			_form_title.text = "保全中カード追加"
+			_input_title.placeholder_text = "題名 / タイトル"
+			_input_fact.placeholder_text = "保全対象（証言/氏名/地名/証拠）"
+			_input_cost.placeholder_text = "一時停止される処理"
+			_input_constraint.placeholder_text = "次フェーズで必ず議題化する内容"
+			_input_owner.placeholder_text = "保全者 / オーディター"
+		"classification":
+			_form_title.text = "公開区分カード追加"
+			_input_title.placeholder_text = "題名 / タイトル"
+			_input_fact.placeholder_text = "分類対象情報"
+			_input_cost.placeholder_text = "公開区分（PUBLIC/LIMITED/SEALED/MISINFO/PUBLIC-SAFE）"
+			_input_constraint.placeholder_text = "分類理由"
+			_input_owner.placeholder_text = "分類者"
 
 
 func _on_form_submit() -> void:
@@ -757,6 +833,16 @@ func _on_form_submit() -> void:
 			state.add_black_card(title, fact, cost, constraint, owner)
 		"rough":
 			state.add_rough_card(title, fact, owner, cost)
+		"dominant":
+			state.add_dominant_white_card(title, fact, cost, constraint, owner)
+		"investigation":
+			state.add_investigation_card(title, fact, cost, constraint, owner)
+		"suspicion":
+			state.add_suspicion_card(title, fact, cost, constraint, owner)
+		"protected":
+			state.add_protected_card(title, fact, cost, constraint, owner)
+		"classification":
+			state.add_classification_card(title, fact, cost, constraint, owner)
 
 	_card_form_panel.visible = false
 	# スクロールを最下部へ移動して新カードを即座に表示する
@@ -841,6 +927,31 @@ func _rebuild_card_list() -> void:
 		var desc := "処置: %s\nリスク: %s" % [card["what_was_sloppy"], card["future_risk"]]
 		_create_card_ui_node("rough", index, str(card["title"]), desc, "責任: %s / Phase %d" % [card["responsible_pc"], card["phase"]])
 
+	for index in range(state.dominant_white_cards.size()):
+		var card: Dictionary = state.dominant_white_cards[index]
+		var desc := "前提: %s\n効果: %s\n露出時リスク: %s" % [card["premise"], card["effect"], card["exposure_risk"]]
+		_create_card_ui_node("dominant", index, str(card["title"]), desc, "担当: %s / Phase %d" % [card["owner"], card["phase"]])
+
+	for index in range(state.investigation_cards.size()):
+		var card: Dictionary = state.investigation_cards[index]
+		var desc := "未確定事実: %s\n保護理由: %s\n次回への棘: %s" % [card["unresolved_fact"], card["protection"], card["next_hook"]]
+		_create_card_ui_node("investigation", index, str(card["title"]), desc, "記録: %s / Phase %d" % [card["owner"], card["phase"]])
+
+	for index in range(state.suspicion_cards.size()):
+		var card: Dictionary = state.suspicion_cards[index]
+		var desc := "疑惑: %s\n発生源: %s\n世論影響: %s" % [card["claim"], card["source"], card["public_effect"]]
+		_create_card_ui_node("suspicion", index, str(card["title"]), desc, "記録: %s / Phase %d" % [card["owner"], card["phase"]])
+
+	for index in range(state.protected_cards.size()):
+		var card: Dictionary = state.protected_cards[index]
+		var desc := "保全対象: %s\n停止処理: %s\n次フェーズ議題: %s" % [card["preserved_item"], card["restriction"], card["next_agenda"]]
+		_create_card_ui_node("protected", index, str(card["title"]), desc, "保全者: %s / Phase %d" % [card["owner"], card["phase"]])
+
+	for index in range(state.classification_cards.size()):
+		var card: Dictionary = state.classification_cards[index]
+		var desc := "対象: %s\n公開区分: %s\n理由: %s" % [card["source_info"], card["classification"], card["rationale"]]
+		_create_card_ui_node("classification", index, str(card["title"]), desc, "分類者: %s / Phase %d" % [card["owner"], card["phase"]])
+
 
 func _create_card_ui_node(type: String, index: int, title: String, content: String, meta: String) -> void:
 	var panel := PanelContainer.new()
@@ -863,6 +974,16 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 			style_box.border_color = Color(0.9, 0.3, 0.3)
 		"rough":
 			style_box.border_color = Color(0.9, 0.6, 0.2)
+		"dominant":
+			style_box.border_color = Color(0.35, 0.70, 1.0)
+		"investigation":
+			style_box.border_color = Color(0.25, 0.85, 0.65)
+		"suspicion":
+			style_box.border_color = Color(0.78, 0.45, 0.95)
+		"protected":
+			style_box.border_color = Color(0.35, 0.95, 0.95)
+		"classification":
+			style_box.border_color = Color(0.55, 0.75, 0.35)
 	
 	panel.add_theme_stylebox_override("panel", style_box)
 
@@ -891,6 +1012,21 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 		"rough":
 			type_label.text = "[粗] "
 			type_label.add_theme_color_override("font_color", Color(0.9, 0.6, 0.2))
+		"dominant":
+			type_label.text = "[支配白] "
+			type_label.add_theme_color_override("font_color", Color(0.35, 0.70, 1.0))
+		"investigation":
+			type_label.text = "[調査] "
+			type_label.add_theme_color_override("font_color", Color(0.25, 0.85, 0.65))
+		"suspicion":
+			type_label.text = "[疑惑] "
+			type_label.add_theme_color_override("font_color", Color(0.78, 0.45, 0.95))
+		"protected":
+			type_label.text = "[保全] "
+			type_label.add_theme_color_override("font_color", Color(0.35, 0.95, 0.95))
+		"classification":
+			type_label.text = "[区分] "
+			type_label.add_theme_color_override("font_color", Color(0.55, 0.75, 0.35))
 	header.add_child(type_label)
 
 	var title_label := Label.new()

@@ -29,9 +29,13 @@ func _run() -> void:
 	var comp_inc: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompInc") as Button
 	
 	var add_white_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddWhiteBtn") as Button
+	var add_investigation_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardAddFlow/AddInvestigationBtn") as Button
 	var form_panel: PanelContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel") as PanelContainer
 	var input_title: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputTitle") as LineEdit
 	var input_fact: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputFact") as LineEdit
+	var input_cost: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputCost") as LineEdit
+	var input_constraint: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputConstraint") as LineEdit
+	var input_owner: LineEdit = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/InputOwner") as LineEdit
 	var form_submit_btn: Button = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows/CardFormPanel/FormMargin/FormRows/FormButtons/FormSubmitBtn") as Button
 
 	# Find dynamic guidelines button
@@ -110,6 +114,21 @@ func _run() -> void:
 	# Submit a test card
 	input_title.text = "テスト公開審判カード"
 	input_fact.text = "広報庁による最終的な要約版の公開プロセスを完了した。"
+	input_cost.text = "公式説明として固定される。"
+	input_constraint.text = "対応する黒カードの露出時、未処理負債+2。"
+	input_owner.text = "PC1"
+	form_submit_btn.pressed.emit()
+	await process_frame
+	await process_frame
+
+	# Submit an extended card type.
+	add_investigation_btn.pressed.emit()
+	await process_frame
+	input_title.text = "調査対象: 瀬尾アキラの呼吸器症状"
+	input_fact.text = "確定診断ではないが、消去できない症状記録。"
+	input_cost.text = "追加調査が必要なため白カード化不可。"
+	input_constraint.text = "次回セッション冒頭で再照会される。"
+	input_owner.text = "PC2"
 	form_submit_btn.pressed.emit()
 	await process_frame
 	await process_frame

@@ -56,6 +56,11 @@ var white_cards: Array[Dictionary] = []
 var gray_cards: Array[Dictionary] = []
 var black_cards: Array[Dictionary] = []
 var rough_cards: Array[Dictionary] = []
+var dominant_white_cards: Array[Dictionary] = []
+var investigation_cards: Array[Dictionary] = []
+var suspicion_cards: Array[Dictionary] = []
+var protected_cards: Array[Dictionary] = []
+var classification_cards: Array[Dictionary] = []
 
 var _history: Array[Dictionary] = []
 var _is_undoing := false
@@ -72,7 +77,12 @@ func _save_history() -> void:
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
-		"rough_cards": rough_cards.duplicate(true)
+		"rough_cards": rough_cards.duplicate(true),
+		"dominant_white_cards": dominant_white_cards.duplicate(true),
+		"investigation_cards": investigation_cards.duplicate(true),
+		"suspicion_cards": suspicion_cards.duplicate(true),
+		"protected_cards": protected_cards.duplicate(true),
+		"classification_cards": classification_cards.duplicate(true)
 	}
 	_history.append(snapshot)
 	if _history.size() > 20:
@@ -97,6 +107,11 @@ func undo() -> bool:
 	gray_cards = snapshot["gray_cards"]
 	black_cards = snapshot["black_cards"]
 	rough_cards = snapshot["rough_cards"]
+	dominant_white_cards = snapshot["dominant_white_cards"]
+	investigation_cards = snapshot["investigation_cards"]
+	suspicion_cards = snapshot["suspicion_cards"]
+	protected_cards = snapshot["protected_cards"]
+	classification_cards = snapshot["classification_cards"]
 	
 	_is_undoing = false
 	state_changed.emit()
@@ -148,6 +163,66 @@ func add_rough_card(title: String, what_was_sloppy: String, responsible_pc: Stri
 	})
 	state_changed.emit()
 
+func add_dominant_white_card(title: String, premise: String, effect: String, exposure_risk: String, owner: String) -> void:
+	_save_history()
+	dominant_white_cards.append({
+		"title": title,
+		"premise": premise,
+		"effect": effect,
+		"exposure_risk": exposure_risk,
+		"owner": owner,
+		"phase": current_phase
+	})
+	state_changed.emit()
+
+func add_investigation_card(title: String, unresolved_fact: String, protection: String, next_hook: String, owner: String) -> void:
+	_save_history()
+	investigation_cards.append({
+		"title": title,
+		"unresolved_fact": unresolved_fact,
+		"protection": protection,
+		"next_hook": next_hook,
+		"owner": owner,
+		"phase": current_phase
+	})
+	state_changed.emit()
+
+func add_suspicion_card(title: String, claim: String, source: String, public_effect: String, owner: String) -> void:
+	_save_history()
+	suspicion_cards.append({
+		"title": title,
+		"claim": claim,
+		"source": source,
+		"public_effect": public_effect,
+		"owner": owner,
+		"phase": current_phase
+	})
+	state_changed.emit()
+
+func add_protected_card(title: String, preserved_item: String, restriction: String, next_agenda: String, owner: String) -> void:
+	_save_history()
+	protected_cards.append({
+		"title": title,
+		"preserved_item": preserved_item,
+		"restriction": restriction,
+		"next_agenda": next_agenda,
+		"owner": owner,
+		"phase": current_phase
+	})
+	state_changed.emit()
+
+func add_classification_card(title: String, source_info: String, classification: String, rationale: String, owner: String) -> void:
+	_save_history()
+	classification_cards.append({
+		"title": title,
+		"source_info": source_info,
+		"classification": classification,
+		"rationale": rationale,
+		"owner": owner,
+		"phase": current_phase
+	})
+	state_changed.emit()
+
 func remove_card(type: String, index: int) -> void:
 	_save_history()
 	match type:
@@ -155,6 +230,11 @@ func remove_card(type: String, index: int) -> void:
 		"gray": gray_cards.remove_at(index)
 		"black": black_cards.remove_at(index)
 		"rough": rough_cards.remove_at(index)
+		"dominant": dominant_white_cards.remove_at(index)
+		"investigation": investigation_cards.remove_at(index)
+		"suspicion": suspicion_cards.remove_at(index)
+		"protected": protected_cards.remove_at(index)
+		"classification": classification_cards.remove_at(index)
 	state_changed.emit()
 
 func update_gray_rot(index: int, new_rot: int) -> void:
@@ -227,6 +307,46 @@ func export_to_markdown() -> String:
 		md += "### %d. %s (責任PC: %s / Phase %d)\n" % [i + 1, c["title"], c["responsible_pc"], c["phase"]]
 		md += "- **粗雑な処置**: %s\n" % c["what_was_sloppy"]
 		md += "- **将来の弱点・リスク**: %s\n\n" % c["future_risk"]
+
+	md += "## ■ 支配的白カード（今回の前提） [%d]\n" % dominant_white_cards.size()
+	for i in range(dominant_white_cards.size()):
+		var c = dominant_white_cards[i]
+		md += "### %d. %s (担当PC: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
+		md += "- **前提化された公式説明**: %s\n" % c["premise"]
+		md += "- **運用効果**: %s\n" % c["effect"]
+		md += "- **露出時リスク**: %s\n\n" % c["exposure_risk"]
+
+	md += "## ■ 調査対象カード（保護された未確定事実） [%d]\n" % investigation_cards.size()
+	for i in range(investigation_cards.size()):
+		var c = investigation_cards[i]
+		md += "### %d. %s (担当PC: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
+		md += "- **未確定事実**: %s\n" % c["unresolved_fact"]
+		md += "- **保護理由**: %s\n" % c["protection"]
+		md += "- **次回への棘**: %s\n\n" % c["next_hook"]
+
+	md += "## ■ 疑惑カード（世論ノイズ） [%d]\n" % suspicion_cards.size()
+	for i in range(suspicion_cards.size()):
+		var c = suspicion_cards[i]
+		md += "### %d. %s (発生源: %s / Phase %d)\n" % [i + 1, c["title"], c["source"], c["phase"]]
+		md += "- **疑惑の主張**: %s\n" % c["claim"]
+		md += "- **世論への影響**: %s\n" % c["public_effect"]
+		md += "- **記録者**: %s\n\n" % c["owner"]
+
+	md += "## ■ 保全中カード（Emergency Injunction） [%d]\n" % protected_cards.size()
+	for i in range(protected_cards.size()):
+		var c = protected_cards[i]
+		md += "### %d. %s (保全者: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
+		md += "- **保全対象**: %s\n" % c["preserved_item"]
+		md += "- **一時停止される処理**: %s\n" % c["restriction"]
+		md += "- **次フェーズ議題**: %s\n\n" % c["next_agenda"]
+
+	md += "## ■ 公開区分カード（アーカイブ分類） [%d]\n" % classification_cards.size()
+	for i in range(classification_cards.size()):
+		var c = classification_cards[i]
+		md += "### %d. %s (分類者: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
+		md += "- **分類対象情報**: %s\n" % c["source_info"]
+		md += "- **公開区分**: %s\n" % c["classification"]
+		md += "- **分類理由**: %s\n\n" % c["rationale"]
 		
 	return md
 
@@ -243,7 +363,12 @@ func to_dict() -> Dictionary:
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
-		"rough_cards": rough_cards.duplicate(true)
+		"rough_cards": rough_cards.duplicate(true),
+		"dominant_white_cards": dominant_white_cards.duplicate(true),
+		"investigation_cards": investigation_cards.duplicate(true),
+		"suspicion_cards": suspicion_cards.duplicate(true),
+		"protected_cards": protected_cards.duplicate(true),
+		"classification_cards": classification_cards.duplicate(true)
 	}
 
 
@@ -256,23 +381,44 @@ func from_dict(dict: Dictionary) -> void:
 	if dict.has("equipment_wear"): equipment_wear = int(dict["equipment_wear"])
 	if dict.has("current_phase"): current_phase = int(dict["current_phase"])
 	if dict.has("unprocessed_debt"): unprocessed_debt = int(dict["unprocessed_debt"])
-	
+
+	white_cards.clear()
+	gray_cards.clear()
+	black_cards.clear()
+	rough_cards.clear()
+	dominant_white_cards.clear()
+	investigation_cards.clear()
+	suspicion_cards.clear()
+	protected_cards.clear()
+	classification_cards.clear()
+
 	if dict.has("white_cards"):
-		white_cards.clear()
 		for card in dict["white_cards"]:
 			white_cards.append(card)
 	if dict.has("gray_cards"):
-		gray_cards.clear()
 		for card in dict["gray_cards"]:
 			gray_cards.append(card)
 	if dict.has("black_cards"):
-		black_cards.clear()
 		for card in dict["black_cards"]:
 			black_cards.append(card)
 	if dict.has("rough_cards"):
-		rough_cards.clear()
 		for card in dict["rough_cards"]:
 			rough_cards.append(card)
+	if dict.has("dominant_white_cards"):
+		for card in dict["dominant_white_cards"]:
+			dominant_white_cards.append(card)
+	if dict.has("investigation_cards"):
+		for card in dict["investigation_cards"]:
+			investigation_cards.append(card)
+	if dict.has("suspicion_cards"):
+		for card in dict["suspicion_cards"]:
+			suspicion_cards.append(card)
+	if dict.has("protected_cards"):
+		for card in dict["protected_cards"]:
+			protected_cards.append(card)
+	if dict.has("classification_cards"):
+		for card in dict["classification_cards"]:
+			classification_cards.append(card)
 			
 	_is_undoing = false
 	state_changed.emit()
