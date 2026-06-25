@@ -1,42 +1,37 @@
-# CRISIS ACTOR: The Rehearsal State — v0.2.1 P0 Refined Walkthrough
+# CRISIS ACTOR: Tabletop Operation Tool (VTT Minimal) Walkthrough
 
-The P0 test assets (rulebook, characters, scenario) have been refined according to the 10 structural feedback points. The game is now fully balanced and ready for playtesting.
+The Godot-based **CRISIS ACTOR VTT Minimal** tool has been successfully updated to include the new custom scenario, **Episode 3: 帳外神楽 (Chougai-Kagura)**, framing regional folklore as a decentralized audit log, along with comprehensive **Session Save/Load** and **Markdown Export** operations.
 
 ---
 
-## Refinement Highlights
+## 1. Episode 3: "帳外神楽" (v0.3 行政ホラー版) Integration
+*   **Artifact File**: [crisis_actor_scenario_ep3.md](file:///C:/Users/zeros/.gemini/antigravity/brain/d8fcf14d-3162-426a-8dbc-31c16f9c0a3d/crisis_actor_scenario_ep3.md)
+*   **VTT Documentation Copy**: [crisis_actor_scenario_ep3.md (Project Copy)](file:///C:/Users/zeros/.gemini/antigravity/scratch/project_manuals/godot_starter/docs/crisis_actor/crisis_actor_scenario_ep3.md)
+*   **Details**:
+    - **コンセプトの極大化**: 「祟りや怪異」ではなく、「死者の名前を資料分類・観光資源へと事務的に処理・消去していく行政の無機質な暴力」をホラーの核に据えました。
+    - **「異物フレーム」カードの追加**: 旧「面の子」のオカルト的描写を廃し、鈴の音の周波数干渉や編集ミス、村人の作為による機材ノイズ（灰カード）に変更し、処理テーブル（機材/編集ミス/仕込み/演出）を追加。
+    - **陰謀論配信者ノゾミの再定義**: プレイヤーの推理を奪わないよう、的外れな主張と本物の「一次データ」を併せ持つ「扱いに困る素材散布装置」へ再設計。疑惑カードにも「的外れな結論」と「一次データ」の書式を導入。
+    - **選択肢A（白カード化）での実体験**: プレイヤー自身に「展示解説文」「PRナレーション」「完了報告書」の3つのテキスト穴埋め記述を強制し、死者の名前を民俗資料・祈り・事務処理へと能動的に改ざん（加害体験）させる儀式を導入。榊ミトら村人達の「もう忘れさせてほしい」という善意の隠蔽ジレンマを追加。
 
-### 1. Backstory Contradiction Solved (Clara & Erina)
-*   **Artifacts**: [crisis_actor_characters.md](crisis_actor_characters.md) / [crisis_actor_scenario_ep1.md](crisis_actor_scenario_ep1.md)
-*   **Fix**: **Clara is alive** and actively hiding inside the mall with evidence. Her sister **Erina** is the one who died 3 months ago. This shifts PC2's (Auditor) tension from "regretting a past victim" to the active choice of "abandoning a living ally again."
+---
 
-### 2. Black Card "Neutralization" Mechanics
-*   **Artifact**: [crisis_actor_rulebook.md](crisis_actor_rulebook.md)
-*   **Fix**: Black Cards cannot be destroyed once written, but they can be **neutralized (invalidated)** if other PCs write a matching White Card that discredits the claim. PC2's victory now directly depends on preventing their Black Cards from being neutralized by the end of the session.
+## 2. Godot GUI & Script Updates
+*   **Scene File**: [main.tscn](file:///C:/Users/zeros/.gemini/antigravity/scratch/project_manuals/godot_starter/scenes/main.tscn)
+    - Added the `ScenarioEp3Button` to the sidebar directly beneath the Episode 1 button.
+*   **Script**: [main.gd](file:///C:/Users/zeros/.gemini/antigravity/scratch/project_manuals/godot_starter/scripts/main.gd)
+    - Registered "シナリオ EP3" inside the `DOCUMENTS` array to automatically map the scene button, parse headings into the TOC sidebar, and read the relative markdown files on click.
+    - Updated `_on_save_pressed()` and `_on_load_pressed()` to use `"user://session_log.json"`.
+    - Updated `_on_export_pressed()` to write the Markdown output to `"user://session_log.md"`, in addition to copying it to the system clipboard.
 
-### 3. PC3 (Engineer) Rebalanced (Equipment Decay Clock)
-*   **Artifact**: [crisis_actor_characters.md](crisis_actor_characters.md)
-*   **Fix**: Added a **機材劣化クロック (Equipment Decay Clock: 0~3)**. Using B-Grade Processing or Controlled Chaos increments the clock. At 3, it resets and triggers an immediate Reality Intrusion or forces one of PC3's "Rough Production Cards" to decay to Level 1.
+---
 
-### 4. PC4 (Manager) Victory Condition Focused (Protected Target Card)
-*   **Artifact**: [crisis_actor_characters.md](crisis_actor_characters.md)
-*   **Fix**: Shifted PC4's goal from mall-wide safety to the survival of a specific **保護対象 (Protected Target)**. PC4 fills out a target template at the start of the game, creating personal, intimate stakes.
-
-### 5. Information-Centric Threats (Replacing Water Flood)
-*   **Artifact**: [crisis_actor_scenario_ep1.md](crisis_actor_scenario_ep1.md)
-*   **Fix**: Removed the water flooding event. Instead, PC3's short-circuits now trigger **「映像の空白」 (Blank Video Footage)** and **「誘導灯の停止」 (Exit Signs Out)**, directly interfering with the "official video record" theme.
-
-### 6. Yellow Gas as Information Cards
-*   **Artifact**: [crisis_actor_scenario_ep1.md](crisis_actor_scenario_ep1.md)
-*   **Fix**: Yellow gas is handled via specific card templates (e.g., Gray Card: "Unusual smell from smoke", Black Card: "残留有害ガス (Residue Gas)", White Card: "新型演出用スモーク (New Staging Smoke)"), ensuring the physical gas threat resolves through information manipulation.
-
-### 7. Climax Choices Expanded (3 Options)
-*   **Artifact**: [crisis_actor_scenario_ep1.md](crisis_actor_scenario_ep1.md)
-*   **Fix**: Phase 4 now offers a 3-way branching path:
-    1.  *Complete Cover-up (完全偽装)*: High Credibility, high Debt, discredits Black Cards.
-    2.  *Abandon Simulation (演出放棄)*: Low Credibility, resets Intrusion, leaves decaying Gray Cards.
-    3.  *Controlled Disclosure (限定暴露)*: Decent Credibility, protects 1 Black Card, exposes PC3's Rough Cards as the scapegoat.
-
-### 8. Strict White Card Templates & Attribute Standardization
-*   **Artifacts**: [crisis_actor_rulebook.md](crisis_actor_rulebook.md) / [crisis_actor_characters.md](crisis_actor_characters.md)
-*   **Fix**: Added structural templates for final White Cards (Success Fact, Explained Anomaly, Next-session Premise). Standardized all attributes to **脚本 (Scenario) / 演出 (Staging) / 情報 (Information) / 精神 (Psyche)**.
+## 3. Verification Expansion
+*   **Smoke Test**: [viewer_smoke_test.gd](file:///C:/Users/zeros/.gemini/antigravity/scratch/project_manuals/godot_starter/tests/viewer_smoke_test.gd)
+    - Expanded reference bindings to check for `ScenarioEp3Button`.
+    - Added a click test on `ScenarioEp3Button` to assert that the TOC parses and updates headings dynamically for the new scenario.
+    - Expanded search smoke terms to include `"帳外帳"` to verify search normalized alias logic inside Episode 3's context.
+    - Added comprehensive validation for Save/Load and Exporter operations:
+      - Clears old files from the user directory.
+      - Sets state and creates a test card, then triggers Save to verify `user://session_log.json` is successfully created.
+      - Mutates credibility and clears cards, then triggers Load to verify the exact state is restored.
+      - Triggers Export to verify `user://session_log.md` is created with correct contents (title, test card title, and description).
