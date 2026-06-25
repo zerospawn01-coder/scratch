@@ -135,6 +135,7 @@ var _current_form_type := "white"
 var _phase_buttons: Array[Button] = []
 var _toc_user_visible := true
 var _render_generation := 0
+var _comp_desc_label: Label
 
 
 func _ready() -> void:
@@ -187,6 +188,7 @@ func _ready() -> void:
 	_export_btn.pressed.connect(_on_export_pressed)
 
 	_build_quick_search_buttons()
+	_setup_tabletop_p1_features()
 	_show_document(0)
 	_on_state_changed()
 	_on_window_resized()
@@ -209,10 +211,19 @@ func _show_document(index: int) -> void:
 	if _doc_selector.selected != index:
 		_doc_selector.select(index)
 
+	# Complicity label rename based on EP3
+	var comp_label := $Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompLabel as Label
+	if comp_label:
+		if document["title"] == "シナリオ EP3":
+			comp_label.text = "文化財処理"
+		else:
+			comp_label.text = "共犯"
+
 	_search_input.clear()
 	_current_match_index = -1
 	_rebuild_toc()
 	_render_document(false)
+	_on_state_changed()
 	_on_window_resized()
 
 
@@ -526,6 +537,23 @@ func _on_state_changed() -> void:
 	_comp_val.text = str(state.complicity_clock)
 	_wear_val.text = str(state.equipment_wear)
 
+	if _comp_desc_label:
+		if DOCUMENTS[_current_doc_index]["title"] == "シナリオ EP3":
+			var stages := [
+				"未分類",
+				"資料整理中",
+				"仮分類完了",
+				"展示名確定",
+				"個人名削除",
+				"解説文確定",
+				"文化財化完了"
+			]
+			var idx := clampi(state.complicity_clock, 0, 6)
+			_comp_desc_label.text = "進捗: %s" % stages[idx]
+			_comp_desc_label.visible = true
+		else:
+			_comp_desc_label.visible = false
+
 	for index in range(_phase_buttons.size()):
 		_phase_buttons[index].button_pressed = state.current_phase == index + 1
 
@@ -698,6 +726,28 @@ func _rebuild_card_list() -> void:
 
 func _create_card_ui_node(type: String, index: int, title: String, content: String, meta: String) -> void:
 	var panel := PanelContainer.new()
+	
+	# Visibility enhancement for cards using StyleBoxFlat left-border
+	var style_box := StyleBoxFlat.new()
+	style_box.bg_color = Color(0.12, 0.13, 0.15)
+	style_box.border_width_left = 4
+	style_box.content_margin_left = 6
+	style_box.content_margin_top = 6
+	style_box.content_margin_right = 6
+	style_box.content_margin_bottom = 6
+	
+	match type:
+		"white":
+			style_box.border_color = Color.WHITE
+		"gray":
+			style_box.border_color = Color(0.6, 0.6, 0.6)
+		"black":
+			style_box.border_color = Color(0.9, 0.3, 0.3)
+		"rough":
+			style_box.border_color = Color(0.9, 0.6, 0.2)
+	
+	panel.add_theme_stylebox_override("panel", style_box)
+
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 6)
 	margin.add_theme_constant_override("margin_top", 6)
@@ -805,3 +855,76 @@ func _read_text(path: String) -> String:
 		return "Could not open document: %s\n%s" % [path, error_string(FileAccess.get_open_error())]
 
 	return file.get_as_text().replace("\r\n", "\n").replace("\r", "\n")
+
+
+func _setup_tabletop_p1_features() -> void:
+	var ops_rows := _ops_panel.get_node("OpsMargin/OpsRows") as VBoxContainer
+	if not ops_rows:
+		return
+
+	# Separator
+	var sep := HSeparator.new()
+	ops_rows.add_child(sep)
+
+	# Complicity clock status description label
+	_comp_desc_label = Label.new()
+	_comp_desc_label.add_theme_font_size_override("font_size", 12)
+	_comp_desc_label.add_theme_color_override("font_color", Color(1.0, 0.84, 0.0))
+	_comp_desc_label.visible = false
+	ops_rows.add_child(_comp_desc_label)
+
+	# Stagnation button
+	var stagnant_btn := Button.new()
+	stagnant_btn.text = "⚠️ 議論停滞：処理クロック+1"
+	stagnant_btn.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
+	stagnant_btn.pressed.connect(func():
+		state.complicity_clock = int(state.complicity_clock) + 1
+		_show_temporary_message("⚠️ 議論停滞により、処理クロックが進行しました。")
+	)
+	ops_rows.add_child(stagnant_btn)
+
+	# Guidelines Toggle Button
+	var guidelines_btn := Button.new()
+	guidelines_btn.text = "表現調整ガイドライン 表示"
+	guidelines_btn.toggle_mode = true
+	ops_rows.add_child(guidelines_btn)
+
+	# Guidelines Panel
+	var guidelines_panel := PanelContainer.new()
+	guidelines_panel.visible = false
+	
+	var style_box := StyleBoxFlat.new()
+	style_box.bg_color = Color(0.12, 0.13, 0.15)
+	style_box.border_width_left = 4
+	style_box.border_color = Color(1.0, 0.84, 0.0) # Yellow edge
+	style_box.content_margin_left = 8
+	style_box.content_margin_top = 8
+	style_box.content_margin_right = 8
+	style_box.content_margin_bottom = 8
+	guidelines_panel.add_theme_stylebox_override("panel", style_box)
+	
+	var guidelines_text := RichTextLabel.new()
+	guidelines_text.bbcode_enabled = true
+	guidelines_text.fit_content = true
+	guidelines_text.text = (
+		"[b][color=#ffd700]表現調整ガイドライン[/color][/b]\n" +
+		"[color=#a0a0a0]禁止語 ➔ 推奨代替語[/color]\n" +
+		"・[color=#ff6b6b]災害[/color] ➔ 地域記憶\n" +
+		"・[color=#ff6b6b]人災[/color] ➔ 歴史的経緯\n" +
+		"・[color=#ff6b6b]避難経路[/color] ➔ 祈りの道筋\n" +
+		"・[color=#ff6b6b]補償[/color] ➔ 生活再建支援\n" +
+		"・[color=#ff6b6b]抹消[/color] ➔ 記録不備\n" +
+		"・[color=#ff6b6b]隠蔽[/color] ➔ 表現調整\n" +
+		"・[color=#ff6b6b]責任[/color] ➔ 関係性\n" +
+		"・[color=#ff6b6b]実験[/color] ➔ 誘導検証\n" +
+		"・[color=#ff6b6b]失踪者[/color] ➔ 帳外対象者\n" +
+		"・[color=#ff6b6b]告発[/color] ➔ 問題提起"
+	)
+	
+	guidelines_panel.add_child(guidelines_text)
+	ops_rows.add_child(guidelines_panel)
+
+	guidelines_btn.toggled.connect(func(button_pressed: bool):
+		guidelines_panel.visible = button_pressed
+		guidelines_btn.text = "表現調整ガイドライン 非表示" if button_pressed else "表現調整ガイドライン 表示"
+	)
