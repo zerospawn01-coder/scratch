@@ -68,4 +68,28 @@ The Godot-based **CRISIS ACTOR VTT Minimal** tool has been successfully updated 
 *   **Sidebar Button Safeguard**:
     - UI（.tscn）内に該当ボタンノードが存在しなくとも、VTT起動時にクラッシュせずドロップダウンから選択可能な、頑健なドキュメント読み込みロジックへ刷新。
 *   **Tabletop UX Enhancements**:
-    - カード追加時にリスト最下部へ自動スクロールする機能や、メッセージ表示タイマーの世代管理により、セッション中のGM操作負荷とバグを極限まで低減。
+    - カード追加時にリスト最下部へ自動スクロールする機能や、メッセージ表示タイマー of `main.gd` の世代管理により、セッション中のGM操作負荷とバグを極限まで低減。
+
+---
+
+## 7. GUI動作確認・レイアウト崩れ対策 (P1修正)
+*   **ビジュアル検証自動スクリプト作成**: [visual_check.gd](../../tests/visual_check.gd) を作成し、GodotのGUIを実際に起動して操作をエミュレートし、スクリーンショットを自動生成して外観・操作感を検証しました。
+*   **スクリーンショットによる動作証明**:
+    1. **初期状態（ルールブック）**: [visual_check_01_init.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_01_init.png)
+       - 目次の階層構造、セッション操作用の基本クロックやカード操作ボタンが綺麗に配置されていることを確認。
+    2. **EP2選択・ガイドライン展開・クロック進行**: [visual_check_02_ep2_guidelines.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_02_ep2_guidelines.png)
+       - コプリミティクロックが「検証委員会：1」になり、「進捗: 資料提出依頼」が表示されていること、またEP2固有の禁止語・推奨代替語テーブルが正しくレンダリングされていることを確認。
+    3. **EP4選択・初期状態**: [visual_check_03_ep4_init.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_03_ep4_init.png)
+       - シナリオ「公開記録審判」のタイトルへの切り替え、クロックが「公開審査」へ動的変更されたことを確認。
+    4. **EP4クロック最大**: [visual_check_04_ep4_clock_max.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_04_ep4_clock_max.png)
+       - クロックを6まで進めた際、進捗表示が「要約版のみ公開」になり、且つ「共犯クロック警告」の赤字警告テキストが表示されていることを確認。
+    5. **カード追加フォーム表示**: [visual_check_05_card_form.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_05_card_form.png)
+       - 白カード追加時にフォームがオーバーレイ表示され、入力項目が正しく表示されることを確認。
+    6. **カード追加・カードリスト描画**: [visual_check_06_card_added.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_06_card_added.png)
+       - 追加した「テスト公開審判カード」が、左側のカードリストの中に白枠（左ボーダー色）のカードとして正しく描画されることを確認。
+    7. **キーワード検索ハイライト**: [visual_check_07_search_highlight.png](file:///C:/Users/zeros/.gemini/antigravity-ide/brain/4bfddfe1-b698-4fd8-a7ef-6f171e979f52/visual_check_07_search_highlight.png)
+       - 「広報庁」で検索した際、本文の該当テキストが瞬時にオレンジ色でハイライトされ、検索バーに「1 / 7 件ヒット」と正しく表示されることを確認。
+*   **P1修正：カードリスト虚脱（スクロール領域消失）バグの解決**:
+    - 実機での動作確認中、クロック、進捗ラベル、警告文、表現調整ガイドラインパネルが動的に追加された際、縦方向のスペースが圧縮されてカードリスト用スクロール領域（`CardScroll`）が縦幅0に潰れてしまい、追加したカードが表示されなくなる重大な不具合を発見。
+    - `main.tscn` において、`CardScroll` に `custom_minimum_size = Vector2(0, 150)` を追加指定しました。これにより、縦方向の領域が圧迫された状態でもカードリストが最小限の高さ（150px）を常に保証し、カードが正しく画面にスクロール表示されるようになりました。
+

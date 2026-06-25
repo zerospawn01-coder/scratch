@@ -337,6 +337,7 @@ layout_mode = 2
 text = "作成"
 
 [node name="CardScroll" type="ScrollContainer" parent="Root/Columns/OpsPanel/OpsMargin/OpsRows"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
