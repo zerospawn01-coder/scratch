@@ -19,6 +19,11 @@ const DOCUMENTS: Array[Dictionary] = [
 		"button": "ScenarioButton",
 	},
 	{
+		"title": "シナリオ EP2",
+		"path": "res://docs/crisis_actor/crisis_actor_scenario_ep2.md",
+		"button": "ScenarioEp2Button", # Note: not in sidebar layout but accessible via doc selector
+	},
+	{
 		"title": "シナリオ EP3",
 		"path": "res://docs/crisis_actor/crisis_actor_scenario_ep3.md",
 		"button": "ScenarioEp3Button",
@@ -56,6 +61,11 @@ const QUICK_SEARCH_TERMS: Array[String] = [
 	"文化財化処理クロック",
 	"黒塗り理由コード",
 	"調査対象カード",
+	"診断書",
+	"検証委員会",
+	"既往症",
+	"瀬尾アキラ",
+	"真田リョウ",
 ]
 
 const BODY_COLOR := Color(0.92, 0.93, 0.95)
@@ -147,8 +157,11 @@ func _ready() -> void:
 	_document_body.fit_content = false
 
 	for index in range(DOCUMENTS.size()):
-		var button := _sidebar.get_node(NodePath(str(DOCUMENTS[index]["button"]))) as Button
-		button.pressed.connect(_show_document.bind(index))
+		var btn_path := str(DOCUMENTS[index]["button"])
+		if _sidebar.has_node(NodePath(btn_path)):
+			var button := _sidebar.get_node(NodePath(btn_path)) as Button
+			if button:
+				button.pressed.connect(_show_document.bind(index))
 
 	_doc_selector.clear()
 	for document in DOCUMENTS:
@@ -211,10 +224,12 @@ func _show_document(index: int) -> void:
 	if _doc_selector.selected != index:
 		_doc_selector.select(index)
 
-	# Complicity label rename based on EP3
+	# Complicity label rename based on scenario
 	var comp_label := $Root/Columns/OpsPanel/OpsMargin/OpsRows/ClocksGrid/CompLabel as Label
 	if comp_label:
-		if document["title"] == "シナリオ EP3":
+		if document["title"] == "シナリオ EP2":
+			comp_label.text = "検証委員会"
+		elif document["title"] == "シナリオ EP3":
 			comp_label.text = "文化財処理"
 		else:
 			comp_label.text = "共犯"
@@ -538,7 +553,21 @@ func _on_state_changed() -> void:
 	_wear_val.text = str(state.equipment_wear)
 
 	if _comp_desc_label:
-		if DOCUMENTS[_current_doc_index]["title"] == "シナリオ EP3":
+		var doc_title: String = DOCUMENTS[_current_doc_index]["title"]
+		if doc_title == "シナリオ EP2":
+			var stages := [
+				"未招集",
+				"資料提出依頼",
+				"医療記録照会",
+				"証言整理",
+				"争点限定",
+				"報告書案作成",
+				"最終報告書確定"
+			]
+			var idx := clampi(state.complicity_clock, 0, 6)
+			_comp_desc_label.text = "進捗: %s" % stages[idx]
+			_comp_desc_label.visible = true
+		elif doc_title == "シナリオ EP3":
 			var stages := [
 				"未分類",
 				"資料整理中",
