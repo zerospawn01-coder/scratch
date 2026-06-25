@@ -53,6 +53,9 @@ const QUICK_SEARCH_TERMS: Array[String] = [
 	"ノイズ",
 	"白カード",
 	"帳外帳",
+	"文化財化処理クロック",
+	"黒塗り理由コード",
+	"調査対象カード",
 ]
 
 const BODY_COLOR := Color(0.92, 0.93, 0.95)

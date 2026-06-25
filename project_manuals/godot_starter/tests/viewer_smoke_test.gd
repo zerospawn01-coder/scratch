@@ -185,6 +185,19 @@ func _run() -> void:
 	_assert(search_count.text.ends_with("件ヒット"), "Episode 3 search should complete for 帳外帳.")
 	_assert(not search_count.text.begins_with("0 "), "Episode 3 should contain 帳外帳.")
 
+	var ep3_terms: Array[String] = [
+		"文化財化処理クロック",
+		"黒塗り理由コード",
+		"調査対象カード",
+	]
+	for term in ep3_terms:
+		search_input.text = term
+		search_input.text_changed.emit(term)
+		await create_timer(0.1).timeout
+		print("SEARCH %s => %s" % [term, search_count.text])
+		_assert(search_count.text.ends_with("件ヒット"), "Episode 3 search should complete for %s." % term)
+		_assert(not search_count.text.begins_with("0 "), "Episode 3 should contain %s." % term)
+
 	# 7. TOC Toggle Tests
 	var initial_toc_visibility := toc_panel.visible
 	toc_toggle.pressed.emit()
