@@ -613,6 +613,11 @@ func _on_form_submit() -> void:
 			state.add_rough_card(title, fact, owner, cost)
 
 	_card_form_panel.visible = false
+	# スクロールを最下部へ移動して新カードを即座に表示する
+	await get_tree().process_frame
+	var scroll := _card_list_container.get_parent() as ScrollContainer
+	if scroll:
+		scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
 
 
 func _on_export_pressed() -> void:
@@ -644,14 +649,19 @@ func _on_load_pressed() -> void:
 		_show_temporary_message("❌ 読込エラー: " + error_string(err))
 
 
+var _msg_generation := 0
+
 func _show_temporary_message(msg: String) -> void:
+	_msg_generation += 1
+	var my_gen := _msg_generation
 	var original_text := _warnings_label.text
 	var original_visible := _warnings_label.visible
 	_warnings_label.text = msg
 	_warnings_label.visible = true
 	await get_tree().create_timer(2.0).timeout
 
-	if _warnings_label.text == msg:
+	# 自分のメッセージがまだ表示中の世代なら元の状態へ戻す
+	if _msg_generation == my_gen:
 		_warnings_label.text = original_text
 		_warnings_label.visible = original_visible
 
