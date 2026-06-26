@@ -1240,6 +1240,7 @@ func _setup_tabletop_p1_features() -> void:
 	audit_pause_btn.text = "⏸️ Audit Pause (卓外一時停止)"
 	audit_pause_btn.add_theme_color_override("font_color", Color(0.35, 0.95, 0.95))
 	audit_pause_btn.pressed.connect(func():
+		state.audit_pauses_used = int(state.audit_pauses_used) + 1
 		state.log_audit_event("AUDIT_PAUSE_USED", {"reason": "player_safety_check"})
 		_show_temporary_message("⏸️ Audit Pause が要求されました。卓外で安全確認を行ってください。")
 	)
@@ -1249,6 +1250,7 @@ func _setup_tabletop_p1_features() -> void:
 	emergency_btn.text = "🚨 Emergency Injunction"
 	emergency_btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
 	emergency_btn.pressed.connect(func():
+		state.emergency_injunctions_used = int(state.emergency_injunctions_used) + 1
 		state.unprocessed_debt = max(0, int(state.unprocessed_debt) - 1)
 		state.log_audit_event("EMERGENCY_INJUNCTION_USED", {"effect": "debt_reduced_by_1"})
 		_show_temporary_message("🚨 Emergency Injunction 発動！未処理負債が -1 されました。")

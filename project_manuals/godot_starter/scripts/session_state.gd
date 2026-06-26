@@ -63,6 +63,27 @@ var protected_cards: Array[Dictionary] = []
 var classification_cards: Array[Dictionary] = []
 var audit_events: Array[Dictionary] = []
 
+var safety_checks_used: int = 0:
+	set(val):
+		if not _is_undoing:
+			_save_history()
+		safety_checks_used = val
+		state_changed.emit()
+
+var audit_pauses_used: int = 0:
+	set(val):
+		if not _is_undoing:
+			_save_history()
+		audit_pauses_used = val
+		state_changed.emit()
+
+var emergency_injunctions_used: int = 0:
+	set(val):
+		if not _is_undoing:
+			_save_history()
+		emergency_injunctions_used = val
+		state_changed.emit()
+
 var _history: Array[Dictionary] = []
 var _is_undoing := false
 
@@ -84,6 +105,9 @@ func _save_history() -> void:
 		"equipment_wear": equipment_wear,
 		"current_phase": current_phase,
 		"unprocessed_debt": unprocessed_debt,
+		"safety_checks_used": safety_checks_used,
+		"audit_pauses_used": audit_pauses_used,
+		"emergency_injunctions_used": emergency_injunctions_used,
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
@@ -106,7 +130,6 @@ func undo() -> bool:
 	_is_undoing = true
 	var snapshot: Dictionary = _history.pop_back()
 	
-	# Setting variables directly triggers setters, but _is_undoing blocks _save_history
 	credibility = snapshot["credibility"]
 	reality_contamination = snapshot["reality_contamination"]
 	audit_debt = snapshot["audit_debt"]
@@ -114,6 +137,9 @@ func undo() -> bool:
 	equipment_wear = snapshot["equipment_wear"]
 	current_phase = snapshot["current_phase"]
 	unprocessed_debt = snapshot["unprocessed_debt"]
+	safety_checks_used = snapshot.get("safety_checks_used", 0)
+	audit_pauses_used = snapshot.get("audit_pauses_used", 0)
+	emergency_injunctions_used = snapshot.get("emergency_injunctions_used", 0)
 	white_cards = snapshot["white_cards"]
 	gray_cards = snapshot["gray_cards"]
 	black_cards = snapshot["black_cards"]
@@ -126,6 +152,7 @@ func undo() -> bool:
 	audit_events = snapshot.get("audit_events", [])
 	
 	_is_undoing = false
+	log_audit_event("AUDIT_EVENT_REVERTED", {"reason": "undo_triggered"})
 	state_changed.emit()
 	return true
 
@@ -491,6 +518,9 @@ func to_dict() -> Dictionary:
 		"equipment_wear": equipment_wear,
 		"current_phase": current_phase,
 		"unprocessed_debt": unprocessed_debt,
+		"safety_checks_used": safety_checks_used,
+		"audit_pauses_used": audit_pauses_used,
+		"emergency_injunctions_used": emergency_injunctions_used,
 		"white_cards": white_cards.duplicate(true),
 		"gray_cards": gray_cards.duplicate(true),
 		"black_cards": black_cards.duplicate(true),
@@ -513,6 +543,9 @@ func from_dict(dict: Dictionary) -> void:
 	if dict.has("equipment_wear"): equipment_wear = int(dict["equipment_wear"])
 	if dict.has("current_phase"): current_phase = int(dict["current_phase"])
 	if dict.has("unprocessed_debt"): unprocessed_debt = int(dict["unprocessed_debt"])
+	safety_checks_used = int(dict.get("safety_checks_used", 0))
+	audit_pauses_used = int(dict.get("audit_pauses_used", 0))
+	emergency_injunctions_used = int(dict.get("emergency_injunctions_used", 0))
 
 	white_cards.clear()
 	gray_cards.clear()

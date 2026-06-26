@@ -179,13 +179,16 @@ func _run() -> void:
 	
 	var state_obj = app.get("state")
 	_assert(state_obj != null, "State object should be accessible.")
+	if state_obj != null and audit_pause_btn != null:
+		_assert(int(state_obj.audit_pauses_used) == 1, "Audit Pause should increment audit_pauses_used.")
 	
 	if emergency_btn != null and state_obj != null:
 		state_obj.unprocessed_debt = 3
-		var initial_debt := state_obj.unprocessed_debt
+		var initial_debt: int = int(state_obj.unprocessed_debt)
 		emergency_btn.pressed.emit()
 		await process_frame
 		_assert(state_obj.unprocessed_debt == initial_debt - 1, "Emergency Injunction should decrement unprocessed debt.")
+		_assert(int(state_obj.emergency_injunctions_used) == 1, "Emergency Injunction should increment emergency_injunctions_used.")
 	
 	# Verify Card Conversion (Gray -> Black)
 	# Card index 1 is Gray card (white was added first, then gray)
@@ -237,9 +240,18 @@ func _run() -> void:
 	save_btn.pressed.emit()
 	await process_frame
 	_assert(FileAccess.file_exists("user://session_log.json"), "user://session_log.json should be created after save.")
+	var saved_json_file := FileAccess.open("user://session_log.json", FileAccess.READ)
+	_assert(saved_json_file != null, "Should open saved JSON file.")
+	if saved_json_file != null:
+		var saved_json_text := saved_json_file.get_as_text()
+		saved_json_file.close()
+		_assert(saved_json_text.contains("\"audit_events\""), "Saved JSON should contain audit_events.")
+		_assert(saved_json_text.contains("CARD_CONVERTED"), "Saved JSON should contain card conversion audit event.")
+		_assert(saved_json_text.contains("AUDIT_PAUSE_USED"), "Saved JSON should contain Audit Pause event.")
+		_assert(saved_json_text.contains("EMERGENCY_INJUNCTION_USED"), "Saved JSON should contain Emergency Injunction event.")
 
 	# Mutate the state (decrease credibility and remove card)
-	var state_obj = app.get("state")
+	state_obj = app.get("state")
 	_assert(state_obj != null, "State object should be accessible.")
 	state_obj.credibility = 1
 	state_obj.remove_card("white", 0)
