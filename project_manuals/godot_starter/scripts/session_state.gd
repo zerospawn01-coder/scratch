@@ -305,7 +305,7 @@ func remove_card(type: String, index: int) -> void:
 	log_audit_event("CARD_DELETED", {"type": type, "title": card_title})
 	state_changed.emit()
 
-func convert_card(from_type: String, index: int, to_type: String) -> void:
+func convert_card(from_type: String, index: int, to_type: String, reason: String = "GM操作による変換") -> void:
 	_save_history()
 	var source_card: Dictionary
 	match from_type:
@@ -320,6 +320,17 @@ func convert_card(from_type: String, index: int, to_type: String) -> void:
 		"classification": source_card = classification_cards[index]
 	
 	var title: String = source_card.get("title", "名称不明")
+	
+	# If converting from black to protected (Emergency Injunction)
+	if from_type == "black" and to_type == "protected":
+		unprocessed_debt = max(0, unprocessed_debt - 1)
+		emergency_injunctions_used += 1
+		log_audit_event("EMERGENCY_INJUNCTION_USED", {
+			"target_type": "black",
+			"target_title": title,
+			"result": "protected",
+			"debt_delta": -1
+		})
 	
 	# Delete original card
 	match from_type:
@@ -351,24 +362,36 @@ func convert_card(from_type: String, index: int, to_type: String) -> void:
 			new_card["evidence"] = "変換による証拠"
 			new_card["linked_white_card"] = "対立する白カード名"
 			new_card["owner"] = source_card.get("owner", "GM")
+			if from_type == "gray":
+				new_card["source_type"] = "gray"
+				new_card["claim_status"] = "black_candidate"
 			black_cards.append(new_card)
 		"investigation":
 			new_card["unresolved_fact"] = source_card.get("sealed_truth", source_card.get("contradiction", "未確定事実"))
 			new_card["protection"] = "変換による保護理由"
 			new_card["next_hook"] = "次回への棘"
 			new_card["owner"] = source_card.get("owner", "GM")
+			if from_type == "black":
+				new_card["source_type"] = "black"
+				new_card["status"] = "未認定 / 要追加調査"
 			investigation_cards.append(new_card)
 		"protected":
 			new_card["preserved_item"] = source_card.get("sealed_truth", "保全対象")
 			new_card["restriction"] = "一時停止される処理"
 			new_card["next_agenda"] = "次フェーズ議題"
 			new_card["owner"] = source_card.get("owner", "GM")
+			if from_type == "black":
+				new_card["source_type"] = "black"
+				new_card["protected_by"] = "Emergency Injunction"
 			protected_cards.append(new_card)
 		"classification":
 			new_card["source_info"] = source_card.get("sealed_truth", "分類対象情報")
 			new_card["classification"] = "PUBLIC-SAFE"
 			new_card["rationale"] = "変換による分類理由"
 			new_card["owner"] = source_card.get("owner", "GM")
+			if from_type == "black":
+				new_card["source_type"] = "black"
+				new_card["public_status"] = "SEALED / LIMITED / PUBLIC-SAFE"
 			classification_cards.append(new_card)
 		"gray":
 			new_card["contradiction"] = source_card.get("what_was_sloppy", source_card.get("claim", "矛盾点"))
@@ -379,7 +402,8 @@ func convert_card(from_type: String, index: int, to_type: String) -> void:
 	log_audit_event("CARD_CONVERTED", {
 		"from": from_type,
 		"to": to_type,
-		"title": title
+		"title": title,
+		"reason": reason
 	})
 	state_changed.emit()
 
@@ -420,7 +444,10 @@ func export_to_markdown() -> String:
 	md += "- **監査負債**: %d/6\n" % audit_debt
 	md += "- **共犯クロック**: %d/6\n" % complicity_clock
 	md += "- **機材劣化**: %d/6\n" % equipment_wear
-	md += "- **未処理負債**: %d/10\n\n" % unprocessed_debt
+	md += "- **未処理負債**: %d/10\n" % unprocessed_debt
+	md += "- **安全確認回数**: %d\n" % safety_checks_used
+	md += "- **Audit Pause回数**: %d\n" % audit_pauses_used
+	md += "- **Emergency Injunction回数**: %d\n\n" % emergency_injunctions_used
 	
 	md += "## ■ 固定された白カード（公式ログ） [%d]\n" % white_cards.size()
 	for i in range(white_cards.size()):
@@ -445,7 +472,12 @@ func export_to_markdown() -> String:
 		md += "### %d. %s (担当PC: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
 		md += "- **裏の真実**: %s\n" % c["sealed_truth"]
 		md += "- **物証・証拠**: %s\n" % c["evidence"]
-		md += "- **対立・無力化対象（白カード）**: %s\n\n" % c["linked_white_card"]
+		md += "- **対立・無力化対象（白カード）**: %s\n" % c["linked_white_card"]
+		if c.has("source_type"):
+			md += "- **元カード種別**: %s\n" % c["source_type"]
+		if c.has("claim_status"):
+			md += "- **主張状況**: %s\n" % c["claim_status"]
+		md += "\n"
 
 	md += "## ■ 粗い演出カード（B級処理の責任） [%d]\n" % rough_cards.size()
 	for i in range(rough_cards.size()):
@@ -468,7 +500,12 @@ func export_to_markdown() -> String:
 		md += "### %d. %s (担当PC: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
 		md += "- **未確定事実**: %s\n" % c["unresolved_fact"]
 		md += "- **保護理由**: %s\n" % c["protection"]
-		md += "- **次回への棘**: %s\n\n" % c["next_hook"]
+		md += "- **次回への棘**: %s\n" % c["next_hook"]
+		if c.has("source_type"):
+			md += "- **元カード種別**: %s\n" % c["source_type"]
+		if c.has("status"):
+			md += "- **ステータス**: %s\n" % c["status"]
+		md += "\n"
 
 	md += "## ■ 疑惑カード（世論ノイズ） [%d]\n" % suspicion_cards.size()
 	for i in range(suspicion_cards.size()):
@@ -484,7 +521,12 @@ func export_to_markdown() -> String:
 		md += "### %d. %s (保全者: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
 		md += "- **保全対象**: %s\n" % c["preserved_item"]
 		md += "- **一時停止される処理**: %s\n" % c["restriction"]
-		md += "- **次フェーズ議題**: %s\n\n" % c["next_agenda"]
+		md += "- **次フェーズ議題**: %s\n" % c["next_agenda"]
+		if c.has("source_type"):
+			md += "- **元カード種別**: %s\n" % c["source_type"]
+		if c.has("protected_by"):
+			md += "- **保全者/手段**: %s\n" % c["protected_by"]
+		md += "\n"
 
 	md += "## ■ 公開区分カード（アーカイブ分類） [%d]\n" % classification_cards.size()
 	for i in range(classification_cards.size()):
@@ -492,7 +534,12 @@ func export_to_markdown() -> String:
 		md += "### %d. %s (分類者: %s / Phase %d)\n" % [i + 1, c["title"], c["owner"], c["phase"]]
 		md += "- **分類対象情報**: %s\n" % c["source_info"]
 		md += "- **公開区分**: %s\n" % c["classification"]
-		md += "- **分類理由**: %s\n\n" % c["rationale"]
+		md += "- **分類理由**: %s\n" % c["rationale"]
+		if c.has("source_type"):
+			md += "- **元カード種別**: %s\n" % c["source_type"]
+		if c.has("public_status"):
+			md += "- **公開ステータス**: %s\n" % c["public_status"]
+		md += "\n"
 		
 	md += "## ■ 監査ログ履歴 (Audit Log) [%d]\n" % audit_events.size()
 	for i in range(audit_events.size()):
@@ -543,9 +590,9 @@ func from_dict(dict: Dictionary) -> void:
 	if dict.has("equipment_wear"): equipment_wear = int(dict["equipment_wear"])
 	if dict.has("current_phase"): current_phase = int(dict["current_phase"])
 	if dict.has("unprocessed_debt"): unprocessed_debt = int(dict["unprocessed_debt"])
-	safety_checks_used = int(dict.get("safety_checks_used", 0))
-	audit_pauses_used = int(dict.get("audit_pauses_used", 0))
-	emergency_injunctions_used = int(dict.get("emergency_injunctions_used", 0))
+	if dict.has("safety_checks_used"): safety_checks_used = int(dict["safety_checks_used"])
+	if dict.has("audit_pauses_used"): audit_pauses_used = int(dict["audit_pauses_used"])
+	if dict.has("emergency_injunctions_used"): emergency_injunctions_used = int(dict["emergency_injunctions_used"])
 
 	white_cards.clear()
 	gray_cards.clear()

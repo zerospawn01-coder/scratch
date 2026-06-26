@@ -160,6 +160,9 @@ var _render_generation := 0
 var _comp_desc_label: Label
 var _guidelines_text: RichTextLabel
 var _unprocessed_debt_val: Label
+var _safety_check_btn: Button
+var _audit_pause_btn: Button
+var _emergency_injunction_btn: Button
 
 
 func _ready() -> void:
@@ -724,6 +727,13 @@ func _on_state_changed() -> void:
 		_warnings_label.text = "\n".join(warnings)
 		_warnings_label.visible = true
 
+	if _safety_check_btn:
+		_safety_check_btn.text = "安全確認 / Safety Check (使用数: %d)" % state.safety_checks_used
+	if _audit_pause_btn:
+		_audit_pause_btn.text = "Audit Pause (使用数: %d)" % state.audit_pauses_used
+	if _emergency_injunction_btn:
+		_emergency_injunction_btn.text = "Emergency Injunction (使用数: %d)" % state.emergency_injunctions_used
+
 	_rebuild_card_list()
 
 
@@ -920,6 +930,8 @@ func _rebuild_card_list() -> void:
 	for index in range(state.black_cards.size()):
 		var card: Dictionary = state.black_cards[index]
 		var desc := "真実: %s\n証拠: %s\n対立白: %s" % [card["sealed_truth"], card["evidence"], card["linked_white_card"]]
+		if card.has("claim_status"):
+			desc += "\n主張状況: %s" % card["claim_status"]
 		_create_card_ui_node("black", index, str(card["title"]), desc, "記録: %s / Phase %d" % [card["owner"], card["phase"]])
 
 	for index in range(state.rough_cards.size()):
@@ -935,6 +947,8 @@ func _rebuild_card_list() -> void:
 	for index in range(state.investigation_cards.size()):
 		var card: Dictionary = state.investigation_cards[index]
 		var desc := "未確定事実: %s\n保護理由: %s\n次回への棘: %s" % [card["unresolved_fact"], card["protection"], card["next_hook"]]
+		if card.has("status"):
+			desc += "\nステータス: %s" % card["status"]
 		_create_card_ui_node("investigation", index, str(card["title"]), desc, "記録: %s / Phase %d" % [card["owner"], card["phase"]])
 
 	for index in range(state.suspicion_cards.size()):
@@ -945,11 +959,15 @@ func _rebuild_card_list() -> void:
 	for index in range(state.protected_cards.size()):
 		var card: Dictionary = state.protected_cards[index]
 		var desc := "保全対象: %s\n停止処理: %s\n次フェーズ議題: %s" % [card["preserved_item"], card["restriction"], card["next_agenda"]]
+		if card.has("protected_by"):
+			desc += "\n保全手段: %s" % card["protected_by"]
 		_create_card_ui_node("protected", index, str(card["title"]), desc, "保全者: %s / Phase %d" % [card["owner"], card["phase"]])
 
 	for index in range(state.classification_cards.size()):
 		var card: Dictionary = state.classification_cards[index]
 		var desc := "対象: %s\n公開区分: %s\n理由: %s" % [card["source_info"], card["classification"], card["rationale"]]
+		if card.has("public_status"):
+			desc += "\n公開ステータス: %s" % card["public_status"]
 		_create_card_ui_node("classification", index, str(card["title"]), desc, "分類者: %s / Phase %d" % [card["owner"], card["phase"]])
 
 
@@ -1038,7 +1056,14 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 	var delete_button := Button.new()
 	delete_button.text = "×"
 	delete_button.flat = true
-	delete_button.pressed.connect(func(): state.remove_card(type, index))
+	if type == "protected":
+		delete_button.pressed.connect(func():
+			_confirm_action("本当に保全中カードを削除しますか？\n(保全された情報が完全に消失します)", func():
+				state.remove_card(type, index)
+			)
+		)
+	else:
+		delete_button.pressed.connect(func(): state.remove_card(type, index))
 	header.add_child(delete_button)
 	rows.add_child(header)
 
@@ -1080,49 +1105,64 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 	match type:
 		"gray":
 			var to_black := Button.new()
-			to_black.text = "➔黒"
+			to_black.text = "[黒カード化]"
 			to_black.flat = true
 			to_black.add_theme_font_size_override("font_size", 9)
-			to_black.pressed.connect(func(): state.convert_card("gray", index, "black"))
+			to_black.pressed.connect(func(): state.convert_card("gray", index, "black", "黒カード化"))
 			action_row.add_child(to_black)
 			
 			var to_white := Button.new()
-			to_white.text = "➔白"
+			to_white.text = "[白カード化]"
 			to_white.flat = true
 			to_white.add_theme_font_size_override("font_size", 9)
-			to_white.pressed.connect(func(): state.convert_card("gray", index, "white"))
+			to_white.pressed.connect(func(): state.convert_card("gray", index, "white", "白カード化"))
 			action_row.add_child(to_white)
 			
 			var to_invest := Button.new()
-			to_invest.text = "➔調査対象"
+			to_invest.text = "[調査対象化]"
 			to_invest.flat = true
 			to_invest.add_theme_font_size_override("font_size", 9)
-			to_invest.pressed.connect(func(): state.convert_card("gray", index, "investigation"))
+			to_invest.pressed.connect(func(): state.convert_card("gray", index, "investigation", "調査対象化"))
 			action_row.add_child(to_invest)
 		"black":
 			var to_protect := Button.new()
-			to_protect.text = "➔保全"
+			to_protect.text = "[緊急差止]"
 			to_protect.flat = true
 			to_protect.add_theme_font_size_override("font_size", 9)
-			to_protect.pressed.connect(func(): state.convert_card("black", index, "protected"))
+			to_protect.pressed.connect(func(): state.convert_card("black", index, "protected", "緊急差止"))
 			action_row.add_child(to_protect)
 			
 			var to_invest := Button.new()
-			to_invest.text = "➔調査対象"
+			to_invest.text = "[調査対象化]"
 			to_invest.flat = true
 			to_invest.add_theme_font_size_override("font_size", 9)
-			to_invest.pressed.connect(func(): state.convert_card("black", index, "investigation"))
+			to_invest.pressed.connect(func(): state.convert_card("black", index, "investigation", "調査対象化"))
 			action_row.add_child(to_invest)
 			
 			var to_class := Button.new()
-			to_class.text = "➔公開区分"
+			to_class.text = "[公開区分化]"
 			to_class.flat = true
 			to_class.add_theme_font_size_override("font_size", 9)
-			to_class.pressed.connect(func(): state.convert_card("black", index, "classification"))
+			to_class.pressed.connect(func():
+				_confirm_action("本当に黒カードを公開区分化しますか？", func():
+					state.convert_card("black", index, "classification", "公開区分化")
+				)
+			)
 			action_row.add_child(to_class)
+			
+			var to_white := Button.new()
+			to_white.text = "[白カード化]"
+			to_white.flat = true
+			to_white.add_theme_font_size_override("font_size", 9)
+			to_white.pressed.connect(func():
+				_confirm_action("本当に黒カードを白カード化しますか？\n(この操作はゲーム内の真実を公式事実で上書きします)", func():
+					state.convert_card("black", index, "white", "白カード化")
+				)
+			)
+			action_row.add_child(to_white)
 		"rough":
 			var inc_debt := Button.new()
-			inc_debt.text = "未処理負債+1"
+			inc_debt.text = "[未処理負債+1]"
 			inc_debt.flat = true
 			inc_debt.add_theme_font_size_override("font_size", 9)
 			inc_debt.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
@@ -1133,24 +1173,24 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 			action_row.add_child(inc_debt)
 			
 			var to_gray := Button.new()
-			to_gray.text = "➔灰"
+			to_gray.text = "[灰カード化]"
 			to_gray.flat = true
 			to_gray.add_theme_font_size_override("font_size", 9)
-			to_gray.pressed.connect(func(): state.convert_card("rough", index, "gray"))
+			to_gray.pressed.connect(func(): state.convert_card("rough", index, "gray", "灰カード化"))
 			action_row.add_child(to_gray)
 		"suspicion":
 			var to_gray := Button.new()
-			to_gray.text = "➔灰"
+			to_gray.text = "[灰カード化]"
 			to_gray.flat = true
 			to_gray.add_theme_font_size_override("font_size", 9)
-			to_gray.pressed.connect(func(): state.convert_card("suspicion", index, "gray"))
+			to_gray.pressed.connect(func(): state.convert_card("suspicion", index, "gray", "灰カード化"))
 			action_row.add_child(to_gray)
 			
 			var to_white := Button.new()
-			to_white.text = "➔白"
+			to_white.text = "[白カード化]"
 			to_white.flat = true
 			to_white.add_theme_font_size_override("font_size", 9)
-			to_white.pressed.connect(func(): state.convert_card("suspicion", index, "white"))
+			to_white.pressed.connect(func(): state.convert_card("suspicion", index, "white", "白カード化"))
 			action_row.add_child(to_white)
 
 	if action_row.get_child_count() > 0:
@@ -1159,6 +1199,16 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 	margin.add_child(rows)
 	panel.add_child(margin)
 	_card_list_container.add_child(panel)
+
+
+func _confirm_action(message: String, confirmed_callback: Callable) -> void:
+	var confirm := ConfirmationDialog.new()
+	confirm.dialog_text = message
+	confirm.confirmed.connect(confirmed_callback)
+	confirm.confirmed.connect(confirm.queue_free)
+	confirm.canceled.connect(confirm.queue_free)
+	add_child(confirm)
+	confirm.popup_centered()
 
 
 func _get_heading_level(line: String) -> int:
@@ -1236,26 +1286,33 @@ func _setup_tabletop_p1_features() -> void:
 	var safety_sep := HSeparator.new()
 	ops_rows.add_child(safety_sep)
 
-	var audit_pause_btn := Button.new()
-	audit_pause_btn.text = "⏸️ Audit Pause (卓外一時停止)"
-	audit_pause_btn.add_theme_color_override("font_color", Color(0.35, 0.95, 0.95))
-	audit_pause_btn.pressed.connect(func():
+	_safety_check_btn = Button.new()
+	_safety_check_btn.text = "安全確認 / Safety Check (使用数: 0)"
+	_safety_check_btn.add_theme_color_override("font_color", Color(0.2, 0.8, 0.2))
+	_safety_check_btn.pressed.connect(func():
+		state.safety_checks_used = int(state.safety_checks_used) + 1
+		state.log_audit_event("SAFETY_CHECK_USED", {"reason": "player_safety_confirmation"})
+		_show_temporary_message("🟢 安全確認 (Safety Check) が実行されました。状況は正常です。")
+	)
+	ops_rows.add_child(_safety_check_btn)
+
+	_audit_pause_btn = Button.new()
+	_audit_pause_btn.text = "Audit Pause (使用数: 0)"
+	_audit_pause_btn.add_theme_color_override("font_color", Color(0.35, 0.95, 0.95))
+	_audit_pause_btn.pressed.connect(func():
 		state.audit_pauses_used = int(state.audit_pauses_used) + 1
 		state.log_audit_event("AUDIT_PAUSE_USED", {"reason": "player_safety_check"})
 		_show_temporary_message("⏸️ Audit Pause が要求されました。卓外で安全確認を行ってください。")
 	)
-	ops_rows.add_child(audit_pause_btn)
+	ops_rows.add_child(_audit_pause_btn)
 
-	var emergency_btn := Button.new()
-	emergency_btn.text = "🚨 Emergency Injunction"
-	emergency_btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
-	emergency_btn.pressed.connect(func():
-		state.emergency_injunctions_used = int(state.emergency_injunctions_used) + 1
-		state.unprocessed_debt = max(0, int(state.unprocessed_debt) - 1)
-		state.log_audit_event("EMERGENCY_INJUNCTION_USED", {"effect": "debt_reduced_by_1"})
-		_show_temporary_message("🚨 Emergency Injunction 発動！未処理負債が -1 されました。")
+	_emergency_injunction_btn = Button.new()
+	_emergency_injunction_btn.text = "Emergency Injunction (使用数: 0)"
+	_emergency_injunction_btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
+	_emergency_injunction_btn.pressed.connect(func():
+		_show_temporary_message("🚨 緊急差止は、対象の黒カード上の[緊急差止]ボタンを押してください。")
 	)
-	ops_rows.add_child(emergency_btn)
+	ops_rows.add_child(_emergency_injunction_btn)
 
 	# Stagnation button
 	var stagnant_btn := Button.new()

@@ -135,12 +135,16 @@ The Godot-based **CRISIS ACTOR VTT Minimal** tool has been successfully updated 
 ## 10. CRISIS ACTOR VTT P2: Card Lifecycle & Audit Log
 *   **状態モデルと履歴の拡張**: [session_state.gd](../../scripts/session_state.gd)
     - **監査ログの記録構造**: `audit_events: Array[Dictionary]` を実装し、カード作成・削除・変換および安全アクションの使用等の履歴をタイムスタンプ付きで自動蓄積する構造を追加。
-    - **Undo/Redoとの統合**: `audit_events` もセッションスナップショットに含め、状態の巻き戻しや JSON セーブ・ロード時に一貫して復元されることを保証。
-    - **カード変換アクションの追加**: `convert_card(from_type, index, to_type)` を実装し、元のカードを削除しつつフィールドの一部を引き継いだ新しいタイプのカードへ動的変換するロジックを統合。
+    - **Undo/Redoとの統合 (P2暫定仕様)**: `audit_events` もセッションスナップショットに含め、状態の巻き戻しや JSON セーブ・ロード時に一貫して復元され、`undo()` 呼び出し時には `AUDIT_EVENT_REVERTED` が追記されます (P3にて操作Undoと監査ログを完全分離予定)。
+    - **カード変換アクションの追加**: `convert_card(from_type, index, to_type, reason)` を実装し、元のカードを削除しつつフィールドの一部を引き継いだ新しいタイプのカードへ動的変換するロジックを統合。各変換時には「変換元、変換先、対象カード名、実行理由」が `audit_events` へ記録されます。
     - **Markdownエクスポートの拡張**: `export_to_markdown()` にて、セッション中の「監査ログ履歴 (Audit Log)」を末尾にリスト表示する処理を追加。
 *   **卓上UIと安全操作の統合**: [main.gd](../../scripts/main.gd)
-    - **カード別変換アクションボタン**: `_create_card_ui_node()` 内で、カードタイプに応じて `➔黒` `➔白` `➔調査対象` `➔保全` `➔公開区分` `➔灰` 等の状態遷移ボタンを動的生成。
-    - **セーフティ機能のUI配置**: 操作パネル下部に `Audit Pause (卓外一時停止)` および `Emergency Injunction (緊急差止)` ボタンを配置し、押下時に警告表示および監査ログへのイベント記録、未処理負債 -1 のロジックと連動。
+    - **カード別変換アクションボタン**: `_create_card_ui_node()` 内で、カードタイプに応じて `[黒カード化]` `[白カード化]` `[調査対象化]` `[緊急差止]` `[公開区分化]` `[灰カード化]` 等の日本語による状態遷移ボタンを動的生成。
+    - **危険な操作の確認ダイアログ**: 黒 ➔ 白、黒 ➔ 公開区分、保全中カードの削除などの危険なアクションは、GMの誤操作を防ぐためにポップアップ確認画面 (`ConfirmationDialog`) を表示するよう実装。
+    - **セーフティ機能のUI分離**: 操作パネル下部に `[安全確認 / Safety Check]`、`[Audit Pause]`、`[Emergency Injunction]` の3つのボタンを明確に分離して配置。
+      - **Safety Check**: 全PL向け、回数制限なし、ゲーム内効果なし。
+      - **Audit Pause**: オーディター補助、GM管理、回数制限なし、ゲーム内効果なし。
+      - **Emergency Injunction**: オーディター用、GM管理。ボタンは単なるガイド表示として機能し、実際の緊急差止は黒カード上の `[緊急差止]` ボタンから実行されます。黒カード上のボタンを押した際、対象カードが保全中（Protected）に変換され、未処理負債 (`unprocessed_debt`) が -1 され、カウンターが加算されて `EMERGENCY_INJUNCTION_USED` イベントが監査ログに詳細付きで記録されます。
 *   **テストの検証保証**: [viewer_smoke_test.gd](../../tests/viewer_smoke_test.gd)
-    - 灰カード ➔ 黒カード ➔ 調査対象カード のような変換動作、および安全アクションの実行を自動テスト内でシミュレートし、アサーションを追加しました。
-    - JSONセーブ/ロード、およびMarkdownエクスポートを実行し、変換した状態や監査ログイベントが正常に復元・出力されることを検証。
+    - Godot 4.7 環境にて `viewer_smoke_test.gd` をヘッドレス実行し、灰カード ➔ 黒カード ➔ 調査対象・保全中への変換、Safety Check や Audit Pause などの安全ボタン押下、未処理負債の減少、およびJSONセーブ/ロードとMarkdown出力による監査ログ履歴の復元チェックをすべて自動検証し、`VIEWER_SMOKE_PASS` を達成しました。
+    - `visual_check.gd` においても動作を完遂し、`VISUAL_CHECK_COMPLETED` を確認しました。

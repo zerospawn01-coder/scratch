@@ -160,35 +160,35 @@ func _run() -> void:
 	_assert(card_list_container.get_child_count() == 9, "Card list container should contain all 9 card types.")
 
 	# 5.5. Safety Buttons and Card Conversion Tests
-	var ops_rows: VBoxContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows") as VBoxContainer
-	var audit_pause_btn: Button
-	var emergency_btn: Button
-	for child in ops_rows.get_children():
-		if child is Button:
-			if child.text.contains("Audit Pause"):
-				audit_pause_btn = child
-			elif child.text.contains("Emergency Injunction"):
-				emergency_btn = child
+	var safety_btn := app.get("_safety_check_btn") as Button
+	var audit_pause_btn := app.get("_audit_pause_btn") as Button
+	var emergency_btn := app.get("_emergency_injunction_btn") as Button
 	
-	_assert(audit_pause_btn != null, "Audit Pause button should be generated.")
-	_assert(emergency_btn != null, "Emergency Injunction button should be generated.")
-	
-	if audit_pause_btn != null:
-		audit_pause_btn.pressed.emit()
-		await process_frame
+	_assert(safety_btn != null, "Safety Check button should exist.")
+	_assert(audit_pause_btn != null, "Audit Pause button should exist.")
+	_assert(emergency_btn != null, "Emergency Injunction button should exist.")
 	
 	var state_obj = app.get("state")
 	_assert(state_obj != null, "State object should be accessible.")
-	if state_obj != null and audit_pause_btn != null:
-		_assert(int(state_obj.audit_pauses_used) == 1, "Audit Pause should increment audit_pauses_used.")
 	
+	if safety_btn != null and state_obj != null:
+		var prev_count := int(state_obj.safety_checks_used)
+		safety_btn.pressed.emit()
+		await process_frame
+		_assert(state_obj.safety_checks_used == prev_count + 1, "Safety Check should increment counter.")
+		
+	if audit_pause_btn != null and state_obj != null:
+		var prev_count := int(state_obj.audit_pauses_used)
+		audit_pause_btn.pressed.emit()
+		await process_frame
+		_assert(state_obj.audit_pauses_used == prev_count + 1, "Audit Pause should increment counter.")
+		
 	if emergency_btn != null and state_obj != null:
-		state_obj.unprocessed_debt = 3
-		var initial_debt: int = int(state_obj.unprocessed_debt)
+		var prev_count := int(state_obj.emergency_injunctions_used)
 		emergency_btn.pressed.emit()
 		await process_frame
-		_assert(state_obj.unprocessed_debt == initial_debt - 1, "Emergency Injunction should decrement unprocessed debt.")
-		_assert(int(state_obj.emergency_injunctions_used) == 1, "Emergency Injunction should increment emergency_injunctions_used.")
+		# Operations panel button doesn't trigger injunction directly, only card button does.
+		_assert(state_obj.emergency_injunctions_used == prev_count, "Operations panel Emergency Injunction button should not increment counter.")
 	
 	# Verify Card Conversion (Gray -> Black)
 	# Card index 1 is Gray card (white was added first, then gray)
@@ -199,22 +199,70 @@ func _run() -> void:
 		var card_vbox := margin_c.get_child(0) as VBoxContainer
 		var action_row: HBoxContainer
 		for child in card_vbox.get_children():
-			if child is HBoxContainer and child.get_child_count() > 0 and child.get_child(0) is Button and child.get_child(0).text.contains("➔"):
+			if child is HBoxContainer and child.get_child_count() > 0 and child.get_child(0) is Button and child.get_child(0).text.contains("["):
 				action_row = child
 				break
 		
 		_assert(action_row != null, "Action row with conversion buttons should exist on Gray card.")
 		if action_row != null:
-			var to_black_btn := action_row.get_child(0) as Button # ➔黒
-			_assert(to_black_btn != null and to_black_btn.text == "➔黒", "to_black button should be mapped.")
-			to_black_btn.pressed.emit()
-			await process_frame
+			var to_black_btn: Button
+			for btn in action_row.get_children():
+				if btn is Button and btn.text == "[黒カード化]":
+					to_black_btn = btn
+					break
+			_assert(to_black_btn != null, "to_black button should be mapped.")
+			if to_black_btn != null:
+				to_black_btn.pressed.emit()
+				await process_frame
 			
 			# Check conversion result
-			# Original was 9 cards (1 white, 1 gray, 1 black, 1 rough, etc.)
-			# Converted gray to black => now we should have 0 gray cards, 2 black cards.
 			_assert(state_obj.gray_cards.size() == 0, "Gray cards should be empty after conversion.")
 			_assert(state_obj.black_cards.size() == 2, "Black cards should have 2 items after conversion.")
+
+	# Verify Target-Card Emergency Injunction (Black -> Protected)
+	var target_black_panel: PanelContainer = null
+	for idx in range(card_list_container.get_child_count()):
+		var panel := card_list_container.get_child(idx) as PanelContainer
+		if panel != null:
+			var margin_c := panel.get_child(0) as MarginContainer
+			var card_vbox := margin_c.get_child(0) as VBoxContainer
+			var header := card_vbox.get_child(0) as HBoxContainer
+			var type_lbl := header.get_child(0) as Label
+			if type_lbl.text.contains("[黒]"):
+				target_black_panel = panel
+				break
+				
+	_assert(target_black_panel != null, "Black card UI panel should exist for Injunction test.")
+	if target_black_panel != null and state_obj != null:
+		state_obj.unprocessed_debt = 3
+		var initial_debt := int(state_obj.unprocessed_debt)
+		var prev_injunctions := int(state_obj.emergency_injunctions_used)
+		var prev_protected := int(state_obj.protected_cards.size())
+		
+		var margin_c := target_black_panel.get_child(0) as MarginContainer
+		var card_vbox := margin_c.get_child(0) as VBoxContainer
+		var action_row: HBoxContainer
+		for child in card_vbox.get_children():
+			if child is HBoxContainer and child.get_child_count() > 0 and child.get_child(0) is Button and child.get_child(0).text.contains("["):
+				action_row = child
+				break
+		
+		_assert(action_row != null, "Action row should exist on Black card.")
+		if action_row != null:
+			var inj_btn: Button = null
+			for btn in action_row.get_children():
+				if btn is Button and btn.text == "[緊急差止]":
+					inj_btn = btn
+					break
+			_assert(inj_btn != null, "[緊急差止] button should exist.")
+			if inj_btn != null:
+				inj_btn.pressed.emit()
+				await process_frame
+				
+				# Verify Injunction effects
+				_assert(state_obj.unprocessed_debt == initial_debt - 1, "Injunction should decrement unprocessed debt.")
+				_assert(state_obj.emergency_injunctions_used == prev_injunctions + 1, "Injunction should increment usage counter.")
+				_assert(state_obj.protected_cards.size() == prev_protected + 1, "Protected cards size should increase by 1.")
 
 	# 6. Save/Load and Exporter Test
 	# Clear existing test files
@@ -249,6 +297,7 @@ func _run() -> void:
 		_assert(saved_json_text.contains("CARD_CONVERTED"), "Saved JSON should contain card conversion audit event.")
 		_assert(saved_json_text.contains("AUDIT_PAUSE_USED"), "Saved JSON should contain Audit Pause event.")
 		_assert(saved_json_text.contains("EMERGENCY_INJUNCTION_USED"), "Saved JSON should contain Emergency Injunction event.")
+		_assert(saved_json_text.contains("\"safety_checks_used\""), "Saved JSON should contain safety_checks_used.")
 
 	# Mutate the state (decrease credibility and remove card)
 	state_obj = app.get("state")
@@ -285,10 +334,14 @@ func _run() -> void:
 		_assert(md_content.contains("Test Protected Card"), "Markdown should contain protected card title.")
 		_assert(md_content.contains("Test Classification Card"), "Markdown should contain classification card title.")
 		_assert(md_content.contains("未処理負債"), "Markdown should contain unprocessed debt parameter.")
+		_assert(md_content.contains("安全確認回数"), "Markdown should contain safety check counter parameter.")
+		_assert(md_content.contains("Audit Pause回数"), "Markdown should contain audit pause counter parameter.")
+		_assert(md_content.contains("Emergency Injunction回数"), "Markdown should contain injunction counter parameter.")
 		_assert(md_content.contains("## ■ 監査ログ履歴 (Audit Log)"), "Markdown should contain audit log history header.")
 		_assert(md_content.contains("CARD_CONVERTED"), "Markdown should log card conversion event.")
 		_assert(md_content.contains("AUDIT_PAUSE_USED"), "Markdown should log safety pause event.")
 		_assert(md_content.contains("EMERGENCY_INJUNCTION_USED"), "Markdown should log injunction event.")
+		_assert(md_content.contains("SAFETY_CHECK_USED"), "Markdown should log safety check event.")
 
 	await create_timer(2.1).timeout
 
