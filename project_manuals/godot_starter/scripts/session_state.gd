@@ -61,9 +61,19 @@ var investigation_cards: Array[Dictionary] = []
 var suspicion_cards: Array[Dictionary] = []
 var protected_cards: Array[Dictionary] = []
 var classification_cards: Array[Dictionary] = []
+var audit_events: Array[Dictionary] = []
 
 var _history: Array[Dictionary] = []
 var _is_undoing := false
+
+func log_audit_event(type: String, details: Dictionary) -> void:
+	var time_dict := Time.get_time_dict_from_system()
+	var timestamp := "%02d:%02d:%02d" % [time_dict["hour"], time_dict["minute"], time_dict["second"]]
+	audit_events.append({
+		"timestamp": timestamp,
+		"type": type,
+		"details": details
+	})
 
 func _save_history() -> void:
 	var snapshot := {
@@ -82,7 +92,8 @@ func _save_history() -> void:
 		"investigation_cards": investigation_cards.duplicate(true),
 		"suspicion_cards": suspicion_cards.duplicate(true),
 		"protected_cards": protected_cards.duplicate(true),
-		"classification_cards": classification_cards.duplicate(true)
+		"classification_cards": classification_cards.duplicate(true),
+		"audit_events": audit_events.duplicate(true)
 	}
 	_history.append(snapshot)
 	if _history.size() > 20:
@@ -112,6 +123,7 @@ func undo() -> bool:
 	suspicion_cards = snapshot["suspicion_cards"]
 	protected_cards = snapshot["protected_cards"]
 	classification_cards = snapshot["classification_cards"]
+	audit_events = snapshot.get("audit_events", [])
 	
 	_is_undoing = false
 	state_changed.emit()
@@ -127,6 +139,7 @@ func add_white_card(title: String, official_fact: String, hidden_cost: String, n
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "white", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_gray_card(title: String, contradiction: String, rot_stage: int, owner: String) -> void:
@@ -138,6 +151,7 @@ func add_gray_card(title: String, contradiction: String, rot_stage: int, owner: 
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "gray", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_black_card(title: String, sealed_truth: String, evidence: String, linked_white_card: String, owner: String) -> void:
@@ -150,6 +164,7 @@ func add_black_card(title: String, sealed_truth: String, evidence: String, linke
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "black", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_rough_card(title: String, what_was_sloppy: String, responsible_pc: String, future_risk: String) -> void:
@@ -161,6 +176,7 @@ func add_rough_card(title: String, what_was_sloppy: String, responsible_pc: Stri
 		"future_risk": future_risk,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "rough", "title": title, "owner": responsible_pc})
 	state_changed.emit()
 
 func add_dominant_white_card(title: String, premise: String, effect: String, exposure_risk: String, owner: String) -> void:
@@ -173,6 +189,7 @@ func add_dominant_white_card(title: String, premise: String, effect: String, exp
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "dominant", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_investigation_card(title: String, unresolved_fact: String, protection: String, next_hook: String, owner: String) -> void:
@@ -185,6 +202,7 @@ func add_investigation_card(title: String, unresolved_fact: String, protection: 
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "investigation", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_suspicion_card(title: String, claim: String, source: String, public_effect: String, owner: String) -> void:
@@ -197,6 +215,7 @@ func add_suspicion_card(title: String, claim: String, source: String, public_eff
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "suspicion", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_protected_card(title: String, preserved_item: String, restriction: String, next_agenda: String, owner: String) -> void:
@@ -209,6 +228,7 @@ func add_protected_card(title: String, preserved_item: String, restriction: Stri
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "protected", "title": title, "owner": owner})
 	state_changed.emit()
 
 func add_classification_card(title: String, source_info: String, classification: String, rationale: String, owner: String) -> void:
@@ -221,11 +241,61 @@ func add_classification_card(title: String, source_info: String, classification:
 		"owner": owner,
 		"phase": current_phase
 	})
+	log_audit_event("CARD_CREATED", {"type": "classification", "title": title, "owner": owner})
 	state_changed.emit()
 
 func remove_card(type: String, index: int) -> void:
 	_save_history()
+	var card_title := "名称不明"
 	match type:
+		"white":
+			card_title = white_cards[index].get("title", card_title)
+			white_cards.remove_at(index)
+		"gray":
+			card_title = gray_cards[index].get("title", card_title)
+			gray_cards.remove_at(index)
+		"black":
+			card_title = black_cards[index].get("title", card_title)
+			black_cards.remove_at(index)
+		"rough":
+			card_title = rough_cards[index].get("title", card_title)
+			rough_cards.remove_at(index)
+		"dominant":
+			card_title = dominant_white_cards[index].get("title", card_title)
+			dominant_white_cards.remove_at(index)
+		"investigation":
+			card_title = investigation_cards[index].get("title", card_title)
+			investigation_cards.remove_at(index)
+		"suspicion":
+			card_title = suspicion_cards[index].get("title", card_title)
+			suspicion_cards.remove_at(index)
+		"protected":
+			card_title = protected_cards[index].get("title", card_title)
+			protected_cards.remove_at(index)
+		"classification":
+			card_title = classification_cards[index].get("title", card_title)
+			classification_cards.remove_at(index)
+	log_audit_event("CARD_DELETED", {"type": type, "title": card_title})
+	state_changed.emit()
+
+func convert_card(from_type: String, index: int, to_type: String) -> void:
+	_save_history()
+	var source_card: Dictionary
+	match from_type:
+		"white": source_card = white_cards[index]
+		"gray": source_card = gray_cards[index]
+		"black": source_card = black_cards[index]
+		"rough": source_card = rough_cards[index]
+		"dominant": source_card = dominant_white_cards[index]
+		"investigation": source_card = investigation_cards[index]
+		"suspicion": source_card = suspicion_cards[index]
+		"protected": source_card = protected_cards[index]
+		"classification": source_card = classification_cards[index]
+	
+	var title: String = source_card.get("title", "名称不明")
+	
+	# Delete original card
+	match from_type:
 		"white": white_cards.remove_at(index)
 		"gray": gray_cards.remove_at(index)
 		"black": black_cards.remove_at(index)
@@ -235,6 +305,55 @@ func remove_card(type: String, index: int) -> void:
 		"suspicion": suspicion_cards.remove_at(index)
 		"protected": protected_cards.remove_at(index)
 		"classification": classification_cards.remove_at(index)
+	
+	# Build converted card
+	var new_card := {
+		"title": title,
+		"phase": current_phase
+	}
+	
+	match to_type:
+		"white":
+			new_card["official_fact"] = source_card.get("contradiction", source_card.get("sealed_truth", source_card.get("what_was_sloppy", source_card.get("claim", "公式事実"))))
+			new_card["hidden_cost"] = "変換による代償"
+			new_card["next_constraint"] = "変換による次回前提条件"
+			new_card["owner"] = source_card.get("owner", source_card.get("responsible_pc", "GM"))
+			white_cards.append(new_card)
+		"black":
+			new_card["sealed_truth"] = source_card.get("contradiction", source_card.get("official_fact", "裏の真実"))
+			new_card["evidence"] = "変換による証拠"
+			new_card["linked_white_card"] = "対立する白カード名"
+			new_card["owner"] = source_card.get("owner", "GM")
+			black_cards.append(new_card)
+		"investigation":
+			new_card["unresolved_fact"] = source_card.get("sealed_truth", source_card.get("contradiction", "未確定事実"))
+			new_card["protection"] = "変換による保護理由"
+			new_card["next_hook"] = "次回への棘"
+			new_card["owner"] = source_card.get("owner", "GM")
+			investigation_cards.append(new_card)
+		"protected":
+			new_card["preserved_item"] = source_card.get("sealed_truth", "保全対象")
+			new_card["restriction"] = "一時停止される処理"
+			new_card["next_agenda"] = "次フェーズ議題"
+			new_card["owner"] = source_card.get("owner", "GM")
+			protected_cards.append(new_card)
+		"classification":
+			new_card["source_info"] = source_card.get("sealed_truth", "分類対象情報")
+			new_card["classification"] = "PUBLIC-SAFE"
+			new_card["rationale"] = "変換による分類理由"
+			new_card["owner"] = source_card.get("owner", "GM")
+			classification_cards.append(new_card)
+		"gray":
+			new_card["contradiction"] = source_card.get("what_was_sloppy", source_card.get("claim", "矛盾点"))
+			new_card["rot_stage"] = 0
+			new_card["owner"] = source_card.get("responsible_pc", source_card.get("owner", "GM"))
+			gray_cards.append(new_card)
+	
+	log_audit_event("CARD_CONVERTED", {
+		"from": from_type,
+		"to": to_type,
+		"title": title
+	})
 	state_changed.emit()
 
 func update_gray_rot(index: int, new_rot: int) -> void:
@@ -348,6 +467,18 @@ func export_to_markdown() -> String:
 		md += "- **公開区分**: %s\n" % c["classification"]
 		md += "- **分類理由**: %s\n\n" % c["rationale"]
 		
+	md += "## ■ 監査ログ履歴 (Audit Log) [%d]\n" % audit_events.size()
+	for i in range(audit_events.size()):
+		var e = audit_events[i]
+		var details_str := ""
+		var details_dict: Dictionary = e.get("details", {})
+		for key in details_dict.keys():
+			details_str += "%s: %s, " % [key, details_dict[key]]
+		if details_str.ends_with(", "):
+			details_str = details_str.left(details_str.length() - 2)
+		md += "- **[%s] %s** — %s\n" % [e["timestamp"], e["type"], details_str]
+	md += "\n"
+	
 	return md
 
 
@@ -368,7 +499,8 @@ func to_dict() -> Dictionary:
 		"investigation_cards": investigation_cards.duplicate(true),
 		"suspicion_cards": suspicion_cards.duplicate(true),
 		"protected_cards": protected_cards.duplicate(true),
-		"classification_cards": classification_cards.duplicate(true)
+		"classification_cards": classification_cards.duplicate(true),
+		"audit_events": audit_events.duplicate(true)
 	}
 
 
@@ -391,6 +523,7 @@ func from_dict(dict: Dictionary) -> void:
 	suspicion_cards.clear()
 	protected_cards.clear()
 	classification_cards.clear()
+	audit_events.clear()
 
 	if dict.has("white_cards"):
 		for card in dict["white_cards"]:
@@ -419,6 +552,9 @@ func from_dict(dict: Dictionary) -> void:
 	if dict.has("classification_cards"):
 		for card in dict["classification_cards"]:
 			classification_cards.append(card)
+	if dict.has("audit_events"):
+		for event in dict["audit_events"]:
+			audit_events.append(event)
 			
 	_is_undoing = false
 	state_changed.emit()

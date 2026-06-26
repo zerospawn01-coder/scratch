@@ -159,6 +159,60 @@ func _run() -> void:
 	await _submit_card(add_classification_btn, form_panel, input_title, input_fact, input_cost, input_constraint, input_owner, form_submit_btn, "Test Classification Card", "Test archive item", "PUBLIC-SAFE", "Test classification reason", "PC1")
 	_assert(card_list_container.get_child_count() == 9, "Card list container should contain all 9 card types.")
 
+	# 5.5. Safety Buttons and Card Conversion Tests
+	var ops_rows: VBoxContainer = app.get_node("Root/Columns/OpsPanel/OpsMargin/OpsRows") as VBoxContainer
+	var audit_pause_btn: Button
+	var emergency_btn: Button
+	for child in ops_rows.get_children():
+		if child is Button:
+			if child.text.contains("Audit Pause"):
+				audit_pause_btn = child
+			elif child.text.contains("Emergency Injunction"):
+				emergency_btn = child
+	
+	_assert(audit_pause_btn != null, "Audit Pause button should be generated.")
+	_assert(emergency_btn != null, "Emergency Injunction button should be generated.")
+	
+	if audit_pause_btn != null:
+		audit_pause_btn.pressed.emit()
+		await process_frame
+	
+	var state_obj = app.get("state")
+	_assert(state_obj != null, "State object should be accessible.")
+	
+	if emergency_btn != null and state_obj != null:
+		state_obj.unprocessed_debt = 3
+		var initial_debt := state_obj.unprocessed_debt
+		emergency_btn.pressed.emit()
+		await process_frame
+		_assert(state_obj.unprocessed_debt == initial_debt - 1, "Emergency Injunction should decrement unprocessed debt.")
+	
+	# Verify Card Conversion (Gray -> Black)
+	# Card index 1 is Gray card (white was added first, then gray)
+	var gray_card_panel := card_list_container.get_child(1) as PanelContainer
+	_assert(gray_card_panel != null, "Gray card UI panel should exist.")
+	if gray_card_panel != null:
+		var margin_c := gray_card_panel.get_child(0) as MarginContainer
+		var card_vbox := margin_c.get_child(0) as VBoxContainer
+		var action_row: HBoxContainer
+		for child in card_vbox.get_children():
+			if child is HBoxContainer and child.get_child_count() > 0 and child.get_child(0) is Button and child.get_child(0).text.contains("➔"):
+				action_row = child
+				break
+		
+		_assert(action_row != null, "Action row with conversion buttons should exist on Gray card.")
+		if action_row != null:
+			var to_black_btn := action_row.get_child(0) as Button # ➔黒
+			_assert(to_black_btn != null and to_black_btn.text == "➔黒", "to_black button should be mapped.")
+			to_black_btn.pressed.emit()
+			await process_frame
+			
+			# Check conversion result
+			# Original was 9 cards (1 white, 1 gray, 1 black, 1 rough, etc.)
+			# Converted gray to black => now we should have 0 gray cards, 2 black cards.
+			_assert(state_obj.gray_cards.size() == 0, "Gray cards should be empty after conversion.")
+			_assert(state_obj.black_cards.size() == 2, "Black cards should have 2 items after conversion.")
+
 	# 6. Save/Load and Exporter Test
 	# Clear existing test files
 	if FileAccess.file_exists("user://session_log.json"):
@@ -219,6 +273,10 @@ func _run() -> void:
 		_assert(md_content.contains("Test Protected Card"), "Markdown should contain protected card title.")
 		_assert(md_content.contains("Test Classification Card"), "Markdown should contain classification card title.")
 		_assert(md_content.contains("未処理負債"), "Markdown should contain unprocessed debt parameter.")
+		_assert(md_content.contains("## ■ 監査ログ履歴 (Audit Log)"), "Markdown should contain audit log history header.")
+		_assert(md_content.contains("CARD_CONVERTED"), "Markdown should log card conversion event.")
+		_assert(md_content.contains("AUDIT_PAUSE_USED"), "Markdown should log safety pause event.")
+		_assert(md_content.contains("EMERGENCY_INJUNCTION_USED"), "Markdown should log injunction event.")
 
 	await create_timer(2.1).timeout
 

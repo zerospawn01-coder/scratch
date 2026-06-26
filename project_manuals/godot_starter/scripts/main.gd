@@ -1073,6 +1073,89 @@ func _create_card_ui_node(type: String, index: int, title: String, content: Stri
 		meta_row.add_child(rot_inc)
 
 	rows.add_child(meta_row)
+
+	var action_row := HBoxContainer.new()
+	action_row.add_theme_constant_override("separation", 4)
+	
+	match type:
+		"gray":
+			var to_black := Button.new()
+			to_black.text = "➔黒"
+			to_black.flat = true
+			to_black.add_theme_font_size_override("font_size", 9)
+			to_black.pressed.connect(func(): state.convert_card("gray", index, "black"))
+			action_row.add_child(to_black)
+			
+			var to_white := Button.new()
+			to_white.text = "➔白"
+			to_white.flat = true
+			to_white.add_theme_font_size_override("font_size", 9)
+			to_white.pressed.connect(func(): state.convert_card("gray", index, "white"))
+			action_row.add_child(to_white)
+			
+			var to_invest := Button.new()
+			to_invest.text = "➔調査対象"
+			to_invest.flat = true
+			to_invest.add_theme_font_size_override("font_size", 9)
+			to_invest.pressed.connect(func(): state.convert_card("gray", index, "investigation"))
+			action_row.add_child(to_invest)
+		"black":
+			var to_protect := Button.new()
+			to_protect.text = "➔保全"
+			to_protect.flat = true
+			to_protect.add_theme_font_size_override("font_size", 9)
+			to_protect.pressed.connect(func(): state.convert_card("black", index, "protected"))
+			action_row.add_child(to_protect)
+			
+			var to_invest := Button.new()
+			to_invest.text = "➔調査対象"
+			to_invest.flat = true
+			to_invest.add_theme_font_size_override("font_size", 9)
+			to_invest.pressed.connect(func(): state.convert_card("black", index, "investigation"))
+			action_row.add_child(to_invest)
+			
+			var to_class := Button.new()
+			to_class.text = "➔公開区分"
+			to_class.flat = true
+			to_class.add_theme_font_size_override("font_size", 9)
+			to_class.pressed.connect(func(): state.convert_card("black", index, "classification"))
+			action_row.add_child(to_class)
+		"rough":
+			var inc_debt := Button.new()
+			inc_debt.text = "未処理負債+1"
+			inc_debt.flat = true
+			inc_debt.add_theme_font_size_override("font_size", 9)
+			inc_debt.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
+			inc_debt.pressed.connect(func():
+				state.unprocessed_debt = int(state.unprocessed_debt) + 1
+				state.log_audit_event("CLOCK_CHANGED", {"property": "unprocessed_debt", "value": state.unprocessed_debt, "reason": "rough_card_applied"})
+			)
+			action_row.add_child(inc_debt)
+			
+			var to_gray := Button.new()
+			to_gray.text = "➔灰"
+			to_gray.flat = true
+			to_gray.add_theme_font_size_override("font_size", 9)
+			to_gray.pressed.connect(func(): state.convert_card("rough", index, "gray"))
+			action_row.add_child(to_gray)
+		"suspicion":
+			var to_gray := Button.new()
+			to_gray.text = "➔灰"
+			to_gray.flat = true
+			to_gray.add_theme_font_size_override("font_size", 9)
+			to_gray.pressed.connect(func(): state.convert_card("suspicion", index, "gray"))
+			action_row.add_child(to_gray)
+			
+			var to_white := Button.new()
+			to_white.text = "➔白"
+			to_white.flat = true
+			to_white.add_theme_font_size_override("font_size", 9)
+			to_white.pressed.connect(func(): state.convert_card("suspicion", index, "white"))
+			action_row.add_child(to_white)
+
+	if action_row.get_child_count() > 0:
+		rows.add_child(action_row)
+
 	margin.add_child(rows)
 	panel.add_child(margin)
 	_card_list_container.add_child(panel)
@@ -1148,6 +1231,29 @@ func _setup_tabletop_p1_features() -> void:
 	_comp_desc_label.add_theme_color_override("font_color", Color(1.0, 0.84, 0.0))
 	_comp_desc_label.visible = false
 	ops_rows.add_child(_comp_desc_label)
+
+	# Safety Buttons
+	var safety_sep := HSeparator.new()
+	ops_rows.add_child(safety_sep)
+
+	var audit_pause_btn := Button.new()
+	audit_pause_btn.text = "⏸️ Audit Pause (卓外一時停止)"
+	audit_pause_btn.add_theme_color_override("font_color", Color(0.35, 0.95, 0.95))
+	audit_pause_btn.pressed.connect(func():
+		state.log_audit_event("AUDIT_PAUSE_USED", {"reason": "player_safety_check"})
+		_show_temporary_message("⏸️ Audit Pause が要求されました。卓外で安全確認を行ってください。")
+	)
+	ops_rows.add_child(audit_pause_btn)
+
+	var emergency_btn := Button.new()
+	emergency_btn.text = "🚨 Emergency Injunction"
+	emergency_btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
+	emergency_btn.pressed.connect(func():
+		state.unprocessed_debt = max(0, int(state.unprocessed_debt) - 1)
+		state.log_audit_event("EMERGENCY_INJUNCTION_USED", {"effect": "debt_reduced_by_1"})
+		_show_temporary_message("🚨 Emergency Injunction 発動！未処理負債が -1 されました。")
+	)
+	ops_rows.add_child(emergency_btn)
 
 	# Stagnation button
 	var stagnant_btn := Button.new()
