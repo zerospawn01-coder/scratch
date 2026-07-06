@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Theme" path="res://resources/ui/premium_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://scripts/vfx/floating_text.gd" id="2_script"]
+
+[node name="FloatingText" type="Label"]
+offset_right = 100.0
+offset_bottom = 50.0
+theme = ExtResource("1_theme")
+theme_override_font_sizes/font_size = 28
+text = "+1 DATA"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_script")

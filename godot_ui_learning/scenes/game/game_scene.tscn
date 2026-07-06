@@ -1,0 +1,158 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game/game_manager.gd" id="1_manager"]
+[ext_resource type="Theme" path="res://resources/ui/premium_theme.tres" id="2_theme"]
+[ext_resource type="Shader" path="res://resources/shaders/bg_gradient.gdshader" id="3_shader"]
+[ext_resource type="Script" path="res://scripts/ui/interactive_button.gd" id="4_button"]
+[ext_resource type="Shader" path="res://resources/shaders/glitch_overlay.gdshader" id="5_glitch_shader"]
+[ext_resource type="Script" path="res://scripts/ui/glitch_overlay.gd" id="6_overlay"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg"]
+shader = ExtResource("3_shader")
+shader_parameter/color_top = Color(0.05, 0.08, 0.15, 1)
+shader_parameter/color_bottom = Color(0.12, 0.15, 0.25, 1)
+shader_parameter/speed = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glitch"]
+shader = ExtResource("5_glitch_shader")
+shader_parameter/strength = 0.0
+shader_parameter/scanline_density = 720.0
+shader_parameter/scanline_speed = 20.0
+shader_parameter/rgb_shift_px = 7.0
+shader_parameter/glitch_band_density = 24.0
+shader_parameter/noise_amount = 0.08
+shader_parameter/band_jitter = 0.15
+
+[node name="GameScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_manager")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="RootVBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/RootVBox/TopBar"]
+custom_minimum_size = Vector2(240, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "<- SYSTEM LOGOUT"
+script = ExtResource("4_button")
+
+[node name="Spacer2" type="Control" parent="MarginContainer/RootVBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DeployButton" type="Button" parent="MarginContainer/RootVBox/TopBar"]
+custom_minimum_size = Vector2(300, 70)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 28
+text = "RETURN TO MAP ->"
+script = ExtResource("4_button")
+
+[node name="Spacer" type="Control" parent="MarginContainer/RootVBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MainContent" type="VBoxContainer" parent="MarginContainer/RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Header" type="VBoxContainer" parent="MarginContainer/RootVBox/MainContent"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DataLabel" type="Label" parent="MarginContainer/RootVBox/MainContent/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "DATA: 0"
+horizontal_alignment = 1
+
+[node name="DpsLabel" type="Label" parent="MarginContainer/RootVBox/MainContent/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "DPS: 0"
+horizontal_alignment = 1
+
+[node name="HackingPanel" type="VBoxContainer" parent="MarginContainer/RootVBox/MainContent"]
+layout_mode = 2
+alignment = 1
+
+[node name="HackButton" type="Button" parent="MarginContainer/RootVBox/MainContent/HackingPanel"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+text = "MANUAL HACK"
+script = ExtResource("4_button")
+
+[node name="ShopPanel" type="VBoxContainer" parent="MarginContainer/RootVBox/MainContent"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="BuyMinerButton" type="Button" parent="MarginContainer/RootVBox/MainContent/ShopPanel"]
+custom_minimum_size = Vector2(500, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BUY AUTO-MINER (Cost: 10)"
+script = ExtResource("4_button")
+
+[node name="UpgradeHpButton" type="Button" parent="MarginContainer/RootVBox/MainContent/ShopPanel"]
+custom_minimum_size = Vector2(500, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "UPGRADE PILOT HP (Cost: 50)"
+script = ExtResource("4_button")
+
+[node name="UpgradeDmgButton" type="Button" parent="MarginContainer/RootVBox/MainContent/ShopPanel"]
+custom_minimum_size = Vector2(500, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "UPGRADE STRIKE DMG (Cost: 80)"
+script = ExtResource("4_button")
+
+[node name="GlitchOverlay" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_glitch")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+script = ExtResource("6_overlay")
