@@ -21,6 +21,7 @@ func _run() -> void:
 		get_tree().quit(1)
 		return
 
+
 	var test_node: Node = test_script.new()
 	if test_node == null:
 		push_error("Failed to instantiate test script: %s" % test_path)

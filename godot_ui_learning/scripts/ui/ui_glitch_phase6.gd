@@ -88,7 +88,7 @@ var _action_press_times: Array[float] = []
 var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
-	print("Phase 6: UI Glitch Overlay Scene Ready.")
+	Logger.info("PHASE6", "UI Glitch Overlay Scene Ready.")
 	_rng.randomize()
 	var use_glitch_fx: bool = bool(ProjectSettings.get_setting("ui_fx/use_glitch_fx", true))
 	glitch_overlay.visible = use_glitch_fx
@@ -533,7 +533,7 @@ func _resolve_enemy_attack() -> void:
 
 	if _enemy_intent_charge_up:
 		_set_hint_text("ENEMY %s: 次弾が強化されます" % _enemy_intent_name)
-		print("[PHASE6_AI] intent=%s | phase=charge" % _enemy_intent_id)
+		Logger.debug("PHASE6_AI", "intent=%s | phase=charge" % _enemy_intent_id)
 		_queue_next_enemy_intent()
 		return
 
@@ -566,7 +566,7 @@ func _resolve_enemy_attack() -> void:
 	_integrity = maxf(_integrity - damage, 0.0)
 	if combo_broken:
 		_combo = 0
-	print("[PHASE6_AI] intent=%s | damage=%.1f | guard_factor=%.2f" % [_enemy_intent_id, damage, _enemy_intent_guard_factor])
+	Logger.debug("PHASE6_AI", "intent=%s | damage=%.1f | guard_factor=%.2f" % [_enemy_intent_id, damage, _enemy_intent_guard_factor])
 	_queue_next_enemy_intent()
 
 func _reset_battle_visuals() -> void:
@@ -588,19 +588,19 @@ func _play_guard_ready_reaction() -> void:
 func _play_player_guard_reaction(damage: float) -> void:
 	player_portrait_label.text = "[#]"
 	_player_reaction_tween = _play_panel_reaction(player_panel, GUARD_FLASH_COLOR, 1.04, 0.2, 4.0)
-	print("[PHASE6_REACTION] target=player | type=guard | damage=%.1f" % damage)
+	Logger.debug("PHASE6_REACTION", "target=player | type=guard | damage=%.1f" % damage)
 
 func _play_player_hit_reaction(damage: float) -> void:
 	player_portrait_label.text = "[!]"
 	_player_reaction_tween = _play_panel_reaction(player_panel, PLAYER_HIT_COLOR, 0.96, 0.24, -8.0)
 	if glitch_overlay and glitch_overlay.visible:
 		glitch_overlay.boost()
-	print("[PHASE6_REACTION] target=player | type=hit | damage=%.1f" % damage)
+	Logger.debug("PHASE6_REACTION", "target=player | type=hit | damage=%.1f" % damage)
 
 func _play_enemy_hit_reaction(damage: float) -> void:
 	enemy_portrait_label.text = "<!>"
 	_enemy_reaction_tween = _play_panel_reaction(enemy_panel, ENEMY_HIT_COLOR, 0.96, 0.2, 8.0)
-	print("[PHASE6_REACTION] target=enemy | type=hit | damage=%.1f" % damage)
+	Logger.debug("PHASE6_REACTION", "target=enemy | type=hit | damage=%.1f" % damage)
 
 func _play_enemy_defeat_reaction() -> void:
 	_stop_reaction_tween(_enemy_reaction_tween)
@@ -611,7 +611,7 @@ func _play_enemy_defeat_reaction() -> void:
 	_enemy_reaction_tween.set_parallel(true)
 	_enemy_reaction_tween.tween_property(enemy_panel, "scale", Vector2(1.08, 1.08), 0.14).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_enemy_reaction_tween.tween_property(enemy_panel, "modulate", Color(0.4, 1.0, 0.7, 0.35), 0.35).set_delay(0.12)
-	print("[PHASE6_REACTION] target=enemy | type=defeat")
+	Logger.debug("PHASE6_REACTION", "target=enemy | type=defeat")
 
 func _play_panel_reaction(panel: Control, flash_color: Color, scale_target: float, duration: float, x_shake: float) -> Tween:
 	var tween := create_tween()
@@ -634,12 +634,12 @@ func _stop_reaction_tween(tween: Tween) -> void:
 
 func _log_result_snapshot(cleared: bool) -> void:
 	var outcome := "CLEARED" if cleared else "FAILED"
-	print("[PHASE6_RESULT] outcome=%s | status=%s | hint=%s | sub=%s" % [
-		outcome,
-		status_label.text,
-		hint_label.text,
-		result_sub_label.text
-	])
+	Logger.audit("PHASE6_RESULT", "Run finished", {
+		"outcome": outcome,
+		"status": status_label.text,
+		"hint": hint_label.text,
+		"sub": result_sub_label.text
+	})
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _run_active:

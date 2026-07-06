@@ -10,6 +10,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 GlobalData="*res://scripts/autoload/global_data.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
+Logger="*res://scripts/autoload/logger.gd"
 
 [display]
 

@@ -1,0 +1,26 @@
+name: Godot Smoke Tests
+
+on:
+  push:
+    branches: [ "main", "feature/*", "phase14*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Godot
+      uses: chickensoft-games/setup-godot@v2
+      with:
+        version: "4.2.2"
+        use-dotnet: false
+
+    - name: Run Master Smoke Tests
+      working-directory: godot_ui_learning
+      run: |
+        godot --headless -s scripts/test/run_all_smoke_tests.gd

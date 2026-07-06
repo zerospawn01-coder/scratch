@@ -5,7 +5,7 @@ extends Control
 @onready var quit_button: Button = $MarginContainer/VBoxContainer/ButtonContainer/QuitButton
 
 func _ready() -> void:
-	print("Phase 5: UI Premium (Shader & Neon) Scene Ready.")
+	Logger.info("PHASE5", "UI Premium (Shader & Neon) Scene Ready.")
 	
 	start_button.pressed.connect(_on_start_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
