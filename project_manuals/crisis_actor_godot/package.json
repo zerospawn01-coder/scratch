@@ -1,0 +1,12 @@
+{
+  "name": "crisis-actor-godot",
+  "version": "1.0.0",
+  "description": "CRISIS ACTOR VTT Simulator for Godot",
+  "scripts": {
+    "lint": "node tests/run_godot.js --headless --check-only",
+    "build": "node tests/run_godot.js --headless --check-only",
+    "test": "node tests/run_godot.js --headless -s tests/viewer_smoke_test.gd && node tests/run_godot.js --headless -s tests/scenario_expansion_tests.gd"
+  },
+  "author": "",
+  "license": "ISC"
+}
