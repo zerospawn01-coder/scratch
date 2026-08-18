@@ -1,0 +1,476 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/arena_floor.png" id="1_wqkem"]
+[ext_resource type="Texture2D" path="res://assets/facility_wall.png" id="2_ar3qm"]
+[ext_resource type="PackedScene" path="res://scenes/ally_bioroid.tscn" id="3_fhk3t"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_bioroid.tscn" id="4_5wpjy"]
+[ext_resource type="Script" path="res://scripts/arena_battle_manager.gd" id="5_b6664"]
+[ext_resource type="Script" path="res://scripts/auto_capture.gd" id="6_k5bt4"]
+
+[sub_resource type="Environment" id="Environment_u5brs"]
+background_mode = 1
+background_color = Color(0.03, 0.04, 0.06, 1)
+ambient_light_color = Color(0.06, 0.09, 0.12, 1)
+ambient_light_energy = 0.55
+tonemap_mode = 3
+tonemap_exposure = 1.05
+ssao_enabled = true
+ssao_radius = 1.4
+glow_enabled = true
+glow_intensity = 0.85
+glow_bloom = 0.15
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.04, 0.08, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dauk"]
+albedo_texture = ExtResource("1_wqkem")
+metallic = 0.4
+roughness = 0.45
+uv1_scale = Vector3(5, 5, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s5odh"]
+size = Vector2(14, 14)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ll52c"]
+size = Vector3(14, 0.1, 14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sq3q"]
+albedo_texture = ExtResource("2_ar3qm")
+metallic = 0.6
+roughness = 0.5
+uv1_scale = Vector3(8, 3, 1)
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_roql7"]
+size = Vector3(15, 6, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smfwd"]
+albedo_color = Color(0.06, 0.08, 0.1, 1)
+metallic = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_kucir"]
+size = Vector3(3.2, 0.7, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qdjj"]
+transparency = 1
+albedo_color = Color(0.2, 0.55, 0.8, 0.22)
+metallic = 0.6
+roughness = 0.04
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnmpq"]
+size = Vector3(7.2, 2.2, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lwxa"]
+albedo_color = Color(0.15, 0.18, 0.23, 1)
+metallic = 0.92
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_grlve"]
+size = Vector3(0.16, 2.4, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnat3"]
+albedo_color = Color(0.15, 0.18, 0.23, 1)
+metallic = 0.92
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_set2p"]
+size = Vector3(0.16, 2.4, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecrku"]
+albedo_color = Color(0.15, 0.18, 0.23, 1)
+metallic = 0.92
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_8p1p6"]
+size = Vector3(0.16, 2.4, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60uey"]
+albedo_color = Color(0.15, 0.18, 0.23, 1)
+metallic = 0.92
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_hr42m"]
+size = Vector3(0.16, 2.4, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3yioi"]
+albedo_color = Color(0.1, 0.12, 0.15, 1)
+metallic = 0.95
+roughness = 0.25
+
+[sub_resource type="BoxMesh" id="BoxMesh_qtcol"]
+size = Vector3(1.6, 5.5, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gf3qx"]
+albedo_color = Color(0.9, 0.1, 0.1, 1)
+emission_enabled = true
+emission = Color(1.8, 0.2, 0.2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aoocl"]
+size = Vector3(0.8, 0.22, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ejot"]
+albedo_color = Color(0.2, 0.25, 0.3, 1)
+metallic = 0.88
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v4s6g"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ipor1"]
+size = Vector3(0.25, 0.18, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irr46"]
+albedo_color = Color(0.9, 0.08, 0.08, 1)
+emission_enabled = true
+emission = Color(1.98, 0.176, 0.176, 2.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_i0vmp"]
+radius = 0.16
+height = 0.32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1epa"]
+albedo_color = Color(0.9, 0.08, 0.08, 1)
+emission_enabled = true
+emission = Color(1.98, 0.176, 0.176, 2.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0upc0"]
+radius = 0.16
+height = 0.32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_biv0j"]
+bg_color = Color(0.03, 0.05, 0.07, 0.92)
+border_width_bottom = 1
+border_color = Color(0.15, 0.35, 0.45, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x681s"]
+bg_color = Color(0.02, 0.04, 0.06, 0.82)
+border_width_left = 2
+border_color = Color(0, 0.8, 0.75, 0.6)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s27ts"]
+bg_color = Color(0.04, 0.02, 0.03, 0.82)
+border_width_right = 2
+border_color = Color(0.9, 0.2, 0.2, 0.6)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q27f2"]
+bg_color = Color(0.02, 0.04, 0.06, 0.88)
+border_width_top = 2
+border_color = Color(0.85, 0.65, 0.1, 0.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikuk1"]
+bg_color = Color(0.02, 0.03, 0.05, 0.88)
+
+[node name="ArenaBattleScene" type="Node3D" unique_id=1174717100]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1583490389]
+environment = SubResource("Environment_u5brs")
+
+[node name="CeilingFluorescent" type="DirectionalLight3D" parent="." unique_id=835794211]
+transform = Transform3D(0.9848077, -0.16317591, 0.05939118, 0, 0.34202015, 0.9396926, -0.17364818, -0.9254165, 0.3368241, 0, 0, 0)
+light_color = Color(0.82, 0.92, 1, 1)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="AnomalyAlertLight" type="OmniLight3D" parent="." unique_id=821858049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.5, -2)
+light_color = Color(1, 0.08, 0.08, 1)
+light_energy = 4.0
+omni_range = 9.0
+
+[node name="ObservationWindowLight" type="OmniLight3D" parent="." unique_id=665802937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, -3.8)
+light_color = Color(0.5, 0.85, 1, 1)
+light_energy = 1.8
+omni_range = 12.0
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=620452478]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor" unique_id=347079263]
+material_override = SubResource("StandardMaterial3D_7dauk")
+mesh = SubResource("PlaneMesh_s5odh")
+
+[node name="FloorCol" type="CollisionShape3D" parent="Floor" unique_id=1041267045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_ll52c")
+
+[node name="FacilityBackWall" type="MeshInstance3D" parent="." unique_id=1798795946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5)
+material_override = SubResource("StandardMaterial3D_7sq3q")
+mesh = SubResource("BoxMesh_roql7")
+
+[node name="SectorSignPlate" type="MeshInstance3D" parent="." unique_id=1996793540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 4.6, -4.72)
+material_override = SubResource("StandardMaterial3D_smfwd")
+mesh = SubResource("BoxMesh_kucir")
+
+[node name="ObservationGlass" type="MeshInstance3D" parent="." unique_id=917071949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.9, -4.72)
+material_override = SubResource("StandardMaterial3D_2qdjj")
+mesh = SubResource("BoxMesh_qnmpq")
+
+[node name="@MeshInstance3D@4" type="MeshInstance3D" parent="." unique_id=1036370837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 2.9, -4.65)
+material_override = SubResource("StandardMaterial3D_5lwxa")
+mesh = SubResource("BoxMesh_grlve")
+
+[node name="@MeshInstance3D@5" type="MeshInstance3D" parent="." unique_id=2055385783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 2.9, -4.65)
+material_override = SubResource("StandardMaterial3D_wnat3")
+mesh = SubResource("BoxMesh_set2p")
+
+[node name="@MeshInstance3D@6" type="MeshInstance3D" parent="." unique_id=1236339421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.9, -4.65)
+material_override = SubResource("StandardMaterial3D_ecrku")
+mesh = SubResource("BoxMesh_8p1p6")
+
+[node name="@MeshInstance3D@7" type="MeshInstance3D" parent="." unique_id=1375201012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 2.9, -4.65)
+material_override = SubResource("StandardMaterial3D_60uey")
+mesh = SubResource("BoxMesh_hr42m")
+
+[node name="LockdownGate" type="MeshInstance3D" parent="." unique_id=487078515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 2.75, -4)
+material_override = SubResource("StandardMaterial3D_3yioi")
+mesh = SubResource("BoxMesh_qtcol")
+
+[node name="LockdownLight" type="MeshInstance3D" parent="." unique_id=789377489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 4.4, -3.8)
+material_override = SubResource("StandardMaterial3D_gf3qx")
+mesh = SubResource("BoxMesh_aoocl")
+
+[node name="CeilingControlArm" type="MeshInstance3D" parent="." unique_id=53815672]
+transform = Transform3D(0.9396926, 0.24184474, 0.24184474, 0, 0.70710677, -0.70710677, -0.34202012, 0.664463, 0.664463, 1.5, 4.2, -3.5)
+material_override = SubResource("StandardMaterial3D_1ejot")
+mesh = SubResource("CylinderMesh_v4s6g")
+
+[node name="CameraHead" type="MeshInstance3D" parent="." unique_id=227025047]
+transform = Transform3D(0.9396926, -0.088521324, -0.33036608, 0, 0.9659258, -0.25881904, 0.34202012, 0.24321035, 0.90767336, 2, 3.1, -2.5)
+material_override = SubResource("StandardMaterial3D_1ejot")
+mesh = SubResource("BoxMesh_ipor1")
+
+[node name="Beacon" type="MeshInstance3D" parent="." unique_id=1738735037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2, 5.1, -4.7)
+material_override = SubResource("StandardMaterial3D_irr46")
+mesh = SubResource("SphereMesh_i0vmp")
+
+[node name="@MeshInstance3D@8" type="MeshInstance3D" parent="." unique_id=1445953564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 5.1, -4.7)
+material_override = SubResource("StandardMaterial3D_p1epa")
+mesh = SubResource("SphereMesh_0upc0")
+
+[node name="AllyBioroid" type="CharacterBody3D" parent="." unique_id=1438856088 instance=ExtResource("3_fhk3t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.2)
+
+[node name="EnemyBioroid" type="CharacterBody3D" parent="." unique_id=1007342629 instance=ExtResource("4_5wpjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -0.2)
+
+[node name="AuditObservationHUD" type="CanvasLayer" parent="." unique_id=1440337366]
+
+[node name="UIRoot" type="Control" parent="AuditObservationHUD" unique_id=343866989]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ObsHeader" type="Panel" parent="AuditObservationHUD/UIRoot" unique_id=303855828]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 26.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_biv0j")
+
+[node name="@Label@9" type="Label" parent="AuditObservationHUD/UIRoot/ObsHeader" unique_id=1378997244]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 12.0
+offset_bottom = 3.0
+text = " [OBSERVATION FEED] CONTAINMENT SECTOR-04 // CAM-02  |  AUDIT PROTOCOL: ACTIVE  |  SECURITY LEVEL 4"
+
+[node name="AllyAuditPanel" type="Panel" parent="AuditObservationHUD/UIRoot" unique_id=495745744]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 276.0
+offset_bottom = 176.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x681s")
+
+[node name="@Label@10" type="Label" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=832896874]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 10.0
+offset_bottom = 6.0
+text = "BIO-ALD-001 [ALDEN]"
+
+[node name="@Label@11" type="Label" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=94516933]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 26.0
+offset_right = 10.0
+offset_bottom = 26.0
+text = "STATUS: SUPPRESSED-STABLE"
+
+[node name="@Label@12" type="Label" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=1275719354]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 48.0
+offset_right = 10.0
+offset_bottom = 48.0
+text = "CONTROL: 85%  |  MUTATION: 14%"
+
+[node name="NeuralControlBar" type="ProgressBar" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=1812315134]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 248.0
+offset_bottom = 97.0
+value = 85.0
+show_percentage = false
+
+[node name="@Label@13" type="Label" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=768553368]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 84.0
+offset_right = 10.0
+offset_bottom = 84.0
+text = "CORE: 40%  |  VITAL: 100%"
+
+[node name="VitalIntegrityBar" type="ProgressBar" parent="AuditObservationHUD/UIRoot/AllyAuditPanel" unique_id=767299854]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 106.0
+offset_right = 248.0
+offset_bottom = 133.0
+value = 100.0
+show_percentage = false
+
+[node name="EnemyAuditPanel" type="Panel" parent="AuditObservationHUD/UIRoot" unique_id=1311329039]
+layout_mode = 0
+offset_left = 1004.0
+offset_top = 36.0
+offset_right = 1264.0
+offset_bottom = 176.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s27ts")
+
+[node name="@Label@14" type="Label" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=2128455100]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 10.0
+offset_bottom = 6.0
+text = "SUBJECT AF-09 [ANOMALY]"
+
+[node name="@Label@15" type="Label" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=1783398618]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 26.0
+offset_right = 10.0
+offset_bottom = 26.0
+text = "STATUS: CRITICAL-UNSTABLE"
+
+[node name="@Label@16" type="Label" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=750029972]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 48.0
+offset_right = 10.0
+offset_bottom = 48.0
+text = "BREACH IMMINENT (HOSTILE: 88%)"
+
+[node name="HostilityBar" type="ProgressBar" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=1500759522]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 248.0
+offset_bottom = 97.0
+value = 88.0
+show_percentage = false
+
+[node name="@Label@17" type="Label" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=921757803]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 84.0
+offset_right = 10.0
+offset_bottom = 84.0
+text = "SURGE: ACTIVE  |  VITAL: 100%"
+
+[node name="EnemyVitalBar" type="ProgressBar" parent="AuditObservationHUD/UIRoot/EnemyAuditPanel" unique_id=1625734327]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 106.0
+offset_right = 248.0
+offset_bottom = 133.0
+value = 100.0
+show_percentage = false
+
+[node name="AuditorInterventionPanel" type="Panel" parent="AuditObservationHUD/UIRoot" unique_id=71803412]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 595.0
+offset_right = 940.0
+offset_bottom = 690.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q27f2")
+
+[node name="@Label@18" type="Label" parent="AuditObservationHUD/UIRoot/AuditorInterventionPanel" unique_id=73900033]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 8.0
+text = "EMERGENCY AUDIT INTERVENTION:"
+
+[node name="@Label@19" type="Label" parent="AuditObservationHUD/UIRoot/AuditorInterventionPanel" unique_id=1497182372]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 16.0
+offset_bottom = 32.0
+text = "[Z]  NERVOUS CORE SUPPRESSION       (+20% Stability / Cancel Surge)"
+
+[node name="@Label@20" type="Label" parent="AuditObservationHUD/UIRoot/AuditorInterventionPanel" unique_id=247545963]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 58.0
+offset_right = 16.0
+offset_bottom = 58.0
+text = "[X]  GENE DISCHARGE OVERRIDE        (40 EP - Critical Suppression Burst)"
+
+[node name="SectorInfoLog" type="Panel" parent="AuditObservationHUD/UIRoot" unique_id=2134410201]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 595.0
+offset_right = 1264.0
+offset_bottom = 690.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ikuk1")
+
+[node name="@Label@21" type="Label" parent="AuditObservationHUD/UIRoot/SectorInfoLog" unique_id=48648638]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 12.0
+offset_bottom = 8.0
+text = "LOC: SECTOR-04 // ZONE-Λ
+CLEARANCE: LEVEL-4
+LOCKDOWN: ENGAGED
+AUDITOR: EXT-0044"
+
+[node name="ArenaBattleManager" type="Node" parent="." unique_id=418563044]
+script = ExtResource("5_b6664")
+
+[node name="ObservationCamera" type="Camera3D" parent="." unique_id=1702533897]
+transform = Transform3D(1, 0, 0, 0, 0.9781476, 0.2079117, 0, -0.2079117, 0.9781476, 0, 2.2, 4.6)
+
+[node name="AutoCapture" type="Node" parent="." unique_id=853079740]
+script = ExtResource("6_k5bt4")
+output_filename = "arena_demo.png"
+delay_seconds = 1.2

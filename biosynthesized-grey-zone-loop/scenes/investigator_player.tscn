@@ -1,0 +1,103 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/investigator_fsm.gd" id="1_lhn3o"]
+[ext_resource type="Texture2D" path="res://assets/investigator_spritesheet.png" id="2_2458b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htosx"]
+atlas = ExtResource("2_2458b")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k071h"]
+atlas = ExtResource("2_2458b")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86608"]
+atlas = ExtResource("2_2458b")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohbnb"]
+atlas = ExtResource("2_2458b")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2fc0"]
+atlas = ExtResource("2_2458b")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dp6s"]
+atlas = ExtResource("2_2458b")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpl1p"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htosx")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k071h")
+}],
+"loop": 1,
+"name": &"idle_side",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86608")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohbnb")
+}],
+"loop": 1,
+"name": &"walk_down",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2fc0")
+}],
+"loop": 1,
+"name": &"walk_side",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dp6s")
+}],
+"loop": 1,
+"name": &"walk_up",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pfmtc"]
+radius = 0.4
+
+[node name="Investigator" type="CharacterBody3D" unique_id=2042679507]
+script = ExtResource("1_lhn3o")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=988046803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2307693, 0)
+pixel_size = 0.03846154
+billboard = 2
+alpha_cut = 1
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_dpl1p")
+animation = &"idle_down"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=617964915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pfmtc")

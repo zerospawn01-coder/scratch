@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/floor_grid.png" id="1_6xo3s"]
+[ext_resource type="PackedScene" path="res://scenes/investigator_player.tscn" id="2_cb6wi"]
+[ext_resource type="Script" path="res://scripts/investigator_fsm.gd" id="3_mvf6d"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_bioroid.tscn" id="4_eumbd"]
+[ext_resource type="PackedScene" path="res://scenes/bioroid_pod.tscn" id="5_o8mi0"]
+[ext_resource type="Script" path="res://scripts/bioroid_synthesis_pod.gd" id="6_5sm1l"]
+[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="7_da7q2"]
+[ext_resource type="Script" path="res://scripts/auto_capture.gd" id="8_lxa51"]
+
+[sub_resource type="Environment" id="Environment_xgoaw"]
+background_mode = 1
+background_color = Color(0.03, 0.05, 0.08, 1)
+ambient_light_color = Color(0.06, 0.12, 0.16, 1)
+ambient_light_energy = 0.75
+tonemap_mode = 3
+tonemap_exposure = 1.05
+ssao_enabled = true
+ssao_radius = 1.4
+glow_enabled = true
+glow_intensity = 0.85
+glow_bloom = 0.15
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.04, 0.08, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f67h"]
+albedo_texture = ExtResource("1_6xo3s")
+metallic = 0.4
+roughness = 0.45
+uv1_scale = Vector3(6, 6, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vf4o1"]
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m1hi7"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpq2r"]
+albedo_color = Color(0.08, 0.11, 0.15, 1)
+metallic = 0.85
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_81end"]
+size = Vector3(18, 6, 1)
+
+[node name="ExplorationScene" type="Node3D" unique_id=426958919]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1244466100]
+environment = SubResource("Environment_xgoaw")
+
+[node name="DirLight" type="DirectionalLight3D" parent="." unique_id=630125113]
+transform = Transform3D(0.8660254, -0.3345653, 0.3715724, 0, 0.7431448, 0.6691306, -0.5, -0.5794841, 0.6435823, 0, 0, 0)
+light_color = Color(0.82, 0.94, 1, 1)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=777015619]
+
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor" unique_id=55739899]
+material_override = SubResource("StandardMaterial3D_3f67h")
+mesh = SubResource("PlaneMesh_vf4o1")
+
+[node name="FloorCol" type="CollisionShape3D" parent="Floor" unique_id=1536916925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_m1hi7")
+
+[node name="BackSecurityWall" type="MeshInstance3D" parent="." unique_id=1218015831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -6.5)
+material_override = SubResource("StandardMaterial3D_dpq2r")
+mesh = SubResource("BoxMesh_81end")
+
+[node name="Investigator" type="CharacterBody3D" parent="." unique_id=2042679507 instance=ExtResource("2_cb6wi")]
+script = ExtResource("3_mvf6d")
+
+[node name="EnemyBioroid" type="CharacterBody3D" parent="." unique_id=1007342629 instance=ExtResource("4_eumbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -1.5)
+
+[node name="BioroidPod" type="Node3D" parent="." unique_id=2027963495 instance=ExtResource("5_o8mi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0, -1.8)
+script = ExtResource("6_5sm1l")
+
+[node name="MainCamera" type="Camera3D" parent="." unique_id=2054761953]
+transform = Transform3D(1, 0, 0, 0, 0.8480481, 0.52991927, 0, -0.52991927, 0.8480481, 0, 2.6, 3.2)
+script = ExtResource("7_da7q2")
+target_path = NodePath("Investigator")
+offset = Vector3(0, 2.6, 3.2)
+
+[node name="AutoCapture" type="Node" parent="." unique_id=1000099274]
+script = ExtResource("8_lxa51")
+delay_seconds = 1.2

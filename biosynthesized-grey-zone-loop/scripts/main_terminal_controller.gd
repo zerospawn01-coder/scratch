@@ -1,0 +1,310 @@
+class_name MainTerminalController
+extends Control
+
+# =============================================================================
+# Aether Fountain — Sovereign Auditor Main Terminal & Scene Flow Controller
+# Philosophy: generation_is_not_authority (Unified deterministic loop)
+# Coordinates: Terminal -> Expedition -> Gene Mixer -> Arena -> Ledger -> Terminal
+# =============================================================================
+
+signal state_changed(new_state: int, state_name: String)
+signal loop_completed(run_id: String, audit_entry: Dictionary)
+
+enum State {
+	STATE_TERMINAL = 0,
+	STATE_EXPEDITION = 1,
+	STATE_GENE_MIXER = 2,
+	STATE_ARENA = 3,
+	STATE_LEDGER = 4
+}
+
+const STATE_NAMES: Dictionary = {
+	State.STATE_TERMINAL: "STATE_TERMINAL",
+	State.STATE_EXPEDITION: "STATE_EXPEDITION",
+	State.STATE_GENE_MIXER: "STATE_GENE_MIXER",
+	State.STATE_ARENA: "STATE_ARENA",
+	State.STATE_LEDGER: "STATE_LEDGER"
+}
+
+@export var current_state: State = State.STATE_TERMINAL
+
+# Manager references
+var bioroid_registry: Node = null
+var expedition_manager: Node = null
+
+# Active run tracking
+var current_run_index: int = 1
+var active_run_id: String = "RUN-0001"
+var active_fragments_available: int = 0
+var active_specimen_payload: Dictionary = {}
+var latest_audit_report: Dictionary = {}
+
+# UI Node References (Optional in headless, wired if present in scene)
+@onready var terminal_view: Control = get_node_or_null("Views/TerminalView")
+@onready var expedition_view: Control = get_node_or_null("Views/ExpeditionView")
+@onready var gene_mixer_view: Control = get_node_or_null("Views/GeneMixerView")
+@onready var arena_view: Control = get_node_or_null("Views/ArenaView")
+@onready var ledger_view: Control = get_node_or_null("Views/LedgerView")
+
+# Status UI Labels
+@onready var lbl_header_status: Label = get_node_or_null("Header/StatusLabel")
+@onready var lbl_prompt: Label = get_node_or_null("Footer/PromptLabel")
+@onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/LedgerSummaryLabel")
+@onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/RunContextLabel")
+
+func _ready() -> void:
+	_resolve_singletons_and_managers()
+	_update_run_id()
+	transition_to_state(State.STATE_TERMINAL)
+
+func _resolve_singletons_and_managers() -> void:
+	# If already resolved, do nothing
+	if bioroid_registry and expedition_manager:
+		return
+
+	# Resolve BioroidRegistry
+	if not bioroid_registry:
+		if is_inside_tree():
+			var r = get_tree().root
+			if r.has_node("BioroidRegistry"):
+				bioroid_registry = r.get_node("BioroidRegistry")
+		
+		if not bioroid_registry:
+			var reg_script = load("res://scripts/bioroid_registry.gd")
+			if reg_script:
+				bioroid_registry = reg_script.new()
+				bioroid_registry.name = "BioroidRegistry"
+				if is_inside_tree():
+					get_tree().root.add_child(bioroid_registry)
+
+	# Resolve ExpeditionManager
+	if not expedition_manager:
+		var exp_script = load("res://scripts/expedition_manager.gd")
+		if exp_script:
+			expedition_manager = exp_script.new()
+			expedition_manager.name = "ExpeditionManager"
+			add_child(expedition_manager)
+
+func _update_run_id() -> void:
+	var total_runs = 0
+	if bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
+		total_runs = bioroid_registry.get_audit_record_count()
+	current_run_index = total_runs + 1
+	active_run_id = "RUN-%04d" % current_run_index
+
+# =============================================================================
+# Input Handling & State Dispatcher
+# =============================================================================
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_pressed() or event.is_echo():
+		return
+
+	if event is InputEventKey:
+		var key = event as InputEventKey
+		if key.physical_keycode == KEY_SPACE or key.keycode == KEY_SPACE:
+			_handle_space_action()
+		elif key.physical_keycode == KEY_TAB or key.keycode == KEY_TAB:
+			_handle_tab_action()
+		elif key.physical_keycode == KEY_Z or key.keycode == KEY_Z:
+			_handle_z_action()
+		elif key.physical_keycode == KEY_X or key.keycode == KEY_X:
+			_handle_x_action()
+
+func _handle_space_action() -> void:
+	match current_state:
+		State.STATE_TERMINAL:
+			# Advance from Terminal to Expedition
+			transition_to_state(State.STATE_EXPEDITION)
+		State.STATE_EXPEDITION:
+			# In expedition, Space acts as alternative to explore sector
+			explore_sector()
+		State.STATE_GENE_MIXER:
+			# Synthesize and advance to Arena
+			synthesize_and_deploy()
+		State.STATE_ARENA:
+			# In Arena, Z/X are interventions; Space triggers battle start if not running
+			pass
+		State.STATE_LEDGER:
+			# Advance from Ledger back to Terminal (Completing 1 cycle)
+			transition_to_state(State.STATE_TERMINAL)
+
+func _handle_tab_action() -> void:
+	match current_state:
+		State.STATE_EXPEDITION:
+			# Return to lab from expedition
+			return_from_expedition_to_mixer()
+		State.STATE_GENE_MIXER:
+			# Skip to Arena if specimen already synthesized
+			if not active_specimen_payload.is_empty():
+				transition_to_state(State.STATE_ARENA)
+
+func _handle_z_action() -> void:
+	match current_state:
+		State.STATE_EXPEDITION:
+			explore_sector()
+		State.STATE_ARENA:
+			var arena_mgr = _get_arena_manager()
+			if arena_mgr and arena_mgr.has_method("execute_auditor_intervention"):
+				arena_mgr.execute_auditor_intervention("NERVOUS_CORE_SUPPRESSION")
+
+func _handle_x_action() -> void:
+	match current_state:
+		State.STATE_ARENA:
+			var arena_mgr = _get_arena_manager()
+			if arena_mgr and arena_mgr.has_method("execute_auditor_intervention"):
+				arena_mgr.execute_auditor_intervention("GENE_DISCHARGE_OVERRIDE")
+
+# =============================================================================
+# State Transitions & Sub-View Management
+# =============================================================================
+
+func transition_to_state(new_state: State) -> void:
+	current_state = new_state
+	var state_str = STATE_NAMES.get(new_state, "UNKNOWN")
+	print("[MainTerminal] Transitioning to: %s" % state_str)
+
+	_update_view_visibilities()
+	_on_enter_state(new_state)
+
+	state_changed.emit(new_state, state_str)
+
+func _on_enter_state(state: State) -> void:
+	match state:
+		State.STATE_TERMINAL:
+			_update_run_id()
+			_refresh_terminal_view()
+		State.STATE_EXPEDITION:
+			_refresh_expedition_view()
+		State.STATE_GENE_MIXER:
+			_refresh_gene_mixer_view()
+		State.STATE_ARENA:
+			_init_arena_view()
+		State.STATE_LEDGER:
+			_refresh_ledger_view()
+
+func _update_view_visibilities() -> void:
+	if terminal_view: terminal_view.visible = (current_state == State.STATE_TERMINAL)
+	if expedition_view: expedition_view.visible = (current_state == State.STATE_EXPEDITION)
+	if gene_mixer_view: gene_mixer_view.visible = (current_state == State.STATE_GENE_MIXER)
+	if arena_view: arena_view.visible = (current_state == State.STATE_ARENA)
+	if ledger_view: ledger_view.visible = (current_state == State.STATE_LEDGER)
+
+# =============================================================================
+# Domain Operations (Expedition -> Mixer -> Arena -> Ledger)
+# =============================================================================
+
+## 1. Expedition: Explore sector
+func explore_sector() -> Dictionary:
+	if not expedition_manager:
+		_resolve_singletons_and_managers()
+	
+	var incident = {}
+	if expedition_manager and expedition_manager.has_method("explore_next_sector"):
+		incident = expedition_manager.explore_next_sector()
+		var res = expedition_manager.get_resources()
+		active_fragments_available = res.get("gene_fragments", 0)
+		_refresh_expedition_view()
+	return incident
+
+## 2. Expedition -> Gene Mixer handoff
+func return_from_expedition_to_mixer() -> void:
+	if not expedition_manager:
+		_resolve_singletons_and_managers()
+
+	if expedition_manager and expedition_manager.has_method("return_to_lab"):
+		var handoff = expedition_manager.return_to_lab()
+		active_fragments_available = handoff.get("gene_fragments", 0)
+		print("[MainTerminal] Returned from expedition with %d fragments" % active_fragments_available)
+	
+	transition_to_state(State.STATE_GENE_MIXER)
+
+## 3. Gene Mixer: Synthesize and register payload for Arena
+func synthesize_and_deploy(custom_ratios: Dictionary = {}) -> Dictionary:
+	var GeneMixerController = load("res://scripts/gene_mixer_controller.gd")
+	var dna_ratios = custom_ratios
+	if dna_ratios.is_empty():
+		# Default proportional distribution based on available fragments
+		var frags = max(active_fragments_available, 1)
+		var ald = clampi(frags * 20 + 20, 30, 70)
+		var kln = clampi(frags * 10 + 15, 15, 40)
+		var chm = maxi(100 - ald - kln, 10)
+		dna_ratios = {"alden": ald, "tsellina": kln, "elphadia": chm}
+
+	var seed_val = current_run_index * 1337 + active_fragments_available * 41
+	var specimen = GeneMixerController.synthesize(dna_ratios, seed_val)
+
+	active_specimen_payload = {
+		"run_id": active_run_id,
+		"bioroid_id": specimen.get("individual_id", "BIO-ALD-DEF001"),
+		"bioroid_name": specimen.get("dominant_nation", "ALDEN").to_upper(),
+		"bioroid_hash": specimen.get("individual_hash", "0000000000000000"),
+		"dna_ratio": {"ald": dna_ratios["alden"], "kln": dna_ratios["tsellina"], "chm": dna_ratios["elphadia"]},
+		"stats": {
+			"vital_integrity": 100,
+			"neural_control": int(70 + dna_ratios["alden"] * 0.2),
+			"mutation_load": int(5 + dna_ratios["elphadia"] * 0.3),
+			"core_stress": 35,
+			"atk": int(22 + dna_ratios["alden"] * 0.25),
+			"ep": 60
+		},
+		"mutation_profile": {"surge_risk": "LOW", "instability_rate": 0.05},
+		"sprite_path": "res://assets/bioroids/sprites/bio_ald_def001_alden_front.png",
+		"generated_at": Time.get_datetime_string_from_system()
+	}
+
+	if bioroid_registry and bioroid_registry.has_method("register_deployment_payload"):
+		bioroid_registry.register_deployment_payload(active_specimen_payload)
+
+	transition_to_state(State.STATE_ARENA)
+	return active_specimen_payload
+
+## 4. Arena -> Ledger conclusion callback
+func on_arena_battle_concluded(player_won: bool, audit_record: Dictionary) -> void:
+	latest_audit_report = audit_record.duplicate(true)
+	print("[MainTerminal] Battle concluded. Result: %s" % latest_audit_report.get("result", "UNKNOWN"))
+	loop_completed.emit(active_run_id, latest_audit_report)
+	transition_to_state(State.STATE_LEDGER)
+
+# =============================================================================
+# View Refresh & Helpers
+# =============================================================================
+
+func _get_arena_manager() -> Node:
+	if arena_view:
+		return arena_view.get_node_or_null("ArenaBattleManager")
+	return null
+
+func _init_arena_view() -> void:
+	var arena_mgr = _get_arena_manager()
+	if arena_mgr:
+		if not arena_mgr.battle_ended.is_connected(on_arena_battle_concluded):
+			arena_mgr.battle_ended.connect(on_arena_battle_concluded)
+		if arena_mgr.has_method("start_arena_combat"):
+			arena_mgr.start_arena_combat()
+
+func _refresh_terminal_view() -> void:
+	if lbl_header_status:
+		lbl_header_status.text = "SOVEREIGN AUDITOR OS v1.0.4 | %s | ACTIVE CONSOLE" % active_run_id
+	if lbl_prompt:
+		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
+	if lbl_run_context:
+		lbl_run_context.text = "ACTIVE RUN: %s\nSPECIMEN: %s\nFRAGMENTS: %d" % [
+			active_run_id,
+			active_specimen_payload.get("bioroid_id", "AWAITING SYNTHESIS"),
+			active_fragments_available
+		]
+	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
+		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d" % bioroid_registry.get_audit_record_count()
+
+func _refresh_expedition_view() -> void:
+	if lbl_prompt:
+		lbl_prompt.text = "> EXPEDITION IN PROGRESS: [Z/SPACE] EXPLORE SECTOR | [TAB] RETURN TO LAB"
+
+func _refresh_gene_mixer_view() -> void:
+	if lbl_prompt:
+		lbl_prompt.text = "> GENE MIXER: [SPACE] SYNTHESIZE & DEPLOY TO ARENA | [TAB] ADVANCE"
+
+func _refresh_ledger_view() -> void:
+	if lbl_prompt:
+		lbl_prompt.text = "> AUDIT LEDGER COMMITTED: [SPACE] RETURN TO TERMINAL CONSOLE"

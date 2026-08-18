@@ -1,0 +1,263 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main_terminal_controller.gd" id="1_r8cqd"]
+[ext_resource type="Script" path="res://scripts/arena_battle_manager.gd" id="2_byiao"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ldxf"]
+bg_color = Color(0.04, 0.06, 0.09, 0.95)
+border_width_bottom = 1
+border_color = Color(0, 0.8, 0.75, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amwpv"]
+bg_color = Color(0.03, 0.05, 0.08, 0.85)
+border_width_left = 2
+border_color = Color(0, 0.8, 0.75, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8q6rh"]
+bg_color = Color(0.04, 0.06, 0.09, 0.95)
+border_width_top = 1
+border_color = Color(0, 0.8, 0.75, 0.7)
+
+[node name="MainTerminal" type="Control" unique_id=269351998]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_r8cqd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1863001176]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.03, 0.05, 1)
+
+[node name="Header" type="Panel" parent="." unique_id=1811797278]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 36.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ldxf")
+
+[node name="StatusLabel" type="Label" parent="Header" unique_id=729916255]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 16.0
+offset_bottom = 7.0
+text = "SOVEREIGN AUDITOR OS v1.0.4 | RUN-0001 | ACTIVE CONSOLE"
+
+[node name="Views" type="Control" parent="." unique_id=815628163]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TerminalView" type="Control" parent="Views" unique_id=1346093394]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SystemStatusPanel" type="Panel" parent="Views/TerminalView" unique_id=1195034992]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 384.0
+offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@22" type="Label" parent="Views/TerminalView/SystemStatusPanel" unique_id=549423122]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "[A] SYSTEM STATUS & PROTOCOLS"
+
+[node name="@Label@23" type="Label" parent="Views/TerminalView/SystemStatusPanel" unique_id=2083901275]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = 16.0
+offset_bottom = 50.0
+text = "• SECTOR: ZONE-Λ (CONTAINMENT)
+• MUTATION DRIFT: 0.04%
+• NEURAL THRESHOLD: 85%
+• SECURITY LEVEL: AUDITOR PRIORITY 4
+• AUTHORITY: SOVEREIGN LEDGER (DECISIVE)
+• AI STATUS: generation_is_not_authority"
+
+[node name="RunContextPanel" type="Panel" parent="Views/TerminalView" unique_id=1367907773]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 60.0
+offset_right = 872.0
+offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@24" type="Label" parent="Views/TerminalView/RunContextPanel" unique_id=35188300]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "[B] ACTIVE RUN OPERATION"
+
+[node name="RunContextLabel" type="Label" parent="Views/TerminalView/RunContextPanel" unique_id=1478922909]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = 16.0
+offset_bottom = 50.0
+text = "ACTIVE RUN: RUN-0001
+SPECIMEN: AWAITING SYNTHESIS
+FRAGMENTS: 0
+
+TARGET: SUBJECT AF-09 [LAMBDA ANOMALY]
+HOSTILITY: 88% (SURGE DETECTED)
+CONTAINMENT INTEGRITY: NORMAL"
+
+[node name="LedgerSummaryPanel" type="Panel" parent="Views/TerminalView" unique_id=258759077]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 60.0
+offset_right = 1256.0
+offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@25" type="Label" parent="Views/TerminalView/LedgerSummaryPanel" unique_id=318493364]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "[C] SOVEREIGN AUDIT LEDGER"
+
+[node name="LedgerSummaryLabel" type="Label" parent="Views/TerminalView/LedgerSummaryPanel" unique_id=753816016]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = 16.0
+offset_bottom = 50.0
+text = "COMMITTED LEDGER ENTRIES: 0
+
+INTERVENTIONS CONTRACT:
+• [Z] NERVOUS CORE STABILIZATION
+• [X] GENE DISCHARGE SUPPRESSION
+
+All outcomes recorded deterministically."
+
+[node name="ExpeditionView" type="Control" parent="Views" unique_id=513375510]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="@Panel@26" type="Panel" parent="Views/ExpeditionView" unique_id=2056162420]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 1080.0
+offset_bottom = 580.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@27" type="Label" parent="Views/ExpeditionView/@Panel@26" unique_id=528432258]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 24.0
+offset_bottom = 20.0
+text = "ZONE-Λ EXPEDITION SECTOR OBSERVER"
+
+[node name="ExpeditionInfoLabel" type="Label" parent="Views/ExpeditionView/@Panel@26" unique_id=412930093]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 70.0
+offset_right = 24.0
+offset_bottom = 70.0
+text = "Contaminated sectors detected.
+
+• [Z / SPACE]: EXPLORE NEXT SECTOR & HARVEST GENE FRAGMENTS
+• [TAB]: RETURN TO LAB WITH HARVESTED FRAGMENTS"
+
+[node name="GeneMixerView" type="Control" parent="Views" unique_id=197172340]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="@Panel@28" type="Panel" parent="Views/GeneMixerView" unique_id=120537085]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 1080.0
+offset_bottom = 580.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@30" type="Label" parent="Views/GeneMixerView/@Panel@28" unique_id=825601216]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 70.0
+offset_right = 24.0
+offset_bottom = 70.0
+text = "4-Layer Parametric Synthesis Ready.
+
+• [SPACE]: SYNTHESIZE SPECIMEN & DEPLOY TO CONTAINMENT ARENA
+• [TAB]: PROCEED WITH ACTIVE SPECIMEN"
+
+[node name="ArenaView" type="Control" parent="Views" unique_id=241033517]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ArenaBattleManager" type="Node" parent="Views/ArenaView" unique_id=1082420458]
+script = ExtResource("2_byiao")
+
+[node name="LedgerView" type="Control" parent="Views" unique_id=1014850816]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="@Panel@31" type="Panel" parent="Views/LedgerView" unique_id=988833126]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 1080.0
+offset_bottom = 580.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_amwpv")
+
+[node name="@Label@32" type="Label" parent="Views/LedgerView/@Panel@31" unique_id=1667556000]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 24.0
+offset_bottom = 20.0
+text = "SOVEREIGN AUDIT REPORT & DEPLOYMENT COMMIT"
+
+[node name="@Label@33" type="Label" parent="Views/LedgerView/@Panel@31" unique_id=1527984529]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 70.0
+offset_right = 24.0
+offset_bottom = 70.0
+text = "Combat outcome verified and committed to immutable Sovereign Audit Ledger.
+
+• [SPACE]: ACKNOWLEDGE REPORT & RETURN TO SOVEREIGN TERMINAL"
+
+[node name="Footer" type="Panel" parent="." unique_id=1775903400]
+layout_mode = 0
+offset_top = 680.0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8q6rh")
+
+[node name="PromptLabel" type="Label" parent="Footer" unique_id=87785272]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 16.0
+offset_bottom = 10.0
+text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
