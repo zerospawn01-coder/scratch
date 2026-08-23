@@ -52,11 +52,26 @@ var dialogue_controller: Node = null
 @onready var lbl_prompt: Label = get_node_or_null("Footer/PromptLabel")
 @onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/LedgerSummaryLabel")
 @onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/RunContextLabel")
+@onready var lbl_dialogue_feed: Label = get_node_or_null("Footer/DialogueFeedLabel")
 
 func _ready() -> void:
 	_resolve_singletons_and_managers()
 	_update_run_id()
+	_connect_dialogue_feed()
 	transition_to_state(State.STATE_TERMINAL)
+
+func _connect_dialogue_feed() -> void:
+	if not lbl_dialogue_feed:
+		lbl_dialogue_feed = get_node_or_null("Footer/DialogueFeedLabel")
+	if dialogue_controller and dialogue_controller.has_signal("line_displayed"):
+		if not dialogue_controller.line_displayed.is_connected(_on_dialogue_line_displayed):
+			dialogue_controller.line_displayed.connect(_on_dialogue_line_displayed)
+
+func _on_dialogue_line_displayed(speaker_id: String, speaker_name: String, text: String, emotion: String) -> void:
+	if not lbl_dialogue_feed:
+		lbl_dialogue_feed = get_node_or_null("Footer/DialogueFeedLabel")
+	if lbl_dialogue_feed:
+		lbl_dialogue_feed.text = "[COMM: %s] %s" % [speaker_name.to_upper(), text]
 
 func _resolve_singletons_and_managers() -> void:
 	# If already resolved, do nothing
@@ -93,6 +108,7 @@ func _resolve_singletons_and_managers() -> void:
 			dialogue_controller = dlg_script.new()
 			dialogue_controller.name = "DialogueController"
 			add_child(dialogue_controller)
+			_connect_dialogue_feed()
 
 func _update_run_id() -> void:
 	var total_runs = 0
