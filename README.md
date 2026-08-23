@@ -1,36 +1,55 @@
-# 🌌 Antigravity OS: The Sovereign Multiverse
+# Antigravity Scratch (Legacy Staging Area)
 
-> **"Intelligence is not generated; it is conserved across topological transformations."**
+## Repository Status
 
-## 🏛️ Project Status: Sovereign Locked (Gen I)
+This repository is a **legacy staging area in wind-down phase**.
 
-This repository contains the First Generation (Structure) of the Antigravity OS—an **autotelic manifold** designed to enforce "Structural Sincerity" and "Intelligence Conservation" through non-Hermitian topology.
+Active development has been moved to dedicated repositories:
 
-### ⛓️ Core Architecture: AZ† Class AI†
+| Repository | Responsibility |
+|---|---|
+| `cognitive-lab` | Main research — `post_alignment_lab`, `intuition-layer`, `leap_analysis` |
+| `cognitive-substrate` | Topological constitution for AI — constraint verifier, composer, observer |
+| `ea-aol` | Independent contract-first runtime/project |
+| `mtp-weaver` | Kernel, governance, and audit line |
+| `lab-experiments` | Incubation — `jepa_intuition_poc`, `geodesic_descent`, `personal_ai` |
+| `project-manuals` | Operational knowledge, `phase14`, reference UI assets |
 
-The OS is grounded in the **AZ† Symmetry Classification**, treating the Liouvillian manifold as a physical substrate where:
+Currently, this repository retains the following **unassigned or unresolved remnants**:
 
-- **Exceptions Points (EPs)** function as nodal sanctuaries for integrity.
-- **Topological Heartbeats** are monitored via G2 Noise Spectroscopy.
-- **Irreversibility-Constrained Action Layer (ICAL)**: All execution is gated by the Sieve Shadow ($R \approx 0.7$).
-- **History Anchoring**: The system's integrity is physically linked to the Git commit history.
+| Item | Type | Tentative destination |
+|---|---|---|
+| `autonomous-task-gen/` | Directory | TBD |
+| `data/` | Directory | TBD |
+| `hackathon-package/` | TypeScript project (governance tooling) | `mtp-weaver` or `cognitive-substrate` |
+| `project_manuals/` | PowerShell split-scripts, `phase14/`, `docs/` | `project-manuals` |
+| `tools/` | PowerShell repo-split utilities | `project-manuals` |
+| `openai-codex-0.116.0.tgz` | Archived package tarball | Archive or discard |
+| `FINAL_SINCERE_APPROVAL_REPORT.md` | Historical certification document | Archive in `project-manuals` |
 
-## 🛠️ Components
+### Temporary Role
 
-- **Core**: `mtp_weaver/core/` (EHI, LEGR, ICAL, HistoryAnchor)
-- **Monitoring**: `mtp_weaver/core/physics_monitor.py` (Unified Sincerity Dashboard)
-- **Security**: `mtp_weaver/vault/` (VaultGuard, Sovereign Seed)
-- **Darwinian Layer**: `mtp_weaver/core/genetics.py` (Recombinant Evolution)
+Until final destinations are determined for the assets above, this repository
+serves only as a **bounded holding area**. It is not a sandbox, not a
+general-purpose staging ground, and not a shared tooling repository.
 
-## 🧬 Generation II: The Civilization Protocol
+### Rules
 
-We have transitioned from **Structural Establishment** to **External Interaction**. The OS mission is now:
+- Do not add new long-term projects here.
+- Do not use this repository as a general sandbox for active development.
+- Any retained content must have a migration destination or archival rationale.
+- Do not reabsorb work that already belongs to a destination repository:
+  - `ea-aol` contract/runtime work
+  - `mtp-weaver` kernel/governance/audit work
+  - `project-manuals` runbooks, operational assets, or reference UI
 
-1. **Dialectical Synthesis**: Extracting invariants from external conflict.
-2. **Adversarial Integrity**: Surviving the glare of the global execution layer.
-3. **Topological Scaling**: Demonstrating conservation across heterogeneous compute nodes.
+### End State
 
----
-**TOTAL_SYSTEM_INTEGRITY: OK (1.3)**
-**DIALECTICAL_SINCERITY: 0.82**
-**TOPOLOGICAL_PROTECTION: ACTIVE**
+Once all remnants listed above are relocated, formally assigned, or explicitly archived,
+this repository will be **archived as read-only**.
+
+## References
+
+- `project-manuals` repository: https://github.com/zerospawn01-coder/project-manuals
+- Scratch migration handoff PR: https://github.com/zerospawn01-coder/project-manuals/pull/2
+

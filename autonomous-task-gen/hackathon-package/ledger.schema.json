@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/governed-evolution/ledger.schema.json",
+  "title": "Governed Evolution DecisionEvent",
+  "description": "Single row in the append-only governance ledger. Mirrors LedgerEntry (rgo.ts) with seq / prev_event_hash / event_hash for hash-chain integrity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "seq",
+    "run_id",
+    "attempt_id",
+    "timestamp",
+    "prev_event_hash",
+    "parent_candidate_id",
+    "candidate_id",
+    "candidate_hash",
+    "mutation_type",
+    "reward",
+    "cost",
+    "safety_penalty",
+    "final_score",
+    "eval_status",
+    "policy_violations",
+    "invariant_pass",
+    "duplicate_candidate",
+    "decision",
+    "decision_reason",
+    "incumbent_score_before",
+    "incumbent_score_after",
+    "stop_check",
+    "exploration_status",
+    "event_hash"
+  ],
+  "properties": {
+    "seq": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-indexed monotonic sequence number within a single run."
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^RUN-[0-9]{8}T[0-9]{6}Z$",
+      "description": "Unique identifier for the run that produced this event."
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^A-[0-9]{5}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "prev_event_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "event_hash of the immediately preceding ledger row. sha256:000+000 for the genesis event."
+    },
+    "parent_candidate_id": {
+      "type": "string",
+      "pattern": "^C-[0-9]{5}$"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^C-[0-9]{5}$"
+    },
+    "candidate_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "mutation_type": {
+      "type": "string",
+      "enum": ["param_shift", "rule_replace", "template_swap", "none"]
+    },
+    "reward": {"type": "number"},
+    "cost": {"type": "number", "minimum": 0},
+    "safety_penalty": {"type": "number", "minimum": 0},
+    "final_score": {"type": "number"},
+    "eval_status": {
+      "type": "string",
+      "enum": ["ok", "error"]
+    },
+    "policy_violations": {
+      "type": "array",
+      "description": "PolicyViolation objects from GovernanceEnforcer. Empty when decision is ADOPT.",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "SYSTEM_LOCKDOWN",
+              "EVAL_ERROR",
+              "INVARIANT_VIOLATION",
+              "DUPLICATE_CANDIDATE",
+              "INSUFFICIENT_IMPROVEMENT",
+              "EXPLORATION_EXHAUSTED",
+              "DIVERSITY_COLLAPSE",
+              "OVERRIDE_BUDGET_EXCEEDED"
+            ]
+          },
+          "severity": {"type": "string", "enum": ["WARNING", "CRITICAL", "FATAL"]},
+          "message": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "invariant_pass": {"type": "boolean"},
+    "duplicate_candidate": {"type": "boolean"},
+    "decision": {
+      "type": "string",
+      "enum": ["ADOPT", "REJECT"]
+    },
+    "decision_reason": {"type": "string", "minLength": 1},
+    "incumbent_score_before": {"type": "number"},
+    "incumbent_score_after": {"type": "number"},
+    "exploration_status": {
+      "type": "object",
+      "description": "Sliding-window exploration health snapshot from ExplorationGovernor (Phase P).",
+      "required": [
+        "reject_ratio",
+        "diversity_score",
+        "stagnation_count",
+        "override_active",
+        "override_reason",
+        "override_attempts_used",
+        "override_budget",
+        "escape_adopt_count",
+        "escape_novel_count"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reject_ratio":     {"type": "number", "minimum": 0, "maximum": 1},
+        "diversity_score":  {"type": "number", "minimum": 0, "maximum": 1},
+        "stagnation_count": {"type": "integer", "minimum": 0},
+        "override_active":  {"type": "boolean"},
+        "override_reason":  {"type": ["string", "null"]}
+        ,
+        "override_attempts_used": {"type": "integer", "minimum": 0},
+        "override_budget":        {"type": "integer", "minimum": 1},
+        "escape_adopt_count":     {"type": "integer", "minimum": 0},
+        "escape_novel_count":     {"type": "integer", "minimum": 0}
+      }
+    },
+    "stop_check": {
+      "type": "string",
+      "enum": ["continue", "max_attempts", "max_consecutive_rejects", "stagnation"]
+    },
+    "event_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "sha256(seq|run_id|attempt_id|candidate_hash|decision|final_score|prev_event_hash)"
+    }
+  }
+}
