@@ -74,11 +74,22 @@ static func synthesize(dna_ratios: Dictionary, world_seed: int = 1337) -> Dictio
 	var max_hp: int = int(140 + (120 * r_tsellina) + (60 * r_elphadia))
 	var durability: float = (50.0 * r_tsellina) + (20.0 * r_alden)
 	var analysis_efficiency: float = (100.0 * r_alden) + (15.0 * r_tsellina)
+	
+	# 非線形変異率計算（三国の親和性と臨界歪み）
 	var mutation_rate: float = clampf(
-		(r_elphadia * 0.95) + (absf(r_alden - r_tsellina) * 0.15),
+		(r_elphadia * 0.95) + (absf(r_alden - r_tsellina) * 0.15) + (sin(r_elphadia * PI) * 0.10),
 		0.0, 1.0
 	)
 	var is_lambda_anomaly: bool = (mutation_rate >= 0.85)
+
+	# アーキタイプ分類 (CERAMIC_STRIKER / TITAN_AEGIS / CHIMERA_SURGE / BALANCED_PROTOCOL)
+	var archetype := "BALANCED_PROTOCOL"
+	if r_alden >= 0.60:
+		archetype = "CERAMIC_STRIKER"
+	elif r_tsellina >= 0.60:
+		archetype = "TITAN_AEGIS"
+	elif r_elphadia >= 0.60:
+		archetype = "CHIMERA_SURGE"
 
 	# 決定論的個体ハッシュの生成 (SHA-256)
 	var seed_hasher = HashingContext.new()
@@ -95,6 +106,7 @@ static func synthesize(dna_ratios: Dictionary, world_seed: int = 1337) -> Dictio
 		"individual_hash": individual_hash,
 		"dominant_nation": dominant_nation,
 		"secondary_nation": secondary_nation,
+		"archetype": archetype,
 		"dna_ratios": {
 			"alden": r_alden,
 			"tsellina": r_tsellina,
@@ -123,3 +135,4 @@ static func synthesize(dna_ratios: Dictionary, world_seed: int = 1337) -> Dictio
 	}
 
 	return ledger_record
+

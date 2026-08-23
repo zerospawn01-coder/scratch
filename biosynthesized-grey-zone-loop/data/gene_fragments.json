@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "project": "biosynthesized-grey-zone-loop",
+  "fragments": {
+    "FRAG_ALDEN_CERAMIC": {
+      "id": "FRAG_ALDEN_CERAMIC",
+      "nation": "alden",
+      "name": "Ceramic Structural Marker",
+      "purity": 0.95,
+      "base_affinity": "STABILITY",
+      "mutation_load_factor": 0.05
+    },
+    "FRAG_TSELLINA_AMBER": {
+      "id": "FRAG_TSELLINA_AMBER",
+      "nation": "tsellina",
+      "name": "Amber Resonant Matrix",
+      "purity": 0.88,
+      "base_affinity": "DURABILITY",
+      "mutation_load_factor": 0.12
+    },
+    "FRAG_ELPHADIA_CRIMSON": {
+      "id": "FRAG_ELPHADIA_CRIMSON",
+      "nation": "elphadia",
+      "name": "Crimson Organoid Catalyst",
+      "purity": 0.82,
+      "base_affinity": "SURGE_POTENCY",
+      "mutation_load_factor": 0.28
+    }
+  }
+}
