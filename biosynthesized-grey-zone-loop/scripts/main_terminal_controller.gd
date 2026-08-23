@@ -50,9 +50,11 @@ var dialogue_controller: Node = null
 # Status UI Labels
 @onready var lbl_header_status: Label = get_node_or_null("Header/StatusLabel")
 @onready var lbl_prompt: Label = get_node_or_null("Footer/PromptLabel")
-@onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/LedgerSummaryLabel")
-@onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/RunContextLabel")
+@onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/RightConsolePanel/LedgerSummaryPanel/LedgerSummaryLabel")
+@onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/LogSubBox/RunContextLabel")
 @onready var lbl_dialogue_feed: Label = get_node_or_null("Footer/DialogueFeedLabel")
+@onready var img_specimen_visual: TextureRect = get_node_or_null("Views/TerminalView/LiveFeedFrame/SpecimenVisual")
+@onready var lbl_cargo_val: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo/Val")
 
 func _ready() -> void:
 	_resolve_singletons_and_managers()
@@ -328,17 +330,23 @@ func _init_arena_view() -> void:
 
 func _refresh_terminal_view() -> void:
 	if lbl_header_status:
-		lbl_header_status.text = "SOVEREIGN AUDITOR OS v1.0.4 | %s | ACTIVE CONSOLE" % active_run_id
+		lbl_header_status.text = "DAY 01 | ACTION 2/3 | ZONE-Λ (ANCIENT RUINS) | %s" % active_run_id
 	if lbl_prompt:
 		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 	if lbl_run_context:
-		lbl_run_context.text = "ACTIVE RUN: %s\nSPECIMEN: %s\nFRAGMENTS: %d" % [
-			active_run_id,
+		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nGOLEM 02 / ZONE-Λ / Depth 2\nSpecimen Target: %s\nCargo Available: %d / 3 Units\nSovereign Protocol Active." % [
 			active_specimen_payload.get("bioroid_id", "AWAITING SYNTHESIS"),
 			active_fragments_available
 		]
+	if lbl_cargo_val:
+		lbl_cargo_val.text = "%d / 3 UNITS" % active_fragments_available
 	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
-		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d" % bioroid_registry.get_audit_record_count()
+		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d\n\nINTERVENTIONS:\n• [Z] NERVE STABILIZATION\n• [X] GENE DISCHARGE" % bioroid_registry.get_audit_record_count()
+	
+	if img_specimen_visual:
+		var sprite_p = active_specimen_payload.get("sprite_path", "res://assets/bioroids/sprites/bio_ald_def001_alden_front.png")
+		if ResourceLoader.exists(sprite_p):
+			img_specimen_visual.texture = load(sprite_p)
 
 func _refresh_expedition_view() -> void:
 	if lbl_prompt:
