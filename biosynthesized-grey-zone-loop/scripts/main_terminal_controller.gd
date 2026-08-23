@@ -45,7 +45,7 @@ var latest_audit_report: Dictionary = {}
 @onready var gene_mixer_view: Control = get_node_or_null("Views/GeneMixerView")
 @onready var arena_view: Control = get_node_or_null("Views/ArenaView")
 @onready var ledger_view: Control = get_node_or_null("Views/LedgerView")
-@onready var dialogue_controller: Node = get_node_or_null("DialogueController")
+var dialogue_controller: Node = null
 
 # Status UI Labels
 @onready var lbl_header_status: Label = get_node_or_null("Header/StatusLabel")
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 func _resolve_singletons_and_managers() -> void:
 	# If already resolved, do nothing
-	if bioroid_registry and expedition_manager:
+	if bioroid_registry and expedition_manager and dialogue_controller:
 		return
 
 	# Resolve BioroidRegistry
@@ -168,34 +168,35 @@ func _handle_x_action() -> void:
 # State Transitions & Sub-View Management
 # =============================================================================
 
-func transition_to_state(new_state: State) -> void:
+func transition_to_state(new_state: State, trigger_dialogue: bool = true) -> void:
+	_resolve_singletons_and_managers()
 	current_state = new_state
 	var state_str = STATE_NAMES.get(new_state, "UNKNOWN")
 	print("[MainTerminal] Transitioning to: %s" % state_str)
 
 	_update_view_visibilities()
-	_on_enter_state(new_state)
+	_on_enter_state(new_state, trigger_dialogue)
 
 	state_changed.emit(new_state, state_str)
 
-func _on_enter_state(state: State) -> void:
+func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
 	match state:
 		State.STATE_TERMINAL:
 			_update_run_id()
 			_refresh_terminal_view()
 		State.STATE_EXPEDITION:
 			_refresh_expedition_view()
-			if dialogue_controller:
+			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_EXPEDITION_ENTER")
 		State.STATE_GENE_MIXER:
 			_refresh_gene_mixer_view()
 		State.STATE_ARENA:
 			_init_arena_view()
-			if dialogue_controller:
+			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_ARENA_ENTER")
 		State.STATE_LEDGER:
 			_refresh_ledger_view()
-			if dialogue_controller:
+			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_LEDGER_ENTER")
 
 func _update_view_visibilities() -> void:
@@ -282,7 +283,7 @@ func synthesize_and_deploy(custom_ratios: Dictionary = {}) -> Dictionary:
 	if dialogue_controller:
 		dialogue_controller.play_dialogue("GENE_MIXER_SYNTHESIS")
 
-	transition_to_state(State.STATE_ARENA)
+	transition_to_state(State.STATE_ARENA, false)
 	return active_specimen_payload
 
 ## 4. Arena -> Ledger conclusion callback
