@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "project": "biosynthesized-grey-zone-loop",
+  "enemies": {
+    "SUBJECT_AF09": {
+      "id": "SUBJECT AF-09",
+      "name": "LAMBDA ANOMALY",
+      "model_id": "AF-LAMBDA/09",
+      "attribute": "CORROSIVE",
+      "threat_class": "LAMBDA-4",
+      "base_stats": {
+        "vital_integrity": 100,
+        "hostility_index": 88,
+        "atk": 28,
+        "mutation_surge": true
+      },
+      "behavior_pattern": "AGGRESSIVE_SURGE",
+      "lore": "Early lambda specimen exhibiting severe bio-corrosive breakdown."
+    },
+    "SUBJECT_AF40": {
+      "id": "SUBJECT AF-40",
+      "name": "LAMBDA-8E",
+      "model_id": "AF-LAMBDA/40",
+      "attribute": "CRYOGENIC",
+      "threat_class": "LAMBDA-5",
+      "base_stats": {
+        "vital_integrity": 120,
+        "hostility_index": 70,
+        "atk": 32,
+        "mutation_surge": false
+      },
+      "behavior_pattern": "DEFENSIVE_CHILL",
+      "lore": "Stabilized heavy bioroid utilizing endothermic thermal dampening."
+    }
+  }
+}

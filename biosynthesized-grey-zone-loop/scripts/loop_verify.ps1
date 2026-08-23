@@ -18,17 +18,20 @@ if (-not (Test-Path $PolicyFile)) {
 }
 
 $policy = Get-Content $PolicyFile -Raw | ConvertFrom-Json
-$godotExe = $null
+$godotExe = $env:GODOT_EXE
 
-foreach ($cand in $policy.engine_binary_candidates) {
-    if (Test-Path $cand) {
-        $godotExe = $cand
-        break
+if (-not $godotExe -or -not (Test-Path $godotExe)) {
+    $godotExe = $null
+    foreach ($cand in $policy.engine_binary_candidates) {
+        if (Test-Path $cand) {
+            $godotExe = $cand
+            break
+        }
     }
 }
 
 if (-not $godotExe) {
-    Write-Error "FATAL: No valid Godot console executable found in candidate list."
+    Write-Error "FATAL: No valid Godot console executable found (checked GODOT_EXE and policy candidates)."
     exit 1
 }
 

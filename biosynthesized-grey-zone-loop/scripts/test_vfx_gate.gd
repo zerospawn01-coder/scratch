@@ -19,6 +19,8 @@ func _init() -> void:
 	var arena_script = load("res://scripts/arena_battle_manager.gd")
 	var arena: Node = arena_script.new()
 	arena.name = "ArenaBattleManager"
+	arena.registry_override = Node.new()
+	arena.deployment_payload = {"stats": {"vital_integrity": 100, "neural_control": 80, "mutation_load": 10, "core_stress": 20, "atk": 30, "ep": 60}}
 
 	var attacker_dummy := Node3D.new()
 	attacker_dummy.name = "AldenDummy"
@@ -94,8 +96,8 @@ func _init() -> void:
 	print(">>> [VFX-GATE-03] Hitstop: time_scale must restore to 1.0...")
 	Engine.time_scale = 1.0
 	arena.enemy_stats["vital_integrity"] = 100
-	arena._apply_attack(arena.player_stats, arena.enemy_stats, 1.0, 0.1)
-	await create_timer(0.30, true, false, true).timeout
+	await arena._apply_attack(arena.player_stats, arena.enemy_stats, 1.0, 0.1)
+	await create_timer(0.20, true, false, true).timeout
 	if abs(Engine.time_scale - 1.0) < 0.01:
 		passed_checks.append("VFX-GATE-03 PASS: time_scale=%.3f" % Engine.time_scale)
 		print("  [PASS] time_scale=%.3f" % Engine.time_scale)
@@ -104,20 +106,39 @@ func _init() -> void:
 		print("  [FAIL] time_scale=%.3f" % Engine.time_scale)
 		Engine.time_scale = 1.0
 
+
 	# -------------------------------------------------------------------------
-	# VFX-GATE-04: Burst input (8 hits) -- no Tween accumulation or time_scale leak
+	# VFX-GATE-04: Rapid public input -- guard accepts one attack and rejects re-entry
 	# -------------------------------------------------------------------------
-	print(">>> [VFX-GATE-04] Burst (8 hits): no leak after rapid-fire...")
-	arena.enemy_stats["vital_integrity"] = 100
+	print(">>> [VFX-GATE-04] Rapid input (8 calls): production guard accepts one attack...")
+	arena.enemy_stats["vital_integrity"] = 1000
+	var rapid_counts := {"impact": 0, "damage": 0}
+	arena.combat_phase_changed.connect(func(_phase: int, phase_name: String):
+		if phase_name == "IMPACT": rapid_counts["impact"] += 1
+	)
+	arena.combatant_damaged.connect(func(_target: Node3D, _damage: int, _critical: bool):
+		rapid_counts["damage"] += 1
+	)
+	arena.is_in_battle = true
+	arena.is_player_turn = true
+	var rapid_attacker_origin := attacker_dummy.position
+	var rapid_defender_origin := defender_dummy.position
 	for i in range(8):
-		arena._apply_attack(arena.player_stats, arena.enemy_stats, 1.0, 0.1)
-	await create_timer(0.65, true, false, true).timeout
-	if abs(Engine.time_scale - 1.0) < 0.01:
-		passed_checks.append("VFX-GATE-04 PASS: time_scale=%.3f after 8-hit burst" % Engine.time_scale)
-		print("  [PASS] time_scale=%.3f" % Engine.time_scale)
+		arena.execute_auditor_intervention("NERVOUS_CORE_SUPPRESSION")
+	var rapid_timeout_at := Time.get_ticks_msec() + 3000
+	while arena._attack_in_progress and Time.get_ticks_msec() < rapid_timeout_at:
+		await process_frame
+	var rapid_completed: bool = not arena._attack_in_progress
+	arena.is_in_battle = false
+	var rapid_attacker_drift := attacker_dummy.position.distance_to(rapid_attacker_origin)
+	var rapid_defender_drift := defender_dummy.position.distance_to(rapid_defender_origin)
+	var rapid_pass: bool = rapid_completed and rapid_counts["impact"] == 1 and rapid_counts["damage"] == 1 and rapid_attacker_drift < 0.05 and rapid_defender_drift < 0.05 and abs(Engine.time_scale - 1.0) < 0.01
+	if rapid_pass:
+		passed_checks.append("VFX-GATE-04 PASS: 8 inputs -> 1 impact, guard released, no residue")
+		print("  [PASS] impacts=%d damage=%d attacker_drift=%.4f defender_drift=%.4f time_scale=%.3f" % [rapid_counts["impact"], rapid_counts["damage"], rapid_attacker_drift, rapid_defender_drift, Engine.time_scale])
 	else:
-		failed_checks.append("VFX-GATE-04 FAIL: time_scale=%.3f leaked after burst" % Engine.time_scale)
-		print("  [FAIL] time_scale=%.3f" % Engine.time_scale)
+		failed_checks.append("VFX-GATE-04 FAIL: completed=%s impacts=%d damage=%d drift=(%.4f,%.4f) scale=%.3f" % [rapid_completed, rapid_counts["impact"], rapid_counts["damage"], rapid_attacker_drift, rapid_defender_drift, Engine.time_scale])
+		print("  [FAIL] completed=%s impacts=%d damage=%d" % [rapid_completed, rapid_counts["impact"], rapid_counts["damage"]])
 		Engine.time_scale = 1.0
 
 	# -------------------------------------------------------------------------
