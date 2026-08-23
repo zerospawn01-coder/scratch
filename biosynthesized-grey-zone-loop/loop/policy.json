@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "project": "biosynthesized-grey-zone-loop",
+  "max_iterations": 3,
+  "retry_budget": 3,
+  "engine_binary_candidates": [
+    "D:\\Downloads\\Godot_v4.7-stable_win64.exe\\Godot_v4.7-stable_win64_console.exe",
+    "C:\\Users\\zeros\\OneDrive\\Desktop\\Godot_v4.7.1-stable_win64_console.exe",
+    "C:\\Users\\zeros\\AppData\\Local\\Temp\\golem-builder-godot-4.7.1\\Godot_v4.7.1-stable_win64_console.exe"
+  ],
+  "required_test_suite": [
+    "scripts/test_terminal_flow_gate.gd",
+    "scripts/test_vfx_gate.gd",
+    "scripts/test_exploration_gate.gd",
+    "scripts/test_deployment_loop.gd",
+    "scripts/test_a0_impact_separation.gd",
+    "scripts/test_a0_vfx_04_rapid_input_safety.gd",
+    "scripts/test_a0_vfx_regression_01_03.gd",
+    "scripts/test_npc_dialogue_gate.gd"
+  ],
+  "forbidden_actions": [
+    "delete_test_file",
+    "remove_assertions",
+    "skip_failing_tests",
+    "modify_canonical_rules",
+    "auto_merge_to_main",
+    "auto_promote_to_canonical",
+    "pass_without_evidence"
+  ],
+  "stop_conditions": {
+    "all_required_gates_passed": "READY_FOR_HUMAN_REVIEW",
+    "max_iterations_exceeded": "BLOCKED",
+    "out_of_scope_change_needed": "BLOCKED",
+    "safety_violation": "BLOCKED"
+  }
+}
