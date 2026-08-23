@@ -1,16 +1,13 @@
 ﻿{
     "status":  "READY_FOR_HUMAN_REVIEW",
     "current_iteration":  0,
-    "last_run_timestamp":  "2026-08-23T22:02:16Z",
+    "last_run_timestamp":  "2026-08-24T01:59:36Z",
     "last_gate_result":  "PASS",
     "passed_gates":  [
                          "scripts/test_terminal_flow_gate.gd",
                          "scripts/test_vfx_gate.gd",
                          "scripts/test_exploration_gate.gd",
                          "scripts/test_deployment_loop.gd",
-                         "scripts/test_a0_impact_separation.gd",
-                         "scripts/test_a0_vfx_04_rapid_input_safety.gd",
-                         "scripts/test_a0_vfx_regression_01_03.gd",
                          "scripts/test_npc_dialogue_gate.gd",
                          "scripts/test_dialogue_presentation_gate.gd"
                      ],

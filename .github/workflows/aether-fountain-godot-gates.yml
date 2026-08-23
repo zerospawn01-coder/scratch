@@ -1,0 +1,68 @@
+name: Aether Fountain Godot Gates
+
+on:
+  pull_request:
+    branches: [ phase14-readiness-gate, main ]
+    paths:
+      - 'biosynthesized-grey-zone-loop/**'
+      - '.github/workflows/aether-fountain-godot-gates.yml'
+  push:
+    branches: [ phase14-readiness-gate, main ]
+    paths:
+      - 'biosynthesized-grey-zone-loop/**'
+      - '.github/workflows/aether-fountain-godot-gates.yml'
+
+jobs:
+  godot-gates:
+    name: Headless Verification Gates (9/9)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache Godot Binary
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/godot
+          key: godot-v4.3-stable-win64
+
+      - name: Download & Extract Godot Engine
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          $godotVersion = "4.3"
+          $godotRelease = "stable"
+          $zipName = "Godot_v${godotVersion}-${godotRelease}_win64.exe.zip"
+          $downloadUrl = "https://github.com/godotengine/godot/releases/download/${godotVersion}-${godotRelease}/${zipName}"
+          $destDir = "${{ runner.temp }}/godot"
+          
+          New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+          $zipPath = Join-Path $destDir $zipName
+          
+          Write-Host "Downloading Godot ${godotVersion}-${godotRelease} from $downloadUrl..."
+          Invoke-WebRequest -Uri $downloadUrl -OutFile $zipPath
+          
+          Write-Host "Extracting to $destDir..."
+          Expand-Archive -Path $zipPath -DestinationPath $destDir -Force
+          Remove-Item -Path $zipPath -Force
+
+      - name: Run Aether Fountain Godot Gate Suite
+        shell: pwsh
+        run: |
+          $godotDir = "${{ runner.temp }}/godot"
+          $exe = Get-ChildItem -Path $godotDir -Filter "*_console.exe" -Recurse | Select-Object -First 1
+          if (-not $exe) {
+              $exe = Get-ChildItem -Path $godotDir -Filter "Godot_*.exe" -Recurse | Select-Object -First 1
+          }
+          if (-not $exe) {
+              Write-Error "FATAL: Could not locate Godot executable in $godotDir"
+              exit 1
+          }
+          
+          $env:GODOT_EXE = $exe.FullName
+          Write-Host "Resolved GODOT_EXE: $env:GODOT_EXE"
+          
+          cd biosynthesized-grey-zone-loop
+          powershell.exe -ExecutionPolicy Bypass -File scripts/loop_verify.ps1
