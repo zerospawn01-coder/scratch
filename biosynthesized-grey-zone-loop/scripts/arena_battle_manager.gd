@@ -35,6 +35,8 @@ var is_player_turn: bool = true
 var interventions_log: Array[String] = []
 var turn_count: int = 0
 var total_damage_taken: int = 0
+var combat_seed: int = 0
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # --- VFX Safety State ---
 ## Tween caches: kill() before creating new tween to prevent multi-fire corruption
@@ -193,10 +195,21 @@ func start_arena_combat() -> void:
 	interventions_log.clear()
 	total_damage_taken = 0
 
+	# 決定論的戦闘乱数シードの確定
+	if deployment_payload.has("combat_seed"):
+		combat_seed = int(deployment_payload["combat_seed"])
+	elif combat_seed == 0:
+		var hash_str = str(player_stats.get("hash", "44291"))
+		if hash_str.is_empty():
+			hash_str = "44291"
+		combat_seed = abs(hash_str.hash())
+	rng.seed = combat_seed
+
 	battle_started.emit()
 	var hash_short = str(player_stats.get("hash", "")).substr(0, 12)
 	print("\n[Arena Combat] === BATTLE INITIATED ===")
 	print("  ALLIED UNIT: %s (HASH: %s...)" % [player_stats["id"], hash_short])
+	print("  COMBAT SEED: %d" % combat_seed)
 	print("  DNA RATIO:   %s" % str(deployment_payload.get("dna_ratio", {})))
 	print("  STATS:       Vital=%d, Control=%d, Mutation=%d, Atk=%d" % [
 		player_stats["vital_integrity"], player_stats["neural_control"], player_stats["mutation_load"], player_stats["atk"]
@@ -260,8 +273,8 @@ func _execute_enemy_turn() -> void:
 		turn_changed.emit(true)
 
 func _apply_attack(attacker: Dictionary, defender: Dictionary, multiplier: float, crit_rate: float) -> void:
-	var is_crit = randf() < crit_rate
-	var base_dmg = int(attacker["atk"] * multiplier * randf_range(0.9, 1.15))
+	var is_crit = rng.randf() < crit_rate
+	var base_dmg = int(attacker["atk"] * multiplier * rng.randf_range(0.9, 1.15))
 	var final_dmg = base_dmg * (2 if is_crit else 1)
 
 	if defender.has("vital_integrity"):
@@ -354,7 +367,7 @@ func _spawn_impact_particles(target: Node3D, is_enemy_hit: bool, is_crit: bool) 
 
 	# ツリーが存在しない環境（headlessテスト等）では描画不可のため即リターン
 	# (add_childせずにオブジェクトを作るとRIDリークの原因になる)
-	if not target.get_tree():
+	if not target.is_inside_tree():
 		return
 
 	var p = CPUParticles3D.new()
@@ -455,6 +468,7 @@ func _conclude_battle(player_won: bool) -> void:
 
 	var audit_record: Dictionary = {
 		"run_id": deployment_payload.get("run_id", "RUN-UNKNOWN"),
+		"combat_seed": combat_seed,
 		"bioroid_id": player_stats["id"],
 		"bioroid_hash": player_stats["hash"],
 		"dna_ratio": deployment_payload.get("dna_ratio", {}),
