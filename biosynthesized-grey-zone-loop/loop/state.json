@@ -1,7 +1,7 @@
 ﻿{
     "status":  "READY_FOR_HUMAN_REVIEW",
     "current_iteration":  0,
-    "last_run_timestamp":  "2026-08-24T02:02:58Z",
+    "last_run_timestamp":  "2026-08-24T02:53:11Z",
     "last_gate_result":  "PASS",
     "passed_gates":  [
                          "scripts/test_terminal_flow_gate.gd",
@@ -9,6 +9,7 @@
                          "scripts/test_exploration_gate.gd",
                          "scripts/test_deployment_loop.gd",
                          "scripts/test_deterministic_combat_gate.gd",
+                         "scripts/test_ledger_integrity_gate.gd",
                          "scripts/test_npc_dialogue_gate.gd",
                          "scripts/test_dialogue_presentation_gate.gd"
                      ],
