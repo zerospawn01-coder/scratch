@@ -1,0 +1,66 @@
+name: Add content to scratch
+description: Request to add or retain content in this repository
+title: "[scratch] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Note:** This repository is a legacy staging area in wind-down phase.
+        > New long-term projects and general sandbox usage are not permitted.
+        > Fill in all fields below before submitting.
+
+  - type: textarea
+    id: content-description
+    attributes:
+      label: What content are you adding or retaining?
+      description: Describe the file(s), directory, or asset involved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: migration-destination
+    attributes:
+      label: Migration destination
+      description: >
+        Which destination repository will own this content permanently?
+        If none yet, explain why ownership cannot be determined right now.
+      placeholder: "e.g. Will move to cognitive-lab once X is resolved"
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why does this belong in scratch (not directly in the destination)?
+      description: >
+        Acceptable: blocked migration, unclear ownership pending a specific decision,
+        temporary holding during active relocation.
+        Not acceptable: "easier for now", "not sure yet", "scratch is convenient".
+    validations:
+      required: true
+
+  - type: textarea
+    id: removal-condition
+    attributes:
+      label: Removal condition
+      description: >
+        What specific event or decision triggers removal of this content from scratch?
+        Be concrete.
+      placeholder: "e.g. Once autonomous-task-gen/ migration to lab-experiments is merged"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: rules-acknowledgement
+    attributes:
+      label: Rules acknowledgement
+      options:
+        - label: This does not add a new long-term project to scratch
+          required: true
+        - label: This does not use scratch as a general sandbox for active development
+          required: true
+        - label: A migration destination or archival rationale is provided above
+          required: true
+        - label: A concrete removal condition is provided above
+          required: true
