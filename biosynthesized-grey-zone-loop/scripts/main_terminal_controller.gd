@@ -367,7 +367,12 @@ func _refresh_terminal_view() -> void:
 			active_fragments_available
 		]
 	if lbl_cargo_val:
-		lbl_cargo_val.text = "%d" % active_fragments_available
+		if active_fragments_available == 0:
+			lbl_cargo_val.text = "0 [DEPLETED]"
+			lbl_cargo_val.add_theme_color_override("font_color", Color(1.0, 0.7, 0.1, 1.0))
+		else:
+			lbl_cargo_val.text = "%d [READY]" % active_fragments_available
+			lbl_cargo_val.add_theme_color_override("font_color", Color(0.2, 0.9, 0.4, 1.0))
 	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
 		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d\n\nINTERVENTIONS:\n• [Z] NERVE STABILIZATION\n• [X] GENE DISCHARGE" % bioroid_registry.get_audit_record_count()
 	

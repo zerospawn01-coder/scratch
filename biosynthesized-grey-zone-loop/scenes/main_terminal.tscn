@@ -46,6 +46,18 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_focus"]
+bg_color = Color(0.02, 0.04, 0.06, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.0, 0.65, 0.0, 0.9)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer"]
 bg_color = Color(0.03, 0.04, 0.06, 0.98)
 border_width_top = 2
@@ -267,7 +279,7 @@ text = "100% [VITAL]"
 [node name="BoxCargo" type="Panel" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid"]
 custom_minimum_size = Vector2(118, 68)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
+theme_override_styles/panel = SubResource("StyleBoxFlat_primary_focus")
 
 [node name="Lbl" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo"]
 layout_mode = 0
@@ -276,18 +288,18 @@ offset_top = 4.0
 offset_right = 114.0
 offset_bottom = 20.0
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.65, 0.75, 0.8, 1)
+theme_override_colors/font_color = Color(1.0, 0.8, 0.4, 1)
 text = "GENE FRAGMENTS"
 
 [node name="Val" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo"]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 26.0
+offset_top = 24.0
 offset_right = 114.0
-offset_bottom = 50.0
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "0"
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1.0, 0.7, 0.1, 1)
+text = "0 [DEPLETED]"
 
 [node name="BoxStability" type="Panel" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid"]
 custom_minimum_size = Vector2(118, 68)
@@ -329,7 +341,7 @@ offset_top = 8.0
 offset_right = 358.0
 offset_bottom = 195.0
 theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+theme_override_colors/font_color = Color(0.6, 0.72, 0.78, 1)
 text = "SPECIMEN:     BIO-ALD-DEF001 [ALDEN]
 MUTATION LOAD: 14% [SURGE STABLE]
 DNA COMPOSITION: ALD:50% KLN:30% CHM:20%
@@ -398,7 +410,7 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 340.0
 offset_bottom = 125.0
-theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+theme_override_colors/font_color = Color(0.55, 0.68, 0.75, 1)
 text = "• CONTAINMENT INTEGRITY: [NORMAL]
 • NEURAL CONTROL:        85% [STABLE]
 • OPTICAL SENSORS:       [ONLINE]
@@ -566,10 +578,11 @@ text = "[COMM: SYSTEM] Standby. Awaiting operator deployment."
 [node name="PromptLabel" type="Label" parent="Footer" unique_id=87785272]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 30.0
+offset_top = 28.0
 offset_right = 1260.0
-offset_bottom = 52.0
-theme_override_colors/font_color = Color(0.75, 0.88, 0.9, 1)
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1.0, 0.9, 0.4, 1)
 text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 
 [node name="TabBar" type="HBoxContainer" parent="Footer"]
