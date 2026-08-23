@@ -164,7 +164,7 @@ offset_top = 510.0
 offset_right = 180.0
 offset_bottom = 530.0
 theme_override_colors/font_color = Color(0.45, 0.6, 0.65, 1)
-text = "CAM-02 // ZONE-Λ 00:07:45"
+text = "CAM-02 // STANDBY"
 
 [node name="NoiseGaugeLabel" type="Label" parent="Views/TerminalView/LiveFeedFrame"]
 layout_mode = 0
@@ -227,10 +227,10 @@ offset_bottom = 166.0
 theme_override_font_sizes/font_size = 13
 theme_override_colors/font_color = Color(0.75, 0.88, 0.9, 1)
 text = "[SYSTEM LOG: ONLINE]
-SPECIMEN: BIO-ALD-DEF001 / ZONE-Λ / Sector 02
-Harvest: Gene Fragment x0 recovered
-GENE FRAGMENTS AVAILABLE: 0
-Dr. Valeria: Neural stability matrices binding smoothly.
+SPECIMEN: BIO-ALD-DEF001 / ZONE-Λ
+SECTOR: --
+GENE FRAGMENTS: 0
+ACTIVE INCIDENT: NONE
 Sovereign Protocol: Immutable Ledger active."
 autowrap_mode = 3
 
@@ -381,8 +381,8 @@ offset_right = 340.0
 offset_bottom = 175.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 0.9)
 text = "  [▲] ZONE-Λ CONTAINMENT SECTOR
-  ┌───┬───┬───┐  SECTOR: 02
-  │ ■ │ ■ │ ◎ │  GRID: ACTIVE
+  ┌───┬───┬───┐  SECTOR: --
+  │ ■ │ ■ │ ◎ │  GRID: STANDBY
   ├───┼───┼───┤  
   │ ■ │ ▲ │ ■ │  ▲ = ACTIVE BIOROID
   └───┴───┴───┘  ◎ = SUBJECT AF-09"
@@ -415,7 +415,7 @@ text = "• CONTAINMENT INTEGRITY: [NORMAL]
 • NEURAL CONTROL:        85% [STABLE]
 • OPTICAL SENSORS:       [ONLINE]
 • MUTATION DRIFT:        0.04% [STABLE]
-• AI STATUS:             generation!=authority"
+• AI STATUS:             generation_is_not_authority"
 
 [node name="LedgerSummaryPanel" type="Panel" parent="Views/TerminalView/RightConsolePanel" unique_id=258759077]
 layout_mode = 0

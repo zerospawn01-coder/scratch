@@ -361,9 +361,8 @@ func _refresh_terminal_view() -> void:
 	if lbl_prompt:
 		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 	if lbl_run_context:
-		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ / Sector 02\nHarvest: Gene Fragment x%d recovered\nGENE FRAGMENTS AVAILABLE: %d\nDr. Valeria: Neural stability matrices binding smoothly.\nSovereign Protocol: Immutable Ledger active." % [
+		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ\nSECTOR: --\nGENE FRAGMENTS: %d\nACTIVE INCIDENT: NONE\nSovereign Protocol: Immutable Ledger active." % [
 			active_specimen_payload.get("bioroid_id", "BIO-ALD-DEF001"),
-			active_fragments_available,
 			active_fragments_available
 		]
 	if lbl_cargo_val:
