@@ -88,29 +88,30 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 
 [node name="TitleLabel" type="Label" parent="Header"]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 16.0
 offset_top = 8.0
-offset_right = 340.0
+offset_right = 260.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0.0, 0.88, 0.85, 1)
-text = "AETHER FOUNTAIN // SOVEREIGN TERMINAL"
+text = "AETHER FOUNTAIN"
 
 [node name="SubtitleLabel" type="Label" parent="Header"]
 layout_mode = 0
-offset_left = 350.0
+offset_left = 185.0
 offset_top = 10.0
-offset_right = 580.0
+offset_right = 440.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(0.45, 0.6, 0.65, 1)
-text = "Containment Facility & Audit Telemetry"
+text = "// SOVEREIGN AUDIT TELEMETRY"
 
 [node name="StatusLabel" type="Label" parent="Header" unique_id=729916255]
 layout_mode = 0
-offset_left = 600.0
+offset_left = 680.0
 offset_top = 8.0
-offset_right = 1260.0
+offset_right = 1264.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
+horizontal_alignment = 2
 text = "DAY 01 | ACTION 2/3 | ZONE-Λ (CONTAINMENT) | SECTOR-02"
 
 [node name="Views" type="Control" parent="." unique_id=815628163]
@@ -294,7 +295,7 @@ offset_top = 4.0
 offset_right = 110.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(0.65, 0.75, 0.8, 1)
-text = "NEURAL SYNC"
+text = "NEURAL CONTROL"
 
 [node name="Val" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxStability"]
 layout_mode = 0
@@ -320,10 +321,10 @@ offset_top = 8.0
 offset_right = 354.0
 offset_bottom = 185.0
 theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
-text = "SPECIMEN:     BIO-ALD-DEF001 (Alden Frame)
+text = "SPECIMEN:     BIO-ALD-DEF001 [ALDEN]
 MUTATION LOAD: 14% [SURGE STABLE]
 DNA COMPOSITION: ALD:50% KLN:30% CHM:20%
-CONTROL MATRIX: Synchronized Matrix Active
+NEURAL CONTROL: 85% [SYNCHRONIZED]
 AUTHORITY:      Sovereign Audit Ledger"
 
 [node name="RightConsolePanel" type="Panel" parent="Views/TerminalView"]
@@ -389,11 +390,11 @@ offset_top = 8.0
 offset_right = 280.0
 offset_bottom = 125.0
 theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
-text = "• CONTAINMENT GRID:  [ONLINE]
-• NEURAL SYNAPSE:     [ONLINE]
-• OPTICAL SENSORS:    [ONLINE]
-• MUTATION DRIFT:     0.04% [STABLE]
-• AI STATUS:          generation!=authority"
+text = "• CONTAINMENT INTEGRITY: [NORMAL]
+• NEURAL CONTROL:        85% [STABLE]
+• OPTICAL SENSORS:       [ONLINE]
+• MUTATION DRIFT:        0.04% [STABLE]
+• AI STATUS:             generation!=authority"
 
 [node name="LedgerSummaryPanel" type="Panel" parent="Views/TerminalView/RightConsolePanel" unique_id=258759077]
 layout_mode = 0
@@ -575,13 +576,8 @@ custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
 text = "☵ OVERVIEW"
 
-[node name="TabSpecimen" type="Button" parent="Footer/TabBar"]
-custom_minimum_size = Vector2(180, 36)
-layout_mode = 2
-text = "☲ SPECIMEN / BIOROID"
-
 [node name="TabExpedition" type="Button" parent="Footer/TabBar"]
-custom_minimum_size = Vector2(240, 36)
+custom_minimum_size = Vector2(220, 36)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_active_tab")
 text = "❖ EXPEDITION [ACTIVE]"
@@ -591,7 +587,12 @@ custom_minimum_size = Vector2(200, 36)
 layout_mode = 2
 text = "⌬ GENE MIXER"
 
-[node name="TabLedger" type="Button" parent="Footer/TabBar"]
+[node name="TabArena" type="Button" parent="Footer/TabBar"]
 custom_minimum_size = Vector2(200, 36)
+layout_mode = 2
+text = "⚔ ARENA"
+
+[node name="TabLedger" type="Button" parent="Footer/TabBar"]
+custom_minimum_size = Vector2(220, 36)
 layout_mode = 2
 text = "📜 AUDIT LEDGER"
