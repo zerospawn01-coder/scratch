@@ -4,3 +4,5 @@
 {"passed_count":8,"timestamp":"2026-08-23T16:44:10Z","failed_count":1,"result":"FAIL","failed_list":["scripts/test_dialogue_presentation_gate.gd"]}
 {"passed_count":9,"timestamp":"2026-08-23T16:46:03Z","failed_count":0,"result":"PASS","failed_list":[]}
 {"passed_count":9,"timestamp":"2026-08-23T17:15:53Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T17:31:42Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T17:33:15Z","failed_count":0,"result":"PASS","failed_list":[]}

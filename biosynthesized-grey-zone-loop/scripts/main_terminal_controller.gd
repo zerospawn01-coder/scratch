@@ -330,16 +330,17 @@ func _init_arena_view() -> void:
 
 func _refresh_terminal_view() -> void:
 	if lbl_header_status:
-		lbl_header_status.text = "DAY 01 | ACTION 2/3 | ZONE-Λ (ANCIENT RUINS) | %s" % active_run_id
+		lbl_header_status.text = "DAY 01 | ACTION 2/3 | ZONE-Λ (CONTAINMENT) | %s" % active_run_id
 	if lbl_prompt:
 		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 	if lbl_run_context:
-		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nGOLEM 02 / ZONE-Λ / Depth 2\nSpecimen Target: %s\nCargo Available: %d / 3 Units\nSovereign Protocol Active." % [
-			active_specimen_payload.get("bioroid_id", "AWAITING SYNTHESIS"),
+		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ / Sector 02\nHarvest: Gene Fragment x%d recovered\nCargo Available: %d / 3 Units\nDr. Valeria: Neural stability matrices binding smoothly.\nSovereign Protocol: Immutable Ledger active." % [
+			active_specimen_payload.get("bioroid_id", "BIO-ALD-DEF001"),
+			active_fragments_available,
 			active_fragments_available
 		]
 	if lbl_cargo_val:
-		lbl_cargo_val.text = "%d / 3 UNITS" % active_fragments_available
+		lbl_cargo_val.text = "%d / 3 FRAGS" % active_fragments_available
 	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
 		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d\n\nINTERVENTIONS:\n• [Z] NERVE STABILIZATION\n• [X] GENE DISCHARGE" % bioroid_registry.get_audit_record_count()
 	

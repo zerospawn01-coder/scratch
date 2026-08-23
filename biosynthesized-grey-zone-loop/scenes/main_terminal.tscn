@@ -4,60 +4,60 @@
 [ext_resource type="Script" path="res://scripts/arena_battle_manager.gd" id="2_byiao"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_header"]
-bg_color = Color(0.06, 0.05, 0.04, 0.95)
+bg_color = Color(0.04, 0.05, 0.07, 0.96)
 border_width_bottom = 2
-border_color = Color(0.65, 0.48, 0.22, 0.8)
+border_color = Color(0.0, 0.75, 0.7, 0.8)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_bronze"]
-bg_color = Color(0.03, 0.04, 0.05, 0.92)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_cyber_slate"]
+bg_color = Color(0.02, 0.03, 0.05, 0.94)
 border_width_left = 2
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.55, 0.42, 0.20, 0.7)
+border_color = Color(0.18, 0.45, 0.52, 0.7)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_cyan"]
-bg_color = Color(0.02, 0.03, 0.05, 0.94)
+bg_color = Color(0.015, 0.025, 0.04, 0.95)
 border_width_left = 2
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.0, 0.75, 0.7, 0.6)
+border_color = Color(0.0, 0.8, 0.75, 0.7)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subbox"]
-bg_color = Color(0.01, 0.02, 0.03, 0.8)
+bg_color = Color(0.01, 0.015, 0.025, 0.85)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.2, 0.35, 0.35, 0.4)
+border_color = Color(0.15, 0.35, 0.4, 0.5)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer"]
-bg_color = Color(0.05, 0.04, 0.03, 0.96)
+bg_color = Color(0.03, 0.04, 0.06, 0.98)
 border_width_top = 2
-border_color = Color(0.65, 0.48, 0.22, 0.8)
+border_color = Color(0.0, 0.75, 0.7, 0.8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_active_tab"]
-bg_color = Color(0.0, 0.25, 0.25, 0.85)
+bg_color = Color(0.0, 0.28, 0.28, 0.9)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.0, 0.85, 0.8, 0.9)
+border_color = Color(0.0, 0.9, 0.85, 0.95)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -78,7 +78,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.02, 0.025, 0.035, 1)
+color = Color(0.01, 0.02, 0.03, 1)
 
 [node name="Header" type="Panel" parent="." unique_id=1811797278]
 layout_mode = 0
@@ -90,19 +90,19 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_header")
 layout_mode = 0
 offset_left = 20.0
 offset_top = 8.0
-offset_right = 320.0
+offset_right = 340.0
 offset_bottom = 32.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
-text = "GOLEM BUILDER EXPEDITION"
+theme_override_colors/font_color = Color(0.0, 0.88, 0.85, 1)
+text = "AETHER FOUNTAIN // SOVEREIGN TERMINAL"
 
 [node name="SubtitleLabel" type="Label" parent="Header"]
 layout_mode = 0
-offset_left = 300.0
+offset_left = 350.0
 offset_top = 10.0
-offset_right = 500.0
+offset_right = 580.0
 offset_bottom = 30.0
-theme_override_colors/font_color = Color(0.45, 0.55, 0.55, 1)
-text = "Expedition Telemetry & Control"
+theme_override_colors/font_color = Color(0.45, 0.6, 0.65, 1)
+text = "Containment Facility & Audit Telemetry"
 
 [node name="StatusLabel" type="Label" parent="Header" unique_id=729916255]
 layout_mode = 0
@@ -111,7 +111,7 @@ offset_top = 8.0
 offset_right = 1260.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "DAY 01 | ACTION 2/3 | ZONE-Λ (ANCIENT RUINS) | DEPTH 2"
+text = "DAY 01 | ACTION 2/3 | ZONE-Λ (CONTAINMENT) | SECTOR-02"
 
 [node name="Views" type="Control" parent="." unique_id=815628163]
 anchors_preset = 0
@@ -139,28 +139,28 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyan")
 layout_mode = 0
 offset_left = 12.0
 offset_top = 10.0
-offset_right = 300.0
+offset_right = 350.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "• GOLEM 02 LIVE FEED [CAM 02]"
+text = "• BIOROID SPECIMEN FEED [CONTAINMENT OPTICS]"
 
 [node name="FeedTimestamp" type="Label" parent="Views/TerminalView/LiveFeedFrame"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 510.0
-offset_right = 150.0
+offset_right = 180.0
 offset_bottom = 530.0
-theme_override_colors/font_color = Color(0.5, 0.6, 0.6, 1)
-text = "CAM 02  00:07:45"
+theme_override_colors/font_color = Color(0.45, 0.6, 0.65, 1)
+text = "CAM-02 // ZONE-Λ 00:07:45"
 
 [node name="NoiseGaugeLabel" type="Label" parent="Views/TerminalView/LiveFeedFrame"]
 layout_mode = 0
-offset_left = 360.0
+offset_left = 340.0
 offset_top = 510.0
 offset_right = 510.0
 offset_bottom = 530.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "MAG. NOISE: 72%"
+text = "MUTATION SURGE: 14%"
 
 [node name="NoiseProgressBar" type="ProgressBar" parent="Views/TerminalView/LiveFeedFrame"]
 layout_mode = 0
@@ -168,7 +168,7 @@ offset_left = 12.0
 offset_top = 532.0
 offset_right = 510.0
 offset_bottom = 542.0
-value = 72.0
+value = 14.0
 show_percentage = false
 
 [node name="SpecimenVisual" type="TextureRect" parent="Views/TerminalView/LiveFeedFrame"]
@@ -186,16 +186,16 @@ offset_left = 552.0
 offset_top = 48.0
 offset_right = 940.0
 offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bronze")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyber_slate")
 
 [node name="LogSectionHeader" type="Label" parent="Views/TerminalView/CenterConsolePanel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 10.0
-offset_right = 200.0
+offset_right = 240.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "[ ☵ LOG & AUDIT TELEMETRY ]"
+text = "[ ☵ AUDIT LOG & FIELD OBSERVATION ]"
 
 [node name="LogSubBox" type="Panel" parent="Views/TerminalView/CenterConsolePanel"]
 layout_mode = 0
@@ -211,22 +211,22 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 354.0
 offset_bottom = 175.0
-theme_override_colors/font_color = Color(0.75, 0.85, 0.85, 1)
+theme_override_colors/font_color = Color(0.75, 0.88, 0.9, 1)
 text = "[SYSTEM LOG: ONLINE]
-GOLEM 02 / ZONE-Λ / Depth 2
-Collection complete: Gene Fragment x1
-Cargo remaining: 1 / 3
-Warning: arcane noise rising / rune load 120%
-Advice: lower mutation drift to avoid rupture."
+SPECIMEN: BIO-ALD-DEF001 / ZONE-Λ / Sector 02
+Harvest: Gene Fragment x1 recovered
+Cargo Available: 1 / 3 Units
+Dr. Valeria: Neural stability matrices binding smoothly.
+Sovereign Protocol: Immutable Ledger active."
 
 [node name="TelemetryHeader" type="Label" parent="Views/TerminalView/CenterConsolePanel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 230.0
-offset_right = 200.0
+offset_right = 240.0
 offset_bottom = 250.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
-text = "[ TELEMETRY METRICS ]"
+theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
+text = "[ BIOLOGICAL TELEMETRY ]"
 
 [node name="TelemetryGrid" type="GridContainer" parent="Views/TerminalView/CenterConsolePanel"]
 layout_mode = 0
@@ -247,8 +247,8 @@ offset_left = 6.0
 offset_top = 4.0
 offset_right = 110.0
 offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-text = "HULL INTEGRITY"
+theme_override_colors/font_color = Color(0.65, 0.75, 0.8, 1)
+text = "VITAL INTEGRITY"
 
 [node name="Val" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxDamage"]
 layout_mode = 0
@@ -256,8 +256,8 @@ offset_left = 6.0
 offset_top = 22.0
 offset_right = 110.0
 offset_bottom = 44.0
-theme_override_colors/font_color = Color(0.9, 0.3, 0.2, 1)
-text = "62% [WARN]"
+theme_override_colors/font_color = Color(0.2, 0.9, 0.4, 1)
+text = "100% [VITAL]"
 
 [node name="BoxCargo" type="Panel" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid"]
 custom_minimum_size = Vector2(116, 70)
@@ -270,8 +270,8 @@ offset_left = 6.0
 offset_top = 4.0
 offset_right = 110.0
 offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-text = "CARGO / FRAGS"
+theme_override_colors/font_color = Color(0.65, 0.75, 0.8, 1)
+text = "GENE FRAGMENTS"
 
 [node name="Val" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo"]
 layout_mode = 0
@@ -280,7 +280,7 @@ offset_top = 22.0
 offset_right = 110.0
 offset_bottom = 44.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "2 / 3 UNITS"
+text = "0 / 3 FRAGS"
 
 [node name="BoxStability" type="Panel" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid"]
 custom_minimum_size = Vector2(116, 70)
@@ -293,8 +293,8 @@ offset_left = 6.0
 offset_top = 4.0
 offset_right = 110.0
 offset_bottom = 20.0
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
-text = "STABILITY"
+theme_override_colors/font_color = Color(0.65, 0.75, 0.8, 1)
+text = "NEURAL SYNC"
 
 [node name="Val" type="Label" parent="Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxStability"]
 layout_mode = 0
@@ -302,8 +302,8 @@ offset_left = 6.0
 offset_top = 22.0
 offset_right = 110.0
 offset_bottom = 44.0
-theme_override_colors/font_color = Color(0.2, 0.9, 0.4, 1)
-text = "64% INDEX"
+theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
+text = "85% [SYNC]"
 
 [node name="GolemStatusBox" type="Panel" parent="Views/TerminalView/CenterConsolePanel"]
 layout_mode = 0
@@ -319,12 +319,12 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 354.0
 offset_bottom = 185.0
-theme_override_colors/font_color = Color(0.7, 0.8, 0.8, 1)
-text = "MODEL:        Bulwark Frame v1.0
-BODY CLASS:   Heavy Ceramic / Alden
-POWER CORE:   87% [STABLE]
-NEURAL SYNC:  83% [SYNCHRONIZED]
-AUTONOMY:     Decisive Sovereign Contract"
+theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+text = "SPECIMEN:     BIO-ALD-DEF001 (Alden Frame)
+MUTATION LOAD: 14% [SURGE STABLE]
+DNA COMPOSITION: ALD:50% KLN:30% CHM:20%
+CONTROL MATRIX: Synchronized Matrix Active
+AUTHORITY:      Sovereign Audit Ledger"
 
 [node name="RightConsolePanel" type="Panel" parent="Views/TerminalView"]
 layout_mode = 0
@@ -332,16 +332,16 @@ offset_left = 952.0
 offset_top = 48.0
 offset_right = 1264.0
 offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bronze")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyber_slate")
 
 [node name="MapHeader" type="Label" parent="Views/TerminalView/RightConsolePanel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 10.0
-offset_right = 200.0
+offset_right = 220.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "[ ❖ AREA MAP & RADAR ]"
+text = "[ ❖ ZONE-Λ NAVIGATION RADAR ]"
 
 [node name="MapSubBox" type="Panel" parent="Views/TerminalView/RightConsolePanel"]
 layout_mode = 0
@@ -357,22 +357,22 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 280.0
 offset_bottom = 175.0
-theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 0.85)
-text = "  [▲] ZONE-Λ DEEP SECTOR
-  ┌───┬───┬───┐  SIGNAL: 76%
+theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 0.9)
+text = "  [▲] ZONE-Λ CONTAINMENT SECTOR
+  ┌───┬───┬───┐  RESONANCE: 76%
   │ ■ │ ■ │ ◎ │  [||||||||||  ]
   ├───┼───┼───┤  
-  │ ■ │ ▲ │ ■ │  ▲ = ACTIVE GOLEM
-  └───┴───┴───┘  ◎ = ANOMALY AF-09"
+  │ ■ │ ▲ │ ■ │  ▲ = ACTIVE BIOROID
+  └───┴───┴───┘  ◎ = SUBJECT AF-09"
 
 [node name="SystemStatusHeader" type="Label" parent="Views/TerminalView/RightConsolePanel"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 230.0
-offset_right = 200.0
+offset_right = 240.0
 offset_bottom = 250.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
-text = "[ SYSTEM STATUS MATRIX ]"
+theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
+text = "[ FACILITY PROTOCOL MATRIX ]"
 
 [node name="SystemStatusPanel" type="Panel" parent="Views/TerminalView/RightConsolePanel" unique_id=1195034992]
 layout_mode = 0
@@ -388,12 +388,12 @@ offset_left = 10.0
 offset_top = 8.0
 offset_right = 280.0
 offset_bottom = 125.0
-theme_override_colors/font_color = Color(0.75, 0.85, 0.85, 1)
-text = "• POWER CORE:      87% [ONLINE]
-• RUNE NETWORK:    [ONLINE]
-• OPTICAL SENSORS: [ONLINE]
-• ENVIRONMENT:     [UNSTABLE SURGE]
-• AI STATUS:       generation!=authority"
+theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+text = "• CONTAINMENT GRID:  [ONLINE]
+• NEURAL SYNAPSE:     [ONLINE]
+• OPTICAL SENSORS:    [ONLINE]
+• MUTATION DRIFT:     0.04% [STABLE]
+• AI STATUS:          generation!=authority"
 
 [node name="LedgerSummaryPanel" type="Panel" parent="Views/TerminalView/RightConsolePanel" unique_id=258759077]
 layout_mode = 0
@@ -409,7 +409,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 280.0
 offset_bottom = 130.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
+theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
 text = "COMMITTED LEDGER ENTRIES: 0
 
 INTERVENTIONS:
@@ -430,7 +430,7 @@ offset_left = 200.0
 offset_top = 80.0
 offset_right = 1080.0
 offset_bottom = 580.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bronze")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyber_slate")
 
 [node name="Title" type="Label" parent="Views/ExpeditionView/Panel" unique_id=528432258]
 layout_mode = 0
@@ -438,7 +438,7 @@ offset_left = 24.0
 offset_top = 20.0
 offset_right = 500.0
 offset_bottom = 44.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
+theme_override_colors/font_color = Color(0.0, 0.88, 0.85, 1)
 text = "ZONE-Λ EXPEDITION SECTOR OBSERVER"
 
 [node name="ExpeditionInfoLabel" type="Label" parent="Views/ExpeditionView/Panel" unique_id=412930093]
@@ -448,7 +448,7 @@ offset_top = 70.0
 offset_right = 840.0
 offset_bottom = 300.0
 theme_override_colors/font_color = Color(0.0, 0.85, 0.8, 1)
-text = "Contaminated sectors detected in Ancient Ruins.
+text = "Contaminated sectors detected in Zone-Lambda.
 
 • [Z / SPACE]: EXPLORE NEXT SECTOR & HARVEST GENE FRAGMENTS
 • [TAB]: RETURN TO LAB WITH HARVESTED FRAGMENTS"
@@ -467,7 +467,7 @@ offset_left = 200.0
 offset_top = 80.0
 offset_right = 1080.0
 offset_bottom = 580.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bronze")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyber_slate")
 
 [node name="Title" type="Label" parent="Views/GeneMixerView/Panel"]
 layout_mode = 0
@@ -475,8 +475,8 @@ offset_left = 24.0
 offset_top = 20.0
 offset_right = 500.0
 offset_bottom = 44.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
-text = "PARAMETRIC GENE MIXER & BLUEPRINTS LAB"
+theme_override_colors/font_color = Color(0.0, 0.88, 0.85, 1)
+text = "PARAMETRIC GENE MIXER & SYNTHESIS LAB"
 
 [node name="MixerInfo" type="Label" parent="Views/GeneMixerView/Panel" unique_id=825601216]
 layout_mode = 0
@@ -515,7 +515,7 @@ offset_left = 200.0
 offset_top = 80.0
 offset_right = 1080.0
 offset_bottom = 580.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel_bronze")
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel_cyber_slate")
 
 [node name="Title" type="Label" parent="Views/LedgerView/Panel" unique_id=1667556000]
 layout_mode = 0
@@ -523,7 +523,7 @@ offset_left = 24.0
 offset_top = 20.0
 offset_right = 500.0
 offset_bottom = 44.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
+theme_override_colors/font_color = Color(0.0, 0.88, 0.85, 1)
 text = "SOVEREIGN AUDIT REPORT & DEPLOYMENT COMMIT"
 
 [node name="LedgerInfo" type="Label" parent="Views/LedgerView/Panel" unique_id=1527984529]
@@ -559,7 +559,7 @@ offset_left = 20.0
 offset_top = 30.0
 offset_right = 1260.0
 offset_bottom = 52.0
-theme_override_colors/font_color = Color(0.88, 0.75, 0.52, 1)
+theme_override_colors/font_color = Color(0.75, 0.88, 0.9, 1)
 text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 
 [node name="TabBar" type="HBoxContainer" parent="Footer"]
@@ -575,10 +575,10 @@ custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
 text = "☵ OVERVIEW"
 
-[node name="TabGolem" type="Button" parent="Footer/TabBar"]
+[node name="TabSpecimen" type="Button" parent="Footer/TabBar"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
-text = "☲ GOLEM / UNIT"
+text = "☲ SPECIMEN / BIOROID"
 
 [node name="TabExpedition" type="Button" parent="Footer/TabBar"]
 custom_minimum_size = Vector2(240, 36)
@@ -586,12 +586,12 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_active_tab")
 text = "❖ EXPEDITION [ACTIVE]"
 
-[node name="TabBlueprints" type="Button" parent="Footer/TabBar"]
+[node name="TabGeneMixer" type="Button" parent="Footer/TabBar"]
 custom_minimum_size = Vector2(200, 36)
 layout_mode = 2
-text = "⌬ BLUEPRINTS"
+text = "⌬ GENE MIXER"
 
-[node name="TabArchive" type="Button" parent="Footer/TabBar"]
+[node name="TabLedger" type="Button" parent="Footer/TabBar"]
 custom_minimum_size = Vector2(200, 36)
 layout_mode = 2
-text = "📜 AUDIT ARCHIVE"
+text = "📜 AUDIT LEDGER"
