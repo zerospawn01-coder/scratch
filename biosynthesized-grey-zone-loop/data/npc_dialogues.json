@@ -1,0 +1,115 @@
+{
+  "version": "1.0.0",
+  "project": "biosynthesized-grey-zone-loop",
+  "characters": {
+    "DR_VALERIA": {
+      "id": "DR_VALERIA",
+      "name": "Dr. Valeria S.",
+      "role": "Chief Geneticist / Aether Auditor",
+      "portrait_path": "res://assets/npc/portraits/valeria_neutral.png",
+      "default_tone": "ANALYTICAL"
+    },
+    "OPERATOR_ZERO": {
+      "id": "OPERATOR_ZERO",
+      "name": "Terminal Subroutine 00",
+      "role": "Sovereign Monitoring AI",
+      "portrait_path": "res://assets/npc/portraits/subroutine_00.png",
+      "default_tone": "COLD_FACTUAL"
+    },
+    "SUBJECT_AF09": {
+      "id": "SUBJECT_AF09",
+      "name": "Subject AF-09",
+      "role": "Unstable Bio-Prototype",
+      "portrait_path": "res://assets/npc/portraits/subject_af09.png",
+      "default_tone": "MUTATING"
+    }
+  },
+  "dialogues": {
+    "EXPEDITION_DEPARTURE": {
+      "dialogue_id": "EXPEDITION_DEPARTURE",
+      "context": "STATE_EXPEDITION_ENTER",
+      "lines": [
+        {
+          "speaker": "OPERATOR_ZERO",
+          "text": "Zone-L perimeter breached. Genetic resonance detector online.",
+          "emotion": "NEUTRAL"
+        },
+        {
+          "speaker": "DR_VALERIA",
+          "text": "Keep the containment field active. We only harvest raw markers—no uncontrolled synthesis.",
+          "emotion": "SERIOUS"
+        }
+      ]
+    },
+    "SPECIMEN_TRACE_DISCOVERY": {
+      "dialogue_id": "SPECIMEN_TRACE_DISCOVERY",
+      "context": "SECTOR_INCIDENT_SPECIMEN_TRACE",
+      "lines": [
+        {
+          "speaker": "DR_VALERIA",
+          "text": "Trace markers confirmed on sector walls. Gene fragment integrity is 84%.",
+          "emotion": "ANALYTICAL"
+        }
+      ]
+    },
+    "ACTIVE_CULTURE_DISCOVERY": {
+      "dialogue_id": "ACTIVE_CULTURE_DISCOVERY",
+      "context": "SECTOR_INCIDENT_ACTIVE_CULTURE",
+      "lines": [
+        {
+          "speaker": "OPERATOR_ZERO",
+          "text": "Warning: High biological activity detected in cultivation medium.",
+          "emotion": "ALERT"
+        },
+        {
+          "speaker": "DR_VALERIA",
+          "text": "Extract two viable fragments immediately before the automated purge sequence initiates.",
+          "emotion": "URGENT"
+        }
+      ]
+    },
+    "GENE_MIXER_SYNTHESIS": {
+      "dialogue_id": "GENE_MIXER_SYNTHESIS",
+      "context": "STATE_GENE_MIXER_SYNTHESIZE",
+      "lines": [
+        {
+          "speaker": "DR_VALERIA",
+          "text": "DNA ratio calibrated. Binding neural control matrices to avoid mutation runaway.",
+          "emotion": "FOCUS"
+        },
+        {
+          "speaker": "OPERATOR_ZERO",
+          "text": "Bioroid payload registered with SHA-256 integrity token. Ready for combat readiness evaluation.",
+          "emotion": "NEUTRAL"
+        }
+      ]
+    },
+    "ARENA_BATTLE_START": {
+      "dialogue_id": "ARENA_BATTLE_START",
+      "context": "STATE_ARENA_ENTER",
+      "lines": [
+        {
+          "speaker": "DR_VALERIA",
+          "text": "Combat simulation initiated. Observe neural stability under high-stress output.",
+          "emotion": "SERIOUS"
+        }
+      ]
+    },
+    "LEDGER_COMMITTED": {
+      "dialogue_id": "LEDGER_COMMITTED",
+      "context": "STATE_LEDGER_ENTER",
+      "lines": [
+        {
+          "speaker": "OPERATOR_ZERO",
+          "text": "Sovereign Audit entry immutable. Biological performance ledger recorded.",
+          "emotion": "COLD_FACTUAL"
+        },
+        {
+          "speaker": "DR_VALERIA",
+          "text": "Run completed cleanly. Re-aligning containment for the next cycle.",
+          "emotion": "CALM"
+        }
+      ]
+    }
+  }
+}
