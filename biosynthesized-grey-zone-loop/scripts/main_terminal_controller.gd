@@ -50,13 +50,37 @@ var dialogue_controller: Node = null
 # Status UI Labels
 @onready var lbl_header_status: Label = get_node_or_null("Header/StatusLabel")
 @onready var lbl_prompt: Label = get_node_or_null("Footer/PromptLabel")
-@onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/LedgerSummaryLabel")
-@onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/RunContextLabel")
+@onready var lbl_ledger_summary: Label = get_node_or_null("Views/TerminalView/RightConsolePanel/LedgerSummaryPanel/LedgerSummaryLabel")
+@onready var lbl_run_context: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/LogSubBox/RunContextLabel")
+@onready var lbl_dialogue_feed: Label = get_node_or_null("Footer/DialogueFeedLabel")
+@onready var img_specimen_visual: TextureRect = get_node_or_null("Views/TerminalView/LiveFeedFrame/SpecimenVisual")
+@onready var lbl_cargo_val: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo/Val")
+
+# TabBar References
+@onready var btn_tab_overview: Button = get_node_or_null("Footer/TabBar/TabOverview")
+@onready var btn_tab_expedition: Button = get_node_or_null("Footer/TabBar/TabExpedition")
+@onready var btn_tab_gene_mixer: Button = get_node_or_null("Footer/TabBar/TabGeneMixer")
+@onready var btn_tab_arena: Button = get_node_or_null("Footer/TabBar/TabArena")
+@onready var btn_tab_ledger: Button = get_node_or_null("Footer/TabBar/TabLedger")
 
 func _ready() -> void:
 	_resolve_singletons_and_managers()
 	_update_run_id()
+	_connect_dialogue_feed()
 	transition_to_state(State.STATE_TERMINAL)
+
+func _connect_dialogue_feed() -> void:
+	if not lbl_dialogue_feed:
+		lbl_dialogue_feed = get_node_or_null("Footer/DialogueFeedLabel")
+	if dialogue_controller and dialogue_controller.has_signal("line_displayed"):
+		if not dialogue_controller.line_displayed.is_connected(_on_dialogue_line_displayed):
+			dialogue_controller.line_displayed.connect(_on_dialogue_line_displayed)
+
+func _on_dialogue_line_displayed(speaker_id: String, speaker_name: String, text: String, emotion: String) -> void:
+	if not lbl_dialogue_feed:
+		lbl_dialogue_feed = get_node_or_null("Footer/DialogueFeedLabel")
+	if lbl_dialogue_feed:
+		lbl_dialogue_feed.text = "[COMM: %s] %s" % [speaker_name.to_upper(), text]
 
 func _resolve_singletons_and_managers() -> void:
 	# If already resolved, do nothing
@@ -93,6 +117,7 @@ func _resolve_singletons_and_managers() -> void:
 			dialogue_controller = dlg_script.new()
 			dialogue_controller.name = "DialogueController"
 			add_child(dialogue_controller)
+			_connect_dialogue_feed()
 
 func _update_run_id() -> void:
 	var total_runs = 0
@@ -180,6 +205,7 @@ func transition_to_state(new_state: State, trigger_dialogue: bool = true) -> voi
 	state_changed.emit(new_state, state_str)
 
 func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
+	_refresh_navigation_tabs(state)
 	match state:
 		State.STATE_TERMINAL:
 			_update_run_id()
@@ -198,6 +224,25 @@ func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
 			_refresh_ledger_view()
 			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_LEDGER_ENTER")
+
+func _refresh_navigation_tabs(state: State) -> void:
+	if not btn_tab_overview:
+		btn_tab_overview = get_node_or_null("Footer/TabBar/TabOverview")
+		btn_tab_expedition = get_node_or_null("Footer/TabBar/TabExpedition")
+		btn_tab_gene_mixer = get_node_or_null("Footer/TabBar/TabGeneMixer")
+		btn_tab_arena = get_node_or_null("Footer/TabBar/TabArena")
+		btn_tab_ledger = get_node_or_null("Footer/TabBar/TabLedger")
+	
+	if btn_tab_overview:
+		btn_tab_overview.text = "☵ OVERVIEW [ACTIVE]" if state == State.STATE_TERMINAL else "☵ OVERVIEW"
+	if btn_tab_expedition:
+		btn_tab_expedition.text = "❖ EXPEDITION [ACTIVE]" if state == State.STATE_EXPEDITION else "❖ EXPEDITION"
+	if btn_tab_gene_mixer:
+		btn_tab_gene_mixer.text = "⌬ GENE MIXER [ACTIVE]" if state == State.STATE_GENE_MIXER else "⌬ GENE MIXER"
+	if btn_tab_arena:
+		btn_tab_arena.text = "⚔ ARENA [ACTIVE]" if state == State.STATE_ARENA else "⚔ ARENA"
+	if btn_tab_ledger:
+		btn_tab_ledger.text = "📜 AUDIT LEDGER [ACTIVE]" if state == State.STATE_LEDGER else "📜 AUDIT LEDGER"
 
 func _update_view_visibilities() -> void:
 	if terminal_view: terminal_view.visible = (current_state == State.STATE_TERMINAL)
@@ -312,17 +357,28 @@ func _init_arena_view() -> void:
 
 func _refresh_terminal_view() -> void:
 	if lbl_header_status:
-		lbl_header_status.text = "SOVEREIGN AUDITOR OS v1.0.4 | %s | ACTIVE CONSOLE" % active_run_id
+		lbl_header_status.text = "STATE: TERMINAL | ZONE-Λ (CONTAINMENT) | %s" % active_run_id
 	if lbl_prompt:
 		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 	if lbl_run_context:
-		lbl_run_context.text = "ACTIVE RUN: %s\nSPECIMEN: %s\nFRAGMENTS: %d" % [
-			active_run_id,
-			active_specimen_payload.get("bioroid_id", "AWAITING SYNTHESIS"),
+		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ\nSECTOR: --\nGENE FRAGMENTS: %d\nACTIVE INCIDENT: NONE\nSovereign Protocol: Immutable Ledger active." % [
+			active_specimen_payload.get("bioroid_id", "BIO-ALD-DEF001"),
 			active_fragments_available
 		]
+	if lbl_cargo_val:
+		if active_fragments_available == 0:
+			lbl_cargo_val.text = "0 [DEPLETED]"
+			lbl_cargo_val.add_theme_color_override("font_color", Color(1.0, 0.7, 0.1, 1.0))
+		else:
+			lbl_cargo_val.text = "%d [READY]" % active_fragments_available
+			lbl_cargo_val.add_theme_color_override("font_color", Color(0.2, 0.9, 0.4, 1.0))
 	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
-		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d" % bioroid_registry.get_audit_record_count()
+		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d\n\nINTERVENTIONS:\n• [Z] NERVE STABILIZATION\n• [X] GENE DISCHARGE" % bioroid_registry.get_audit_record_count()
+	
+	if img_specimen_visual:
+		var sprite_p = active_specimen_payload.get("sprite_path", "res://assets/bioroids/sprites/bio_ald_def001_alden_front.png")
+		if ResourceLoader.exists(sprite_p):
+			img_specimen_visual.texture = load(sprite_p)
 
 func _refresh_expedition_view() -> void:
 	if lbl_prompt:

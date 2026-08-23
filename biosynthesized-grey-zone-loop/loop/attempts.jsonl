@@ -1,3 +1,14 @@
 ﻿{"passed_count":7,"timestamp":"2026-08-23T14:19:47Z","failed_count":0,"result":"PASS","failed_list":[]}
 {"passed_count":7,"timestamp":"2026-08-23T14:40:05Z","failed_count":1,"result":"FAIL","failed_list":["scripts/test_npc_dialogue_gate.gd"]}
 {"passed_count":8,"timestamp":"2026-08-23T14:40:48Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":8,"timestamp":"2026-08-23T16:44:10Z","failed_count":1,"result":"FAIL","failed_list":["scripts/test_dialogue_presentation_gate.gd"]}
+{"passed_count":9,"timestamp":"2026-08-23T16:46:03Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T17:15:53Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T17:31:42Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T17:33:15Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T18:31:29Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T18:48:24Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T19:00:25Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":8,"timestamp":"2026-08-23T20:44:07Z","failed_count":1,"result":"FAIL","failed_list":["scripts/test_a0_vfx_04_rapid_input_safety.gd"]}
+{"passed_count":9,"timestamp":"2026-08-23T20:47:38Z","failed_count":0,"result":"PASS","failed_list":[]}
+{"passed_count":9,"timestamp":"2026-08-23T22:02:16Z","failed_count":0,"result":"PASS","failed_list":[]}

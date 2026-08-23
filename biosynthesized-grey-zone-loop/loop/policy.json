@@ -16,7 +16,8 @@
     "scripts/test_a0_impact_separation.gd",
     "scripts/test_a0_vfx_04_rapid_input_safety.gd",
     "scripts/test_a0_vfx_regression_01_03.gd",
-    "scripts/test_npc_dialogue_gate.gd"
+    "scripts/test_npc_dialogue_gate.gd",
+    "scripts/test_dialogue_presentation_gate.gd"
   ],
   "forbidden_actions": [
     "delete_test_file",
