@@ -56,6 +56,13 @@ var dialogue_controller: Node = null
 @onready var img_specimen_visual: TextureRect = get_node_or_null("Views/TerminalView/LiveFeedFrame/SpecimenVisual")
 @onready var lbl_cargo_val: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo/Val")
 
+# TabBar References
+@onready var btn_tab_overview: Button = get_node_or_null("Footer/TabBar/TabOverview")
+@onready var btn_tab_expedition: Button = get_node_or_null("Footer/TabBar/TabExpedition")
+@onready var btn_tab_gene_mixer: Button = get_node_or_null("Footer/TabBar/TabGeneMixer")
+@onready var btn_tab_arena: Button = get_node_or_null("Footer/TabBar/TabArena")
+@onready var btn_tab_ledger: Button = get_node_or_null("Footer/TabBar/TabLedger")
+
 func _ready() -> void:
 	_resolve_singletons_and_managers()
 	_update_run_id()
@@ -198,6 +205,7 @@ func transition_to_state(new_state: State, trigger_dialogue: bool = true) -> voi
 	state_changed.emit(new_state, state_str)
 
 func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
+	_refresh_navigation_tabs(state)
 	match state:
 		State.STATE_TERMINAL:
 			_update_run_id()
@@ -216,6 +224,25 @@ func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
 			_refresh_ledger_view()
 			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_LEDGER_ENTER")
+
+func _refresh_navigation_tabs(state: State) -> void:
+	if not btn_tab_overview:
+		btn_tab_overview = get_node_or_null("Footer/TabBar/TabOverview")
+		btn_tab_expedition = get_node_or_null("Footer/TabBar/TabExpedition")
+		btn_tab_gene_mixer = get_node_or_null("Footer/TabBar/TabGeneMixer")
+		btn_tab_arena = get_node_or_null("Footer/TabBar/TabArena")
+		btn_tab_ledger = get_node_or_null("Footer/TabBar/TabLedger")
+	
+	if btn_tab_overview:
+		btn_tab_overview.text = "☵ OVERVIEW [ACTIVE]" if state == State.STATE_TERMINAL else "☵ OVERVIEW"
+	if btn_tab_expedition:
+		btn_tab_expedition.text = "❖ EXPEDITION [ACTIVE]" if state == State.STATE_EXPEDITION else "❖ EXPEDITION"
+	if btn_tab_gene_mixer:
+		btn_tab_gene_mixer.text = "⌬ GENE MIXER [ACTIVE]" if state == State.STATE_GENE_MIXER else "⌬ GENE MIXER"
+	if btn_tab_arena:
+		btn_tab_arena.text = "⚔ ARENA [ACTIVE]" if state == State.STATE_ARENA else "⚔ ARENA"
+	if btn_tab_ledger:
+		btn_tab_ledger.text = "📜 AUDIT LEDGER [ACTIVE]" if state == State.STATE_LEDGER else "📜 AUDIT LEDGER"
 
 func _update_view_visibilities() -> void:
 	if terminal_view: terminal_view.visible = (current_state == State.STATE_TERMINAL)
@@ -330,17 +357,17 @@ func _init_arena_view() -> void:
 
 func _refresh_terminal_view() -> void:
 	if lbl_header_status:
-		lbl_header_status.text = "DAY 01 | ACTION 2/3 | ZONE-Λ (CONTAINMENT) | %s" % active_run_id
+		lbl_header_status.text = "STATE: TERMINAL | ZONE-Λ (CONTAINMENT) | %s" % active_run_id
 	if lbl_prompt:
 		lbl_prompt.text = "> NEXT ACTION: [SPACE] INITIATE ZONE-Λ EXPEDITION"
 	if lbl_run_context:
-		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ / Sector 02\nHarvest: Gene Fragment x%d recovered\nCargo Available: %d / 3 Units\nDr. Valeria: Neural stability matrices binding smoothly.\nSovereign Protocol: Immutable Ledger active." % [
+		lbl_run_context.text = "[SYSTEM LOG: ONLINE]\nSPECIMEN: %s / ZONE-Λ / Sector 02\nHarvest: Gene Fragment x%d recovered\nGENE FRAGMENTS AVAILABLE: %d\nDr. Valeria: Neural stability matrices binding smoothly.\nSovereign Protocol: Immutable Ledger active." % [
 			active_specimen_payload.get("bioroid_id", "BIO-ALD-DEF001"),
 			active_fragments_available,
 			active_fragments_available
 		]
 	if lbl_cargo_val:
-		lbl_cargo_val.text = "%d / 3 FRAGS" % active_fragments_available
+		lbl_cargo_val.text = "%d" % active_fragments_available
 	if lbl_ledger_summary and bioroid_registry and bioroid_registry.has_method("get_audit_record_count"):
 		lbl_ledger_summary.text = "COMMITTED LEDGER ENTRIES: %d\n\nINTERVENTIONS:\n• [Z] NERVE STABILIZATION\n• [X] GENE DISCHARGE" % bioroid_registry.get_audit_record_count()
 	
