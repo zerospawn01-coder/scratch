@@ -1,3 +1,4 @@
+class_name DialogueController
 extends Node
 
 # =============================================================================
@@ -61,6 +62,15 @@ func play_dialogue(dialogue_id: String) -> bool:
 	dialogue_started.emit(_active_dialogue_id, d_data.get("context", ""))
 	_display_current_line()
 	return true
+
+## Start playback by context string
+func play_context(context_id: String) -> bool:
+	for d_id in _dialogue_database.keys():
+		var d_data: Dictionary = _dialogue_database[d_id]
+		if d_data.get("context", "") == context_id:
+			return play_dialogue(d_id)
+	push_warning("[DialogueManager] No dialogue matching context: %s" % context_id)
+	return false
 
 ## Advance to the next line in the active dialogue
 func advance_line() -> bool:

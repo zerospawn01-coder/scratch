@@ -45,6 +45,7 @@ var latest_audit_report: Dictionary = {}
 @onready var gene_mixer_view: Control = get_node_or_null("Views/GeneMixerView")
 @onready var arena_view: Control = get_node_or_null("Views/ArenaView")
 @onready var ledger_view: Control = get_node_or_null("Views/LedgerView")
+@onready var dialogue_controller: Node = get_node_or_null("DialogueController")
 
 # Status UI Labels
 @onready var lbl_header_status: Label = get_node_or_null("Header/StatusLabel")
@@ -84,6 +85,14 @@ func _resolve_singletons_and_managers() -> void:
 			expedition_manager = exp_script.new()
 			expedition_manager.name = "ExpeditionManager"
 			add_child(expedition_manager)
+
+	# Resolve DialogueController
+	if not dialogue_controller:
+		var dlg_script = load("res://scripts/dialogue_controller.gd")
+		if dlg_script:
+			dialogue_controller = dlg_script.new()
+			dialogue_controller.name = "DialogueController"
+			add_child(dialogue_controller)
 
 func _update_run_id() -> void:
 	var total_runs = 0
@@ -176,12 +185,18 @@ func _on_enter_state(state: State) -> void:
 			_refresh_terminal_view()
 		State.STATE_EXPEDITION:
 			_refresh_expedition_view()
+			if dialogue_controller:
+				dialogue_controller.play_context("STATE_EXPEDITION_ENTER")
 		State.STATE_GENE_MIXER:
 			_refresh_gene_mixer_view()
 		State.STATE_ARENA:
 			_init_arena_view()
+			if dialogue_controller:
+				dialogue_controller.play_context("STATE_ARENA_ENTER")
 		State.STATE_LEDGER:
 			_refresh_ledger_view()
+			if dialogue_controller:
+				dialogue_controller.play_context("STATE_LEDGER_ENTER")
 
 func _update_view_visibilities() -> void:
 	if terminal_view: terminal_view.visible = (current_state == State.STATE_TERMINAL)
@@ -205,6 +220,14 @@ func explore_sector() -> Dictionary:
 		var res = expedition_manager.get_resources()
 		active_fragments_available = res.get("gene_fragments", 0)
 		_refresh_expedition_view()
+
+		if dialogue_controller:
+			var incident_type: String = incident.get("incident_type", "")
+			match incident_type:
+				"SPECIMEN_TRACE":
+					dialogue_controller.play_context("SECTOR_INCIDENT_SPECIMEN_TRACE")
+				"ACTIVE_CULTURE":
+					dialogue_controller.play_context("SECTOR_INCIDENT_ACTIVE_CULTURE")
 	return incident
 
 ## 2. Expedition -> Gene Mixer handoff
@@ -255,6 +278,9 @@ func synthesize_and_deploy(custom_ratios: Dictionary = {}) -> Dictionary:
 
 	if bioroid_registry and bioroid_registry.has_method("register_deployment_payload"):
 		bioroid_registry.register_deployment_payload(active_specimen_payload)
+
+	if dialogue_controller:
+		dialogue_controller.play_dialogue("GENE_MIXER_SYNTHESIS")
 
 	transition_to_state(State.STATE_ARENA)
 	return active_specimen_payload
