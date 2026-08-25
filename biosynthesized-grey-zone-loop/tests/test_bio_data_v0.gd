@@ -7,6 +7,7 @@ var _failures: Array[String] = []
 
 
 func _initialize() -> void:
+	print("[BIO-DATA-v0]")
 	var material := load(MATERIAL_PATH) as MaterialDefinition
 	var component := load(COMPONENT_PATH) as ComponentDefinition
 	_check(material != null and component != null, "fixtures load")
