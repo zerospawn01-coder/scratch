@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComponentDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/aether/component_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+component_id = "CMP-NEURAL-LATTICE"
+traits = Array[String](["responsive", "adaptive"])
+quality_q = 60
+defects = Array[String](["signal_noise"])
