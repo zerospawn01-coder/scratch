@@ -15,6 +15,20 @@ const COLOR_ALDEN_LIQUID: Color    = Color(0.05, 0.35, 0.50, 0.70)
 const COLOR_TSELLINA_LIQUID: Color = Color(0.40, 0.25, 0.05, 0.75)
 const COLOR_ELPHADIA_LIQUID: Color = Color(0.35, 0.05, 0.15, 0.80)
 
+# BIO-DATA-v0 boundary. Identity values are supplied by the caller and are not
+# inferred from synthesis data or runtime state.
+static func generate_entity(
+	materials: Array[MaterialDefinition],
+	components: Array[ComponentDefinition],
+	seed: int,
+	entity_id: String,
+	batch_id: String,
+	origin_ids: Array[String] = []
+) -> ManufacturableEntity:
+	return BiosynthesisService.new().generate(
+		materials, components, seed, entity_id, batch_id, origin_ids
+	)
+
 # 4層パラメトリック合成関数
 static func synthesize(dna_ratios: Dictionary, world_seed: int = 1337) -> Dictionary:
 	# 1. 比率の正規化 (Normalize: alden + tsellina + elphadia = 1.0)
