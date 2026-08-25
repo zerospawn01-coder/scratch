@@ -17,7 +17,8 @@
     "scripts/test_ledger_integrity_gate.gd",
     "scripts/test_expedition_decision_gate.gd",
     "scripts/test_npc_dialogue_gate.gd",
-    "scripts/test_dialogue_presentation_gate.gd"
+    "scripts/test_dialogue_presentation_gate.gd",
+    "tests/test_bio_loop_v0.gd"
   ],
   "forbidden_actions": [
     "delete_test_file",

@@ -50,6 +50,7 @@ $gateContracts = @{
     "scripts/test_expedition_decision_gate.gd" = @("[EXP DECISION GATE]", "EXPEDITION DECISION GATE RESULTS: 5 / 5 PASSED")
     "scripts/test_npc_dialogue_gate.gd" = @("[NPC DIALOGUE GATE]", "NPC DIALOGUE GATE RESULTS: 3 / 3 PASSED")
     "scripts/test_dialogue_presentation_gate.gd" = @("[PRESENTATION GATE]", "PRESENTATION GATE RESULTS: 3 / 3 PASSED")
+    "tests/test_bio_loop_v0.gd" = @("[BIO-LOOP-v0]", "BIO-LOOP-v0 RESULT | 5/5 PASS | 0 FAIL")
 }
 
 function Invoke-GodotProcess {
