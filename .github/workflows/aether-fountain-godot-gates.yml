@@ -26,13 +26,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/godot
-          key: godot-v4.3-stable-win64
+          key: godot-v4.7.1-stable-win64
 
       - name: Download & Extract Godot Engine
         if: steps.cache-godot.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
-          $godotVersion = "4.3"
+          $godotVersion = "4.7.1"
           $godotRelease = "stable"
           $zipName = "Godot_v${godotVersion}-${godotRelease}_win64.exe.zip"
           $downloadUrl = "https://github.com/godotengine/godot/releases/download/${godotVersion}-${godotRelease}/${zipName}"
@@ -62,7 +62,19 @@ jobs:
           }
           
           $env:GODOT_EXE = $exe.FullName
+          $env:GATE_LOG_DIR = "${{ runner.temp }}/aether-gate-logs"
           Write-Host "Resolved GODOT_EXE: $env:GODOT_EXE"
           
           cd biosynthesized-grey-zone-loop
           powershell.exe -ExecutionPolicy Bypass -File scripts/loop_verify.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          powershell.exe -ExecutionPolicy Bypass -File scripts/test_ci_runner_fail_closed.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Upload raw Godot Gate logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-fountain-godot-gate-logs
+          path: ${{ runner.temp }}/aether-gate-logs
+          if-no-files-found: error
