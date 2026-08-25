@@ -39,6 +39,12 @@ var active_fragments_available: int = 0
 var active_specimen_payload: Dictionary = {}
 var latest_audit_report: Dictionary = {}
 
+# BIO-LOOP-v0 runtime-only diagnostic candidate state.
+var selected_bio_material: MaterialDefinition = null
+var selected_bio_component: ComponentDefinition = null
+var active_biosynthesis_entity: ManufacturableEntity = null
+var biosynthesis_generation_count: int = 0
+
 # UI Node References (Optional in headless, wired if present in scene)
 @onready var terminal_view: Control = get_node_or_null("Views/TerminalView")
 @onready var expedition_view: Control = get_node_or_null("Views/ExpeditionView")
@@ -55,6 +61,7 @@ var dialogue_controller: Node = null
 @onready var lbl_dialogue_feed: Label = get_node_or_null("Footer/DialogueFeedLabel")
 @onready var img_specimen_visual: TextureRect = get_node_or_null("Views/TerminalView/LiveFeedFrame/SpecimenVisual")
 @onready var lbl_cargo_val: Label = get_node_or_null("Views/TerminalView/CenterConsolePanel/TelemetryGrid/BoxCargo/Val")
+@onready var lbl_mixer_info: Label = get_node_or_null("Views/GeneMixerView/Panel/MixerInfo")
 
 # TabBar References
 @onready var btn_tab_overview: Button = get_node_or_null("Footer/TabBar/TabOverview")
@@ -177,6 +184,8 @@ func _handle_z_action() -> void:
 	match current_state:
 		State.STATE_EXPEDITION:
 			explore_sector()
+		State.STATE_GENE_MIXER:
+			generate_biosynthesis_candidate()
 		State.STATE_ARENA:
 			var arena_mgr = _get_arena_manager()
 			if arena_mgr and arena_mgr.has_method("execute_auditor_intervention"):
@@ -215,6 +224,7 @@ func _on_enter_state(state: State, trigger_dialogue: bool = true) -> void:
 			if trigger_dialogue and dialogue_controller:
 				dialogue_controller.play_context("STATE_EXPEDITION_ENTER")
 		State.STATE_GENE_MIXER:
+			bind_bio_definitions()
 			_refresh_gene_mixer_view()
 		State.STATE_ARENA:
 			_init_arena_view()
@@ -287,6 +297,60 @@ func return_from_expedition_to_mixer() -> void:
 		print("[MainTerminal] Returned from expedition with %d fragments" % active_fragments_available)
 	
 	transition_to_state(State.STATE_GENE_MIXER)
+
+## BIO-LOOP-v0: bind the explicit Definition selection without inferring inputs.
+func bind_bio_definitions() -> bool:
+	if selected_bio_material == null:
+		selected_bio_material = load("res://data/aether/materials/aether_gel.tres") as MaterialDefinition
+	if selected_bio_component == null:
+		selected_bio_component = load("res://data/aether/components/neural_lattice.tres") as ComponentDefinition
+	return selected_bio_material != null and selected_bio_component != null
+
+## Generate one unregistered candidate through the frozen Controller boundary.
+## Optional values are explicit replay inputs for deterministic Gate evidence.
+func generate_biosynthesis_candidate(
+	seed_override: int = -1,
+	entity_id_override: String = "",
+	batch_id_override: String = "",
+	origin_ids_override: Array[String] = []
+) -> ManufacturableEntity:
+	if current_state != State.STATE_GENE_MIXER or not bind_bio_definitions():
+		return null
+
+	var seed_value := seed_override
+	if seed_value < 0:
+		seed_value = current_run_index * 1337 + active_fragments_available * 41
+	var entity_id := entity_id_override if not entity_id_override.is_empty() else "CANDIDATE-RUN-%04d" % current_run_index
+	var batch_id := batch_id_override if not batch_id_override.is_empty() else "%s-BIO" % active_run_id
+	var origin_ids := origin_ids_override
+	if origin_ids.is_empty():
+		origin_ids = [active_run_id]
+
+	var materials: Array[MaterialDefinition] = [selected_bio_material]
+	var components: Array[ComponentDefinition] = [selected_bio_component]
+	active_biosynthesis_entity = GeneMixerController.generate_entity(
+		materials, components, seed_value, entity_id, batch_id, origin_ids
+	)
+	biosynthesis_generation_count += 1
+	_refresh_gene_mixer_view()
+	return active_biosynthesis_entity
+
+func format_biosynthesis_diagnostic(entity: ManufacturableEntity) -> String:
+	if entity == null or entity.manufacturing_record == null:
+		return "BIOSYNTHESIS CANDIDATE\n\nSTATUS\nNO CANDIDATE"
+	var record := entity.manufacturing_record
+	var traits_text := " / ".join(entity.traits) if not entity.traits.is_empty() else "none"
+	var defects_text := " / ".join(entity.defects) if not entity.defects.is_empty() else "none"
+	return "BIOSYNTHESIS CANDIDATE\n\nENTITY       %s\nBATCH        %s\nMATERIAL     %s\nCOMPONENT    %s\nTRAITS       %s\nQUALITY      %d / 100\nDEFECTS      %s\nSEED         %d\n\nSTATUS       UNREGISTERED / DIAGNOSTIC ONLY" % [
+		record.entity_id,
+		record.batch_id,
+		" / ".join(entity.materials),
+		" / ".join(entity.components),
+		traits_text,
+		entity.quality_q,
+		defects_text,
+		entity.generation_seed,
+	]
 
 ## 3. Gene Mixer: Synthesize and register payload for Arena
 func synthesize_and_deploy(custom_ratios: Dictionary = {}) -> Dictionary:
@@ -385,8 +449,14 @@ func _refresh_expedition_view() -> void:
 		lbl_prompt.text = "> EXPEDITION IN PROGRESS: [Z/SPACE] EXPLORE SECTOR | [TAB] RETURN TO LAB"
 
 func _refresh_gene_mixer_view() -> void:
+	if lbl_header_status:
+		lbl_header_status.text = "STATE: GENE_MIXER | DIAGNOSTIC MODE | %s" % active_run_id
 	if lbl_prompt:
-		lbl_prompt.text = "> GENE MIXER: [SPACE] SYNTHESIZE & DEPLOY TO ARENA | [TAB] ADVANCE"
+		lbl_prompt.text = "> GENE MIXER: [Z] GENERATE DIAGNOSTIC | [SPACE] SYNTHESIZE & DEPLOY | [TAB] ADVANCE"
+	if not lbl_mixer_info:
+		lbl_mixer_info = get_node_or_null("Views/GeneMixerView/Panel/MixerInfo")
+	if lbl_mixer_info and active_biosynthesis_entity != null:
+		lbl_mixer_info.text = format_biosynthesis_diagnostic(active_biosynthesis_entity)
 
 func _refresh_ledger_view() -> void:
 	if lbl_prompt:
